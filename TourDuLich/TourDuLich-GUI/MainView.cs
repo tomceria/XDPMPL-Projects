@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using DevExpress.XtraBars;
 using System.ComponentModel.DataAnnotations;
+using TourDuLich_GUI.Models;
 
 namespace TourDuLich_GUI
 {
@@ -19,7 +20,7 @@ namespace TourDuLich_GUI
         {
             InitializeComponent();
             gridControl.DataSource = GetDataSource();
-            BindingList<Customer> dataSource = GetDataSource();
+            BindingList<Tour> dataSource = GetDataSource();
             gridControl.DataSource = dataSource;
             bsiRecordsCount.Caption = "RECORDS : " + dataSource.Count;
         }
@@ -27,29 +28,25 @@ namespace TourDuLich_GUI
         {
             gridControl.ShowRibbonPrintPreview();
         }
-        public BindingList<Customer> GetDataSource()
+        public BindingList<Tour> GetDataSource()
         {
-            BindingList<Customer> result = new BindingList<Customer>();
-            result.Add(new Customer()
-            {
-                ID = 1,
-                Name = "ACME",
-                Address = "2525 E El Segundo Blvd",
-                City = "El Segundo",
-                State = "CA",
-                ZipCode = "90245",
-                Phone = "(310) 536-0611"
-            });
-            result.Add(new Customer()
-            {
-                ID = 2,
-                Name = "Electronics Depot",
-                Address = "2455 Paces Ferry Road NW",
-                City = "Atlanta",
-                State = "GA",
-                ZipCode = "30339",
-                Phone = "(800) 595-3232"
-            });
+            BindingList<Tour> result = new BindingList<Tour>();
+            result.Add(new Tour()
+                {
+                    ID = 1,
+                    Name = "Saigon - Hanoi",
+                    Description = "Wow",
+                    PriceRef = 300000
+                }
+            );
+            result.Add(new Tour()
+                {
+                    ID = 2,
+                    Name = "Saigon - Da Nang",
+                    Description = "wowwww",
+                    PriceRef = 400000
+                }
+            );
             return result;
         }
         public class Customer
