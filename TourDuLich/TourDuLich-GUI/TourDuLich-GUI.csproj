@@ -59,7 +59,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainViewModel.cs" />
+    <Compile Include="Models\Destination.cs" />
     <Compile Include="Models\Tour.cs" />
+    <Compile Include="Models\TourDetail.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MainView.cs">
