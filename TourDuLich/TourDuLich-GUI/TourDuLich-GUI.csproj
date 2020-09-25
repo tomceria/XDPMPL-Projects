@@ -68,6 +68,15 @@
     <Compile Include="MainView.Designer.cs">
       <DependentUpon>MainView.cs</DependentUpon>
     </Compile>
+    <Compile Include="EditTourView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditTourView.Designer.cs">
+      <DependentUpon>EditTourView.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="EditTourView.resx">
+      <DependentUpon>EditTourView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainView.resx">
       <DependentUpon>MainView.cs</DependentUpon>
     </EmbeddedResource>

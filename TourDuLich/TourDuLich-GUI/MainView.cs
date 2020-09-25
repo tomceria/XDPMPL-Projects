@@ -63,7 +63,10 @@ namespace TourDuLich_GUI
         {
             foreach (int i in gridView.GetSelectedRows())
             {
-                Console.WriteLine("Data: " + ((Tour)gridView.GetRow(i)).Name);
+                Tour selectedTour = (Tour) gridView.GetRow(i);
+                Console.WriteLine("Data: " + (selectedTour.Name));
+                EditTourView editTourView = new EditTourView(selectedTour);
+                editTourView.ShowDialog(this);
             }
         }
     }
