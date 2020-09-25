@@ -22,7 +22,7 @@ namespace TourDuLich_GUI
             gridControl.DataSource = GetDataSource();
             BindingList<Tour> dataSource = GetDataSource();
             gridControl.DataSource = dataSource;
-            bsiRecordsCount.Caption = "RECORDS : " + dataSource.Count;
+            bsiListCount.Caption = $"{dataSource.Count} items";
         }
         void bbiPrintPreview_ItemClick(object sender, ItemClickEventArgs e)
         {

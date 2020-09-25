@@ -33,7 +33,6 @@
             this.gridView = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.ribbonControl = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.bbiPrintPreview = new DevExpress.XtraBars.BarButtonItem();
-            this.bsiRecordsCount = new DevExpress.XtraBars.BarStaticItem();
             this.bbiNew = new DevExpress.XtraBars.BarButtonItem();
             this.bbiEdit = new DevExpress.XtraBars.BarButtonItem();
             this.bbiDelete = new DevExpress.XtraBars.BarButtonItem();
@@ -41,6 +40,7 @@
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonStatusBar = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
+            this.bsiListCount = new DevExpress.XtraBars.BarStaticItem();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl)).BeginInit();
@@ -65,6 +65,9 @@
             this.gridView.Name = "gridView";
             this.gridView.OptionsBehavior.Editable = false;
             this.gridView.OptionsBehavior.ReadOnly = true;
+            this.gridView.OptionsCustomization.AllowColumnMoving = false;
+            this.gridView.OptionsView.ShowFooter = true;
+            this.gridView.OptionsView.ShowGroupPanel = false;
             // 
             // ribbonControl
             // 
@@ -73,13 +76,13 @@
             this.ribbonControl.ExpandCollapseItem,
             this.ribbonControl.SearchEditItem,
             this.bbiPrintPreview,
-            this.bsiRecordsCount,
             this.bbiNew,
             this.bbiEdit,
             this.bbiDelete,
-            this.bbiRefresh});
+            this.bbiRefresh,
+            this.bsiListCount});
             this.ribbonControl.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl.MaxItemId = 20;
+            this.ribbonControl.MaxItemId = 21;
             this.ribbonControl.Name = "ribbonControl";
             this.ribbonControl.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPage1});
@@ -97,22 +100,16 @@
             this.bbiPrintPreview.Name = "bbiPrintPreview";
             this.bbiPrintPreview.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.bbiPrintPreview_ItemClick);
             // 
-            // bsiRecordsCount
-            // 
-            this.bsiRecordsCount.Caption = "RECORDS : 0";
-            this.bsiRecordsCount.Id = 15;
-            this.bsiRecordsCount.Name = "bsiRecordsCount";
-            // 
             // bbiNew
             // 
-            this.bbiNew.Caption = "New";
+            this.bbiNew.Caption = "Thêm";
             this.bbiNew.Id = 16;
             this.bbiNew.ImageOptions.ImageUri.Uri = "New";
             this.bbiNew.Name = "bbiNew";
             // 
             // bbiEdit
             // 
-            this.bbiEdit.Caption = "Edit";
+            this.bbiEdit.Caption = "Sửa";
             this.bbiEdit.Id = 17;
             this.bbiEdit.ImageOptions.ImageUri.Uri = "Edit";
             this.bbiEdit.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("bbiEdit.ImageOptions.SvgImage")));
@@ -120,14 +117,14 @@
             // 
             // bbiDelete
             // 
-            this.bbiDelete.Caption = "Delete";
+            this.bbiDelete.Caption = "Xoá";
             this.bbiDelete.Id = 18;
             this.bbiDelete.ImageOptions.ImageUri.Uri = "Delete";
             this.bbiDelete.Name = "bbiDelete";
             // 
             // bbiRefresh
             // 
-            this.bbiRefresh.Caption = "Refresh";
+            this.bbiRefresh.Caption = "Nạp lại";
             this.bbiRefresh.Id = 19;
             this.bbiRefresh.ImageOptions.ImageUri.Uri = "Refresh";
             this.bbiRefresh.Name = "bbiRefresh";
@@ -138,7 +135,7 @@
             this.ribbonPageGroup1});
             this.ribbonPage1.MergeOrder = 0;
             this.ribbonPage1.Name = "ribbonPage1";
-            this.ribbonPage1.Text = "Home";
+            this.ribbonPage1.Text = "Quản lý Tour";
             // 
             // ribbonPageGroup1
             // 
@@ -149,15 +146,21 @@
             this.ribbonPageGroup1.ItemLinks.Add(this.bbiDelete);
             this.ribbonPageGroup1.ItemLinks.Add(this.bbiRefresh);
             this.ribbonPageGroup1.Name = "ribbonPageGroup1";
-            this.ribbonPageGroup1.Text = "Tasks";
+            this.ribbonPageGroup1.Text = "Hành động";
             // 
             // ribbonStatusBar
             // 
-            this.ribbonStatusBar.ItemLinks.Add(this.bsiRecordsCount);
+            this.ribbonStatusBar.ItemLinks.Add(this.bsiListCount);
             this.ribbonStatusBar.Location = new System.Drawing.Point(0, 575);
             this.ribbonStatusBar.Name = "ribbonStatusBar";
             this.ribbonStatusBar.Ribbon = this.ribbonControl;
             this.ribbonStatusBar.Size = new System.Drawing.Size(790, 24);
+            // 
+            // bsiListCount
+            // 
+            this.bsiListCount.Caption = "??? items";
+            this.bsiListCount.Id = 20;
+            this.bsiListCount.Name = "bsiListCount";
             // 
             // MainView
             // 
@@ -186,10 +189,10 @@
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup1;
         private DevExpress.XtraBars.BarButtonItem bbiPrintPreview;
         private DevExpress.XtraBars.Ribbon.RibbonStatusBar ribbonStatusBar;
-        private DevExpress.XtraBars.BarStaticItem bsiRecordsCount;
         private DevExpress.XtraBars.BarButtonItem bbiNew;
         private DevExpress.XtraBars.BarButtonItem bbiEdit;
         private DevExpress.XtraBars.BarButtonItem bbiDelete;
         private DevExpress.XtraBars.BarButtonItem bbiRefresh;
+        private DevExpress.XtraBars.BarStaticItem bsiListCount;
     }
 }
