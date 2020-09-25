@@ -16,11 +16,12 @@ namespace TourDuLich_GUI
 {
     public partial class MainView : DevExpress.XtraBars.Ribbon.RibbonForm
     {
+        BindingList<Tour> dataSource;
+
         public MainView()
         {
             InitializeComponent();
-            gridControl.DataSource = GetDataSource();
-            BindingList<Tour> dataSource = GetDataSource();
+            dataSource = GetDataSource();
             gridControl.DataSource = dataSource;
             bsiListCount.Caption = $"{dataSource.Count} items";
         }
@@ -47,20 +48,23 @@ namespace TourDuLich_GUI
                     PriceRef = 400000
                 }
             );
+            result.Add(new Tour()
+                {
+                    ID = 3,
+                    Name = "Saigon - Da Lat",
+                    Description = "cold place",
+                    PriceRef = 200000
+                }
+            );
             return result;
         }
-        public class Customer
+
+        private void bbiEdit_ItemClick(object sender, ItemClickEventArgs e)
         {
-            [Key, Display(AutoGenerateField = false)]
-            public int ID { get; set; }
-            [Required]
-            public string Name { get; set; }
-            public string Address { get; set; }
-            public string City { get; set; }
-            public string State { get; set; }
-            [Display(Name = "Zip Code")]
-            public string ZipCode { get; set; }
-            public string Phone { get; set; }
+            foreach (int i in gridView.GetSelectedRows())
+            {
+                Console.WriteLine("Data: " + ((Tour)gridView.GetRow(i)).Name);
+            }
         }
     }
 }
