@@ -32,30 +32,57 @@ namespace TourDuLich_GUI
         public BindingList<Tour> GetDataSource()
         {
             BindingList<Tour> result = new BindingList<Tour>();
-            result.Add(new Tour()
+            List<Tour> tours = new List<Tour>()
                 {
-                    ID = 1,
-                    Name = "Saigon - Hanoi",
-                    Description = "Wow",
-                    PriceRef = 300000
-                }
-            );
-            result.Add(new Tour()
+                    new Tour() {
+                        ID = 1,
+                        Name = "Saigon - Hanoi",
+                        Description = "Wow",
+                        PriceRef = 300000
+                    },
+                    new Tour() {
+                        ID = 2,
+                        Name = "Saigon - Da Nang",
+                        Description = "wowwww",
+                        PriceRef = 400000
+                    },
+                    new Tour() {
+                        ID = 3,
+                        Name = "Saigon - Da Lat",
+                        Description = "cold place",
+                        PriceRef = 200000
+                    },
+                };
+            List<Destination> destinations = new List<Destination>()
                 {
-                    ID = 2,
-                    Name = "Saigon - Da Nang",
-                    Description = "wowwww",
-                    PriceRef = 400000
-                }
-            );
-            result.Add(new Tour()
-                {
-                    ID = 3,
-                    Name = "Saigon - Da Lat",
-                    Description = "cold place",
-                    PriceRef = 200000
-                }
-            );
+                    new Destination() {
+                        ID = 1,
+                        Name = "Ha Long Bay"
+                    },
+                    new Destination() {
+                        ID = 2,
+                        Name = "Pho co Hoi An"
+                    },
+                    new Destination() {
+                        ID = 3,
+                        Name = "Tiem banh Coi Xay Gio"
+                    },
+                };
+
+            for (int i = 0; i < tours.Count; i++)
+            {
+                Tour t = tours[i];
+                Destination d = destinations[i];
+                t.TourDetails = new List<TourDetail>() {
+                    new TourDetail() {
+                        ID = i,
+                        Order = i + 1,
+                        Tour = t,
+                        Destination = d
+                    }
+                };
+                result.Add(t);
+            }
             return result;
         }
 
@@ -63,7 +90,7 @@ namespace TourDuLich_GUI
         {
             foreach (int i in gridView.GetSelectedRows())
             {
-                Tour selectedTour = (Tour) gridView.GetRow(i);
+                Tour selectedTour = (Tour)gridView.GetRow(i);
                 Console.WriteLine("Data: " + (selectedTour.Name));
                 EditTourView editTourView = new EditTourView(selectedTour);
                 editTourView.ShowDialog(this);

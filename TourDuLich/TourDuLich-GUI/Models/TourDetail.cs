@@ -13,10 +13,23 @@ namespace TourDuLich_GUI.Models
         [Key, Display(AutoGenerateField = false)]
         public int ID { get; set; }
 
-        [Key, ForeignKey("Tour"), Display(Name = "Tour")]
-        public virtual Tour TourID { get; set; }
+        [Required, Display(Name = "Thứ tự")]
+        public int Order { get; set; }
+
+/*        [Key, ForeignKey("Tour"), Display(Name = "Tour")]
+        public int TourID { get; set; }
 
         [Key, ForeignKey("Destination"), Display(Name = "Địa điểm")]
-        public virtual Destination DestinationID { get; set; }
+        public int DestinationID { get; set; }
+*/
+        public virtual Tour Tour { get; set; }
+
+        public virtual Destination Destination { get; set; }
+
+        public override string ToString()
+        {
+            return $"{this.Order}: {this.Destination.Name}";
+        }
     }
+
 }
