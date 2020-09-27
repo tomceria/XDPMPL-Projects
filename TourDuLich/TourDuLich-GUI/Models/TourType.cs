@@ -14,5 +14,10 @@ namespace TourDuLich_GUI.Models
 
         [Required, Display(Name = "Tên")]
         public string Name { get; set; }
+
+        public override string ToString()
+        {
+            return $"{this.Name}";
+        }
     }
 }
