@@ -98,6 +98,7 @@
     <None Include="Properties\DataSources\TourDuLich_GUI.Models.Destination.datasource" />
     <None Include="Properties\DataSources\TourDuLich_GUI.Models.Tour.datasource" />
     <None Include="Properties\DataSources\TourDuLich_GUI.Models.TourPrice.datasource" />
+    <None Include="Properties\DataSources\TourDuLich_GUI.Models.TourType1.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

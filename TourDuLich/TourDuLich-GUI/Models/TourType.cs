@@ -17,7 +17,7 @@ namespace TourDuLich_GUI.Models
 
         public override string ToString()
         {
-            return $"{this.Name}";
+            return $"{this.ID}, {this.Name}";
         }
     }
 }

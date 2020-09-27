@@ -35,6 +35,7 @@ namespace TourDuLich_GUI
 
             dataLayoutControl1.DataSource = GetTourDataSource();
             destinationBindingSource.DataSource = GetDestinationDataSource();
+            tourTypeBindingSource.DataSource = GetTourTypeDataSource();
         }
 
         public BindingList<Tour> GetTourDataSource()
@@ -51,6 +52,25 @@ namespace TourDuLich_GUI
                 result.Add(d);
             }
             return result;
+        }
+        public BindingList<TourType> GetTourTypeDataSource()
+        {
+            BindingList<TourType> result = new BindingList<TourType>();
+            foreach (TourType tt in parent.tourTypes) {
+                result.Add(tt);
+            }
+            return result;
+        }
+
+        private void getState ()
+        {
+            Console.WriteLine($"{tour.Name}, {tour.PriceRef}, {tour.TourPrices.ElementAt(0).Value}, {tour.TourType.Name}, {tour.TourType.ID}");
+            Console.WriteLine($"{TourTypeLookupEdit.GetSelectedDataRow()}");
+        }
+
+        private void bbiSave_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            getState();
         }
     }
 }

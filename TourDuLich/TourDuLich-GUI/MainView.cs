@@ -91,7 +91,7 @@ namespace TourDuLich_GUI
             {
                 Tour t = tours[i];
                 Destination d = destinations[i];
-                t.TourType = tourTypes[0];
+                t.TourType = tourTypes[i];
                 t.TourDetails = new List<TourDetail>() {
                     new TourDetail() {
                         ID = i,
