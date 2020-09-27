@@ -20,6 +20,7 @@ namespace TourDuLich_GUI.Models
         [Required, Display(Name = "Giá tham khảo")]
         public long PriceRef { get; set; }
 
+        public virtual TourType TourType { get; set; }
         public virtual ICollection<TourDetail> TourDetails { get; set; }
         public virtual ICollection<TourPrice> TourPrices { get; set; }
     }
