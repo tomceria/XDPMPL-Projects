@@ -48,20 +48,24 @@
             this.PriceRefTextEdit = new DevExpress.XtraEditors.TextEdit();
             this.TourDetailsListBoxControl = new DevExpress.XtraEditors.ListBoxControl();
             this.TourPricesGridControl = new DevExpress.XtraGrid.GridControl();
+            this.tourPriceBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.colValue = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colTimeStart = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colTimeEnd = new DevExpress.XtraGrid.Columns.GridColumn();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlGroup2 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.ItemForName = new DevExpress.XtraLayout.LayoutControlItem();
             this.ItemForDescription = new DevExpress.XtraLayout.LayoutControlItem();
             this.ItemForPriceRef = new DevExpress.XtraLayout.LayoutControlItem();
             this.tabbedDetails = new DevExpress.XtraLayout.TabbedControlGroup();
+            this.layoutControlGroup4 = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.ItemForTourPrices = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlGroup3 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.ItemForTourDetails = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlGroup4 = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.ItemForTourPrices = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl1)).BeginInit();
             this.dataLayoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.listBoxControl1)).BeginInit();
@@ -73,6 +77,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.PriceRefTextEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.TourDetailsListBoxControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.TourPricesGridControl)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tourPriceBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).BeginInit();
@@ -80,13 +85,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.ItemForDescription)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForPriceRef)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabbedDetails)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForTourPrices)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForTourDetails)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForTourPrices)).BeginInit();
             this.SuspendLayout();
             // 
             // dataLayoutControl1
@@ -272,6 +277,7 @@
             // TourPricesGridControl
             // 
             this.TourPricesGridControl.DataBindings.Add(new System.Windows.Forms.Binding("DataSource", this.tourBindingSource, "TourPrices", true));
+            this.TourPricesGridControl.DataSource = this.tourPriceBindingSource;
             this.TourPricesGridControl.Location = new System.Drawing.Point(24, 119);
             this.TourPricesGridControl.MainView = this.gridView1;
             this.TourPricesGridControl.MenuManager = this.mainRibbonControl;
@@ -281,10 +287,40 @@
             this.TourPricesGridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
             // 
+            // tourPriceBindingSource
+            // 
+            this.tourPriceBindingSource.DataSource = typeof(TourDuLich_GUI.Models.TourPrice);
+            // 
             // gridView1
             // 
+            this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.colValue,
+            this.colTimeStart,
+            this.colTimeEnd});
             this.gridView1.GridControl = this.TourPricesGridControl;
             this.gridView1.Name = "gridView1";
+            this.gridView1.OptionsCustomization.AllowQuickHideColumns = false;
+            // 
+            // colValue
+            // 
+            this.colValue.FieldName = "Value";
+            this.colValue.Name = "colValue";
+            this.colValue.Visible = true;
+            this.colValue.VisibleIndex = 0;
+            // 
+            // colTimeStart
+            // 
+            this.colTimeStart.FieldName = "TimeStart";
+            this.colTimeStart.Name = "colTimeStart";
+            this.colTimeStart.Visible = true;
+            this.colTimeStart.VisibleIndex = 1;
+            // 
+            // colTimeEnd
+            // 
+            this.colTimeEnd.FieldName = "TimeEnd";
+            this.colTimeEnd.Name = "colTimeEnd";
+            this.colTimeEnd.Visible = true;
+            this.colTimeEnd.VisibleIndex = 2;
             // 
             // layoutControlGroup1
             // 
@@ -337,12 +373,33 @@
             // 
             this.tabbedDetails.Location = new System.Drawing.Point(0, 72);
             this.tabbedDetails.Name = "tabbedDetails";
-            this.tabbedDetails.SelectedTabPage = this.layoutControlGroup3;
+            this.tabbedDetails.SelectedTabPage = this.layoutControlGroup4;
             this.tabbedDetails.Size = new System.Drawing.Size(778, 349);
             this.tabbedDetails.TabPages.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlGroup4,
             this.layoutControlGroup3});
             this.tabbedDetails.Text = "Chi tiết";
+            // 
+            // layoutControlGroup4
+            // 
+            this.layoutControlGroup4.CustomizationFormText = "Giá";
+            this.layoutControlGroup4.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.ItemForTourPrices});
+            this.layoutControlGroup4.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlGroup4.Name = "layoutControlGroup4";
+            this.layoutControlGroup4.Size = new System.Drawing.Size(754, 302);
+            this.layoutControlGroup4.Text = "Giá";
+            // 
+            // ItemForTourPrices
+            // 
+            this.ItemForTourPrices.Control = this.TourPricesGridControl;
+            this.ItemForTourPrices.Location = new System.Drawing.Point(0, 0);
+            this.ItemForTourPrices.Name = "ItemForTourPrices";
+            this.ItemForTourPrices.Size = new System.Drawing.Size(754, 302);
+            this.ItemForTourPrices.StartNewLine = true;
+            this.ItemForTourPrices.Text = "Tour Prices";
+            this.ItemForTourPrices.TextSize = new System.Drawing.Size(0, 0);
+            this.ItemForTourPrices.TextVisible = false;
             // 
             // layoutControlGroup3
             // 
@@ -397,27 +454,6 @@
             this.layoutControlItem3.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem3.TextVisible = false;
             // 
-            // layoutControlGroup4
-            // 
-            this.layoutControlGroup4.CustomizationFormText = "Giá";
-            this.layoutControlGroup4.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.ItemForTourPrices});
-            this.layoutControlGroup4.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlGroup4.Name = "layoutControlGroup4";
-            this.layoutControlGroup4.Size = new System.Drawing.Size(754, 302);
-            this.layoutControlGroup4.Text = "Giá";
-            // 
-            // ItemForTourPrices
-            // 
-            this.ItemForTourPrices.Control = this.TourPricesGridControl;
-            this.ItemForTourPrices.Location = new System.Drawing.Point(0, 0);
-            this.ItemForTourPrices.Name = "ItemForTourPrices";
-            this.ItemForTourPrices.Size = new System.Drawing.Size(754, 302);
-            this.ItemForTourPrices.StartNewLine = true;
-            this.ItemForTourPrices.Text = "Tour Prices";
-            this.ItemForTourPrices.TextSize = new System.Drawing.Size(0, 0);
-            this.ItemForTourPrices.TextVisible = false;
-            // 
             // EditTourView
             // 
             this.AllowFormGlass = DevExpress.Utils.DefaultBoolean.True;
@@ -440,6 +476,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.PriceRefTextEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.TourDetailsListBoxControl)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.TourPricesGridControl)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tourPriceBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).EndInit();
@@ -447,13 +484,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.ItemForDescription)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForPriceRef)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabbedDetails)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForTourPrices)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForTourDetails)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForTourPrices)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -493,5 +530,9 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup4;
         private DevExpress.XtraLayout.LayoutControlItem ItemForTourPrices;
+        private System.Windows.Forms.BindingSource tourPriceBindingSource;
+        private DevExpress.XtraGrid.Columns.GridColumn colValue;
+        private DevExpress.XtraGrid.Columns.GridColumn colTimeStart;
+        private DevExpress.XtraGrid.Columns.GridColumn colTimeEnd;
     }
 }
