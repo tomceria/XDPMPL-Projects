@@ -33,7 +33,6 @@
             this.btnRemoveDestination = new DevExpress.XtraEditors.SimpleButton();
             this.btnAddDestination = new DevExpress.XtraEditors.SimpleButton();
             this.listBoxControl_Destination = new DevExpress.XtraEditors.ListBoxControl();
-            this.destinationBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.NameTextEdit = new DevExpress.XtraEditors.TextEdit();
             this.tourBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.mainRibbonControl = new DevExpress.XtraBars.Ribbon.RibbonControl();
@@ -68,11 +67,10 @@
             this.layoutControlGroup4 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.ItemForTourPrices = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.tourTypeBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.destinationBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl_Tour)).BeginInit();
             this.dataLayoutControl_Tour.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.listBoxControl_Destination)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.destinationBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NameTextEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tourBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.mainRibbonControl)).BeginInit();
@@ -97,7 +95,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForTourPrices)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tourTypeBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.destinationBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // dataLayoutControl_Tour
@@ -149,10 +147,6 @@
             this.listBoxControl_Destination.StyleController = this.dataLayoutControl_Tour;
             this.listBoxControl_Destination.TabIndex = 9;
             this.listBoxControl_Destination.ValueMember = "ID";
-            // 
-            // destinationBindingSource
-            // 
-            this.destinationBindingSource.DataSource = typeof(TourDuLich_GUI.Models.Destination);
             // 
             // NameTextEdit
             // 
@@ -339,7 +333,6 @@
             this.LookUpEdit_TourType.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.LookUpEdit_TourType.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.LookUpEdit_TourType.Properties.DataSource = typeof(TourDuLich_GUI.Models.TourType);
             this.LookUpEdit_TourType.Properties.NullText = "";
             this.LookUpEdit_TourType.Properties.PopupSizeable = false;
             this.LookUpEdit_TourType.Size = new System.Drawing.Size(314, 20);
@@ -487,9 +480,9 @@
             this.layoutControlItem4.Size = new System.Drawing.Size(389, 24);
             this.layoutControlItem4.TextSize = new System.Drawing.Size(68, 13);
             // 
-            // tourTypeBindingSource
+            // destinationBindingSource
             // 
-            this.tourTypeBindingSource.DataSource = typeof(TourDuLich_GUI.Models.TourType);
+            this.destinationBindingSource.DataSource = typeof(TourDuLich_GUI.Models.Destination);
             // 
             // EditTourView
             // 
@@ -505,7 +498,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl_Tour)).EndInit();
             this.dataLayoutControl_Tour.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.listBoxControl_Destination)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.destinationBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NameTextEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tourBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.mainRibbonControl)).EndInit();
@@ -530,7 +522,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForTourPrices)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tourTypeBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.destinationBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -560,7 +552,6 @@
         private DevExpress.XtraEditors.SimpleButton btnRemoveDestination;
         private DevExpress.XtraEditors.SimpleButton btnAddDestination;
         private DevExpress.XtraLayout.TabbedControlGroup tabbedDetails;
-        private System.Windows.Forms.BindingSource destinationBindingSource;
         private DevExpress.XtraGrid.GridControl TourPricesGridControl;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup3;
@@ -576,6 +567,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn colTimeEnd;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem4;
         private DevExpress.XtraEditors.LookUpEdit LookUpEdit_TourType;
-        private System.Windows.Forms.BindingSource tourTypeBindingSource;
+        private System.Windows.Forms.BindingSource destinationBindingSource;
     }
 }
