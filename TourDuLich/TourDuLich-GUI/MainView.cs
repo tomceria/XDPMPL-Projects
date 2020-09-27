@@ -17,6 +17,42 @@ namespace TourDuLich_GUI
     public partial class MainView : DevExpress.XtraBars.Ribbon.RibbonForm
     {
         BindingList<Tour> dataSource;
+        public List<Tour> tours = new List<Tour>()
+            {
+                new Tour() {
+                    ID = 1,
+                    Name = "Saigon - Hanoi",
+                    Description = "Wow",
+                    PriceRef = 300000
+                },
+                new Tour() {
+                    ID = 2,
+                    Name = "Saigon - Da Nang",
+                    Description = "wowwww",
+                    PriceRef = 400000
+                },
+                new Tour() {
+                    ID = 3,
+                    Name = "Saigon - Da Lat",
+                    Description = "cold place",
+                    PriceRef = 200000
+                },
+            };
+        public List<Destination> destinations = new List<Destination>()
+            {
+                new Destination() {
+                    ID = 1,
+                    Name = "Ha Long Bay"
+                },
+                new Destination() {
+                    ID = 2,
+                    Name = "Pho co Hoi An"
+                },
+                new Destination() {
+                    ID = 3,
+                    Name = "Tiem banh Coi Xay Gio"
+                },
+            };
 
         public MainView()
         {
@@ -32,42 +68,6 @@ namespace TourDuLich_GUI
         public BindingList<Tour> GetDataSource()
         {
             BindingList<Tour> result = new BindingList<Tour>();
-            List<Tour> tours = new List<Tour>()
-                {
-                    new Tour() {
-                        ID = 1,
-                        Name = "Saigon - Hanoi",
-                        Description = "Wow",
-                        PriceRef = 300000
-                    },
-                    new Tour() {
-                        ID = 2,
-                        Name = "Saigon - Da Nang",
-                        Description = "wowwww",
-                        PriceRef = 400000
-                    },
-                    new Tour() {
-                        ID = 3,
-                        Name = "Saigon - Da Lat",
-                        Description = "cold place",
-                        PriceRef = 200000
-                    },
-                };
-            List<Destination> destinations = new List<Destination>()
-                {
-                    new Destination() {
-                        ID = 1,
-                        Name = "Ha Long Bay"
-                    },
-                    new Destination() {
-                        ID = 2,
-                        Name = "Pho co Hoi An"
-                    },
-                    new Destination() {
-                        ID = 3,
-                        Name = "Tiem banh Coi Xay Gio"
-                    },
-                };
 
             for (int i = 0; i < tours.Count; i++)
             {
@@ -92,7 +92,7 @@ namespace TourDuLich_GUI
             {
                 Tour selectedTour = (Tour)gridView.GetRow(i);
                 Console.WriteLine("Data: " + (selectedTour.Name));
-                EditTourView editTourView = new EditTourView(selectedTour);
+                EditTourView editTourView = new EditTourView(this, selectedTour);
                 editTourView.ShowDialog(this);
             }
         }

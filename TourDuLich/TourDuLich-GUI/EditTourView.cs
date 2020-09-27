@@ -18,9 +18,10 @@ namespace TourDuLich_GUI
 {
     public partial class EditTourView : DevExpress.XtraBars.Ribbon.RibbonForm
     {
+        private MainView parent;
         private Tour tour;
 
-        public EditTourView(Tour _tour)
+        public EditTourView(MainView _parent, Tour _tour)
         {
 /*            dataLayoutControl1.DataSource = GetDataSource();
 */            /*            dataLayoutControl1.RetrieveFields();
@@ -29,15 +30,26 @@ namespace TourDuLich_GUI
                         aboutItem.TextLocation = DevExpress.Utils.Locations.Top;
             */
             InitializeComponent();
+            parent = _parent;
             tour = _tour;
 
-            dataLayoutControl1.DataSource = GetDataSource();
+            dataLayoutControl1.DataSource = GetTourDataSource();
+            destinationBindingSource.DataSource = GetDestinationDataSource();
         }
 
-        public BindingList<Tour> GetDataSource()
+        public BindingList<Tour> GetTourDataSource()
         {
             BindingList<Tour> result = new BindingList<Tour>();
             result.Add(tour);
+            return result;
+        }
+
+        public BindingList<Destination> GetDestinationDataSource()
+        {
+            BindingList<Destination> result = new BindingList<Destination>();
+            foreach (Destination d in parent.destinations) {
+                result.Add(d);
+            }
             return result;
         }
     }
