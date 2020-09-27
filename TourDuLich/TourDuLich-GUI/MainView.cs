@@ -81,6 +81,16 @@ namespace TourDuLich_GUI
                         Destination = d
                     }
                 };
+                t.TourPrices = new List<TourPrice>() {
+                    new TourPrice()
+                    {
+                        ID = 1,
+                        Value = 1000000,
+                        TimeStart = new DateTime(2020, 9, 27),
+                        TimeEnd = new DateTime(2020, 9, 27).AddDays(10),
+                        Tour = t,
+                    }
+                };
                 result.Add(t);
             }
             return result;
