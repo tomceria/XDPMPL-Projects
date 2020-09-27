@@ -53,6 +53,24 @@ namespace TourDuLich_GUI
                     Name = "Tiem banh Coi Xay Gio"
                 },
             };
+        public List<TourType> tourTypes = new List<TourType>()
+        {
+            new TourType()
+            {
+                ID = 1,
+                Name = "Du lịch di động"
+            },
+            new TourType()
+            {
+                ID = 2,
+                Name = "Du lịch kết hợp nghề nghiệp"
+            },
+            new TourType()
+            {
+                ID = 3,
+                Name = "Du lịch xã hội và gia đình"
+            },
+        };
 
         public MainView()
         {
@@ -73,6 +91,7 @@ namespace TourDuLich_GUI
             {
                 Tour t = tours[i];
                 Destination d = destinations[i];
+                t.TourType = tourTypes[0];
                 t.TourDetails = new List<TourDetail>() {
                     new TourDetail() {
                         ID = i,
