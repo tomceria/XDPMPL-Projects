@@ -21,5 +21,6 @@ namespace TourDuLich_GUI.Models
         public long PriceRef { get; set; }
 
         public virtual ICollection<TourDetail> TourDetails { get; set; }
+        public virtual ICollection<TourPrice> TourPrices { get; set; }
     }
 }
