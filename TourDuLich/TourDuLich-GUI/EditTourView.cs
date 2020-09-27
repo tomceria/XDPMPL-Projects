@@ -23,19 +23,19 @@ namespace TourDuLich_GUI
 
         public EditTourView(MainView _parent, Tour _tour)
         {
-/*            dataLayoutControl1.DataSource = GetDataSource();
-*/            /*            dataLayoutControl1.RetrieveFields();
-                        List<BaseLayoutItem> flatList = new FlatItemsList().GetItemsList(dataLayoutControl1.Root);
-                        BaseLayoutItem aboutItem = flatList.First(e => e.Text == "About");
-                        aboutItem.TextLocation = DevExpress.Utils.Locations.Top;
-            */
+            /*            dataLayoutControl1.DataSource = GetDataSource();
+            */            /*            dataLayoutControl1.RetrieveFields();
+                                    List<BaseLayoutItem> flatList = new FlatItemsList().GetItemsList(dataLayoutControl1.Root);
+                                    BaseLayoutItem aboutItem = flatList.First(e => e.Text == "About");
+                                    aboutItem.TextLocation = DevExpress.Utils.Locations.Top;
+                        */
             InitializeComponent();
             parent = _parent;
             tour = _tour;
 
-            dataLayoutControl1.DataSource = GetTourDataSource();
-            destinationBindingSource.DataSource = GetDestinationDataSource();
-            tourTypeBindingSource.DataSource = GetTourTypeDataSource();
+            dataLayoutControl_Tour.DataSource = GetTourDataSource();
+            listBoxControl_Destination.DataSource = GetDestinationDataSource();
+            LookUpEdit_TourType.Properties.DataSource = GetTourTypeDataSource();
         }
 
         public BindingList<Tour> GetTourDataSource()
@@ -65,7 +65,7 @@ namespace TourDuLich_GUI
         private void getState ()
         {
             Console.WriteLine($"{tour.Name}, {tour.PriceRef}, {tour.TourPrices.ElementAt(0).Value}, {tour.TourType.Name}, {tour.TourType.ID}");
-            Console.WriteLine($"{TourTypeLookupEdit.GetSelectedDataRow()}");
+            Console.WriteLine($"{LookUpEdit_TourType.GetSelectedDataRow()}");
         }
 
         private void bbiSave_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
