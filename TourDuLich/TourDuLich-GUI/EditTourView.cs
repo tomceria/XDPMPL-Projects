@@ -21,6 +21,15 @@ namespace TourDuLich_GUI
         private MainView parent;
         private Tour tour;
 
+        public EditTourView(MainView _parent)
+        {
+
+            InitializeComponent();
+            parent = _parent;
+            tour = new Tour();
+            InitializeDataSources();
+        }
+
         public EditTourView(MainView _parent, Tour _tour)
         {
             /*            dataLayoutControl1.DataSource = GetDataSource();
@@ -32,7 +41,11 @@ namespace TourDuLich_GUI
             InitializeComponent();
             parent = _parent;
             tour = _tour;
+            InitializeDataSources();
+        }
 
+        private void InitializeDataSources()
+        {
             dataLayoutControl_Tour.DataSource = GetTourDataSource();
             listBoxControl_Destination.DataSource = GetDestinationDataSource();
             LookUpEdit_TourType.Properties.DataSource = GetTourTypeDataSource();
@@ -62,15 +75,56 @@ namespace TourDuLich_GUI
             return result;
         }
 
-        private void getState ()
+        private void handleSaveTour ()
         {
+            // TODO: Perform save tour
             Console.WriteLine($"{tour.Name}, {tour.PriceRef}, {tour.TourPrices.ElementAt(0).Value}, {tour.TourType.Name}, {tour.TourType.ID}");
             Console.WriteLine($"{LookUpEdit_TourType.GetSelectedDataRow()}");
         }
 
+        private void handleResetTour()
+        {
+            tour = new Tour();
+            InitializeDataSources();
+        }
+
+        private void handleDeleteTour()
+        {
+            Console.WriteLine("Deeeeeelete!");
+        }
+
+        private void handleCloseEdit()
+        {
+            this.Dispose();
+        }
+
+        // Events
+
         private void bbiSave_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            getState();
+            handleSaveTour();
+        }
+
+        private void bbiSaveAndClose_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            handleSaveTour();
+            handleCloseEdit();
+        }
+
+        private void bbiSaveAndNew_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            handleSaveTour();
+            handleResetTour();
+        }
+
+        private void bbiReset_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            handleResetTour();
+        }
+
+        private void bbiDelete_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            handleDeleteTour();
         }
     }
 }

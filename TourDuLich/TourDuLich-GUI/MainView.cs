@@ -114,15 +114,24 @@ namespace TourDuLich_GUI
             }
             return result;
         }
+        private void bbiNew_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            EditTourView editTourView = new EditTourView(this);
+            editTourView.ShowDialog(this);
+
+            Console.WriteLine("Completed.");
+        }
 
         private void bbiEdit_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (int i in gridView.GetSelectedRows())
+            /*            foreach (int i in gridView.GetSelectedRows())*/
             {
-                Tour selectedTour = (Tour)gridView.GetRow(i);
+                Tour selectedTour = (Tour)gridView.GetRow(0);
                 Console.WriteLine("Data: " + (selectedTour.Name));
                 EditTourView editTourView = new EditTourView(this, selectedTour);
                 editTourView.ShowDialog(this);
+
+                Console.WriteLine("Completed.");
             }
         }
     }
