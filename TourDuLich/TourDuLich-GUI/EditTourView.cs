@@ -81,8 +81,6 @@ namespace TourDuLich_GUI
         private void handleSaveTour ()
         {
             // TODO: Perform save tour
-            Console.WriteLine($"{tour.Name}, {tour.PriceRef}, {tour.TourPrices.ElementAt(0).Value}, {tour.TourType.Name}, {tour.TourType.ID}");
-            Console.WriteLine($"{LookUpEdit_TourType.GetSelectedDataRow()}");
         }
 
         private void handleResetTour()
@@ -104,20 +102,28 @@ namespace TourDuLich_GUI
 
         private void handleAddTourPrice()
         {
-            ((BindingList<Tour>)dataLayoutControl_Tour.DataSource)
-                .ElementAt(0)
+            ((BindingList<Tour>)dataLayoutControl_Tour.DataSource) .ElementAt(0)
                 .TourPrices
                 .Add(new TourPrice(tour));
+
             gridView_TourPrice.GridControl.RefreshDataSource();
         }
 
         private void handleDeleteTourPrice()
         {
+/*            gridView_TourPrice.DeleteRow(gridView_TourPrice.FocusedRowHandle);
+*/            
             if (gridView_TourPrice.FocusedRowHandle < 0)
             {
                 return;
             }
-            gridView_TourPrice.DeleteRow(gridView_TourPrice.FocusedRowHandle);
+            ICollection<TourPrice> tourPrices = 
+                ((BindingList<Tour>)dataLayoutControl_Tour.DataSource)
+                    .ElementAt(0)
+                    .TourPrices;
+            tourPrices.Remove(tourPrices.ElementAt(gridView_TourPrice.FocusedRowHandle));
+
+            gridView_TourPrice.GridControl.RefreshDataSource();
         }
 
         // Events

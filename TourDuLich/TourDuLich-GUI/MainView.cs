@@ -124,9 +124,8 @@ namespace TourDuLich_GUI
 
         private void bbiEdit_ItemClick(object sender, ItemClickEventArgs e)
         {
-            /*            foreach (int i in gridView.GetSelectedRows())*/
             {
-                Tour selectedTour = (Tour)gridView.GetRow(0);
+                Tour selectedTour = (Tour)gridView.GetFocusedRow();
                 Console.WriteLine("Data: " + (selectedTour.Name));
                 EditTourView editTourView = new EditTourView(this, selectedTour);
                 editTourView.ShowDialog(this);
