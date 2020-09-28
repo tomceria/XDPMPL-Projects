@@ -75,6 +75,8 @@ namespace TourDuLich_GUI
             return result;
         }
 
+        // Event Handlers
+
         private void handleSaveTour ()
         {
             // TODO: Perform save tour
@@ -90,6 +92,7 @@ namespace TourDuLich_GUI
 
         private void handleDeleteTour()
         {
+            // TODO: Perform delete tour
             Console.WriteLine("Deeeeeelete!");
         }
 
