@@ -9,6 +9,21 @@ namespace TourDuLich_GUI.Models
 {
     public class TourPrice
     {
+        static int Count = 0;
+
+        public TourPrice()
+        {
+            ID = Count++;
+            Value = 0;
+            TimeStart = new DateTime();
+            TimeEnd = new DateTime().AddDays(10);
+        }
+
+        public TourPrice(Tour t): this()
+        {
+            Tour = t;
+        }
+
         [Key, Display(AutoGenerateField = false)]
         public int ID { get; set; }
 

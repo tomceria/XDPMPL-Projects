@@ -13,6 +13,7 @@ using System.IO;
 using DevExpress.XtraLayout.Helpers;
 using DevExpress.XtraLayout;
 using TourDuLich_GUI.Models;
+using DevExpress.XtraGrid;
 
 namespace TourDuLich_GUI
 {
@@ -101,6 +102,24 @@ namespace TourDuLich_GUI
             this.Dispose();
         }
 
+        private void handleAddTourPrice()
+        {
+            ((BindingList<Tour>)dataLayoutControl_Tour.DataSource)
+                .ElementAt(0)
+                .TourPrices
+                .Add(new TourPrice(tour));
+            gridView_TourPrice.GridControl.RefreshDataSource();
+        }
+
+        private void handleDeleteTourPrice()
+        {
+            if (gridView_TourPrice.FocusedRowHandle < 0)
+            {
+                return;
+            }
+            gridView_TourPrice.DeleteRow(gridView_TourPrice.FocusedRowHandle);
+        }
+
         // Events
 
         private void bbiSave_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -128,6 +147,16 @@ namespace TourDuLich_GUI
         private void bbiDelete_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             handleDeleteTour();
+        }
+
+        private void button_AddTourPrice_Click(object sender, EventArgs e)
+        {
+            handleAddTourPrice();
+        }
+
+        private void button_DeleteTourPrice_Click(object sender, EventArgs e)
+        {
+            handleDeleteTourPrice();
         }
     }
 }
