@@ -90,22 +90,22 @@
     <Compile Include="Models\TourType.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="MainView.cs">
+    <Compile Include="GUI\MainView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainView.Designer.cs">
+    <Compile Include="GUI\MainView.Designer.cs">
       <DependentUpon>MainView.cs</DependentUpon>
     </Compile>
-    <Compile Include="EditTourView.cs">
+    <Compile Include="GUI\EditTourView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="EditTourView.Designer.cs">
+    <Compile Include="GUI\EditTourView.Designer.cs">
       <DependentUpon>EditTourView.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="EditTourView.resx">
+    <EmbeddedResource Include="GUI\EditTourView.resx">
       <DependentUpon>EditTourView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainView.resx">
+    <EmbeddedResource Include="GUI\MainView.resx">
       <DependentUpon>MainView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202009281631422_EmptyMigration.resx">
@@ -139,6 +139,9 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="BUS\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

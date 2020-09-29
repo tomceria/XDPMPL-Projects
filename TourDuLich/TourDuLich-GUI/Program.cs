@@ -20,7 +20,7 @@ namespace TourDuLich_GUI
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainView());
-            var context = new Model1();
+            var context = new TourContext();
             context.SaveChanges();
         }
     }

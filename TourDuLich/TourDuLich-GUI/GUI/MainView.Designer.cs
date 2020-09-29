@@ -53,7 +53,7 @@
             // 
             // gridControl
             // 
-            this.gridControl.DataSource = this.tourBindingSource;
+            this.gridControl.DataSource = typeof(TourDuLich_GUI.Models.Tour);
             this.gridControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridControl.Location = new System.Drawing.Point(0, 158);
             this.gridControl.MainView = this.gridView;

@@ -11,6 +11,7 @@ using DevExpress.XtraEditors;
 using DevExpress.XtraBars;
 using System.ComponentModel.DataAnnotations;
 using TourDuLich_GUI.Models;
+using System.Data.Entity;
 
 namespace TourDuLich_GUI
 {
