@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using DevExpress.UserSkins;
 using DevExpress.Skins;
 using DevExpress.LookAndFeel;
+using System.Data.Entity;
 
 namespace TourDuLich_GUI
 {
@@ -19,6 +20,8 @@ namespace TourDuLich_GUI
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainView());
+            var context = new Model1();
+            context.SaveChanges();
         }
     }
 }
