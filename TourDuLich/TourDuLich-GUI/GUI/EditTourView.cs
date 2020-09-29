@@ -14,24 +14,24 @@ using DevExpress.XtraLayout.Helpers;
 using DevExpress.XtraLayout;
 using TourDuLich_GUI.Models;
 using DevExpress.XtraGrid;
+using System.Data.Entity;
 
 namespace TourDuLich_GUI
 {
     public partial class EditTourView : DevExpress.XtraBars.Ribbon.RibbonForm
     {
-        private MainView parent;
         private Tour tour;
 
-        public EditTourView(MainView _parent)
+        public EditTourView()
         {
 
             InitializeComponent();
-            parent = _parent;
             tour = new Tour();
+
             InitializeDataSources();
         }
 
-        public EditTourView(MainView _parent, Tour _tour)
+        public EditTourView(Tour _tour)
         {
             /*            dataLayoutControl1.DataSource = GetDataSource();
             */            /*            dataLayoutControl1.RetrieveFields();
@@ -40,12 +40,29 @@ namespace TourDuLich_GUI
                                     aboutItem.TextLocation = DevExpress.Utils.Locations.Top;
                         */
             InitializeComponent();
-            parent = _parent;
             tour = _tour;
+
             InitializeDataSources();
         }
 
         private void InitializeDataSources()
+        {
+            TourDuLich_GUI.DAL.TourContext dbContext = new TourDuLich_GUI.DAL.TourContext();
+            // Call the LoadAsync method to asynchronously get the data for the given DbSet from the database.
+            dbContext.Tours.LoadAsync().ContinueWith(loadTask =>
+            {
+                // Bind data to control when loading complete
+                dataLayoutControl_Tour.DataSource = dbContext.Tours.Local.ToBindingList();
+            }, System.Threading.Tasks.TaskScheduler.FromCurrentSynchronizationContext());
+
+            dbContext.TourTypes.LoadAsync().ContinueWith(loadTask =>
+            {
+              // Bind data to control when loading complete
+              LookUpEdit_TourType.Properties.DataSource = dbContext.TourTypes.Local.ToBindingList();
+            }, System.Threading.Tasks.TaskScheduler.FromCurrentSynchronizationContext());
+        }
+
+/*        private void InitializeDataSources()
         {
             dataLayoutControl_Tour.DataSource = GetTourDataSource();
             listBoxControl_Destination.DataSource = GetDestinationDataSource();
@@ -75,6 +92,7 @@ namespace TourDuLich_GUI
             }
             return result;
         }
+*/
 
         // Event Handlers
 
@@ -86,7 +104,9 @@ namespace TourDuLich_GUI
         private void handleResetTour()
         {
             tour = new Tour();
-            InitializeDataSources();
+
+/*            InitializeDataSources();
+*/
         }
 
         private void handleDeleteTour()

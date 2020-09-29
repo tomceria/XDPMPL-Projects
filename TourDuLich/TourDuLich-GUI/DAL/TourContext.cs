@@ -1,9 +1,10 @@
-namespace TourDuLich_GUI
+using System;
+using System.Data.Entity;
+using System.Linq;
+using TourDuLich_GUI.Models;
+
+namespace TourDuLich_GUI.DAL
 {
-    using System;
-    using System.Data.Entity;
-    using System.Linq;
-    using TourDuLich_GUI.Models;
 
     public class TourContext : DbContext
     {
