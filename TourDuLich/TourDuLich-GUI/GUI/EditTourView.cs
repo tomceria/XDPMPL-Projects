@@ -49,7 +49,7 @@ namespace TourDuLich_GUI
         {
             TourDuLich_GUI.DAL.TourContext dbContext = new TourDuLich_GUI.DAL.TourContext();
             // Call the LoadAsync method to asynchronously get the data for the given DbSet from the database.
-            dbContext.Tours.LoadAsync().ContinueWith(loadTask =>
+            dbContext.Tours.Where(t => t.ID == tour.ID).FirstOrDefaultAsync().ContinueWith(loadTask =>
             {
                 // Bind data to control when loading complete
                 dataLayoutControl_Tour.DataSource = dbContext.Tours.Local.ToBindingList();
