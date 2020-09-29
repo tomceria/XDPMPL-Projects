@@ -69,15 +69,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DAL\TourContext.cs" />
-    <Compile Include="DAL\TourInitializer.cs" />
     <Compile Include="MainViewModel.cs" />
     <Compile Include="Migrations\202009281631422_EmptyMigration.cs" />
     <Compile Include="Migrations\202009281631422_EmptyMigration.designer.cs">
       <DependentUpon>202009281631422_EmptyMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Model1.cs" />
+    <Compile Include="TourContext.cs" />
     <Compile Include="Models\CostType.cs" />
     <Compile Include="Models\Staff.cs" />
     <Compile Include="Models\TourGroupCost.cs" />
