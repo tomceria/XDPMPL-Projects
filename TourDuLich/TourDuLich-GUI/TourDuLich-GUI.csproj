@@ -83,10 +83,6 @@
     <Compile Include="Migrations\202010010701440_TourANDTourGroup.designer.cs">
       <DependentUpon>202010010701440_TourANDTourGroup.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202010010712121_NavigationPropertyFix.cs" />
-    <Compile Include="Migrations\202010010712121_NavigationPropertyFix.designer.cs">
-      <DependentUpon>202010010712121_NavigationPropertyFix.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="DAL\TourContext.cs" />
     <Compile Include="Models\CostType.cs" />
@@ -129,9 +125,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202010010701440_TourANDTourGroup.resx">
       <DependentUpon>202010010701440_TourANDTourGroup.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202010010712121_NavigationPropertyFix.resx">
-      <DependentUpon>202010010712121_NavigationPropertyFix.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">

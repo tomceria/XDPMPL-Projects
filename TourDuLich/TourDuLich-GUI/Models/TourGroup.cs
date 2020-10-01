@@ -30,8 +30,8 @@ namespace TourDuLich_GUI.Models
         public long PriceGroup { get; set; }
 
         public virtual Tour Tour { get; set; }
-        public virtual ICollection<TourGroup> TourGroups { get; set; }
         public virtual ICollection<TourGroupCost> TourGroupCosts { get; set; }
         public virtual ICollection<TourGroupDetail> TourGroupDetails { get; set; }
+        public virtual ICollection<TourGroupStaff> TourGroupStaffs { get; set; }
     }
 }
