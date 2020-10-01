@@ -9,5 +9,7 @@ namespace TourDuLich_GUI.Models
 
         [Required, Display(Name = "Tên")]
         public string Name { get; set; }
+
+        public virtual TourDetail[] TourDetails { get; set; }
     }
 }

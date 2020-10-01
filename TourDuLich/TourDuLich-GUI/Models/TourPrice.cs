@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TourDuLich_GUI.Models
 {
@@ -34,6 +35,7 @@ namespace TourDuLich_GUI.Models
         [Required, Display(Name = "Thời gian kết thúc")]
         public DateTime TimeEnd { get; set; }
 
+        [ForeignKey("tourId")]
         public virtual Tour Tour { get; set; }
     }
 }

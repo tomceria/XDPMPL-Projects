@@ -8,16 +8,13 @@ namespace TourDuLich_GUI.Models
         [Key, Display(AutoGenerateField = false)]
         public int ID { get; set; }
 
-        [ForeignKey("TourGroup"), Display(Name = "Đoàn")]
-        public int TourGroupID { get; set; }
-
-        [ForeignKey("Staff"), Display(Name = "Nhân viên")]
-        public int StaffID { get; set; }
-
         [Required, Display(Name = "Nhiệm vụ")]
         public Task StaffTask { get; set; }
 
+        [ForeignKey("TourGroupID"), Display(Name = "Đoàn")]
         public virtual TourGroup TourGroup { get; set; }
+
+        [ForeignKey("StaffID"), Display(Name = "Nhân viên")]
         public virtual Staff Staff { get; set; }
 
         [NotMapped]

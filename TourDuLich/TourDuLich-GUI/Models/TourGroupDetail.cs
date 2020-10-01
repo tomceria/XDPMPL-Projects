@@ -8,13 +8,10 @@ namespace TourDuLich_GUI.Models
         [Key, Display(AutoGenerateField = false)]
         public int ID { get; set; }
 
-        [ForeignKey("TourGroup"), Display(Name = "Đoàn")]
-        public int TourGroupID { get; set; }
-
-        [ForeignKey("Customer"), Display(Name = "Khách hàng")]
-        public int CustomerID { get; set; }
-
+        [ForeignKey("TourGroupID"), Display(Name = "Đoàn")]
         public virtual TourGroup TourGroup { get; set; }
+
+        [ForeignKey("CustomerID"), Display(Name = "Khách hàng")]
         public virtual Customer Customer { get; set; }
     }
 }

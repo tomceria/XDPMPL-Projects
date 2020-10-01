@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TourDuLich_GUI.Models
 {
@@ -16,7 +17,7 @@ namespace TourDuLich_GUI.Models
         [Required, Display(Name = "Giá tham khảo")]
         public long PriceRef { get; set; }
 
-        [Required, Display(Name = "Loại tour")]
+        [Required, Display(Name = "Loại tour"), ForeignKey("tourTypeId")]
         public virtual TourType TourType { get; set; }
 
         public virtual ICollection<TourDetail> TourDetails { get; set; }
