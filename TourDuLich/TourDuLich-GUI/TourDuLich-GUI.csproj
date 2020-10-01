@@ -75,6 +75,10 @@
     <Compile Include="Migrations\202009281631422_EmptyMigration.designer.cs">
       <DependentUpon>202009281631422_EmptyMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202010010623184_ForeignKeysUpdated.cs" />
+    <Compile Include="Migrations\202010010623184_ForeignKeysUpdated.designer.cs">
+      <DependentUpon>202010010623184_ForeignKeysUpdated.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="DAL\TourContext.cs" />
     <Compile Include="Models\CostType.cs" />
@@ -111,6 +115,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202009281631422_EmptyMigration.resx">
       <DependentUpon>202009281631422_EmptyMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010010623184_ForeignKeysUpdated.resx">
+      <DependentUpon>202010010623184_ForeignKeysUpdated.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">

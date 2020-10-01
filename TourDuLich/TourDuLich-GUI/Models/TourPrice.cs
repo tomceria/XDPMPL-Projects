@@ -24,7 +24,7 @@ namespace TourDuLich_GUI.Models
         [Key, Display(AutoGenerateField = false)]
         public int ID { get; set; }
 
-        [ForeignKey("Tour"), Display("Tour")]
+        [ForeignKey("Tour"), Display(Name = "Tour")]
         public int TourID { get; set; }
 
         [Required, Display(Name = "Giá trị")]
