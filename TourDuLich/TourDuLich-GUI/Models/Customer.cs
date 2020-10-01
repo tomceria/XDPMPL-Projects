@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace TourDuLich_GUI.Models
 {
@@ -9,5 +11,7 @@ namespace TourDuLich_GUI.Models
 
         [Required, Display(Name = "Tên khách")]
         public string Name { get; set; }
+
+        public virtual ICollection<TourGroupDetail> TourGroupDetails { get; set; }
     }
 }
