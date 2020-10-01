@@ -24,6 +24,9 @@ namespace TourDuLich_GUI.Models
         [Key, Display(AutoGenerateField = false)]
         public int ID { get; set; }
 
+        [ForeignKey("Tour"), Display("Tour")]
+        public int TourID { get; set; }
+
         [Required, Display(Name = "Giá trị")]
         public long Value { get; set; }
 
@@ -35,7 +38,6 @@ namespace TourDuLich_GUI.Models
         [Required, Display(Name = "Thời gian kết thúc")]
         public DateTime TimeEnd { get; set; }
 
-        [ForeignKey("tourId")]
         public virtual Tour Tour { get; set; }
     }
 }

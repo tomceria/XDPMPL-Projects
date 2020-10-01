@@ -47,19 +47,19 @@ namespace TourDuLich_GUI
 
         private void InitializeDataSources()
         {
-            TourDuLich_GUI.DAL.TourContext dbContext = new TourDuLich_GUI.DAL.TourContext();
-            // Call the LoadAsync method to asynchronously get the data for the given DbSet from the database.
-            dbContext.Tours.Where(t => t.ID == tour.ID).FirstOrDefaultAsync().ContinueWith(loadTask =>
-            {
-                // Bind data to control when loading complete
-                dataLayoutControl_Tour.DataSource = dbContext.Tours.Local.ToBindingList();
-            }, System.Threading.Tasks.TaskScheduler.FromCurrentSynchronizationContext());
+            // TourDuLich_GUI.DAL.TourContext dbContext = new TourDuLich_GUI.DAL.TourContext();
+            // // Call the LoadAsync method to asynchronously get the data for the given DbSet from the database.
+            // dbContext.Tours.Where(t => t.ID == tour.ID).FirstOrDefaultAsync().ContinueWith(loadTask =>
+            // {
+            //     // Bind data to control when loading complete
+            //     dataLayoutControl_Tour.DataSource = dbContext.Tours.Local.ToBindingList();
+            // }, System.Threading.Tasks.TaskScheduler.FromCurrentSynchronizationContext());
 
-            dbContext.TourTypes.LoadAsync().ContinueWith(loadTask =>
-            {
-              // Bind data to control when loading complete
-              LookUpEdit_TourType.Properties.DataSource = dbContext.TourTypes.Local.ToBindingList();
-            }, System.Threading.Tasks.TaskScheduler.FromCurrentSynchronizationContext());
+            // dbContext.TourTypes.LoadAsync().ContinueWith(loadTask =>
+            // {
+            //   // Bind data to control when loading complete
+            //   LookUpEdit_TourType.Properties.DataSource = dbContext.TourTypes.Local.ToBindingList();
+            // }, System.Threading.Tasks.TaskScheduler.FromCurrentSynchronizationContext());
         }
 
 /*        private void InitializeDataSources()

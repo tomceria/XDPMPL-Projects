@@ -17,7 +17,9 @@ namespace TourDuLich_GUI.Models
         [Required, Display(Name = "Giá tham khảo")]
         public long PriceRef { get; set; }
 
-        [Required, Display(Name = "Loại tour"), ForeignKey("tourTypeId")]
+        [ForeignKey("TourType"), Display(Name = "Loại tour")]
+        public int TourTypeID { get; set; }
+
         public virtual TourType TourType { get; set; }
 
         public virtual ICollection<TourDetail> TourDetails { get; set; }
