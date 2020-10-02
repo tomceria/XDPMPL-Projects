@@ -21,39 +21,43 @@ namespace TourDuLich_GUI
 {
     public partial class EditTourView : DevExpress.XtraBars.Ribbon.RibbonForm
     {
-        private Tour tour;
+        private Tour _item;
 
-        public EditTourView()
+        public EditTourView()   // New Tour
         {
-
             InitializeComponent();
-            tour = new Tour();
+            _item = new Tour();
             InitializeDataSources();
         }
 
-        public EditTourView(Tour _tour)
+        public EditTourView(Tour tour)     // Edit Tour
         {
             InitializeComponent();
-            tour = _tour;
+            _item = tour;
             InitializeDataSources();
         }
 
         private async void InitializeDataSources()
         {
-            // Prefetch UI changes
-
             // Data fetch
-            BindingList<Tour> item = new BindingList<Tour>(
-                new List<Tour>() { await TourBUS.GetOne(tour.ID) }
-            );
-            BindingList<TourType> tourTypes = new BindingList<TourType>(await TourTypeBUS.GetAll());
+            Tour item = await TourBUS.GetOne(_item.ID);
+            List<TourType> tourTypes = await TourTypeBUS.GetAll();
 
-            // UI changes
-            dataLayoutControl_Tour.DataSource = item;
-            LookUpEdit_TourTypeID.Properties.DataSource = tourTypes;
-            LookUpEdit_TourTypeID.EditValue = item[0].TourTypeID;
+            if (item == null)
+            {
+                item = _item;       // this "_item" would be INITIALIZED before running this method, meaning it has no reference to ANY BindingList, unlike EditTourView(Tour tour)
+            }
+
+            // Data binding
+            BindingList<Tour> itemBL = new BindingList<Tour>( new List<Tour>() { item } );
+            BindingList<TourType> tourTypesBL = new BindingList<TourType>(tourTypes);
+            dataLayoutControl_Tour.DataSource = itemBL;
+            LookUpEdit_TourTypeID.Properties.DataSource = tourTypesBL;
             LookUpEdit_TourTypeID.Properties.DisplayMember = "Name";
             LookUpEdit_TourTypeID.Properties.ValueMember = "ID";
+            LookUpEdit_TourTypeID.Properties.PopulateColumns();
+            LookUpEdit_TourTypeID.Properties.Columns["Tours"].Visible = false;
+            LookUpEdit_TourTypeID.EditValue = itemBL[0].TourTypeID;
         }
 
         // Event Handlers
@@ -65,7 +69,7 @@ namespace TourDuLich_GUI
 
         private void handleResetTour()
         {
-            tour = new Tour();
+            _item = new Tour();
 
 /*            InitializeDataSources();
 */
@@ -86,7 +90,7 @@ namespace TourDuLich_GUI
         {
             ((BindingList<Tour>)dataLayoutControl_Tour.DataSource) .ElementAt(0)
                 .TourPrices
-                .Add(new TourPrice(tour));
+                .Add(new TourPrice(_item));
 
             gridView_TourPrice.GridControl.RefreshDataSource();
         }

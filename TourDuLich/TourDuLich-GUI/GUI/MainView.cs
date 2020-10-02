@@ -40,6 +40,7 @@ namespace TourDuLich_GUI
             gridControl.DataSource = list;
             bsiListCount.Caption = $"{list.Count} items";
         }
+
         private void bbiNew_ItemClick(object sender, ItemClickEventArgs e)
         {
             EditTourView editTourView = new EditTourView();
