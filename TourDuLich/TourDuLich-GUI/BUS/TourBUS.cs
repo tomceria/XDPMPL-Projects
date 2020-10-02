@@ -16,7 +16,7 @@ namespace TourDuLich_GUI.BUS
     {
         public static async Task<List<Tour>> GetAll()
         {
-            var ctx = new TourContext();
+            using var ctx = new TourContext();
 
             List<Tour> result = await ctx.Set<Tour>().ToListAsync();
 
@@ -24,10 +24,11 @@ namespace TourDuLich_GUI.BUS
         }
         public static async Task<Tour> GetOne(int id)
         {
-            var ctx = new TourContext();
+            using var ctx = new TourContext();
 
             Tour result = await ctx.Set<Tour>()
                 .Include(o => o.TourType)
+                .Include(o => o.TourPrices)
                 .FirstOrDefaultAsync(o => o.ID == id);
 
             return result;
@@ -35,7 +36,7 @@ namespace TourDuLich_GUI.BUS
 
         public static void SaveOne(Tour item)
         {
-            var ctx = new TourContext();
+            using var ctx = new TourContext();
 
             bool doesExist = false;
             if (ctx.Tours.Any(o => o.ID == item.ID))
