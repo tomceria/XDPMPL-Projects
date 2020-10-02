@@ -13,15 +13,15 @@ namespace TourDuLich_GUI.BUS
 {
     public class TourBUS
     {
-        public static async Task<BindingList<Tour>> GetAll()
+        public static async Task<ObservableCollection<Tour>> GetAll()
         {
             var ctx = new TourContext();
 
-            BindingList<Tour> result = new BindingList<Tour>();
+            ObservableCollection<Tour> result = new ObservableCollection<Tour>();
             DbSet<Tour> query = ctx.Tours;
             await query.LoadAsync().ContinueWith(loadTask =>
                 {
-                    result = ctx.Tours.Local.ToBindingList();
+                    result = ctx.Tours.Local;
                 }, System.Threading.Tasks.TaskScheduler.FromCurrentSynchronizationContext());
             return result;
         }

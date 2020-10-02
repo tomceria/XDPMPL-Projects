@@ -19,68 +19,12 @@ namespace TourDuLich_GUI
 {
     public partial class MainView : DevExpress.XtraBars.Ribbon.RibbonForm
     {
-        public List<Tour> tours = new List<Tour>()
-            {
-                new Tour() {
-                    ID = 1,
-                    Name = "Saigon - Hanoi",
-                    Description = "Wow",
-                    PriceRef = 300000
-                },
-                new Tour() {
-                    ID = 2,
-                    Name = "Saigon - Da Nang",
-                    Description = "wowwww",
-                    PriceRef = 400000
-                },
-                new Tour() {
-                    ID = 3,
-                    Name = "Saigon - Da Lat",
-                    Description = "cold place",
-                    PriceRef = 200000
-                },
-            };
-        public List<Destination> destinations = new List<Destination>()
-            {
-                new Destination() {
-                    ID = 1,
-                    Name = "Ha Long Bay"
-                },
-                new Destination() {
-                    ID = 2,
-                    Name = "Pho co Hoi An"
-                },
-                new Destination() {
-                    ID = 3,
-                    Name = "Tiem banh Coi Xay Gio"
-                },
-            };
-        public List<TourType> tourTypes = new List<TourType>()
-        {
-            new TourType()
-            {
-                ID = 1,
-                Name = "Du lịch di động"
-            },
-            new TourType()
-            {
-                ID = 2,
-                Name = "Du lịch kết hợp nghề nghiệp"
-            },
-            new TourType()
-            {
-                ID = 3,
-                Name = "Du lịch xã hội và gia đình"
-            },
-        };
-
         public MainView()
         {
             InitializeComponent();
 
             /*            dataSource = GetDataSource();
                         gridControl.DataSource = dataSource;
-                        bsiListCount.Caption = $"{dataSource.Count} items";
             */
 
             InitializeDataSources();
@@ -88,7 +32,16 @@ namespace TourDuLich_GUI
 
         private async void InitializeDataSources()
         {
-            gridControl.DataSource = await TourBUS.GetAll();
+            // Prefetch UI changes
+            gridView.ShowLoadingPanel();
+
+            // Data fetch
+            BindingList<Tour> list = (await TourBUS.GetAll()).ToBindingList();
+
+            // UI changes
+            gridView.HideLoadingPanel();
+            gridControl.DataSource = list;
+            bsiListCount.Caption = $"{list.Count} items";
         }
 
         void bbiPrintPreview_ItemClick(object sender, ItemClickEventArgs e)
