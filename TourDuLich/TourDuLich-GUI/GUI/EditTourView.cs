@@ -51,6 +51,7 @@ namespace TourDuLich_GUI
             // Data binding
             BindingList<Tour> itemBL = new BindingList<Tour>( new List<Tour>() { item } );
             BindingList<TourType> tourTypesBL = new BindingList<TourType>(tourTypes);
+            BindingList<TourPrice> tourPricesBL = new BindingList<TourPrice>(new List<TourPrice>(item.TourPrices));
             dataLayoutControl_Tour.DataSource = itemBL;
             LookUpEdit_TourTypeID.Properties.DataSource = tourTypesBL;
             LookUpEdit_TourTypeID.Properties.DisplayMember = "Name";
@@ -58,6 +59,10 @@ namespace TourDuLich_GUI
             LookUpEdit_TourTypeID.Properties.PopulateColumns();
             LookUpEdit_TourTypeID.Properties.Columns["Tours"].Visible = false;
             LookUpEdit_TourTypeID.EditValue = itemBL[0].TourTypeID;
+            gridView_TourPrice.GridControl.DataSource = tourPricesBL;
+            gridView_TourPrice.GridControl.RefreshDataSource();
+
+            Console.WriteLine("Count: " + tourPricesBL.Count);
         }
 
         // Event Handlers
@@ -83,14 +88,21 @@ namespace TourDuLich_GUI
 
         private void handleCloseEdit()
         {
-            this.Dispose();
+            Dispose();
         }
 
         private void handleAddTourPrice()
         {
-            ((BindingList<Tour>)dataLayoutControl_Tour.DataSource) .ElementAt(0)
+
+            TourPrice tourPrice = new TourPrice(_item);
+            Console.WriteLine("ID: " + tourPrice.ID);
+            ((BindingList<Tour>)dataLayoutControl_Tour.DataSource).ElementAt(0)
                 .TourPrices
-                .Add(new TourPrice(_item));
+                .Add(tourPrice);
+            Console.WriteLine(((BindingList<Tour>)dataLayoutControl_Tour.DataSource).ElementAt(0).TourPrices.ElementAt(
+                ((BindingList<Tour>)dataLayoutControl_Tour.DataSource).ElementAt(0).TourPrices.Count - 1
+                ).ID);
+            Console.WriteLine("CCCCount: " + ((BindingList<Tour>)dataLayoutControl_Tour.DataSource).ElementAt(0).TourPrices.Count);
 
             gridView_TourPrice.GridControl.RefreshDataSource();
         }
