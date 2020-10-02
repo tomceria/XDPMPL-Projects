@@ -12,6 +12,8 @@ using DevExpress.XtraBars;
 using System.ComponentModel.DataAnnotations;
 using TourDuLich_GUI.Models;
 using System.Data.Entity;
+using TourDuLich_GUI.BUS;
+using System.Collections.ObjectModel;
 
 namespace TourDuLich_GUI
 {
@@ -76,17 +78,19 @@ namespace TourDuLich_GUI
         {
             InitializeComponent();
 
-/*            dataSource = GetDataSource();
-            gridControl.DataSource = dataSource;
-            bsiListCount.Caption = $"{dataSource.Count} items";
-*/
-            TourDuLich_GUI.DAL.TourContext dbContext = new TourDuLich_GUI.DAL.TourContext();
-            dbContext.Tours.LoadAsync().ContinueWith(loadTask =>
-                {
-                    gridControl.DataSource = dbContext.Tours.Local.ToBindingList();
-                }, System.Threading.Tasks.TaskScheduler.FromCurrentSynchronizationContext());
+            /*            dataSource = GetDataSource();
+                        gridControl.DataSource = dataSource;
+                        bsiListCount.Caption = $"{dataSource.Count} items";
+            */
 
+            InitializeDataSources();
         }
+
+        private async void InitializeDataSources()
+        {
+            gridControl.DataSource = await TourBUS.GetAll();
+        }
+
         void bbiPrintPreview_ItemClick(object sender, ItemClickEventArgs e)
         {
             gridControl.ShowRibbonPrintPreview();
