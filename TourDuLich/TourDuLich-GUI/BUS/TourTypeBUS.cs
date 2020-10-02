@@ -13,9 +13,9 @@ namespace TourDuLich_GUI.BUS
     {
         public static async Task<List<TourType>> GetAll()
         {
-            using var ctx = new TourContext();
+            using var _ctx = new TourContext();
 
-            List<TourType> result = await ctx.Set<TourType>()
+            List<TourType> result = await _ctx.Set<TourType>()
                 .Include(o => o.Tours)
                 .ToListAsync();
 
@@ -23,9 +23,9 @@ namespace TourDuLich_GUI.BUS
         }
         public static async Task<TourType> GetOne(int id)
         {
-            var ctx = new TourContext();
+            var _ctx = new TourContext();
 
-            TourType result = await ctx.Set<TourType>()
+            TourType result = await _ctx.Set<TourType>()
                 .FirstOrDefaultAsync(o => o.ID == id);
 
             return result;

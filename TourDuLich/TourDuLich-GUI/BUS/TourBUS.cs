@@ -16,17 +16,17 @@ namespace TourDuLich_GUI.BUS
     {
         public static async Task<List<Tour>> GetAll()
         {
-            using var ctx = new TourContext();
+            using var _ctx = new TourContext();
 
-            List<Tour> result = await ctx.Set<Tour>().ToListAsync();
+            List<Tour> result = await _ctx.Set<Tour>().ToListAsync();
 
             return result;
         }
         public static async Task<Tour> GetOne(int id)
         {
-            using var ctx = new TourContext();
+            using var _ctx = new TourContext();
 
-            Tour result = await ctx.Set<Tour>()
+            Tour result = await _ctx.Set<Tour>()
                 .Include(o => o.TourType)
                 .Include(o => o.TourPrices)
                 .FirstOrDefaultAsync(o => o.ID == id);
@@ -34,54 +34,28 @@ namespace TourDuLich_GUI.BUS
             return result;
         }
 
-        public static void SaveOne(Tour item)
+        public static void CreateOne(Tour item)
         {
-            using var ctx = new TourContext();
+            using var _ctx = new TourContext();
 
-            bool doesExist = false;
-            if (ctx.Tours.Any(o => o.ID == item.ID))
+            _ctx.Tours.Add(item);
+
+            _ctx.SaveChanges();
+
+            return;
+        }
+
+        public static void UpdateOne(Tour item)
+        {
+            using var _ctx = new TourContext();
+
+            _ctx.Entry(item).State = EntityState.Modified;
+            foreach (TourPrice tP in item.TourPrices)
             {
-                doesExist = true;
+                _ctx.Entry(tP).State = EntityState.Modified;
             }
 
-            switch (doesExist)
-            {
-                case true:
-                    {
-                        // Update
-
-                        /*                        var existing = ctx.Set<Tour>().Include(o => o.TourPrices).First(o => o.ID == item.ID);
-                                                foreach(TourPrice tP in existing.TourPrices.ToList())
-                                                {
-                                                    existing.TourPrices.Remove(tP);
-                                                }
-                                                foreach(TourPrice tP in item.TourPrices.ToList())
-                                                {
-                                                    tP.TourID = item.ID;
-                                                    existing.TourPrices.Add(tP);
-                                                    tP.Tour = existing;
-                                                    Console.WriteLine("id: " + existing.TourPrices.ElementAt(existing.TourPrices.Count - 1).ID);
-                                                    Console.WriteLine("tourid: " + existing.TourPrices.ElementAt(existing.TourPrices.Count - 1).TourID);
-                                                }
-                        */
-
-                        ctx.Entry(item).State = EntityState.Modified;
-                        foreach (TourPrice tP in item.TourPrices)
-                        {
-                            ctx.Entry(tP).State = EntityState.Modified;
-                        }
-                        break;
-                    }
-                case false:
-                    {
-                        // Add
-                        ctx.Tours.Add(item);
-                        break;
-                    }
-            }
-
-
-            ctx.SaveChanges();
+            _ctx.SaveChanges();
 
             return;
         }

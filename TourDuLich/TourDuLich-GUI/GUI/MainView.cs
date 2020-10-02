@@ -57,6 +57,9 @@ namespace TourDuLich_GUI
                 EditTourView editTourView = new EditTourView(selectedTour);
                 editTourView.ShowDialog(this);
 
+                // Post-Disposal of Dialog
+                InitializeDataSources();
+
                 Console.WriteLine("Completed.");
             }
         }

@@ -22,6 +22,7 @@ namespace TourDuLich_GUI
     public partial class EditTourView : DevExpress.XtraBars.Ribbon.RibbonForm
     {
         private Tour _item;
+        private bool isUpdate = false;
 
         public EditTourView()   // New Tour
         {
@@ -34,6 +35,7 @@ namespace TourDuLich_GUI
         {
             InitializeComponent();
             _item = tour;
+            isUpdate = true;
             InitializeDataSources();
         }
 
@@ -78,7 +80,13 @@ namespace TourDuLich_GUI
 
         private void handleSaveTour()
         {
-            TourBUS.SaveOne(getItemState());
+            if (isUpdate)
+            {
+                TourBUS.UpdateOne(getItemState());
+            } else
+            {
+                TourBUS.CreateOne(getItemState());
+            }
         }
 
         private void handleResetTour()
