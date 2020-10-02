@@ -15,6 +15,7 @@ using DevExpress.XtraLayout;
 using TourDuLich_GUI.Models;
 using DevExpress.XtraGrid;
 using System.Data.Entity;
+using TourDuLich_GUI.BUS;
 
 namespace TourDuLich_GUI
 {
@@ -37,21 +38,22 @@ namespace TourDuLich_GUI
             InitializeDataSources();
         }
 
-        private void InitializeDataSources()
+        private async void InitializeDataSources()
         {
-            TourDuLich_GUI.DAL.TourContext dbContext = new TourDuLich_GUI.DAL.TourContext();
-            // Call the LoadAsync method to asynchronously get the data for the given DbSet from the database.
-            dbContext.Tours.Where(t => t.ID == tour.ID).FirstOrDefaultAsync().ContinueWith(loadTask =>
-            {
-                // Bind data to control when loading complete
-                dataLayoutControl_Tour.DataSource = dbContext.Tours.Local.ToBindingList();
-            }, System.Threading.Tasks.TaskScheduler.FromCurrentSynchronizationContext());
+            // Prefetch UI changes
 
-            dbContext.TourTypes.LoadAsync().ContinueWith(loadTask =>
-            {
-              // Bind data to control when loading complete
-              LookUpEdit_TourType.Properties.DataSource = dbContext.TourTypes.Local.ToBindingList();
-            }, System.Threading.Tasks.TaskScheduler.FromCurrentSynchronizationContext());
+            // Data fetch
+            BindingList<Tour> item = new BindingList<Tour>(
+                new List<Tour>() { await TourBUS.GetOne(tour.ID) }
+            );
+            BindingList<TourType> tourTypes = new BindingList<TourType>(await TourTypeBUS.GetAll());
+
+            // UI changes
+            dataLayoutControl_Tour.DataSource = item;
+            LookUpEdit_TourTypeID.Properties.DataSource = tourTypes;
+            LookUpEdit_TourTypeID.EditValue = item[0].TourTypeID;
+            LookUpEdit_TourTypeID.Properties.DisplayMember = "Name";
+            LookUpEdit_TourTypeID.Properties.ValueMember = "ID";
         }
 
         // Event Handlers

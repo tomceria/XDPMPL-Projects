@@ -22,11 +22,6 @@ namespace TourDuLich_GUI
         public MainView()
         {
             InitializeComponent();
-
-            /*            dataSource = GetDataSource();
-                        gridControl.DataSource = dataSource;
-            */
-
             InitializeDataSources();
         }
 
@@ -36,17 +31,14 @@ namespace TourDuLich_GUI
             gridView.ShowLoadingPanel();
 
             // Data fetch
-            BindingList<Tour> list = (await TourBUS.GetAll()).ToBindingList();
+            BindingList<Tour> list = new BindingList<Tour>(
+                await TourBUS.GetAll()
+            );
 
             // UI changes
             gridView.HideLoadingPanel();
             gridControl.DataSource = list;
             bsiListCount.Caption = $"{list.Count} items";
-        }
-
-        void bbiPrintPreview_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            gridControl.ShowRibbonPrintPreview();
         }
         private void bbiNew_ItemClick(object sender, ItemClickEventArgs e)
         {
