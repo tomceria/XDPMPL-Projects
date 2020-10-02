@@ -51,7 +51,11 @@ namespace TourDuLich_GUI
             // Data binding
             BindingList<Tour> itemBL = new BindingList<Tour>( new List<Tour>() { item } );
             BindingList<TourType> tourTypesBL = new BindingList<TourType>(tourTypes);
-            BindingList<TourPrice> tourPricesBL = new BindingList<TourPrice>(new List<TourPrice>(item.TourPrices));
+            BindingList<TourPrice> tourPricesBL = new BindingList<TourPrice>(
+                (item.TourPrices != null)
+                    ? new List<TourPrice>(item.TourPrices)
+                    : new List<TourPrice>()
+                );
             dataLayoutControl_Tour.DataSource = itemBL;
             LookUpEdit_TourTypeID.Properties.DataSource = tourTypesBL;
             LookUpEdit_TourTypeID.Properties.DisplayMember = "Name";
@@ -65,11 +69,16 @@ namespace TourDuLich_GUI
             Console.WriteLine("Count: " + tourPricesBL.Count);
         }
 
+        private Tour getItemState()
+        {
+            return ((BindingList<Tour>)dataLayoutControl_Tour.DataSource).ElementAt(0);
+        }
+
         // Event Handlers
 
-        private void handleSaveTour ()
+        private void handleSaveTour()
         {
-            // TODO: Perform save tour
+            TourBUS.SaveOne(getItemState());
         }
 
         private void handleResetTour()
@@ -94,7 +103,7 @@ namespace TourDuLich_GUI
         private void handleAddTourPrice()
         {
 
-            TourPrice tourPrice = new TourPrice(_item);
+            TourPrice tourPrice = new TourPrice(getItemState());
             Console.WriteLine("ID: " + tourPrice.ID);
             ((BindingList<Tour>)dataLayoutControl_Tour.DataSource).ElementAt(0)
                 .TourPrices

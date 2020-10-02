@@ -9,8 +9,8 @@ namespace TourDuLich_GUI.Models
         public TourPrice()
         {
             Value = 0;
-            TimeStart = new DateTime();
-            TimeEnd = new DateTime().AddDays(10);
+            TimeStart = DateTime.Now;
+            TimeEnd = DateTime.Now.AddDays(10);
         }
 
         public TourPrice(Tour t): this()
