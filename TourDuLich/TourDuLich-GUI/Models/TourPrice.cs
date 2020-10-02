@@ -1,18 +1,16 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TourDuLich_GUI.Models
 {
     public class TourPrice
     {
-        static int Count = 0;
-
         public TourPrice()
         {
-            ID = Count++;
             Value = 0;
-            TimeStart = new DateTime();
-            TimeEnd = new DateTime().AddDays(10);
+            TimeStart = DateTime.Now;
+            TimeEnd = DateTime.Now.AddDays(10);
         }
 
         public TourPrice(Tour t): this()
@@ -21,7 +19,11 @@ namespace TourDuLich_GUI.Models
         }
 
         [Key, Display(AutoGenerateField = false)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
+
+        [ForeignKey("Tour"), Display(Name = "Tour")]
+        public int TourID { get; set; }
 
         [Required, Display(Name = "Giá trị")]
         public long Value { get; set; }

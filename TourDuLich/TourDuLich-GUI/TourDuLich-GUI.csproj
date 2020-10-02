@@ -24,6 +24,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -33,6 +34,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DevExpress.BonusSkins.v19.2" />
@@ -69,11 +71,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BUS\TourBUS.cs" />
+    <Compile Include="BUS\TourTypeBUS.cs" />
     <Compile Include="DAL\TourInitializer.cs" />
     <Compile Include="MainViewModel.cs" />
     <Compile Include="Migrations\202009281631422_EmptyMigration.cs" />
     <Compile Include="Migrations\202009281631422_EmptyMigration.designer.cs">
       <DependentUpon>202009281631422_EmptyMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010010623184_ForeignKeysUpdated.cs" />
+    <Compile Include="Migrations\202010010623184_ForeignKeysUpdated.designer.cs">
+      <DependentUpon>202010010623184_ForeignKeysUpdated.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010010701440_TourANDTourGroup.cs" />
+    <Compile Include="Migrations\202010010701440_TourANDTourGroup.designer.cs">
+      <DependentUpon>202010010701440_TourANDTourGroup.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="DAL\TourContext.cs" />
@@ -112,6 +124,12 @@
     <EmbeddedResource Include="Migrations\202009281631422_EmptyMigration.resx">
       <DependentUpon>202009281631422_EmptyMigration.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010010623184_ForeignKeysUpdated.resx">
+      <DependentUpon>202010010623184_ForeignKeysUpdated.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010010701440_TourANDTourGroup.resx">
+      <DependentUpon>202010010701440_TourANDTourGroup.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -141,9 +159,7 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="BUS\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

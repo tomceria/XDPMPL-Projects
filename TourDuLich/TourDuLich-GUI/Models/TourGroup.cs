@@ -1,12 +1,20 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TourDuLich_GUI.Models
 {
     public class TourGroup
     {
         [Key, Display(AutoGenerateField = false)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
+
+
+        [ForeignKey("Tour"), Display(Name = "Tour")]
+        public int TourID { get; set; }
 
         [Required, Display(Name = "Tên đoàn")]
         public string Name { get; set; }
@@ -21,5 +29,10 @@ namespace TourDuLich_GUI.Models
 
         [Required, Display(Name = "Giá của đoàn")]
         public long PriceGroup { get; set; }
+
+        public virtual Tour Tour { get; set; }
+        public virtual ICollection<TourGroupCost> TourGroupCosts { get; set; }
+        public virtual ICollection<TourGroupDetail> TourGroupDetails { get; set; }
+        public virtual ICollection<TourGroupStaff> TourGroupStaffs { get; set; }
     }
 }

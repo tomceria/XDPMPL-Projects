@@ -6,6 +6,7 @@ namespace TourDuLich_GUI.Models
     public class TourGroupCost
     {
         [Key, Display(AutoGenerateField = false)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
 
         [ForeignKey("TourGroup"), Display(Name = "Đoàn")]
@@ -13,6 +14,7 @@ namespace TourDuLich_GUI.Models
 
         [ForeignKey("CostType"), Display(Name = "Loại chi phí")]
         public int CostTypeID { get; set; }
+
 
         [Display(Name = "Ghi chú")]
         public string Note { get; set; }

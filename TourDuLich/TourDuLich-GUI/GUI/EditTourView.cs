@@ -15,95 +15,83 @@ using DevExpress.XtraLayout;
 using TourDuLich_GUI.Models;
 using DevExpress.XtraGrid;
 using System.Data.Entity;
+using TourDuLich_GUI.BUS;
 
 namespace TourDuLich_GUI
 {
     public partial class EditTourView : DevExpress.XtraBars.Ribbon.RibbonForm
     {
-        private Tour tour;
+        private Tour _item;
+        private bool isUpdate = false;
 
-        public EditTourView()
+        public EditTourView()   // New Tour
         {
-
             InitializeComponent();
-            tour = new Tour();
-
+            _item = new Tour();
             InitializeDataSources();
         }
 
-        public EditTourView(Tour _tour)
+        public EditTourView(Tour tour)     // Edit Tour
         {
-            /*            dataLayoutControl1.DataSource = GetDataSource();
-            */            /*            dataLayoutControl1.RetrieveFields();
-                                    List<BaseLayoutItem> flatList = new FlatItemsList().GetItemsList(dataLayoutControl1.Root);
-                                    BaseLayoutItem aboutItem = flatList.First(e => e.Text == "About");
-                                    aboutItem.TextLocation = DevExpress.Utils.Locations.Top;
-                        */
             InitializeComponent();
-            tour = _tour;
-
+            _item = tour;
+            isUpdate = true;
             InitializeDataSources();
         }
 
-        private void InitializeDataSources()
+        private async void InitializeDataSources()
         {
-            TourDuLich_GUI.DAL.TourContext dbContext = new TourDuLich_GUI.DAL.TourContext();
-            // Call the LoadAsync method to asynchronously get the data for the given DbSet from the database.
-            dbContext.Tours.Where(t => t.ID == tour.ID).FirstOrDefaultAsync().ContinueWith(loadTask =>
+            // Data fetch
+            Tour item = await TourBUS.GetOne(_item.ID);
+            List<TourType> tourTypes = await TourTypeBUS.GetAll();
+
+            if (item == null)
             {
-                // Bind data to control when loading complete
-                dataLayoutControl_Tour.DataSource = dbContext.Tours.Local.ToBindingList();
-            }, System.Threading.Tasks.TaskScheduler.FromCurrentSynchronizationContext());
-
-            dbContext.TourTypes.LoadAsync().ContinueWith(loadTask =>
-            {
-              // Bind data to control when loading complete
-              LookUpEdit_TourType.Properties.DataSource = dbContext.TourTypes.Local.ToBindingList();
-            }, System.Threading.Tasks.TaskScheduler.FromCurrentSynchronizationContext());
-        }
-
-/*        private void InitializeDataSources()
-        {
-            dataLayoutControl_Tour.DataSource = GetTourDataSource();
-            listBoxControl_Destination.DataSource = GetDestinationDataSource();
-            LookUpEdit_TourType.Properties.DataSource = GetTourTypeDataSource();
-        }
-
-        public BindingList<Tour> GetTourDataSource()
-        {
-            BindingList<Tour> result = new BindingList<Tour>();
-            result.Add(tour);
-            return result;
-        }
-
-        public BindingList<Destination> GetDestinationDataSource()
-        {
-            BindingList<Destination> result = new BindingList<Destination>();
-            foreach (Destination d in parent.destinations) {
-                result.Add(d);
+                item = _item;       // this "_item" would be INITIALIZED before running this method, meaning it has no reference to ANY BindingList, unlike EditTourView(Tour tour)
             }
-            return result;
+
+            // Data binding
+            BindingList<Tour> itemBL = new BindingList<Tour>( new List<Tour>() { item } );
+            BindingList<TourType> tourTypesBL = new BindingList<TourType>(tourTypes);
+            BindingList<TourPrice> tourPricesBL = new BindingList<TourPrice>(
+                (item.TourPrices != null)
+                    ? new List<TourPrice>(item.TourPrices)
+                    : new List<TourPrice>()
+                );
+            dataLayoutControl_Tour.DataSource = itemBL;
+            LookUpEdit_TourTypeID.Properties.DataSource = tourTypesBL;
+            LookUpEdit_TourTypeID.Properties.DisplayMember = "Name";
+            LookUpEdit_TourTypeID.Properties.ValueMember = "ID";
+            LookUpEdit_TourTypeID.Properties.PopulateColumns();
+            LookUpEdit_TourTypeID.Properties.Columns["Tours"].Visible = false;
+            LookUpEdit_TourTypeID.EditValue = itemBL[0].TourTypeID;
+            gridView_TourPrice.GridControl.DataSource = tourPricesBL;
+            gridView_TourPrice.GridControl.RefreshDataSource();
+
+            Console.WriteLine("Count: " + tourPricesBL.Count);
         }
-        public BindingList<TourType> GetTourTypeDataSource()
+
+        private Tour getItemState()
         {
-            BindingList<TourType> result = new BindingList<TourType>();
-            foreach (TourType tt in parent.tourTypes) {
-                result.Add(tt);
-            }
-            return result;
+            return ((BindingList<Tour>)dataLayoutControl_Tour.DataSource).ElementAt(0);
         }
-*/
 
         // Event Handlers
 
-        private void handleSaveTour ()
+        private void handleSaveTour()
         {
-            // TODO: Perform save tour
+            if (isUpdate)
+            {
+                TourBUS.UpdateOne(getItemState());
+            } else
+            {
+                TourBUS.CreateOne(getItemState());
+            }
         }
 
         private void handleResetTour()
         {
-            tour = new Tour();
+            _item = new Tour();
 
 /*            InitializeDataSources();
 */
@@ -117,14 +105,21 @@ namespace TourDuLich_GUI
 
         private void handleCloseEdit()
         {
-            this.Dispose();
+            Dispose();
         }
 
         private void handleAddTourPrice()
         {
-            ((BindingList<Tour>)dataLayoutControl_Tour.DataSource) .ElementAt(0)
+
+            TourPrice tourPrice = new TourPrice(getItemState());
+            Console.WriteLine("ID: " + tourPrice.ID);
+            ((BindingList<Tour>)dataLayoutControl_Tour.DataSource).ElementAt(0)
                 .TourPrices
-                .Add(new TourPrice(tour));
+                .Add(tourPrice);
+            Console.WriteLine(((BindingList<Tour>)dataLayoutControl_Tour.DataSource).ElementAt(0).TourPrices.ElementAt(
+                ((BindingList<Tour>)dataLayoutControl_Tour.DataSource).ElementAt(0).TourPrices.Count - 1
+                ).ID);
+            Console.WriteLine("CCCCount: " + ((BindingList<Tour>)dataLayoutControl_Tour.DataSource).ElementAt(0).TourPrices.Count);
 
             gridView_TourPrice.GridControl.RefreshDataSource();
         }

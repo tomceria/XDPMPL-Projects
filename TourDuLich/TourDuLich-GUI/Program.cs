@@ -16,26 +16,48 @@ namespace TourDuLich_GUI {
         /// </summary>
         [STAThread]
         static void Main() {
-/*            var context = new TourContext();
+/*            
+            var context = new TourContext();
             List<TourType> tourTypes = new List<TourType>() {
                 new TourType() {
-                ID = 1,
-                Name = "Du lịch di động"
+                    Name = "Du lịch di động"
                 },
                 new TourType() {
-                ID = 2,
-                Name = "Du lịch kết hợp nghề nghiệp"
+                    Name = "Du lịch kết hợp nghề nghiệp"
                 },
                 new TourType() {
-                ID = 3,
-                Name = "Du lịch xã hội và gia đình"
+                    Name = "Du lịch xã hội và gia đình"
                 },
             };
 
             var tours = new List<Tour> {
-                new Tour { ID = 1, Name = "HCM - Hanoi", PriceRef = 1050, Description = "Hello world", TourType = tourTypes[0] }
+                new Tour { 
+                    Name = "HCM - Hanoi",
+                    PriceRef = 100000,
+                    Description = "Hello world",
+                    TourType = tourTypes[0],
+                    TourPrices = new List<TourPrice>() {
+                        new TourPrice() { Value = 200000, TimeStart = DateTime.Now, TimeEnd = DateTime.Now.AddDays(10) }
+                    }
+                },
+                new Tour { Name = "HCM - Da Nang", PriceRef = 200000, Description = "Hello world 2", TourType = tourTypes[1] }
             };
+
+            public List<Destination> destinations = new List<Destination>()
+                {
+                    new Destination() {
+                        Name = "Ha Long Bay"
+                    },
+                    new Destination() {
+                        Name = "Pho co Hoi An"
+                    },
+                    new Destination() {
+                        Name = "Tiem banh Coi Xay Gio"
+                    },
+                };
+
             tours.ForEach(s => context.Tours.Add(s));
+            destinations.ForEach(s => context.Destinations.Add(s));
             context.SaveChanges();
 */
             Application.EnableVisualStyles();
