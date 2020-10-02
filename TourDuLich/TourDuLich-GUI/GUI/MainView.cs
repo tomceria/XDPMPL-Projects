@@ -76,16 +76,15 @@ namespace TourDuLich_GUI
         {
             InitializeComponent();
 
-            /*            dataSource = GetDataSource();
-                        gridControl.DataSource = dataSource;
-                        bsiListCount.Caption = $"{dataSource.Count} items";
-            */
-
-            // TourDuLich_GUI.DAL.TourContext dbContext = new TourDuLich_GUI.DAL.TourContext();
-            // dbContext.Tours.LoadAsync().ContinueWith(loadTask =>
-            //     {
-            //         gridControl.DataSource = dbContext.Tours.Local.ToBindingList();
-            //     }, System.Threading.Tasks.TaskScheduler.FromCurrentSynchronizationContext());
+/*            dataSource = GetDataSource();
+            gridControl.DataSource = dataSource;
+            bsiListCount.Caption = $"{dataSource.Count} items";
+*/
+            TourDuLich_GUI.DAL.TourContext dbContext = new TourDuLich_GUI.DAL.TourContext();
+            dbContext.Tours.LoadAsync().ContinueWith(loadTask =>
+                {
+                    gridControl.DataSource = dbContext.Tours.Local.ToBindingList();
+                }, System.Threading.Tasks.TaskScheduler.FromCurrentSynchronizationContext());
 
         }
         void bbiPrintPreview_ItemClick(object sender, ItemClickEventArgs e)

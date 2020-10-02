@@ -27,72 +27,32 @@ namespace TourDuLich_GUI
 
             InitializeComponent();
             tour = new Tour();
-
             InitializeDataSources();
         }
 
         public EditTourView(Tour _tour)
         {
-            /*            dataLayoutControl1.DataSource = GetDataSource();
-            */            /*            dataLayoutControl1.RetrieveFields();
-                                    List<BaseLayoutItem> flatList = new FlatItemsList().GetItemsList(dataLayoutControl1.Root);
-                                    BaseLayoutItem aboutItem = flatList.First(e => e.Text == "About");
-                                    aboutItem.TextLocation = DevExpress.Utils.Locations.Top;
-                        */
             InitializeComponent();
             tour = _tour;
-
             InitializeDataSources();
         }
 
         private void InitializeDataSources()
         {
-            // TourDuLich_GUI.DAL.TourContext dbContext = new TourDuLich_GUI.DAL.TourContext();
-            // // Call the LoadAsync method to asynchronously get the data for the given DbSet from the database.
-            // dbContext.Tours.Where(t => t.ID == tour.ID).FirstOrDefaultAsync().ContinueWith(loadTask =>
-            // {
-            //     // Bind data to control when loading complete
-            //     dataLayoutControl_Tour.DataSource = dbContext.Tours.Local.ToBindingList();
-            // }, System.Threading.Tasks.TaskScheduler.FromCurrentSynchronizationContext());
+            TourDuLich_GUI.DAL.TourContext dbContext = new TourDuLich_GUI.DAL.TourContext();
+            // Call the LoadAsync method to asynchronously get the data for the given DbSet from the database.
+            dbContext.Tours.Where(t => t.ID == tour.ID).FirstOrDefaultAsync().ContinueWith(loadTask =>
+            {
+                // Bind data to control when loading complete
+                dataLayoutControl_Tour.DataSource = dbContext.Tours.Local.ToBindingList();
+            }, System.Threading.Tasks.TaskScheduler.FromCurrentSynchronizationContext());
 
-            // dbContext.TourTypes.LoadAsync().ContinueWith(loadTask =>
-            // {
-            //   // Bind data to control when loading complete
-            //   LookUpEdit_TourType.Properties.DataSource = dbContext.TourTypes.Local.ToBindingList();
-            // }, System.Threading.Tasks.TaskScheduler.FromCurrentSynchronizationContext());
+            dbContext.TourTypes.LoadAsync().ContinueWith(loadTask =>
+            {
+              // Bind data to control when loading complete
+              LookUpEdit_TourType.Properties.DataSource = dbContext.TourTypes.Local.ToBindingList();
+            }, System.Threading.Tasks.TaskScheduler.FromCurrentSynchronizationContext());
         }
-
-/*        private void InitializeDataSources()
-        {
-            dataLayoutControl_Tour.DataSource = GetTourDataSource();
-            listBoxControl_Destination.DataSource = GetDestinationDataSource();
-            LookUpEdit_TourType.Properties.DataSource = GetTourTypeDataSource();
-        }
-
-        public BindingList<Tour> GetTourDataSource()
-        {
-            BindingList<Tour> result = new BindingList<Tour>();
-            result.Add(tour);
-            return result;
-        }
-
-        public BindingList<Destination> GetDestinationDataSource()
-        {
-            BindingList<Destination> result = new BindingList<Destination>();
-            foreach (Destination d in parent.destinations) {
-                result.Add(d);
-            }
-            return result;
-        }
-        public BindingList<TourType> GetTourTypeDataSource()
-        {
-            BindingList<TourType> result = new BindingList<TourType>();
-            foreach (TourType tt in parent.tourTypes) {
-                result.Add(tt);
-            }
-            return result;
-        }
-*/
 
         // Event Handlers
 
