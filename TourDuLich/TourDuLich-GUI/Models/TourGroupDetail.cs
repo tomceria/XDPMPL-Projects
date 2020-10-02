@@ -6,6 +6,7 @@ namespace TourDuLich_GUI.Models
     public class TourGroupDetail
     {
         [Key, Display(AutoGenerateField = false)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
 
         [ForeignKey("TourGroup"), Display(Name = "Đoàn")]

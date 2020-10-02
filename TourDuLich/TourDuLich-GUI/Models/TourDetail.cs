@@ -6,6 +6,7 @@ namespace TourDuLich_GUI.Models
     public class TourDetail
     {
         [Key, Display(AutoGenerateField = false)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
 
         [Required, Display(Name = "Thứ tự")]

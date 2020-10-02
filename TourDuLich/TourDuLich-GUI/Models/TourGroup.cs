@@ -9,6 +9,7 @@ namespace TourDuLich_GUI.Models
     public class TourGroup
     {
         [Key, Display(AutoGenerateField = false)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
 
 
