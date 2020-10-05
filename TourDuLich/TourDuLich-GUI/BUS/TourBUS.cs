@@ -67,11 +67,11 @@ namespace TourDuLich_GUI.BUS
         {
             using var _ctx = new TourContext();
 
-            _ctx.Entry(item).State = EntityState.Deleted;
 
-            /*Tour tour = await _ctx.Set<Tour>().Include(o => o.TourPrices).FirstAsync(o => o.ID == item.ID);
-            _ctx.Entry(tour).State = EntityState.Deleted;
-            */
+            Tour tour = _ctx.Set<Tour>().Include(o => o.TourPrices).First(o => o.ID == item.ID);
+            _ctx.Tours.Remove(tour);
+            /*_ctx.Entry(tour).State = EntityState.Deleted;
+*/
             _ctx.SaveChanges();
 
         }
