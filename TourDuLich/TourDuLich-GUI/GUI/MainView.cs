@@ -51,7 +51,8 @@ namespace TourDuLich_GUI
             EditTourView editTourView = new EditTourView();
             editTourView.ShowDialog(this);
 
-            Console.WriteLine("Completed.");
+            // Post-Disposal of Dialog
+            InitializeDataSources();
         }
 
         private void bbiEdit_ItemClick(object sender, ItemClickEventArgs e)
@@ -65,7 +66,6 @@ namespace TourDuLich_GUI
                 // Post-Disposal of Dialog
                 InitializeDataSources();
 
-                Console.WriteLine("Completed.");
             }
         }
 
