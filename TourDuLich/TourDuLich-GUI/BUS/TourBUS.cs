@@ -52,16 +52,21 @@ namespace TourDuLich_GUI.BUS
 
         public void UpdateOne(Tour item)
         {
-            
+            using var dbContextTransaction = _ctx.Database.BeginTransaction();
+
 
             _ctx.Entry(item).State = EntityState.Modified;
-            foreach (TourPrice tP in item.TourPrices)
+            _ctx.SaveChanges();
+            foreach (TourPrice tP in item.TourPrices.ToList())
             {
-                _ctx.Entry(tP).State = EntityState.Modified;
+                _ctx.Entry(tP).State = EntityState.Deleted;
+                _ctx.SaveChanges();
+                _ctx.Entry(tP).State = EntityState.Added;
+                _ctx.SaveChanges();
             }
-
             _ctx.SaveChanges();
 
+            dbContextTransaction.Commit();
             return;
         }
 
