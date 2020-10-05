@@ -52,27 +52,25 @@ namespace TourDuLich_GUI.BUS
 
         public void UpdateOne(Tour item)
         {
-            using var dbContextTransaction = _ctx.Database.BeginTransaction();
-
+            // as "item" is loaded from a DataSource/BindingList, it is ALREADY DETACHED => Must detach TourPrices before deleting/adding
 
             List<TourPrice> tourPrices = item.TourPrices.ToList();
 
             _ctx.Entry(item).State = EntityState.Modified;
+
             foreach (TourPrice tP in tourPrices)
             {
                 _ctx.Entry(tP).State = EntityState.Detached;
             }
             item.TourPrices.Clear();
             _ctx.TourPrices.RemoveRange(_ctx.TourPrices.Where(o => o.TourID == item.ID));
-            _ctx.SaveChanges();
+
             foreach (TourPrice tP in tourPrices)
             {
                 _ctx.Entry(tP).State = EntityState.Added;
-                _ctx.SaveChanges();
             }
             _ctx.SaveChanges();
 
-            dbContextTransaction.Commit();
             return;
         }
 
