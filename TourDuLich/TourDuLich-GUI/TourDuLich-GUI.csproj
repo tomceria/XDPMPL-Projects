@@ -73,6 +73,7 @@
   <ItemGroup>
     <Compile Include="BUS\DestinationBUS.cs" />
     <Compile Include="BUS\TourBUS.cs" />
+    <Compile Include="BUS\TourGroupBUS.cs" />
     <Compile Include="BUS\TourTypeBUS.cs" />
     <Compile Include="DAL\TourInitializer.cs" />
     <Compile Include="MainViewModel.cs" />

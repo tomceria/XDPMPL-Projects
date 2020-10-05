@@ -1,15 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
 using System.Windows.Forms;
-using DevExpress.LookAndFeel;
-using DevExpress.Skins;
-using DevExpress.UserSkins;
-using TourDuLich_GUI.DAL;
-using TourDuLich_GUI.Models;
 
-namespace TourDuLich_GUI {
+namespace TourDuLich_GUI
+{
     static class Program {
         /// <summary>
         /// The main entry point for the application.
@@ -57,10 +50,10 @@ namespace TourDuLich_GUI {
                                     }
                                 };
 
-            tours.ForEach(s => context.Tours.Add(s));
-            destinations.ForEach(s => context.Destinations.Add(s));
-            context.SaveChanges();
-*/
+                        tours.ForEach(s => context.Tours.Add(s));
+                        destinations.ForEach(s => context.Destinations.Add(s));
+                        context.SaveChanges();
+            */
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainView());
