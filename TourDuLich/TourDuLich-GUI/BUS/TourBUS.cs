@@ -19,6 +19,9 @@ namespace TourDuLich_GUI.BUS
             using var _ctx = new TourContext();
 
             List<Tour> result = await _ctx.Set<Tour>().ToListAsync();
+                /*List<Tour> = */
+
+            Console.WriteLine("Count: " + result.Count);
 
             return result;
         }
@@ -58,6 +61,19 @@ namespace TourDuLich_GUI.BUS
             _ctx.SaveChanges();
 
             return;
+        }
+
+      public static  void DeleteOne(Tour item)
+        {
+            using var _ctx = new TourContext();
+
+            _ctx.Entry(item).State = EntityState.Deleted;
+
+            /*Tour tour = await _ctx.Set<Tour>().Include(o => o.TourPrices).FirstAsync(o => o.ID == item.ID);
+            _ctx.Entry(tour).State = EntityState.Deleted;
+            */
+            _ctx.SaveChanges();
+
         }
     }
 }

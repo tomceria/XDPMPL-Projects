@@ -26,11 +26,13 @@ namespace TourDuLich_GUI
         }
 
         private async void InitializeDataSources()
-        {
+        {   
             // Prefetch UI changes
             gridView.ShowLoadingPanel();
 
             // Data fetch
+            List<Tour> tours = await TourBUS.GetAll();
+            Console.WriteLine("Count: " + tours.Count);
             BindingList<Tour> list = new BindingList<Tour>(
                 await TourBUS.GetAll()
             );
@@ -62,6 +64,15 @@ namespace TourDuLich_GUI
 
                 Console.WriteLine("Completed.");
             }
+        }
+
+        private void bbiDelete_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            Tour selectedTour = (Tour)gridView.GetFocusedRow();
+            TourBUS.DeleteOne(selectedTour);
+
+            // Refresh
+            InitializeDataSources();
         }
     }
 }

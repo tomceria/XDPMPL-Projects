@@ -87,6 +87,7 @@ namespace TourDuLich_GUI
             {
                 TourBUS.CreateOne(getItemState());
             }
+;
         }
 
         private void handleResetTour()
@@ -99,8 +100,10 @@ namespace TourDuLich_GUI
 
         private void handleDeleteTour()
         {
-            // TODO: Perform delete tour
-            Console.WriteLine("Deeeeeelete!");
+            Tour selectedTour = getItemState();
+            TourBUS.DeleteOne(selectedTour);
+            // close window
+            Dispose();
         }
 
         private void handleCloseEdit()
@@ -116,6 +119,7 @@ namespace TourDuLich_GUI
             ((BindingList<Tour>)dataLayoutControl_Tour.DataSource).ElementAt(0)
                 .TourPrices
                 .Add(tourPrice);
+
             Console.WriteLine(((BindingList<Tour>)dataLayoutControl_Tour.DataSource).ElementAt(0).TourPrices.ElementAt(
                 ((BindingList<Tour>)dataLayoutControl_Tour.DataSource).ElementAt(0).TourPrices.Count - 1
                 ).ID);
