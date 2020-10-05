@@ -34,6 +34,7 @@ namespace TourDuLich_GUI.BUS
             Tour result = await _ctx.Set<Tour>()
                 .Include(o => o.TourType)
                 .Include(o => o.TourPrices)
+                .Include(o => o.TourDetails)
                 .FirstOrDefaultAsync(o => o.ID == id);
 
             return result;
@@ -41,7 +42,6 @@ namespace TourDuLich_GUI.BUS
 
         public void CreateOne(Tour item)
         {
-            
 
             _ctx.Tours.Add(item);
 

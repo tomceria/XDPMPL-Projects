@@ -26,12 +26,12 @@ namespace TourDuLich_GUI.BUS
         public async Task<Destination> GetOne(int id)
         {
 
-
             Destination result = await _ctx.Set<Destination>()                
                 .FirstOrDefaultAsync(o => o.ID == id);
 
             return result;
         }
 
+      
     }
 }
