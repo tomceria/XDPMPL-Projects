@@ -55,12 +55,18 @@ namespace TourDuLich_GUI.BUS
             using var dbContextTransaction = _ctx.Database.BeginTransaction();
 
 
+            List<TourPrice> tourPrices = item.TourPrices.ToList();
+
             _ctx.Entry(item).State = EntityState.Modified;
-            _ctx.SaveChanges();
-            foreach (TourPrice tP in item.TourPrices.ToList())
+            foreach (TourPrice tP in tourPrices)
             {
-                _ctx.Entry(tP).State = EntityState.Deleted;
-                _ctx.SaveChanges();
+                _ctx.Entry(tP).State = EntityState.Detached;
+            }
+            item.TourPrices.Clear();
+            _ctx.TourPrices.RemoveRange(_ctx.TourPrices.Where(o => o.TourID == item.ID));
+            _ctx.SaveChanges();
+            foreach (TourPrice tP in tourPrices)
+            {
                 _ctx.Entry(tP).State = EntityState.Added;
                 _ctx.SaveChanges();
             }
