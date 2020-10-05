@@ -16,8 +16,8 @@ namespace TourDuLich_GUI {
         /// </summary>
         [STAThread]
         static void Main() {
-/*            
-            var context = new TourContext();
+
+           /* var context = new TourContext();
             List<TourType> tourTypes = new List<TourType>() {
                 new TourType() {
                     Name = "Du lịch di động"
@@ -31,30 +31,31 @@ namespace TourDuLich_GUI {
             };
 
             var tours = new List<Tour> {
-                new Tour { 
-                    Name = "HCM - Hanoi",
-                    PriceRef = 100000,
-                    Description = "Hello world",
-                    TourType = tourTypes[0],
-                    TourPrices = new List<TourPrice>() {
-                        new TourPrice() { Value = 200000, TimeStart = DateTime.Now, TimeEnd = DateTime.Now.AddDays(10) }
-                    }
-                },
-                new Tour { Name = "HCM - Da Nang", PriceRef = 200000, Description = "Hello world 2", TourType = tourTypes[1] }
-            };
+                            new Tour {
+                                ID = 0,
+                                Name = "HCM - Hanoi",
+                                PriceRef = 100000,
+                                Description = "Hello world",
+                                TourType = tourTypes[0],
+                                TourPrices = new List<TourPrice>() {
+                                    new TourPrice() { Value = 200000, TimeStart = DateTime.Now, TimeEnd = DateTime.Now.AddDays(10) }
+                                }
+                            },
+                            new Tour { Name = "HCM - Da Nang", PriceRef = 200000, Description = "Hello world 2", TourType = tourTypes[1] }
+                        };
 
-            public List<Destination> destinations = new List<Destination>()
-                {
-                    new Destination() {
-                        Name = "Ha Long Bay"
-                    },
-                    new Destination() {
-                        Name = "Pho co Hoi An"
-                    },
-                    new Destination() {
-                        Name = "Tiem banh Coi Xay Gio"
-                    },
-                };
+            List<Destination> destinations = new List<Destination>()
+                                {
+                                    new Destination() {
+                                        Name = "Ha Long Bay"
+                                    },
+                                    new Destination() {
+                                        Name = "Pho co Hoi An"
+                                    },
+                                    new Destination() {
+                                        Name = "Tiem banh Coi Xay Gio"
+                                    }
+                                };
 
             tours.ForEach(s => context.Tours.Add(s));
             destinations.ForEach(s => context.Destinations.Add(s));

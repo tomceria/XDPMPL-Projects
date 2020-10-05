@@ -11,9 +11,11 @@ namespace TourDuLich_GUI.BUS
 {
     class TourTypeBUS
     {
-        public static async Task<List<TourType>> GetAll()
+        TourContext _ctx = new TourContext();
+
+        public async Task<List<TourType>> GetAll()
         {
-            using var _ctx = new TourContext();
+            
 
             List<TourType> result = await _ctx.Set<TourType>()
                 .Include(o => o.Tours)
@@ -21,7 +23,7 @@ namespace TourDuLich_GUI.BUS
 
             return result;
         }
-        public static async Task<TourType> GetOne(int id)
+        public async Task<TourType> GetOne(int id)
         {
             var _ctx = new TourContext();
 

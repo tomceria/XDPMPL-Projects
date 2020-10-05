@@ -15,9 +15,18 @@ namespace TourDuLich_GUI.DAL
         // If you wish to target a different database and/or database provider, modify the 'Model1' 
         // connection string in the application configuration file.
         public TourContext()
-            : base("TDLMinhHoangPCContext")
+            : base("TDLHieuContext")
         {
         }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<TourPrice>()
+                .HasRequired<Tour>(o => o.Tour).WithMany(o => o.TourPrices).HasForeignKey<int>(o => o.TourID)
+                .WillCascadeOnDelete(true);
+        }
+
 
         // Add a DbSet for each entity type that you want to include in your model. For more information 
         // on configuring and using a Code First model, see http://go.microsoft.com/fwlink/?LinkId=390109.

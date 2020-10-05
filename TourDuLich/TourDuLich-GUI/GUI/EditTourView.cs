@@ -21,6 +21,10 @@ namespace TourDuLich_GUI
 {
     public partial class EditTourView : DevExpress.XtraBars.Ribbon.RibbonForm
     {
+        TourBUS TourBUS = new TourBUS();
+        TourTypeBUS TourTypeBUS = new TourTypeBUS();
+        DestinationBUS DestinationBUS = new DestinationBUS();
+
         private Tour _item;
         private bool isUpdate = false;
 
@@ -44,6 +48,7 @@ namespace TourDuLich_GUI
             // Data fetch
             Tour item = await TourBUS.GetOne(_item.ID);
             List<TourType> tourTypes = await TourTypeBUS.GetAll();
+            List<Destination> destinations = await DestinationBUS.GetAll();
 
             if (item == null)
             {
@@ -53,6 +58,7 @@ namespace TourDuLich_GUI
             // Data binding
             BindingList<Tour> itemBL = new BindingList<Tour>( new List<Tour>() { item } );
             BindingList<TourType> tourTypesBL = new BindingList<TourType>(tourTypes);
+            BindingList<Destination> destinationsBL = new BindingList<Destination>(destinations);
             BindingList<TourPrice> tourPricesBL = new BindingList<TourPrice>(
                 (item.TourPrices != null)
                     ? new List<TourPrice>(item.TourPrices)
@@ -67,6 +73,7 @@ namespace TourDuLich_GUI
             LookUpEdit_TourTypeID.EditValue = itemBL[0].TourTypeID;
             gridView_TourPrice.GridControl.DataSource = tourPricesBL;
             gridView_TourPrice.GridControl.RefreshDataSource();
+            listBoxControl_Destination.DataSource = destinationsBL;
 
             Console.WriteLine("Count: " + tourPricesBL.Count);
         }
@@ -86,7 +93,9 @@ namespace TourDuLich_GUI
             } else
             {
                 TourBUS.CreateOne(getItemState());
+                isUpdate = true;
             }
+;
         }
 
         private void handleResetTour()
@@ -99,8 +108,10 @@ namespace TourDuLich_GUI
 
         private void handleDeleteTour()
         {
-            // TODO: Perform delete tour
-            Console.WriteLine("Deeeeeelete!");
+            Tour selectedTour = getItemState();
+            TourBUS.DeleteOne(selectedTour);
+            // close window
+            Dispose();
         }
 
         private void handleCloseEdit()
@@ -116,6 +127,7 @@ namespace TourDuLich_GUI
             ((BindingList<Tour>)dataLayoutControl_Tour.DataSource).ElementAt(0)
                 .TourPrices
                 .Add(tourPrice);
+
             Console.WriteLine(((BindingList<Tour>)dataLayoutControl_Tour.DataSource).ElementAt(0).TourPrices.ElementAt(
                 ((BindingList<Tour>)dataLayoutControl_Tour.DataSource).ElementAt(0).TourPrices.Count - 1
                 ).ID);
