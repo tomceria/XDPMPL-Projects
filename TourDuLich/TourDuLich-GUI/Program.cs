@@ -16,8 +16,8 @@ namespace TourDuLich_GUI {
         /// </summary>
         [STAThread]
         static void Main() {
-           /*
-            var context = new TourContext();
+
+           /* var context = new TourContext();
             List<TourType> tourTypes = new List<TourType>() {
                 new TourType() {
                     Name = "Du lịch di động"
@@ -29,9 +29,9 @@ namespace TourDuLich_GUI {
                     Name = "Du lịch xã hội và gia đình"
                 },
             };
-            
-                        var tours = new List<Tour> {
-                            new Tour { 
+
+            var tours = new List<Tour> {
+                            new Tour {
                                 ID = 0,
                                 Name = "HCM - Hanoi",
                                 PriceRef = 100000,
@@ -43,8 +43,8 @@ namespace TourDuLich_GUI {
                             },
                             new Tour { Name = "HCM - Da Nang", PriceRef = 200000, Description = "Hello world 2", TourType = tourTypes[1] }
                         };
-                
-                             List<Destination> destinations = new List<Destination>()
+
+            List<Destination> destinations = new List<Destination>()
                                 {
                                     new Destination() {
                                         Name = "Ha Long Bay"
@@ -57,10 +57,10 @@ namespace TourDuLich_GUI {
                                     }
                                 };
 
-                            tours.ForEach(s => context.Tours.Add(s));
-                            destinations.ForEach(s => context.Destinations.Add(s));
-                            context.SaveChanges();
-            */    
+            tours.ForEach(s => context.Tours.Add(s));
+            destinations.ForEach(s => context.Destinations.Add(s));
+            context.SaveChanges();
+*/
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainView());

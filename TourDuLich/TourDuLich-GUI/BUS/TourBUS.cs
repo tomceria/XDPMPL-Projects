@@ -14,9 +14,11 @@ namespace TourDuLich_GUI.BUS
 {
     public class TourBUS
     {
-        public static async Task<List<Tour>> GetAll()
+        TourContext _ctx = new TourContext();
+        
+        public async Task<List<Tour>> GetAll()
         {
-            using var _ctx = new TourContext();
+            
 
             List<Tour> result = await _ctx.Set<Tour>().ToListAsync();
                 /*List<Tour> = */
@@ -25,9 +27,9 @@ namespace TourDuLich_GUI.BUS
 
             return result;
         }
-        public static async Task<Tour> GetOne(int id)
+        public async Task<Tour> GetOne(int id)
         {
-            using var _ctx = new TourContext();
+            
 
             Tour result = await _ctx.Set<Tour>()
                 .Include(o => o.TourType)
@@ -37,9 +39,9 @@ namespace TourDuLich_GUI.BUS
             return result;
         }
 
-        public static void CreateOne(Tour item)
+        public void CreateOne(Tour item)
         {
-            using var _ctx = new TourContext();
+            
 
             _ctx.Tours.Add(item);
 
@@ -48,9 +50,9 @@ namespace TourDuLich_GUI.BUS
             return;
         }
 
-        public static void UpdateOne(Tour item)
+        public void UpdateOne(Tour item)
         {
-            using var _ctx = new TourContext();
+            
 
             _ctx.Entry(item).State = EntityState.Modified;
             foreach (TourPrice tP in item.TourPrices)
@@ -63,9 +65,9 @@ namespace TourDuLich_GUI.BUS
             return;
         }
 
-      public static  void DeleteOne(Tour item)
+      public void DeleteOne(Tour item)
         {
-            using var _ctx = new TourContext();
+            
 
 
             Tour tour = _ctx.Set<Tour>().Include(o => o.TourPrices).First(o => o.ID == item.ID);

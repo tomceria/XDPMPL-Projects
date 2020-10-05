@@ -14,11 +14,14 @@ using TourDuLich_GUI.Models;
 using System.Data.Entity;
 using TourDuLich_GUI.BUS;
 using System.Collections.ObjectModel;
+using TourDuLich_GUI.DAL;
 
 namespace TourDuLich_GUI
 {
     public partial class MainView : DevExpress.XtraBars.Ribbon.RibbonForm
     {
+        TourBUS TourBUS = new TourBUS();
+        
         public MainView()
         {
             InitializeComponent();

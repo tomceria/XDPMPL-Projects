@@ -21,6 +21,9 @@ namespace TourDuLich_GUI
 {
     public partial class EditTourView : DevExpress.XtraBars.Ribbon.RibbonForm
     {
+        TourBUS TourBUS = new TourBUS();
+        TourTypeBUS TourTypeBUS = new TourTypeBUS();
+
         private Tour _item;
         private bool isUpdate = false;
 

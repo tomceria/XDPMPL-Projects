@@ -19,12 +19,14 @@ namespace TourDuLich_GUI.DAL
         {
         }
 
-        /*protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<Tour>().HasMany<TourPrice>(s => s.TourPrices).WithRequired().WillCascadeOnDelete(true);
+            modelBuilder.Entity<TourPrice>()
+                .HasRequired<Tour>(o => o.Tour).WithMany(o => o.TourPrices).HasForeignKey<int>(o => o.TourID)
+                .WillCascadeOnDelete(true);
         }
-*/
+
 
         // Add a DbSet for each entity type that you want to include in your model. For more information 
         // on configuring and using a Code First model, see http://go.microsoft.com/fwlink/?LinkId=390109.
