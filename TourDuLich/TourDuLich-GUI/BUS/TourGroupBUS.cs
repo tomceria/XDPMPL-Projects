@@ -9,7 +9,7 @@ namespace TourDuLich_GUI.BUS
 
     class TourGroupBUS
     {
-        TourContext _ctx;
+        private TourContext _ctx;
 
         public TourGroupBUS()
         {
@@ -50,6 +50,13 @@ namespace TourDuLich_GUI.BUS
             _ctx.SaveChanges();
 
             return tourGroupToUpdate;
+        }
+
+        public void DeleteOne(int id)
+        {
+            var tourGroup = _ctx.TourGroups.Find(id);
+            _ctx.TourGroups.Remove(tourGroup);
+            _ctx.SaveChanges();
         }
     }
 }
