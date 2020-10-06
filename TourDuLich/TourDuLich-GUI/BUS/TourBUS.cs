@@ -85,10 +85,31 @@ namespace TourDuLich_GUI.BUS
             item.TourPrices.Add(tourPrice);
         }
 
-        public void DeleteTourPriceForTour(TourPrice tourPrice)
+        public void DeleteTourPriceFromTour(TourPrice tourPrice)
         {
             Tour tour = tourPrice.Tour;
             tour.TourPrices.Remove(tourPrice);
+        }
+        public void AddTourDetailToTour(Tour tour, Destination destination)
+        {
+            int lastOrderValue = 0;
+            if (tour.TourDetails != null && tour.TourDetails.Count > 0)
+            {
+                lastOrderValue = tour.TourDetails.Last().Order; // Get value order of LastTourDetail
+            }
+
+            Console.WriteLine("Value Order : " + lastOrderValue + "COunt tourDetail : " + lastOrderValue);
+            TourDetail tourDetail = new TourDetail() 
+            {
+                TourID = tour.ID,
+                Order = lastOrderValue + 1,
+                Destination = destination
+/*                DestinationID = destination.ID
+*/
+            };
+
+            tour.TourDetails.Add(tourDetail);
+
         }
     }
 }

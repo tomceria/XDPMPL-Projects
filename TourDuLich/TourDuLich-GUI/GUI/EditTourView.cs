@@ -65,16 +65,25 @@ namespace TourDuLich_GUI
                     ? new List<TourPrice>(item.TourPrices)
                     : new List<TourPrice>()
                 );
+            BindingList<TourDetail> tourDetailsBL = new BindingList<TourDetail>(
+                (item.TourDetails != null)
+                    ? new List<TourDetail>(item.TourDetails)
+                    : new List<TourDetail>()
+                );
             dataLayoutControl_Tour.DataSource = itemBL;
+
             LookUpEdit_TourTypeID.Properties.DataSource = tourTypesBL;
             LookUpEdit_TourTypeID.Properties.DisplayMember = "Name";
             LookUpEdit_TourTypeID.Properties.ValueMember = "ID";
             LookUpEdit_TourTypeID.Properties.PopulateColumns();
             LookUpEdit_TourTypeID.Properties.Columns["Tours"].Visible = false;
             LookUpEdit_TourTypeID.EditValue = itemBL[0].TourTypeID;
+
             gridView_TourPrice.GridControl.DataSource = tourPricesBL;
             gridView_TourPrice.GridControl.RefreshDataSource();
+
             listBoxControl_Destination.DataSource = destinationsBL;
+            listBoxControl_TourDetail.DataSource = tourDetailsBL;
 
             Console.WriteLine("Count: " + tourPricesBL.Count);
         }
@@ -133,8 +142,6 @@ namespace TourDuLich_GUI
 
         private void handleDeleteTourPrice()
         {
-/*            gridView_TourPrice.DeleteRow(gridView_TourPrice.FocusedRowHandle);
-*/            
             if (gridView_TourPrice.FocusedRowHandle < 0)
             {
                 return;
@@ -145,9 +152,7 @@ namespace TourDuLich_GUI
                     .TourPrices;
             TourPrice tourPrice = tourPrices.ElementAt(gridView_TourPrice.FocusedRowHandle);
 
-            /*            tourPrices.Remove(tourPrices.ElementAt(gridView_TourPrice.FocusedRowHandle));
-            */
-            TourBUS.DeleteTourPriceForTour(tourPrice);
+            TourBUS.DeleteTourPriceFromTour(tourPrice);
             gridView_TourPrice.GridControl.RefreshDataSource();
         }
 
@@ -155,16 +160,12 @@ namespace TourDuLich_GUI
 
         private void handleAddDestinationToTourDetail()
         {
-
-           
-           
-
             Destination destination = getSelectedDestination();
-            TourDetailBUS.AddDestinationToTourDetail(_item, destination);
-
-            //TODO: call func AddDestinationToTourDetail(Tour tour, Destination destination )(TourDetailBUS) 
-            
+            Console.WriteLine("BEFORE: " + getItemState().TourDetails.Count);
+            TourBUS.AddTourDetailToTour(getItemState(), destination);
+            Console.WriteLine("AFTER: " + getItemState().TourDetails.Count);
         }
+
         //End Destination of TourDetail
 
         // Events
