@@ -155,7 +155,6 @@ namespace TourDuLich_GUI
         }
 
         // Begin Destination of TourDetail
-
         private void handleAddTourDetailToTour()
         {
             Destination destination = getSelectedDestination();
@@ -166,8 +165,11 @@ namespace TourDuLich_GUI
         {
             TourDetail tourDetail = (TourDetail)listBoxControl_TourDetail.SelectedItem;
             TourBUS.DeleteTourDetailFromTour(tourDetail);
+            InitializeDataSources();
+
         }
 
+       // private
         //End Destination of TourDetail
 
         // Events
