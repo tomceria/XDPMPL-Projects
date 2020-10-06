@@ -171,20 +171,20 @@ namespace TourDuLich_GUI.BUS
         {
             Tour tour = tourDetail.Tour;
             tour.TourDetails.Remove(tourDetail);
+            SortTourDetails(tour); // Sort TourDetail
 
-            int i = 1;
-            foreach( TourDetail t in tour.TourDetails)
-            {
-                t.Order = i;
-                i++;
-                Console.WriteLine("Order value : " + t.Order);
-            }
+            
             // TODO: Update Order
         }
 
-        public void SortTourDetails()
+        public void SortTourDetails(Tour tour)
         {
-
+            int i = 1;
+            foreach (TourDetail t in tour.TourDetails)
+            {
+                t.Order = i; 
+                i++;
+            }
         }
     }
 }
