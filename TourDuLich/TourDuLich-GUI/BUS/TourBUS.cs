@@ -29,6 +29,9 @@ namespace TourDuLich_GUI.BUS
                 .Include(o => o.TourDetails)
                 .FirstOrDefaultAsync(o => o.ID == id);
 
+            result.TourPrices = result.TourPrices.OrderBy(o => o.TimeStart).ToList();
+            result.TourDetails = result.TourDetails.OrderBy(o => o.Order).ToList();
+
             return result;
         }
 

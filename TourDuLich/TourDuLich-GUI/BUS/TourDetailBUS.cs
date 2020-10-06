@@ -8,7 +8,6 @@ using System.Text;
 using System.Threading.Tasks;
 using TourDuLich_GUI.DAL;
 using TourDuLich_GUI.Models;
-using Destination = TourDuLich_GUI.Models.Destination;
 
 namespace TourDuLich_GUI.BUS
 {
