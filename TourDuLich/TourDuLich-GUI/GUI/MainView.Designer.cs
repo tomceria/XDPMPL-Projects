@@ -45,21 +45,27 @@
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonStatusBar = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
             this.tourBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.xtraTabControl_Tours = new DevExpress.XtraTab.XtraTabControl();
+            this.xtraTabPage_Tours = new DevExpress.XtraTab.XtraTabPage();
+            this.xtraTabPage_TourGroups = new DevExpress.XtraTab.XtraTabPage();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tourBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl_Tours)).BeginInit();
+            this.xtraTabControl_Tours.SuspendLayout();
+            this.xtraTabPage_Tours.SuspendLayout();
             this.SuspendLayout();
             // 
             // gridControl
             // 
             this.gridControl.DataSource = typeof(TourDuLich_GUI.Models.Tour);
             this.gridControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl.Location = new System.Drawing.Point(0, 158);
+            this.gridControl.Location = new System.Drawing.Point(0, 0);
             this.gridControl.MainView = this.gridView;
             this.gridControl.MenuManager = this.ribbonControl;
             this.gridControl.Name = "gridControl";
-            this.gridControl.Size = new System.Drawing.Size(790, 441);
+            this.gridControl.Size = new System.Drawing.Size(788, 392);
             this.gridControl.TabIndex = 2;
             this.gridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView});
@@ -166,7 +172,7 @@
             this.ribbonPageGroup1});
             this.ribbonPage1.MergeOrder = 0;
             this.ribbonPage1.Name = "ribbonPage1";
-            this.ribbonPage1.Text = "Quản lý Tour";
+            this.ribbonPage1.Text = "Trang chủ";
             // 
             // ribbonPageGroup1
             // 
@@ -191,14 +197,40 @@
             // 
             this.tourBindingSource.DataSource = typeof(TourDuLich_GUI.Models.Tour);
             // 
+            // xtraTabControl_Tours
+            // 
+            this.xtraTabControl_Tours.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.xtraTabControl_Tours.Location = new System.Drawing.Point(0, 158);
+            this.xtraTabControl_Tours.Name = "xtraTabControl_Tours";
+            this.xtraTabControl_Tours.SelectedTabPage = this.xtraTabPage_Tours;
+            this.xtraTabControl_Tours.Size = new System.Drawing.Size(790, 417);
+            this.xtraTabControl_Tours.TabIndex = 5;
+            this.xtraTabControl_Tours.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
+            this.xtraTabPage_Tours,
+            this.xtraTabPage_TourGroups});
+            // 
+            // xtraTabPage_Tours
+            // 
+            this.xtraTabPage_Tours.Controls.Add(this.gridControl);
+            this.xtraTabPage_Tours.Name = "xtraTabPage_Tours";
+            this.xtraTabPage_Tours.Size = new System.Drawing.Size(788, 392);
+            this.xtraTabPage_Tours.Text = "Tour";
+            // 
+            // xtraTabPage_TourGroups
+            // 
+            this.xtraTabPage_TourGroups.Name = "xtraTabPage_TourGroups";
+            this.xtraTabPage_TourGroups.Size = new System.Drawing.Size(788, 392);
+            this.xtraTabPage_TourGroups.Text = "Đoàn Tour";
+            // 
             // MainView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(790, 599);
+            this.Controls.Add(this.xtraTabControl_Tours);
             this.Controls.Add(this.ribbonStatusBar);
-            this.Controls.Add(this.gridControl);
             this.Controls.Add(this.ribbonControl);
+            this.IsMdiContainer = true;
             this.Name = "MainView";
             this.Ribbon = this.ribbonControl;
             this.StatusBar = this.ribbonStatusBar;
@@ -206,6 +238,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tourBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl_Tours)).EndInit();
+            this.xtraTabControl_Tours.ResumeLayout(false);
+            this.xtraTabPage_Tours.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -227,5 +262,8 @@
         private DevExpress.XtraGrid.Columns.GridColumn colName;
         private DevExpress.XtraGrid.Columns.GridColumn colDescription;
         private DevExpress.XtraGrid.Columns.GridColumn colPriceRef;
+        private DevExpress.XtraTab.XtraTabControl xtraTabControl_Tours;
+        private DevExpress.XtraTab.XtraTabPage xtraTabPage_Tours;
+        private DevExpress.XtraTab.XtraTabPage xtraTabPage_TourGroups;
     }
 }
