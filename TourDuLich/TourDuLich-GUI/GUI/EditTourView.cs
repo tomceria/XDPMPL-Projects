@@ -24,7 +24,6 @@ namespace TourDuLich_GUI
         TourBUS TourBUS = new TourBUS();
         TourTypeBUS TourTypeBUS = new TourTypeBUS();
         DestinationBUS DestinationBUS = new DestinationBUS();
-
         private Tour _item;
         private bool isUpdate = false;
 
@@ -49,7 +48,7 @@ namespace TourDuLich_GUI
             Tour item = await TourBUS.GetOne(_item.ID);
             List<TourType> tourTypes = await TourTypeBUS.GetAll();
             List<Destination> destinations = await DestinationBUS.GetAll();
-
+            
             if (item == null)
             {
                 item = _item;       // this "_item" would be INITIALIZED before running this method, meaning it has no reference to ANY BindingList, unlike EditTourView(Tour tour)
@@ -59,21 +58,31 @@ namespace TourDuLich_GUI
             BindingList<Tour> itemBL = new BindingList<Tour>( new List<Tour>() { item } );
             BindingList<TourType> tourTypesBL = new BindingList<TourType>(tourTypes);
             BindingList<Destination> destinationsBL = new BindingList<Destination>(destinations);
+
             BindingList<TourPrice> tourPricesBL = new BindingList<TourPrice>(
                 (item.TourPrices != null)
                     ? new List<TourPrice>(item.TourPrices)
                     : new List<TourPrice>()
                 );
+            BindingList<TourDetail> tourDetailsBL = new BindingList<TourDetail>(
+                (item.TourDetails != null)
+                    ? new List<TourDetail>(item.TourDetails)
+                    : new List<TourDetail>()
+                );
             dataLayoutControl_Tour.DataSource = itemBL;
+
             LookUpEdit_TourTypeID.Properties.DataSource = tourTypesBL;
             LookUpEdit_TourTypeID.Properties.DisplayMember = "Name";
             LookUpEdit_TourTypeID.Properties.ValueMember = "ID";
             LookUpEdit_TourTypeID.Properties.PopulateColumns();
             LookUpEdit_TourTypeID.Properties.Columns["Tours"].Visible = false;
             LookUpEdit_TourTypeID.EditValue = itemBL[0].TourTypeID;
+
             gridView_TourPrice.GridControl.DataSource = tourPricesBL;
             gridView_TourPrice.GridControl.RefreshDataSource();
+
             listBoxControl_Destination.DataSource = destinationsBL;
+            listBoxControl_TourDetail.DataSource = tourDetailsBL;
 
             Console.WriteLine("Count: " + tourPricesBL.Count);
         }
@@ -81,6 +90,11 @@ namespace TourDuLich_GUI
         private Tour getItemState()
         {
             return ((BindingList<Tour>)dataLayoutControl_Tour.DataSource).ElementAt(0);
+        }
+
+        private Destination getSelectedDestination()
+        {
+            return (Destination)listBoxControl_Destination.SelectedItem;
         }
 
         // Event Handlers
@@ -121,25 +135,12 @@ namespace TourDuLich_GUI
 
         private void handleAddTourPrice()
         {
-
-            TourPrice tourPrice = new TourPrice(getItemState());
-            Console.WriteLine("ID: " + tourPrice.ID);
-            ((BindingList<Tour>)dataLayoutControl_Tour.DataSource).ElementAt(0)
-                .TourPrices
-                .Add(tourPrice);
-
-            Console.WriteLine(((BindingList<Tour>)dataLayoutControl_Tour.DataSource).ElementAt(0).TourPrices.ElementAt(
-                ((BindingList<Tour>)dataLayoutControl_Tour.DataSource).ElementAt(0).TourPrices.Count - 1
-                ).ID);
-            Console.WriteLine("CCCCount: " + ((BindingList<Tour>)dataLayoutControl_Tour.DataSource).ElementAt(0).TourPrices.Count);
-
+            TourBUS.CreateTourPriceForTour(getItemState());
             gridView_TourPrice.GridControl.RefreshDataSource();
         }
 
         private void handleDeleteTourPrice()
         {
-/*            gridView_TourPrice.DeleteRow(gridView_TourPrice.FocusedRowHandle);
-*/            
             if (gridView_TourPrice.FocusedRowHandle < 0)
             {
                 return;
@@ -148,10 +149,27 @@ namespace TourDuLich_GUI
                 ((BindingList<Tour>)dataLayoutControl_Tour.DataSource)
                     .ElementAt(0)
                     .TourPrices;
-            tourPrices.Remove(tourPrices.ElementAt(gridView_TourPrice.FocusedRowHandle));
+            TourPrice tourPrice = tourPrices.ElementAt(gridView_TourPrice.FocusedRowHandle);
 
+            TourBUS.DeleteTourPriceFromTour(tourPrice);
             gridView_TourPrice.GridControl.RefreshDataSource();
         }
+
+        // Begin Destination of TourDetail
+
+        private void handleAddTourDetailToTour()
+        {
+            Destination destination = getSelectedDestination();
+            TourBUS.AddTourDetailToTour(getItemState(), destination);
+        }
+
+        private void handleDeleteDestinationFromTour()
+        {
+            TourDetail tourDetail = (TourDetail)listBoxControl_TourDetail.SelectedItem;
+            TourBUS.DeleteTourDetailFromTour(tourDetail);
+        }
+
+        //End Destination of TourDetail
 
         // Events
 
@@ -190,6 +208,26 @@ namespace TourDuLich_GUI
         private void button_DeleteTourPrice_Click(object sender, EventArgs e)
         {
             handleDeleteTourPrice();
+        }
+
+        private void listBoxControl_Destination_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnAddTourDetail_Click(object sender, EventArgs e)
+        {
+            handleAddTourDetailToTour();
+        }
+
+        private void btnRemoveDestination_Click(object sender, EventArgs e)
+        {
+            handleDeleteDestinationFromTour();
+        }
+
+        private void listBoxControl_TourDetail_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

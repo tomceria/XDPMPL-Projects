@@ -80,6 +80,7 @@
     <Compile Include="BUS\TourGroupCostBUS.cs" />
     <Compile Include="BUS\TourGroupDetailBUS.cs" />
     <Compile Include="BUS\TourGroupStaffBUS.cs" />
+    <Compile Include="BUS\TourDetailBUS.cs" />
     <Compile Include="BUS\TourTypeBUS.cs" />
     <Compile Include="DAL\TourInitializer.cs" />
     <Compile Include="MainViewModel.cs" />

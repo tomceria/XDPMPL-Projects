@@ -155,6 +155,7 @@
             this.btnRemoveDestination.StyleController = this.dataLayoutControl_Tour;
             this.btnRemoveDestination.TabIndex = 11;
             this.btnRemoveDestination.Text = "<";
+            this.btnRemoveDestination.Click += new System.EventHandler(this.btnRemoveDestination_Click);
             // 
             // btnAddDestination
             // 
@@ -164,6 +165,7 @@
             this.btnAddDestination.StyleController = this.dataLayoutControl_Tour;
             this.btnAddDestination.TabIndex = 10;
             this.btnAddDestination.Text = ">";
+            this.btnAddDestination.Click += new System.EventHandler(this.btnAddTourDetail_Click);
             // 
             // listBoxControl_Destination
             // 
@@ -174,6 +176,7 @@
             this.listBoxControl_Destination.StyleController = this.dataLayoutControl_Tour;
             this.listBoxControl_Destination.TabIndex = 9;
             this.listBoxControl_Destination.ValueMember = "ID";
+            this.listBoxControl_Destination.SelectedIndexChanged += new System.EventHandler(this.listBoxControl_Destination_SelectedIndexChanged);
             // 
             // NameTextEdit
             // 
@@ -317,6 +320,7 @@
             this.listBoxControl_TourDetail.Size = new System.Drawing.Size(248, 298);
             this.listBoxControl_TourDetail.StyleController = this.dataLayoutControl_Tour;
             this.listBoxControl_TourDetail.TabIndex = 8;
+            this.listBoxControl_TourDetail.SelectedIndexChanged += new System.EventHandler(this.listBoxControl_TourDetail_SelectedIndexChanged);
             // 
             // GridControl_TourPrices
             // 
@@ -436,7 +440,7 @@
             // 
             this.tabbedDetails.Location = new System.Drawing.Point(0, 72);
             this.tabbedDetails.Name = "tabbedDetails";
-            this.tabbedDetails.SelectedTabPage = this.layoutControlGroup4;
+            this.tabbedDetails.SelectedTabPage = this.layoutControlGroup3;
             this.tabbedDetails.Size = new System.Drawing.Size(778, 349);
             this.tabbedDetails.TabPages.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlGroup4,
