@@ -59,23 +59,41 @@ namespace TourDuLich_GUI
         {
             {
                 Tour selectedTour = (Tour)gridView.GetFocusedRow();
-                Console.WriteLine("Data: " + (selectedTour.Name));
+
+                if (selectedTour == null)
+                {
+                    return;
+                }
+
                 EditTourView editTourView = new EditTourView(selectedTour);
                 editTourView.ShowDialog(this);
 
                 // Post-Disposal of Dialog
                 InitializeDataSources();
-
             }
         }
 
         private void bbiDelete_ItemClick(object sender, ItemClickEventArgs e)
         {
             Tour selectedTour = (Tour)gridView.GetFocusedRow();
+
+            if (selectedTour == null)
+            {
+                return;
+            }
+
             TourBUS.DeleteOne(selectedTour);
 
             // Refresh
             InitializeDataSources();
+        }
+
+        private void gridView_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
+        {
+            var selectedItem = gridView.GetFocusedRow();
+            bool selectedExists = selectedItem != null;
+            bbiEdit.Enabled = selectedExists;
+            bbiDelete.Enabled = selectedExists;
         }
     }
 }
