@@ -32,28 +32,14 @@ namespace TourDuLich_GUI.BUS
 
             return result;
         }
-        public void AddDestinationToTourDetail(Tour tour, Destination destination)
-        {
-            int lastOrderValue = tour.TourDetails.Last().Order; // Get value order of LastTourDetail
 
-            Console.WriteLine("Value Order : " + lastOrderValue + "COunt tourDetail : " + lastOrderValue);
-            TourDetail tourDetail = new TourDetail() 
-            {
-                TourID = tour.ID,
-                Order = lastOrderValue + 1,
-                DestinationID = destination.ID
-            };
-
-            CreateOne(tourDetail);
-
-        }
     /*    private int GetLastValueOfOrder()
         {
 
         }*/
         public void CreateOne(TourDetail item)
         {
-            _ctx.TourDetail.Add(item);
+            _ctx.TourDetails.Add(item);
 
             _ctx.SaveChanges();
 
