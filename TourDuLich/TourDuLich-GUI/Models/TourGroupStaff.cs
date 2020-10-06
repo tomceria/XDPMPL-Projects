@@ -15,7 +15,6 @@ namespace TourDuLich_GUI.Models
         [ForeignKey("Staff"), Display(Name = "Nhân viên")]
         public int StaffID { get; set; }
 
-
         [Required, Display(Name = "Nhiệm vụ")]
         public Task StaffTask { get; set; }
 

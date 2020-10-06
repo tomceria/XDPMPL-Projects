@@ -71,9 +71,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BUS\CostTypeBUS.cs" />
+    <Compile Include="BUS\CustomerBUS.cs" />
     <Compile Include="BUS\DestinationBUS.cs" />
+    <Compile Include="BUS\StaffBUS.cs" />
     <Compile Include="BUS\TourBUS.cs" />
     <Compile Include="BUS\TourGroupBUS.cs" />
+    <Compile Include="BUS\TourGroupCostBUS.cs" />
+    <Compile Include="BUS\TourGroupDetailBUS.cs" />
+    <Compile Include="BUS\TourGroupStaffBUS.cs" />
     <Compile Include="BUS\TourTypeBUS.cs" />
     <Compile Include="DAL\TourInitializer.cs" />
     <Compile Include="MainViewModel.cs" />
