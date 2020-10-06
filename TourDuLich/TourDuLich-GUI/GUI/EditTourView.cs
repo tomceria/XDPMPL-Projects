@@ -228,5 +228,10 @@ namespace TourDuLich_GUI
         {
 
         }
+
+        private void tabbedDetails_SelectedPageChanged(object sender, LayoutTabPageChangedEventArgs e)
+        {
+            InitializeDataSources();        // This works for some reasons?????
+        }
     }
 }

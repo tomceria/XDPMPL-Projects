@@ -440,12 +440,13 @@
             // 
             this.tabbedDetails.Location = new System.Drawing.Point(0, 72);
             this.tabbedDetails.Name = "tabbedDetails";
-            this.tabbedDetails.SelectedTabPage = this.layoutControlGroup3;
+            this.tabbedDetails.SelectedTabPage = this.layoutControlGroup4;
             this.tabbedDetails.Size = new System.Drawing.Size(778, 349);
             this.tabbedDetails.TabPages.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlGroup4,
             this.layoutControlGroup3});
             this.tabbedDetails.Text = "Chi tiết";
+            this.tabbedDetails.SelectedPageChanged += new DevExpress.XtraLayout.LayoutTabPageChangedEventHandler(this.tabbedDetails_SelectedPageChanged);
             // 
             // layoutControlGroup3
             // 
