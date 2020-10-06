@@ -29,8 +29,19 @@ namespace TourDuLich_GUI.BUS
                 .Include(o => o.TourDetails)
                 .FirstOrDefaultAsync(o => o.ID == id);
 
-            result.TourPrices = result.TourPrices.OrderBy(o => o.TimeStart).ToList();
-            result.TourDetails = result.TourDetails.OrderBy(o => o.Order).ToList();
+            if (result == null)
+            {
+                return null;
+            }
+
+            if (result.TourPrices != null & result.TourPrices.Count > 0)
+            {
+                result.TourPrices = result.TourPrices.OrderBy(o => o.TimeStart).ToList();
+            }
+            if (result.TourPrices != null & result.TourPrices.Count > 0)
+            {
+                result.TourDetails = result.TourDetails.OrderBy(o => o.Order).ToList();
+            }
 
             return result;
         }
@@ -38,7 +49,9 @@ namespace TourDuLich_GUI.BUS
         public void CreateOne(Tour item)
         {
 
-            _ctx.Tours.Add(item);
+            // This "item" is unattached
+
+            _ctx.Entry(item).State = EntityState.Added;
 
             _ctx.SaveChanges();
 
