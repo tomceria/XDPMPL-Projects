@@ -81,9 +81,6 @@ namespace TourDuLich_GUI.BUS
 
         public void DeleteOne(Tour item)
         {
-            
-
-
             Tour tour = _ctx.Set<Tour>().Include(o => o.TourPrices).First(o => o.ID == item.ID);
             _ctx.Tours.Remove(tour);
             /*_ctx.Entry(tour).State = EntityState.Deleted;
@@ -121,8 +118,6 @@ namespace TourDuLich_GUI.BUS
                 Tour = tour,
                 Order = lastOrderValue + 1,
                 Destination = newDestination
-/*                DestinationID = destination.ID
-*/
             };
 
             tour.TourDetails.Add(tourDetail);

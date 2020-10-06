@@ -109,7 +109,6 @@ namespace TourDuLich_GUI
                 TourBUS.CreateOne(getItemState());
                 isUpdate = true;
             }
-;
         }
 
         private void handleResetTour()
