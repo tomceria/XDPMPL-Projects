@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using TourDuLich_GUI.DAL;
@@ -48,9 +49,9 @@ namespace TourDuLich_GUI.BUS
 
         public void CreateOne(Tour item)
         {
+            ValidateOne(item);
 
-            // This "item" is unattached
-
+            // This "item" is unattached => ATTACH!
             _ctx.Entry(item).State = EntityState.Added;
 
             _ctx.SaveChanges();
@@ -60,7 +61,9 @@ namespace TourDuLich_GUI.BUS
 
         public void UpdateOne(Tour item)
         {
-            // as "item" is loaded from a DataSource/BindingList, it is ALREADY DETACHED => Must detach TourPrices before deleting/adding
+            ValidateOne(item);
+
+            // as "item" is loaded from a DataSource/BindingList, it is ALREADY ATTACHED => Must detach TourPrices before deleting/adding
 
             _ctx.Entry(item).State = EntityState.Modified;
 
@@ -103,6 +106,31 @@ namespace TourDuLich_GUI.BUS
 */
             _ctx.SaveChanges();
 
+        }
+
+        public bool ValidateOne(Tour item)
+        {
+            List<TourPrice> tourPrices = item.TourPrices.ToList();
+
+            for (int i = 0; i < tourPrices.Count; i++)
+            {
+                // Check Valid TimeStart < TimeEnd
+                if (!(tourPrices[i].TimeStart < tourPrices[i].TimeEnd))
+                {
+                    throw new Exception("Khoảng thời gian không hợp lệ (Ngày bắt đầu phải trước Ngày kết thúc)");
+                }
+
+                for (int j = i+1; j < tourPrices.Count - 1; j++)
+                {
+                    // Check non-intersect: (A1>B2) || (B1>A2); assumes A1<A2,B1<B2
+                    if (!(tourPrices[i].TimeStart >= tourPrices[j].TimeEnd || tourPrices[j].TimeStart >= tourPrices[i].TimeEnd)) {
+                        Console.WriteLine("i: " + tourPrices[i].ID + "j: " + tourPrices[j].ID);
+                        throw new Exception("Tồn tại khoảng thời gian trùng trong bảng giá");
+                    }
+                }
+            }
+
+            return true;
         }
 
         public void CreateTourPriceForTour(Tour item)
