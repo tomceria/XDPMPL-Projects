@@ -77,6 +77,7 @@
             this.gridView.OptionsBehavior.ReadOnly = true;
             this.gridView.OptionsCustomization.AllowQuickHideColumns = false;
             this.gridView.OptionsView.ShowFooter = true;
+            this.gridView.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.gridView_FocusedRowChanged);
             // 
             // colName
             // 
