@@ -172,27 +172,15 @@ namespace TourDuLich_GUI.BUS
             Tour tour = tourDetail.Tour;
             tour.TourDetails.Remove(tourDetail);
             SortTourDetails(tour); // Sort TourDetail
-
-<<<<<<< HEAD
-            
-            // TODO: Update Order
         }
 
         public void SortTourDetails(Tour tour)
         {
-            int i = 1;
-            foreach (TourDetail t in tour.TourDetails)
-            {
-                t.Order = i; 
-                i++;
-=======
-            // Re-ordering TourDetails by Order
             int tdIndex = 1;
-            foreach( TourDetail t in tour.TourDetails)
+            foreach(TourDetail t in tour.TourDetails)
             {
                 t.Order = tdIndex;
                 tdIndex++;
->>>>>>> f0778e7a73c6f4e6cbbc075c5cfa76054cc64a42
             }
         }
     }
