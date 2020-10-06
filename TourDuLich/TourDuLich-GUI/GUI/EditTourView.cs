@@ -127,18 +127,7 @@ namespace TourDuLich_GUI
 
         private void handleAddTourPrice()
         {
-
-            TourPrice tourPrice = new TourPrice(getItemState());
-            Console.WriteLine("ID: " + tourPrice.ID);
-            ((BindingList<Tour>)dataLayoutControl_Tour.DataSource).ElementAt(0)
-                .TourPrices
-                .Add(tourPrice);
-
-            Console.WriteLine(((BindingList<Tour>)dataLayoutControl_Tour.DataSource).ElementAt(0).TourPrices.ElementAt(
-                ((BindingList<Tour>)dataLayoutControl_Tour.DataSource).ElementAt(0).TourPrices.Count - 1
-                ).ID);
-            Console.WriteLine("CCCCount: " + ((BindingList<Tour>)dataLayoutControl_Tour.DataSource).ElementAt(0).TourPrices.Count);
-
+            TourBUS.CreateTourPriceForTour(getItemState());
             gridView_TourPrice.GridControl.RefreshDataSource();
         }
 
@@ -154,8 +143,11 @@ namespace TourDuLich_GUI
                 ((BindingList<Tour>)dataLayoutControl_Tour.DataSource)
                     .ElementAt(0)
                     .TourPrices;
-            tourPrices.Remove(tourPrices.ElementAt(gridView_TourPrice.FocusedRowHandle));
+            TourPrice tourPrice = tourPrices.ElementAt(gridView_TourPrice.FocusedRowHandle);
 
+            /*            tourPrices.Remove(tourPrices.ElementAt(gridView_TourPrice.FocusedRowHandle));
+            */
+            TourBUS.DeleteTourPriceForTour(tourPrice);
             gridView_TourPrice.GridControl.RefreshDataSource();
         }
 

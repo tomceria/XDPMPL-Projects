@@ -18,19 +18,11 @@ namespace TourDuLich_GUI.BUS
         
         public async Task<List<Tour>> GetAll()
         {
-            
-
             List<Tour> result = await _ctx.Set<Tour>().ToListAsync();
-                /*List<Tour> = */
-
-            Console.WriteLine("Count: " + result.Count);
-
             return result;
         }
         public async Task<Tour> GetOne(int id)
         {
-            
-
             Tour result = await _ctx.Set<Tour>()
                 .Include(o => o.TourType)
                 .Include(o => o.TourPrices)
@@ -74,7 +66,7 @@ namespace TourDuLich_GUI.BUS
             return;
         }
 
-      public void DeleteOne(Tour item)
+        public void DeleteOne(Tour item)
         {
             
 
@@ -85,6 +77,18 @@ namespace TourDuLich_GUI.BUS
 */
             _ctx.SaveChanges();
 
+        }
+
+        public void CreateTourPriceForTour(Tour item)
+        {
+            TourPrice tourPrice = new TourPrice(item);
+            item.TourPrices.Add(tourPrice);
+        }
+
+        public void DeleteTourPriceForTour(TourPrice tourPrice)
+        {
+            Tour tour = tourPrice.Tour;
+            tour.TourPrices.Remove(tourPrice);
         }
     }
 }
