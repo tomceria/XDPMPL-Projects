@@ -39,7 +39,7 @@ namespace TourDuLich_GUI.BUS
         }*/
         public void CreateOne(TourDetail item)
         {
-            _ctx.TourDetail.Add(item);
+            _ctx.TourDetails.Add(item);
 
             _ctx.SaveChanges();
 

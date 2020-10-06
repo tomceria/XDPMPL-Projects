@@ -40,7 +40,7 @@ namespace TourDuLich_GUI.DAL
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Staff> Staffs { get; set; }
         public DbSet<CostType> CostTypes { get; set; }
-        public DbSet<TourDetail> TourDetail { get; set; }
+        public DbSet<TourDetail> TourDetails { get; set; }
         public DbSet<TourGroupCost> TourGroupCosts { get; set; }
         public DbSet<TourGroupDetail> TourGroupDetails { get; set; }
         public DbSet<TourGroupStaff> TourGroupStaffs { get; set; }

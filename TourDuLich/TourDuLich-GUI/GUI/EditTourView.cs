@@ -24,7 +24,6 @@ namespace TourDuLich_GUI
         TourBUS TourBUS = new TourBUS();
         TourTypeBUS TourTypeBUS = new TourTypeBUS();
         DestinationBUS DestinationBUS = new DestinationBUS();
-        TourDetailBUS TourDetailBUS = new TourDetailBUS();
         private Tour _item;
         private bool isUpdate = false;
 
@@ -158,12 +157,16 @@ namespace TourDuLich_GUI
 
         // Begin Destination of TourDetail
 
-        private void handleAddDestinationToTourDetail()
+        private void handleAddTourDetailToTour()
         {
             Destination destination = getSelectedDestination();
-            Console.WriteLine("BEFORE: " + getItemState().TourDetails.Count);
             TourBUS.AddTourDetailToTour(getItemState(), destination);
-            Console.WriteLine("AFTER: " + getItemState().TourDetails.Count);
+        }
+
+        private void handleDeleteDestinationFromTour()
+        {
+            TourDetail tourDetail = (TourDetail)listBoxControl_TourDetail.SelectedItem;
+            TourBUS.DeleteTourDetailFromTour(tourDetail);
         }
 
         //End Destination of TourDetail
@@ -212,9 +215,14 @@ namespace TourDuLich_GUI
 
         }
 
-        private void btnAddDestination_Click(object sender, EventArgs e)
+        private void btnAddTourDetail_Click(object sender, EventArgs e)
         {
-            handleAddDestinationToTourDetail();
+            handleAddTourDetailToTour();
+        }
+
+        private void btnRemoveDestination_Click(object sender, EventArgs e)
+        {
+            handleDeleteDestinationFromTour();
         }
 
         private void listBoxControl_TourDetail_SelectedIndexChanged(object sender, EventArgs e)
