@@ -66,7 +66,7 @@ namespace TourDuLich_GUI
                 );
             BindingList<TourDetail> tourDetailsBL = new BindingList<TourDetail>(
                 (item.TourDetails != null)
-                    ? new List<TourDetail>(item.TourDetails)
+                    ? new List<TourDetail>(item.TourDetails.OrderBy( o => o.Order))
                     : new List<TourDetail>()
                 );
             dataLayoutControl_Tour.DataSource = itemBL;
@@ -83,7 +83,6 @@ namespace TourDuLich_GUI
 
             listBoxControl_Destination.DataSource = destinationsBL;
             listBoxControl_TourDetail.DataSource = tourDetailsBL;
-
             Console.WriteLine("Count: " + tourPricesBL.Count);
         }
 
@@ -167,11 +166,27 @@ namespace TourDuLich_GUI
             TourBUS.DeleteTourDetailFromTour(tourDetail);
             InitializeDataSources();
 
+
         }
 
-       // private
         //End Destination of TourDetail
 
+        //Begin TourDetail event
+        private void handleMoveUpTourDetail() 
+        {
+            TourDetail tourDetail = (TourDetail)listBoxControl_TourDetail.SelectedItem;
+            TourBUS.MoveUpTourDetailOfTour(tourDetail);
+            InitializeDataSources();
+        }
+
+        private void handleMoveDownTourDetail()
+        {
+            TourDetail tourDetail = (TourDetail)listBoxControl_TourDetail.SelectedItem;
+            TourBUS.MoveDownTourDetailOfTour(tourDetail);
+            InitializeDataSources();
+        }
+           
+        //End TourDetail event
         // Events
 
         private void bbiSave_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -234,6 +249,26 @@ namespace TourDuLich_GUI
         private void tabbedDetails_SelectedPageChanged(object sender, LayoutTabPageChangedEventArgs e)
         {
             InitializeDataSources();        // This works for some reasons?????
+        }
+
+        private void mainRibbonControl_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void simpleButton2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_MoveUpTourDetail_Click(object sender, EventArgs e)
+        {
+            handleMoveUpTourDetail();
+        }
+
+        private void btn_MoveDownTourDetail_Click(object sender, EventArgs e)
+        {
+            handleMoveDownTourDetail();
         }
     }
 }

@@ -183,5 +183,49 @@ namespace TourDuLich_GUI.BUS
                 tdIndex++;
             }
         }
+
+        public void MoveUpTourDetailOfTour(TourDetail tourDetail)
+        {
+            //Skip first element
+            if( tourDetail.Order > 1)
+            {
+                //Get previous value order of TourDetail
+                int previousOrderTourDetail = tourDetail.Order - 1;
+                //Because Row Table begin from 0 but Order begin from 1
+
+                //Get tourDetail above current tourDetail
+                TourDetail previousTourDetail = tourDetail.Tour.TourDetails.First(o => o.Order == previousOrderTourDetail);
+                Console.WriteLine("pre value order= " + previousTourDetail.Order + "current value order= " + tourDetail.Order);
+                SwapTourDetail(tourDetail, previousTourDetail);
+
+            }
+           
+        }
+
+        public void MoveDownTourDetailOfTour(TourDetail tourDetail)// Current TourDetail
+        {
+            int lengthTourDetails = tourDetail.Tour.TourDetails.Count;
+            //Skip last element
+            if (tourDetail.Order < lengthTourDetails) 
+            {
+                //Get next value order of TourDetail
+                int nextOrderOfTourDetail = tourDetail.Order + 1;
+
+                //Get tourDetail below current tourDetail
+                TourDetail nextTourDetail = tourDetail.Tour.TourDetails.First(o => o.Order == nextOrderOfTourDetail);
+                Console.WriteLine("next value order= " + nextTourDetail.Order + "current value order= " + tourDetail.Order);
+                SwapTourDetail(tourDetail, nextTourDetail);
+
+            }
+        }
+
+        private void SwapTourDetail(TourDetail tourDetail_1, TourDetail tourDetail_2)
+        {
+            int temp_OrderOfTourDetail_1 = tourDetail_1.Order;
+
+            tourDetail_1.Order = tourDetail_2.Order;
+            tourDetail_2.Order = temp_OrderOfTourDetail_1;
+        }
+
     }
 }
