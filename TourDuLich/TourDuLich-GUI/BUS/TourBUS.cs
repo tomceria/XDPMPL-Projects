@@ -39,7 +39,7 @@ namespace TourDuLich_GUI.BUS
             {
                 result.TourPrices = result.TourPrices.OrderBy(o => o.TimeStart).ToList();
             }
-            if (result.TourPrices != null & result.TourPrices.Count > 0)
+            if (result.TourDetails != null & result.TourDetails.Count > 0)
             {
                 result.TourDetails = result.TourDetails.OrderBy(o => o.Order).ToList();
             }

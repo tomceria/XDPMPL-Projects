@@ -66,7 +66,7 @@ namespace TourDuLich_GUI
                 );
             BindingList<TourDetail> tourDetailsBL = new BindingList<TourDetail>(
                 (item.TourDetails != null)
-                    ? new List<TourDetail>(item.TourDetails.OrderBy( o => o.Order))
+                    ? new List<TourDetail>(item.TourDetails)
                     : new List<TourDetail>()
                 );
             dataLayoutControl_Tour.DataSource = itemBL;
