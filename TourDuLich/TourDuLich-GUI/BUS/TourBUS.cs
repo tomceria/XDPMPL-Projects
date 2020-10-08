@@ -195,9 +195,9 @@ namespace TourDuLich_GUI.BUS
 
                 //Get tourDetail above current tourDetail
                 TourDetail previousTourDetail = tourDetail.Tour.TourDetails.First(o => o.Order == previousOrderTourDetail);
-                Console.WriteLine("pre value order= " + previousTourDetail.Order + "current value order= " + tourDetail.Order);
-                SwapTourDetail(tourDetail, previousTourDetail);
 
+                SwapTourDetail(tourDetail, previousTourDetail);
+               
             }
            
         }
@@ -215,7 +215,7 @@ namespace TourDuLich_GUI.BUS
                 TourDetail nextTourDetail = tourDetail.Tour.TourDetails.First(o => o.Order == nextOrderOfTourDetail);
                 Console.WriteLine("next value order= " + nextTourDetail.Order + "current value order= " + tourDetail.Order);
                 SwapTourDetail(tourDetail, nextTourDetail);
-
+                
             }
         }
 

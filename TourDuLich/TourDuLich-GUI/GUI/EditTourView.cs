@@ -21,6 +21,7 @@ namespace TourDuLich_GUI
 {
     public partial class EditTourView : DevExpress.XtraBars.Ribbon.RibbonForm
     {
+        
         TourBUS TourBUS = new TourBUS();
         TourTypeBUS TourTypeBUS = new TourTypeBUS();
         DestinationBUS DestinationBUS = new DestinationBUS();
@@ -69,6 +70,8 @@ namespace TourDuLich_GUI
                     ? new List<TourDetail>(item.TourDetails.OrderBy( o => o.Order))
                     : new List<TourDetail>()
                 );
+            
+
             dataLayoutControl_Tour.DataSource = itemBL;
 
             LookUpEdit_TourTypeID.Properties.DataSource = tourTypesBL;
@@ -90,7 +93,7 @@ namespace TourDuLich_GUI
         {
             return ((BindingList<Tour>)dataLayoutControl_Tour.DataSource).ElementAt(0);
         }
-
+        
         private Destination getSelectedDestination()
         {
             return (Destination)listBoxControl_Destination.SelectedItem;
@@ -174,9 +177,21 @@ namespace TourDuLich_GUI
         //Begin TourDetail event
         private void handleMoveUpTourDetail() 
         {
+
             TourDetail tourDetail = (TourDetail)listBoxControl_TourDetail.SelectedItem;
+            int selectedKeyOfListBox = tourDetail.Order;
             TourBUS.MoveUpTourDetailOfTour(tourDetail);
-            InitializeDataSources();
+            //Next key of row table = selectedKeyOfListBox - 1, Order Begin from 1 and Row Table begin from 0   => next key of row table = -1 +(-1) = -2 
+            UpdateListBoxControl_TourDetail(tourDetail,selectedKeyOfListBox - 2); 
+
+
+        }
+
+        private void UpdateListBoxControl_TourDetail(TourDetail tourDetail, int nextSelectedKey)
+        {
+            BindingList<TourDetail> tourDetailsBL1 = new BindingList<TourDetail>( tourDetail.Tour.TourDetails.OrderBy(o => o.Order).ToList() );
+            listBoxControl_TourDetail.DataSource = tourDetailsBL1;
+            listBoxControl_TourDetail.SetSelected(nextSelectedKey, true);
         }
 
         private void handleMoveDownTourDetail()
