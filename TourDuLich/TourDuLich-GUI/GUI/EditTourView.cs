@@ -175,30 +175,49 @@ namespace TourDuLich_GUI
         //End Destination of TourDetail
 
         //Begin TourDetail event
-        private void handleMoveUpTourDetail() 
-        {
 
-            TourDetail tourDetail = (TourDetail)listBoxControl_TourDetail.SelectedItem;
-            int selectedKeyOfListBox = tourDetail.Order;
-            TourBUS.MoveUpTourDetailOfTour(tourDetail);
-            //Next key of row table = selectedKeyOfListBox - 1, Order Begin from 1 and Row Table begin from 0   => next key of row table = -1 +(-1) = -2 
-            UpdateListBoxControl_TourDetail(tourDetail,selectedKeyOfListBox - 2); 
-
-
-        }
 
         private void UpdateListBoxControl_TourDetail(TourDetail tourDetail, int nextSelectedKey)
         {
-            BindingList<TourDetail> tourDetailsBL1 = new BindingList<TourDetail>( tourDetail.Tour.TourDetails.OrderBy(o => o.Order).ToList() );
+            BindingList<TourDetail> tourDetailsBL1 = new BindingList<TourDetail>(tourDetail.Tour.TourDetails.OrderBy(o => o.Order).ToList());
             listBoxControl_TourDetail.DataSource = tourDetailsBL1;
             listBoxControl_TourDetail.SetSelected(nextSelectedKey, true);
+        }
+
+
+        private void handleMoveUpTourDetail()
+        {
+
+            TourDetail tourDetail = (TourDetail)listBoxControl_TourDetail.SelectedItem;
+            if (tourDetail != null)
+            { 
+                
+                int selectedKeyOfListBox = tourDetail.Order;
+                TourBUS.MoveUpTourDetailOfTour(tourDetail);
+                //Next key of row table = selectedKeyOfListBox - 1, Order Begin from 1 and Row Table begin from 0   => next key of row table = -1 +(-1) = -2 
+                if(selectedKeyOfListBox > 1)
+                {
+                    UpdateListBoxControl_TourDetail(tourDetail, selectedKeyOfListBox - 2);
+                }
+
+            }
+
         }
 
         private void handleMoveDownTourDetail()
         {
             TourDetail tourDetail = (TourDetail)listBoxControl_TourDetail.SelectedItem;
-            TourBUS.MoveDownTourDetailOfTour(tourDetail);
-            InitializeDataSources();
+            if (tourDetail != null)
+            {
+                // Next key = current key + 1; But key Order Begin from 1 and Row Table begin from 0 => original number 
+                int selectedKeyOfListBox = tourDetail.Order;
+                TourBUS.MoveDownTourDetailOfTour(tourDetail);
+
+                if (selectedKeyOfListBox < tourDetail.Tour.TourDetails.Count) 
+                {
+                    UpdateListBoxControl_TourDetail(tourDetail, selectedKeyOfListBox);
+                }
+            }
         }
            
         //End TourDetail event
