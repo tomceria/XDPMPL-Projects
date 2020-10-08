@@ -91,10 +91,10 @@ namespace TourDuLich_GUI
 
         private Tour getItemState()
         {
-            return _item;
+            /*            return _item;
+            */
+            return ((BindingList<Tour>)dataLayoutControl_Tour.DataSource).ElementAt(0);
 
-/*            return ((BindingList<Tour>)dataLayoutControl_Tour.DataSource).ElementAt(0);
-*/
         }
 
         private Destination getSelectedDestination()
@@ -180,24 +180,30 @@ namespace TourDuLich_GUI
         //End Destination of TourDetail
 
         //Begin TourDetail event
-        private void handleMoveUpTourDetail() 
+        private void handleMoveTourDetail(int direction)
         {
             TourDetail tourDetail = (TourDetail)listBoxControl_TourDetail.SelectedItem;
-            TourBUS.MoveUpTourDetailOfTour(tourDetail, ref _item);
+            ICollection<TourDetail> tourDetails = getItemState().TourDetails;
+            int selectedI = listBoxControl_TourDetail.SelectedIndex;
+            if (tourDetail == null)
+            {
+                return;
+            }
+
+            if (direction < 0)  // Move up
+            {
+                if (selectedI == 0) { return; }
+                TourBUS.MoveUpTourDetailOfTour(tourDetail);
+            } else  // Move down
+            {
+                if (selectedI == tourDetails.Count - 1) { return; }
+                TourBUS.MoveDownTourDetailOfTour(tourDetail);
+            }
+
+            listBoxControl_TourDetail.DataSource = getItemState().TourDetails.OrderBy(o => o.Order).ToList();
+            listBoxControl_TourDetail.SelectedIndex = direction < 0 ? selectedI - 1 : selectedI + 1;
             listBoxControl_TourDetail.Refresh();
 
-/*            InitializeDataSources();
-*/
-        }
-
-        private void handleMoveDownTourDetail()
-        {
-            TourDetail tourDetail = (TourDetail)listBoxControl_TourDetail.SelectedItem;
-            TourBUS.MoveDownTourDetailOfTour(tourDetail, ref _item);
-            listBoxControl_TourDetail.Refresh();
-
-/*            InitializeDataSources();
-*/
         }
            
         //End TourDetail event
@@ -262,7 +268,7 @@ namespace TourDuLich_GUI
 
         private void tabbedDetails_SelectedPageChanged(object sender, LayoutTabPageChangedEventArgs e)
         {
-            InitializeDataSources();        // This works for some reasons?????
+            InitializeDataSources();        // TODO: This works for some reasons?????
         }
 
         private void mainRibbonControl_Click(object sender, EventArgs e)
@@ -277,12 +283,12 @@ namespace TourDuLich_GUI
 
         private void btn_MoveUpTourDetail_Click(object sender, EventArgs e)
         {
-            handleMoveUpTourDetail();
+            handleMoveTourDetail(-1);
         }
 
         private void btn_MoveDownTourDetail_Click(object sender, EventArgs e)
         {
-            handleMoveDownTourDetail();
+            handleMoveTourDetail(1);
         }
     }
 }
