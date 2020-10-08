@@ -184,7 +184,7 @@ namespace TourDuLich_GUI.BUS
             }
         }
 
-        public void MoveUpTourDetailOfTour(TourDetail tourDetail)
+        public void MoveUpTourDetailOfTour(TourDetail tourDetail, ref Tour tour)
         {
             //Skip first element
             if( tourDetail.Order > 1)
@@ -196,13 +196,13 @@ namespace TourDuLich_GUI.BUS
                 //Get tourDetail above current tourDetail
                 TourDetail previousTourDetail = tourDetail.Tour.TourDetails.First(o => o.Order == previousOrderTourDetail);
                 Console.WriteLine("pre value order= " + previousTourDetail.Order + "current value order= " + tourDetail.Order);
-                SwapTourDetail(tourDetail, previousTourDetail);
+                SwapTourDetail(tourDetail, previousTourDetail, ref tour);
 
             }
            
         }
 
-        public void MoveDownTourDetailOfTour(TourDetail tourDetail)// Current TourDetail
+        public void MoveDownTourDetailOfTour(TourDetail tourDetail, ref Tour tour)// Current TourDetail
         {
             int lengthTourDetails = tourDetail.Tour.TourDetails.Count;
             //Skip last element
@@ -214,17 +214,23 @@ namespace TourDuLich_GUI.BUS
                 //Get tourDetail below current tourDetail
                 TourDetail nextTourDetail = tourDetail.Tour.TourDetails.First(o => o.Order == nextOrderOfTourDetail);
                 Console.WriteLine("next value order= " + nextTourDetail.Order + "current value order= " + tourDetail.Order);
-                SwapTourDetail(tourDetail, nextTourDetail);
+                SwapTourDetail(tourDetail, nextTourDetail, ref tour);
 
             }
         }
 
-        private void SwapTourDetail(TourDetail tourDetail_1, TourDetail tourDetail_2)
+        private void SwapTourDetail(TourDetail tourDetail_1, TourDetail tourDetail_2, ref Tour tour)
         {
             int temp_OrderOfTourDetail_1 = tourDetail_1.Order;
 
             tourDetail_1.Order = tourDetail_2.Order;
             tourDetail_2.Order = temp_OrderOfTourDetail_1;
+
+            tour.TourDetails.First(o => o.ID == tourDetail_1.ID).Order = tourDetail_1.Order;
+            tour.TourDetails.First(o => o.ID == tourDetail_2.ID).Order = tourDetail_2.Order;
+            tour.TourDetails = tour.TourDetails.OrderBy(o => o.Order).ToList();
+
+            _ctx.Entry(tour).State = EntityState.Modified;
         }
 
     }

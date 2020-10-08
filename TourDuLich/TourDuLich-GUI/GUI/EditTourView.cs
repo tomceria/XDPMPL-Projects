@@ -52,6 +52,9 @@ namespace TourDuLich_GUI
             if (item == null)
             {
                 item = _item;       // this "_item" would be INITIALIZED before running this method, meaning it has no reference to ANY BindingList, unlike EditTourView(Tour tour)
+            } else
+            {
+                _item = item;
             }
 
             // Data binding
@@ -61,12 +64,12 @@ namespace TourDuLich_GUI
 
             BindingList<TourPrice> tourPricesBL = new BindingList<TourPrice>(
                 (item.TourPrices != null)
-                    ? new List<TourPrice>(item.TourPrices)
+                    ? item.TourPrices.ToList()
                     : new List<TourPrice>()
                 );
             BindingList<TourDetail> tourDetailsBL = new BindingList<TourDetail>(
                 (item.TourDetails != null)
-                    ? new List<TourDetail>(item.TourDetails)
+                    ? item.TourDetails.ToList()
                     : new List<TourDetail>()
                 );
             dataLayoutControl_Tour.DataSource = itemBL;
@@ -88,7 +91,10 @@ namespace TourDuLich_GUI
 
         private Tour getItemState()
         {
-            return ((BindingList<Tour>)dataLayoutControl_Tour.DataSource).ElementAt(0);
+            return _item;
+
+/*            return ((BindingList<Tour>)dataLayoutControl_Tour.DataSource).ElementAt(0);
+*/
         }
 
         private Destination getSelectedDestination()
@@ -158,15 +164,17 @@ namespace TourDuLich_GUI
         {
             Destination destination = getSelectedDestination();
             TourBUS.AddTourDetailToTour(getItemState(), destination);
+            listBoxControl_TourDetail.Refresh();
         }
 
         private void handleDeleteDestinationFromTour()
         {
             TourDetail tourDetail = (TourDetail)listBoxControl_TourDetail.SelectedItem;
-            TourBUS.DeleteTourDetailFromTour(tourDetail);
-            InitializeDataSources();
-
-
+            if (tourDetail != null)
+            {
+                TourBUS.DeleteTourDetailFromTour(tourDetail);
+                listBoxControl_TourDetail.Refresh();
+            }
         }
 
         //End Destination of TourDetail
@@ -175,15 +183,21 @@ namespace TourDuLich_GUI
         private void handleMoveUpTourDetail() 
         {
             TourDetail tourDetail = (TourDetail)listBoxControl_TourDetail.SelectedItem;
-            TourBUS.MoveUpTourDetailOfTour(tourDetail);
-            InitializeDataSources();
+            TourBUS.MoveUpTourDetailOfTour(tourDetail, ref _item);
+            listBoxControl_TourDetail.Refresh();
+
+/*            InitializeDataSources();
+*/
         }
 
         private void handleMoveDownTourDetail()
         {
             TourDetail tourDetail = (TourDetail)listBoxControl_TourDetail.SelectedItem;
-            TourBUS.MoveDownTourDetailOfTour(tourDetail);
-            InitializeDataSources();
+            TourBUS.MoveDownTourDetailOfTour(tourDetail, ref _item);
+            listBoxControl_TourDetail.Refresh();
+
+/*            InitializeDataSources();
+*/
         }
            
         //End TourDetail event
