@@ -106,13 +106,19 @@ namespace TourDuLich_GUI
 
         private void handleSaveTour()
         {
-            if (isUpdate)
+            try
             {
-                TourBUS.UpdateOne(getItemState());
-            } else
+                if (isUpdate)
+                {
+                    TourBUS.UpdateOne(getItemState());
+                } else
+                {
+                    TourBUS.CreateOne(getItemState());
+                    isUpdate = true;
+                }
+            } catch (Exception e)
             {
-                TourBUS.CreateOne(getItemState());
-                isUpdate = true;
+                MessageBox.Show(e.Message, "Lỗi dữ liệu nhập", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
