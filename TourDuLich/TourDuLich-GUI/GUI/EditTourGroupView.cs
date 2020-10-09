@@ -127,17 +127,130 @@ namespace TourDuLich_GUI.GUI
 
         }
 
+        // States
         private TourGroup getItemState()
         {
             return ((BindingList<TourGroup>)dataLayoutControl_TourGroup.DataSource).ElementAt(0);
+        }
+
+        private Customer getSelectedCustomer()
+        {
+            return (Customer)gridView_Customers.GetFocusedRow();
+        }
+
+        private Staff getSelectedStaff()
+        {
+            return (Staff)gridView_Staffs.GetFocusedRow();
+        }
+
+        // Event Handlers
+
+        private void handleSaveTourGroup()
+        {
+            if (isUpdate)
+            {
+                TourGroupBUS.UpdateOne(getItemState());
+            } else
+            {
+                TourGroupBUS.CreateOne(getItemState());
+                isUpdate = true;
+            }
+        }
+
+        private void handleCloseEdit()
+        {
+            Dispose();
+        }
+
+        private void handleAddTourGroupDetailToTourGroup()
+        {
+            Customer customer = getSelectedCustomer();
+            // TourGroupBUS.AddTourGroupDetailToTourGroup(getItemState(), customer);
+        }
+
+        private void handleDeleteTourGroupDetailFromTourGroup()
+        {
+            TourGroupDetail tourGroupDetail = (TourGroupDetail)ListBoxControl_TourGroupDetails.SelectedItem;
+            // TourGroupBUS.DeleteTourGroupDetailFromTourGroup(tourGroupDetail);
+        }
+
+        private void handleAddTourGroupStaffToTourGroup()
+        {
+            Staff staff = getSelectedStaff();
+            // TourGroupBUS.AddTourGroupStaffToTourGroup(getItemState(), staff);
+        }
+
+        private void handleDeleteTourGroupStaffFromTourGroup()
+        {
+            TourGroupStaff tourGroupDetail = (TourGroupStaff)ListBoxControl_TourGroupStaffs.SelectedItem;
+            // TourGroupBUS.DeleteTourGroupStaffFromTourGroup(tourGroupDetail);
+        }
+
+        private void handleAddTourGroupCostToTourGroup()
+        {
+            // TourGroupBUS.CreateTourGroupCostForTour(getItemState());
+            gridView_TourGroupCosts.GridControl.RefreshDataSource();
+        }
+
+        private void handleDeleteTourGroupCostFromTourGroup()
+        {
+            if (gridView_TourGroupCosts.FocusedRowHandle < 0)
+            {
+                return;
+            }
+            ICollection<TourGroupCost> tourGroupCosts = getItemState().TourGroupCosts;
+            TourGroupCost tourGroupCost = tourGroupCosts.ElementAt(gridView_TourGroupCosts.FocusedRowHandle);
+
+            // TourGroupBUS.DeleteTourGroupCostFromTour(tourGroupCost);
+            gridView_TourGroupCosts.GridControl.RefreshDataSource();
         }
 
         // Events
 
         private void bbiSave_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            Console.WriteLine(getItemState().TourGroupCosts.ElementAt(0).Note);
-            Console.WriteLine(getItemState().TourGroupCosts.ElementAt(0).CostType.Name);
+            handleSaveTourGroup();
+        }
+
+        private void bbiSaveAndClose_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            handleSaveTourGroup();
+            handleCloseEdit();
+        }
+
+        private void button_AddTourDetail_Click(object sender, EventArgs e)
+        {
+            handleAddTourGroupDetailToTourGroup();
+        }
+
+        private void button_DeleteTourGroupDetail_Click(object sender, EventArgs e)
+        {
+            handleDeleteTourGroupDetailFromTourGroup();
+        }
+
+        private void Button_AddTourGroupStaff_Click(object sender, EventArgs e)
+        {
+            handleAddTourGroupStaffToTourGroup();
+        }
+
+        private void Button_DeleteTourStaff_Click(object sender, EventArgs e)
+        {
+            handleDeleteTourGroupStaffFromTourGroup();
+        }
+
+        private void Button_AddTourGroupCost_Click(object sender, EventArgs e)
+        {
+            handleAddTourGroupCostToTourGroup();
+        }
+
+        private void Button_DeleteTourGroupCost_Click(object sender, EventArgs e)
+        {
+            handleDeleteTourGroupCostFromTourGroup();
+        }
+
+        private void tabbedControlGroup1_SelectedPageChanged(object sender, LayoutTabPageChangedEventArgs e)
+        {
+            InitializeDataSources();            // TODO: Optimization
         }
     }
 }

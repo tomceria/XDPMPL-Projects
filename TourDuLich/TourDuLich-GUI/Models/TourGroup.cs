@@ -27,7 +27,7 @@ namespace TourDuLich_GUI.Models
         [Required, Display(Name = "Thời gian kết thúc")]
         public DateTime DateEnd { get; set; }
 
-        [Required, Display(Name = "Giá của đoàn")]
+        [Required, Display(Name = "Chi phí của Đoàn")]
         public long PriceGroup { get; set; }
 
         public virtual Tour Tour { get; set; }
