@@ -28,7 +28,7 @@ namespace TourDuLich_GUI
             Tours,
             TourGroups
         }
-        
+
         public MainView()
         {
             InitializeComponent();

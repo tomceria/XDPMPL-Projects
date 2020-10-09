@@ -49,7 +49,13 @@
             this.xtraTabPage_Tours = new DevExpress.XtraTab.XtraTabPage();
             this.xtraTabPage_TourGroups = new DevExpress.XtraTab.XtraTabPage();
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
+            this.tourGroupBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.gridView_TourGroups = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.colTour = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colName1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colDateStart = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colDateEnd = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colPriceGroup = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView_Tours)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl)).BeginInit();
@@ -59,6 +65,7 @@
             this.xtraTabPage_Tours.SuspendLayout();
             this.xtraTabPage_TourGroups.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tourGroupBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView_TourGroups)).BeginInit();
             this.SuspendLayout();
             // 
@@ -231,6 +238,7 @@
             // 
             // gridControl1
             // 
+            this.gridControl1.DataSource = this.tourGroupBindingSource;
             this.gridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridControl1.Location = new System.Drawing.Point(0, 0);
             this.gridControl1.MainView = this.gridView_TourGroups;
@@ -241,10 +249,56 @@
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView_TourGroups});
             // 
+            // tourGroupBindingSource
+            // 
+            this.tourGroupBindingSource.DataSource = typeof(TourDuLich_GUI.Models.TourGroup);
+            // 
             // gridView_TourGroups
             // 
+            this.gridView_TourGroups.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.gridView_TourGroups.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.colTour,
+            this.colName1,
+            this.colDateStart,
+            this.colDateEnd,
+            this.colPriceGroup});
             this.gridView_TourGroups.GridControl = this.gridControl1;
             this.gridView_TourGroups.Name = "gridView_TourGroups";
+            // 
+            // colTour
+            // 
+            this.colTour.FieldName = "Tour";
+            this.colTour.Name = "colTour";
+            this.colTour.Visible = true;
+            this.colTour.VisibleIndex = 4;
+            // 
+            // colName1
+            // 
+            this.colName1.FieldName = "Name";
+            this.colName1.Name = "colName1";
+            this.colName1.Visible = true;
+            this.colName1.VisibleIndex = 0;
+            // 
+            // colDateStart
+            // 
+            this.colDateStart.FieldName = "DateStart";
+            this.colDateStart.Name = "colDateStart";
+            this.colDateStart.Visible = true;
+            this.colDateStart.VisibleIndex = 1;
+            // 
+            // colDateEnd
+            // 
+            this.colDateEnd.FieldName = "DateEnd";
+            this.colDateEnd.Name = "colDateEnd";
+            this.colDateEnd.Visible = true;
+            this.colDateEnd.VisibleIndex = 2;
+            // 
+            // colPriceGroup
+            // 
+            this.colPriceGroup.FieldName = "PriceGroup";
+            this.colPriceGroup.Name = "colPriceGroup";
+            this.colPriceGroup.Visible = true;
+            this.colPriceGroup.VisibleIndex = 3;
             // 
             // MainView
             // 
@@ -267,6 +321,7 @@
             this.xtraTabPage_Tours.ResumeLayout(false);
             this.xtraTabPage_TourGroups.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tourGroupBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView_TourGroups)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -294,5 +349,11 @@
         private DevExpress.XtraTab.XtraTabPage xtraTabPage_TourGroups;
         private DevExpress.XtraGrid.GridControl gridControl1;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView_TourGroups;
+        private System.Windows.Forms.BindingSource tourGroupBindingSource;
+        private DevExpress.XtraGrid.Columns.GridColumn colName1;
+        private DevExpress.XtraGrid.Columns.GridColumn colDateStart;
+        private DevExpress.XtraGrid.Columns.GridColumn colDateEnd;
+        private DevExpress.XtraGrid.Columns.GridColumn colPriceGroup;
+        private DevExpress.XtraGrid.Columns.GridColumn colTour;
     }
 }
