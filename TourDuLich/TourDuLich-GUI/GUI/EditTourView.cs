@@ -17,9 +17,10 @@ using DevExpress.XtraLayout.Helpers;
 using TourDuLich_GUI.BUS;
 using TourDuLich_GUI.Models;
 
-namespace TourDuLich_GUI {
-    public partial class EditTourView : DevExpress.XtraBars.Ribbon.RibbonForm {
-
+namespace TourDuLich_GUI.GUI
+{
+    public partial class EditTourView : DevExpress.XtraBars.Ribbon.RibbonForm
+    {
         TourBUS TourBUS = new TourBUS();
         TourTypeBUS TourTypeBUS = new TourTypeBUS();
         DestinationBUS DestinationBUS = new DestinationBUS();

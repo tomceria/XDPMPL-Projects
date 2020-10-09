@@ -16,7 +16,7 @@ using TourDuLich_GUI.BUS;
 using System.Collections.ObjectModel;
 using TourDuLich_GUI.DAL;
 
-namespace TourDuLich_GUI
+namespace TourDuLich_GUI.GUI
 {
     public partial class MainView : DevExpress.XtraBars.Ribbon.RibbonForm
     {
@@ -134,11 +134,29 @@ namespace TourDuLich_GUI
             TourBUS.DeleteOne(selectedTour);
         }
 
+        private void handleNewTourGroup()
+        {
+            EditTourGroupView editTourGroupView = new EditTourGroupView();
+            editTourGroupView.ShowDialog(this);
+        }
+
         // Events
 
         private void bbiNew_ItemClick(object sender, ItemClickEventArgs e)
         {
-            handleNewTour();
+            switch (getCurrentPage())
+            {
+                case Page.Tours:
+                    {
+                        handleNewTour();
+                        break;
+                    }
+                case Page.TourGroups:
+                    {
+                        handleNewTourGroup();
+                        break;
+                    }
+            }
 
             // Post-Disposal of Dialog
             InitializeDataSources();

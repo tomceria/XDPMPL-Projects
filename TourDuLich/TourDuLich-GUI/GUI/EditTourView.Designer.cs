@@ -1,4 +1,4 @@
-﻿namespace TourDuLich_GUI
+﻿namespace TourDuLich_GUI.GUI
 {
     partial class EditTourView
     {

@@ -83,6 +83,12 @@
     <Compile Include="BUS\TourDetailBUS.cs" />
     <Compile Include="BUS\TourTypeBUS.cs" />
     <Compile Include="DAL\TourInitializer.cs" />
+    <Compile Include="GUI\EditTourGroupView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\EditTourGroupView.Designer.cs">
+      <DependentUpon>EditTourGroupView.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainViewModel.cs" />
     <Compile Include="Migrations\202009281631422_EmptyMigration.cs" />
     <Compile Include="Migrations\202009281631422_EmptyMigration.designer.cs">
@@ -124,6 +130,9 @@
     <Compile Include="GUI\EditTourView.Designer.cs">
       <DependentUpon>EditTourView.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="GUI\EditTourGroupView.resx">
+      <DependentUpon>EditTourGroupView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GUI\EditTourView.resx">
       <DependentUpon>EditTourView.cs</DependentUpon>
     </EmbeddedResource>
