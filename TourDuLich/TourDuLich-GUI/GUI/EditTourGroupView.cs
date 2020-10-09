@@ -24,6 +24,10 @@ namespace TourDuLich_GUI.GUI
     {
         TourGroupBUS TourGroupBUS = new TourGroupBUS();
         TourBUS TourBUS = new TourBUS();
+        CustomerBUS CustomerBUS = new CustomerBUS();
+        StaffBUS StaffBUS = new StaffBUS();
+        CostTypeBUS CostTypeBUS = new CostTypeBUS();
+
         private TourGroup _item;
         private bool isUpdate = false;
 
@@ -47,14 +51,36 @@ namespace TourDuLich_GUI.GUI
             // Data fetch
             TourGroup item = TourGroupBUS.GetOne(_item.ID);
             List<Tour> tours = await TourBUS.GetAll();
+            List<Customer> customers = CustomerBUS.GetAll();
+            List<Staff> staffs = StaffBUS.GetAll();
+            List<CostType> costTypes = CostTypeBUS.GetAll();
+
+            if (item == null)
+            {
+                item = _item;       // this "_item" would be INITIALIZED before running this method, meaning it has no reference to ANY BindingList, unlike EditTourView(Tour tour)
+            } else
+            {
+                _item = item;
+            }
 
             // Data binding
             BindingList<TourGroup> itemBL = new BindingList<TourGroup>( new List<TourGroup>() { item } );
             BindingList<Tour> toursBL = new BindingList<Tour>(tours);
+            BindingList<Customer> customersBL = new BindingList<Customer>(customers);
+            BindingList<Staff> staffsBL = new BindingList<Staff>(staffs);
+            BindingList<CostType> costTypesBL = new BindingList<CostType>(costTypes);
+
+            BindingList<TourGroupCost> tourGroupCostsBL = new BindingList<TourGroupCost>(
+                (item.TourGroupCosts != null)
+                    ? item.TourGroupCosts.ToList()
+                    : new List<TourGroupCost>(){ new TourGroupCost() { CostType = costTypes.ElementAt(0) } }
+                );
+
             dataLayoutControl_TourGroup.DataSource = itemBL;
 
             TextEdit_PriceGroup.Enabled = false;
 
+            // Tours
             LookUpEdit_TourID.Properties.DataSource = toursBL;
             LookUpEdit_TourID.Properties.DisplayMember = "Name";
             LookUpEdit_TourID.Properties.ValueMember = "ID";
@@ -64,6 +90,29 @@ namespace TourDuLich_GUI.GUI
                 column.Visible = false;
             }
             LookUpEdit_TourID.Properties.Columns["Name"].Visible = true;
+
+            // Customers
+            gridView_Customers.GridControl.DataSource = customersBL;
+            gridView_Customers.OptionsBehavior.ReadOnly = true;
+            gridView_Customers.Columns["TourGroupDetails"].Visible = false;
+
+            // Staffs
+            gridView_Staffs.GridControl.DataSource = staffsBL;
+            gridView_Customers.OptionsBehavior.ReadOnly = true;
+            gridView_Staffs.Columns["TourGroupStaffs"].Visible = false;
+
+            // TourGroupCosts
+            gridView_TourGroupCosts.GridControl.DataSource = tourGroupCostsBL;
+
+            // CostTypes
+            RepositoryItemLookUpEdit lookUpEdit_TourGroupCost_CostType = new RepositoryItemLookUpEdit();
+            lookUpEdit_TourGroupCost_CostType.DataSource = costTypesBL;
+            lookUpEdit_TourGroupCost_CostType.ValueMember = "ID";
+            lookUpEdit_TourGroupCost_CostType.DisplayMember = "Name";
+            lookUpEdit_TourGroupCost_CostType.PopulateColumns();
+            lookUpEdit_TourGroupCost_CostType.Columns["TourGroupCosts"].Visible = false;
+
+            gridView_TourGroupCosts.Columns["CostType"].ColumnEdit = lookUpEdit_TourGroupCost_CostType;
 
         }
     }

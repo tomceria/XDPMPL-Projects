@@ -5,11 +5,11 @@ using TourDuLich_GUI.Models;
 
 namespace TourDuLich_GUI.BUS
 {
-    class CostTypeBUSS
+    class CostTypeBUS
     {
         private TourContext _ctx;
 
-        public CostTypeBUSS()
+        public CostTypeBUS()
         {
             _ctx = new TourContext();
         }
