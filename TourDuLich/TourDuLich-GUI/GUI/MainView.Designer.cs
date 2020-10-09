@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainView));
             this.gridControl = new DevExpress.XtraGrid.GridControl();
-            this.gridView = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridView_Tours = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colDescription = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colPriceRef = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -48,13 +48,18 @@
             this.xtraTabControl_Tours = new DevExpress.XtraTab.XtraTabControl();
             this.xtraTabPage_Tours = new DevExpress.XtraTab.XtraTabPage();
             this.xtraTabPage_TourGroups = new DevExpress.XtraTab.XtraTabPage();
+            this.gridControl1 = new DevExpress.XtraGrid.GridControl();
+            this.gridView_TourGroups = new DevExpress.XtraGrid.Views.Grid.GridView();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView_Tours)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tourBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl_Tours)).BeginInit();
             this.xtraTabControl_Tours.SuspendLayout();
             this.xtraTabPage_Tours.SuspendLayout();
+            this.xtraTabPage_TourGroups.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView_TourGroups)).BeginInit();
             this.SuspendLayout();
             // 
             // gridControl
@@ -62,28 +67,28 @@
             this.gridControl.DataSource = typeof(TourDuLich_GUI.Models.Tour);
             this.gridControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridControl.Location = new System.Drawing.Point(0, 0);
-            this.gridControl.MainView = this.gridView;
+            this.gridControl.MainView = this.gridView_Tours;
             this.gridControl.MenuManager = this.ribbonControl;
             this.gridControl.Name = "gridControl";
             this.gridControl.Size = new System.Drawing.Size(788, 392);
             this.gridControl.TabIndex = 2;
             this.gridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridView});
+            this.gridView_Tours});
             // 
-            // gridView
+            // gridView_Tours
             // 
-            this.gridView.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.gridView.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridView_Tours.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.gridView_Tours.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colName,
             this.colDescription,
             this.colPriceRef});
-            this.gridView.GridControl = this.gridControl;
-            this.gridView.Name = "gridView";
-            this.gridView.OptionsBehavior.Editable = false;
-            this.gridView.OptionsBehavior.ReadOnly = true;
-            this.gridView.OptionsCustomization.AllowQuickHideColumns = false;
-            this.gridView.OptionsView.ShowFooter = true;
-            this.gridView.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.gridView_FocusedRowChanged);
+            this.gridView_Tours.GridControl = this.gridControl;
+            this.gridView_Tours.Name = "gridView_Tours";
+            this.gridView_Tours.OptionsBehavior.Editable = false;
+            this.gridView_Tours.OptionsBehavior.ReadOnly = true;
+            this.gridView_Tours.OptionsCustomization.AllowQuickHideColumns = false;
+            this.gridView_Tours.OptionsView.ShowFooter = true;
+            this.gridView_Tours.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.gridView_FocusedRowChanged);
             // 
             // colName
             // 
@@ -208,6 +213,7 @@
             this.xtraTabControl_Tours.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.xtraTabPage_Tours,
             this.xtraTabPage_TourGroups});
+            this.xtraTabControl_Tours.SelectedPageChanged += new DevExpress.XtraTab.TabPageChangedEventHandler(this.xtraTabControl_Tours_SelectedPageChanged);
             // 
             // xtraTabPage_Tours
             // 
@@ -218,9 +224,27 @@
             // 
             // xtraTabPage_TourGroups
             // 
+            this.xtraTabPage_TourGroups.Controls.Add(this.gridControl1);
             this.xtraTabPage_TourGroups.Name = "xtraTabPage_TourGroups";
             this.xtraTabPage_TourGroups.Size = new System.Drawing.Size(788, 392);
             this.xtraTabPage_TourGroups.Text = "Đoàn Tour";
+            // 
+            // gridControl1
+            // 
+            this.gridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridControl1.Location = new System.Drawing.Point(0, 0);
+            this.gridControl1.MainView = this.gridView_TourGroups;
+            this.gridControl1.MenuManager = this.ribbonControl;
+            this.gridControl1.Name = "gridControl1";
+            this.gridControl1.Size = new System.Drawing.Size(788, 392);
+            this.gridControl1.TabIndex = 0;
+            this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridView_TourGroups});
+            // 
+            // gridView_TourGroups
+            // 
+            this.gridView_TourGroups.GridControl = this.gridControl1;
+            this.gridView_TourGroups.Name = "gridView_TourGroups";
             // 
             // MainView
             // 
@@ -235,12 +259,15 @@
             this.Ribbon = this.ribbonControl;
             this.StatusBar = this.ribbonStatusBar;
             ((System.ComponentModel.ISupportInitialize)(this.gridControl)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView_Tours)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tourBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl_Tours)).EndInit();
             this.xtraTabControl_Tours.ResumeLayout(false);
             this.xtraTabPage_Tours.ResumeLayout(false);
+            this.xtraTabPage_TourGroups.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView_TourGroups)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -248,7 +275,7 @@
 
         #endregion
         private DevExpress.XtraGrid.GridControl gridControl;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridView;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView_Tours;
         private DevExpress.XtraBars.Ribbon.RibbonControl ribbonControl;
         private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPage1;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup1;
@@ -265,5 +292,7 @@
         private DevExpress.XtraTab.XtraTabControl xtraTabControl_Tours;
         private DevExpress.XtraTab.XtraTabPage xtraTabPage_Tours;
         private DevExpress.XtraTab.XtraTabPage xtraTabPage_TourGroups;
+        private DevExpress.XtraGrid.GridControl gridControl1;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView_TourGroups;
     }
 }
