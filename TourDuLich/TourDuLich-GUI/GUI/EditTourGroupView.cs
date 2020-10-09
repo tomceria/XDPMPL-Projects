@@ -53,6 +53,8 @@ namespace TourDuLich_GUI.GUI
             BindingList<Tour> toursBL = new BindingList<Tour>(tours);
             dataLayoutControl_TourGroup.DataSource = itemBL;
 
+            TextEdit_PriceGroup.Enabled = false;
+
             LookUpEdit_TourID.Properties.DataSource = toursBL;
             LookUpEdit_TourID.Properties.DisplayMember = "Name";
             LookUpEdit_TourID.Properties.ValueMember = "ID";
