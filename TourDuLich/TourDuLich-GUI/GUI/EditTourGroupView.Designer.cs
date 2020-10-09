@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.dataLayoutControl_TourGroup = new DevExpress.XtraDataLayout.DataLayoutControl();
             this.GridControl_Staffs = new DevExpress.XtraGrid.GridControl();
             this.gridView_Staffs = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -74,6 +75,12 @@
             this.ItemForName = new DevExpress.XtraLayout.LayoutControlItem();
             this.ItemForDateEnd = new DevExpress.XtraLayout.LayoutControlItem();
             this.ItemForPriceGroup = new DevExpress.XtraLayout.LayoutControlItem();
+            this.tourGroupCostBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.colTourGroupID = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colCostTypeID = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colNote = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colTourGroup = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colCostType = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl_TourGroup)).BeginInit();
             this.dataLayoutControl_TourGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GridControl_Staffs)).BeginInit();
@@ -112,6 +119,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.ItemForName)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForDateEnd)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForPriceGroup)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tourGroupCostBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // dataLayoutControl_TourGroup
@@ -183,6 +191,7 @@
             this.bbiSave.Id = 2;
             this.bbiSave.ImageOptions.ImageUri.Uri = "Save";
             this.bbiSave.Name = "bbiSave";
+            this.bbiSave.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.bbiSave_ItemClick);
             // 
             // bbiSaveAndClose
             // 
@@ -361,6 +370,7 @@
             // GridControl_TourGroupCosts
             // 
             this.GridControl_TourGroupCosts.DataBindings.Add(new System.Windows.Forms.Binding("DataSource", typeof(TourDuLich_GUI.Models.TourGroup), "TourGroupCosts", true));
+            this.GridControl_TourGroupCosts.DataSource = this.tourGroupCostBindingSource;
             this.GridControl_TourGroupCosts.Location = new System.Drawing.Point(24, 119);
             this.GridControl_TourGroupCosts.MainView = this.gridView_TourGroupCosts;
             this.GridControl_TourGroupCosts.MenuManager = this.mainRibbonControl;
@@ -372,6 +382,12 @@
             // 
             // gridView_TourGroupCosts
             // 
+            this.gridView_TourGroupCosts.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.colTourGroupID,
+            this.colCostTypeID,
+            this.colNote,
+            this.colTourGroup,
+            this.colCostType});
             this.gridView_TourGroupCosts.GridControl = this.GridControl_TourGroupCosts;
             this.gridView_TourGroupCosts.Name = "gridView_TourGroupCosts";
             // 
@@ -593,6 +609,45 @@
             this.ItemForPriceGroup.Size = new System.Drawing.Size(778, 24);
             this.ItemForPriceGroup.TextSize = new System.Drawing.Size(85, 13);
             // 
+            // tourGroupCostBindingSource
+            // 
+            this.tourGroupCostBindingSource.DataSource = typeof(TourDuLich_GUI.Models.TourGroupCost);
+            // 
+            // colTourGroupID
+            // 
+            this.colTourGroupID.FieldName = "TourGroupID";
+            this.colTourGroupID.Name = "colTourGroupID";
+            this.colTourGroupID.Visible = true;
+            this.colTourGroupID.VisibleIndex = 0;
+            // 
+            // colCostTypeID
+            // 
+            this.colCostTypeID.FieldName = "CostTypeID";
+            this.colCostTypeID.Name = "colCostTypeID";
+            this.colCostTypeID.Visible = true;
+            this.colCostTypeID.VisibleIndex = 1;
+            // 
+            // colNote
+            // 
+            this.colNote.FieldName = "Note";
+            this.colNote.Name = "colNote";
+            this.colNote.Visible = true;
+            this.colNote.VisibleIndex = 2;
+            // 
+            // colTourGroup
+            // 
+            this.colTourGroup.FieldName = "TourGroup";
+            this.colTourGroup.Name = "colTourGroup";
+            this.colTourGroup.Visible = true;
+            this.colTourGroup.VisibleIndex = 3;
+            // 
+            // colCostType
+            // 
+            this.colCostType.FieldName = "CostType";
+            this.colCostType.Name = "colCostType";
+            this.colCostType.Visible = true;
+            this.colCostType.VisibleIndex = 4;
+            // 
             // EditTourGroupView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -641,6 +696,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.ItemForName)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForDateEnd)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForPriceGroup)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tourGroupCostBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -693,5 +749,11 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem4;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem5;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem6;
+        private System.Windows.Forms.BindingSource tourGroupCostBindingSource;
+        private DevExpress.XtraGrid.Columns.GridColumn colTourGroupID;
+        private DevExpress.XtraGrid.Columns.GridColumn colCostTypeID;
+        private DevExpress.XtraGrid.Columns.GridColumn colNote;
+        private DevExpress.XtraGrid.Columns.GridColumn colTourGroup;
+        private DevExpress.XtraGrid.Columns.GridColumn colCostType;
     }
 }

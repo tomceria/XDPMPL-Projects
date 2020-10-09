@@ -63,6 +63,12 @@ namespace TourDuLich_GUI.GUI
                 _item = item;
             }
 
+            // TODO: REMOVE PLACEHOLDER
+            item.TourGroupCosts = new List<TourGroupCost>()
+            {
+                new TourGroupCost() { CostType = costTypes.ElementAt(0) }
+            };
+
             // Data binding
             BindingList<TourGroup> itemBL = new BindingList<TourGroup>( new List<TourGroup>() { item } );
             BindingList<Tour> toursBL = new BindingList<Tour>(tours);
@@ -73,7 +79,7 @@ namespace TourDuLich_GUI.GUI
             BindingList<TourGroupCost> tourGroupCostsBL = new BindingList<TourGroupCost>(
                 (item.TourGroupCosts != null)
                     ? item.TourGroupCosts.ToList()
-                    : new List<TourGroupCost>(){ new TourGroupCost() { CostType = costTypes.ElementAt(0) } }
+                    : new List<TourGroupCost>()
                 );
 
             dataLayoutControl_TourGroup.DataSource = itemBL;
@@ -104,6 +110,10 @@ namespace TourDuLich_GUI.GUI
             // TourGroupCosts
             gridView_TourGroupCosts.GridControl.DataSource = tourGroupCostsBL;
 
+            gridView_TourGroupCosts.Columns["TourGroup"].Visible = false;
+            gridView_TourGroupCosts.Columns["TourGroupID"].Visible = false;
+            gridView_TourGroupCosts.Columns["CostType"].Visible = false;
+
             // CostTypes
             RepositoryItemLookUpEdit lookUpEdit_TourGroupCost_CostType = new RepositoryItemLookUpEdit();
             lookUpEdit_TourGroupCost_CostType.DataSource = costTypesBL;
@@ -112,8 +122,22 @@ namespace TourDuLich_GUI.GUI
             lookUpEdit_TourGroupCost_CostType.PopulateColumns();
             lookUpEdit_TourGroupCost_CostType.Columns["TourGroupCosts"].Visible = false;
 
-            gridView_TourGroupCosts.Columns["CostType"].ColumnEdit = lookUpEdit_TourGroupCost_CostType;
+            GridControl_TourGroupCosts.RepositoryItems.Add(lookUpEdit_TourGroupCost_CostType);
+            gridView_TourGroupCosts.Columns["CostTypeID"].ColumnEdit = lookUpEdit_TourGroupCost_CostType;
 
+        }
+
+        private TourGroup getItemState()
+        {
+            return ((BindingList<TourGroup>)dataLayoutControl_TourGroup.DataSource).ElementAt(0);
+        }
+
+        // Events
+
+        private void bbiSave_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            Console.WriteLine(getItemState().TourGroupCosts.ElementAt(0).Note);
+            Console.WriteLine(getItemState().TourGroupCosts.ElementAt(0).CostType.Name);
         }
     }
 }
