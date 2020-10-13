@@ -117,62 +117,46 @@ namespace TourDuLich_GUI.BUS
         /// <param name="customer">Customer to be added to tour group details</param>
         public void AddTourGroupDetailToTourGroup(TourGroup tourGroup, Customer customer)
         {
-            TourGroupDetail tourGroupDetail = new TourGroupDetail
+            // Customer is fetched from ANOTHER Context instance => Make a copy
+            Customer newCustomer = _ctx.Customers.First(o => o.ID == customer.ID);
+
+            TourGroupDetail tourGroupDetail = new TourGroupDetail() 
             {
-                TourGroupID = tourGroup.ID,
-                CustomerID = customer.ID
+                TourGroup = tourGroup,
+                Customer = newCustomer
             };
 
-            if (tourGroupDetail.TourGroupID != 0)
-            {
-                tourGroup.TourGroupDetails.Add(tourGroupDetail);
-            }
-            else
-            {
-                Console.WriteLine("Lỗi rồi");
-            }
+            tourGroup.TourGroupDetails.Add(tourGroupDetail);
         }
 
         /// <param name="tourGroupDetail">A detail to be deleted</param>
         public void DeleteTourGroupDetailFromTourGroup(TourGroupDetail tourGroupDetail)
         {
-            var detail = _ctx.TourGroupDetails.Find(tourGroupDetail.ID);
-
-            if (detail != null)
-            {
-                _ctx.TourGroupDetails.Remove(detail);
-            }
+            TourGroup tourGroup = tourGroupDetail.TourGroup;
+            tourGroup.TourGroupDetails.Remove(tourGroupDetail);
         }
 
         /// <param name="tourGroup">A tour group to add staff</param>
         /// <param name="staff">Staff to be added to tour group staffs</param>
         public void AddTourGroupStaffToTourGroup(TourGroup tourGroup, Staff staff)
         {
-            TourGroupStaff tourGroupStaff = new TourGroupStaff
+            // Staff is fetched from ANOTHER Context instance => Make a copy
+            Staff newStaff = _ctx.Staffs.First(o => o.ID == staff.ID);
+
+            TourGroupStaff tourGroupStaff = new TourGroupStaff() 
             {
-                TourGroupID = tourGroup.ID,
-                StaffID = staff.ID
+                TourGroup = tourGroup,
+                Staff = newStaff
             };
 
-            if (tourGroupStaff.TourGroupID != 0)
-            {
-                tourGroup.TourGroupStaffs.Add(tourGroupStaff);
-            }
-            else
-            {
-                Console.WriteLine("Lỗi rồi");
-            }
+            tourGroup.TourGroupStaffs.Add(tourGroupStaff);
         }
 
         /// <param name="tourGroupStaff">A tour group staff to be deleted</param>
         public void DeleteTourGroupStaffFromTourGroup(TourGroupStaff tourGroupStaff)
         {
-            var staff = _ctx.TourGroupDetails.Find(tourGroupStaff.ID);
-
-            if (staff != null)
-            {
-                _ctx.TourGroupDetails.Remove(staff);
-            }
+            TourGroup tourGroup = tourGroupStaff.TourGroup;
+            tourGroup.TourGroupStaffs.Remove(tourGroupStaff);
         }
 
         /// <param name="tourGroup">A tour group to create new cost</param>

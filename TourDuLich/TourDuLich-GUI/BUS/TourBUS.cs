@@ -156,7 +156,6 @@ namespace TourDuLich_GUI.BUS
                 lastOrderValue = tour.TourDetails.Last().Order; // Get value order of LastTourDetail
             }
 
-            Console.WriteLine("Value Order : " + lastOrderValue + "COunt tourDetail : " + lastOrderValue);
             TourDetail tourDetail = new TourDetail() 
             {
                 Tour = tour,
