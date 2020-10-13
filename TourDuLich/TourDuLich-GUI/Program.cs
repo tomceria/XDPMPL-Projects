@@ -14,8 +14,8 @@ namespace TourDuLich_GUI
         [STAThread]
         static void Main() {
 
-/*            var context = new TourContext();*/
-            /*
+/*            var context = new TourContext();
+*/            /*
              List<TourType> tourTypes = new List<TourType>() {
                  new TourType() {
                      Name = "Du lịch di động"
@@ -59,17 +59,31 @@ namespace TourDuLich_GUI
                          destinations.ForEach(s => context.Destinations.Add(s));
              */
 
-/*            List<CostType> costTypes = new List<CostType>()
+            /*            List<CostType> costTypes = new List<CostType>()
+                        {
+                            new CostType() { Name = "Chi phí Khách sạn" },
+                            new CostType() { Name = "Chi phí Vận chuyển" },
+                            new CostType() { Name = "Chi phí Ăn uống" },
+                            new CostType() { Name = "Chi phí khác" }
+                        };
+                        costTypes.ForEach(s => context.CostTypes.Add(s));
+            */
+/*            List<Customer> customers = new List<Customer>()
             {
-                new CostType() { Name = "Chi phí Khách sạn" },
-                new CostType() { Name = "Chi phí Vận chuyển" },
-                new CostType() { Name = "Chi phí Ăn uống" },
-                new CostType() { Name = "Chi phí khác" }
+                new Customer() { Name = "Lưu Minh Hoàng", CMND = "079099001462", Address = "100 Everywhere", Gender = "Nam", PhoneNumber = "0908228566" },
+                new Customer() { Name = "Lưu Minh H", CMND = "099999999", Address = "102 Everywhere", Gender = "Nam", PhoneNumber = "0909000999" }
             };
-            costTypes.ForEach(s => context.CostTypes.Add(s));
+            customers.ForEach(s => context.Customers.Add(s));
 
-            context.SaveChanges();*/
+            List<Staff> staffs = new List<Staff>()
+            {
+                new Staff() { Name = "Nguyễn Văn A" },
+                new Staff() { Name = "Nguyễn Văn B" }
+            };
+            staffs.ForEach(s => context.Staffs.Add(s));
 
+            context.SaveChanges();
+*/
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainView());
