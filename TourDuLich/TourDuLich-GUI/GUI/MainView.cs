@@ -147,6 +147,19 @@ namespace TourDuLich_GUI.GUI
             editTourGroupView.ShowDialog(this);
         }
 
+        private void handleEditTourGroup()
+        {
+            TourGroup selectedTourGroup = (TourGroup)gridView_TourGroups.GetFocusedRow();
+
+            if (selectedTourGroup == null)
+            {
+                return;
+            }
+
+            EditTourGroupView editTourGroupView = new EditTourGroupView(selectedTourGroup);
+            editTourGroupView.ShowDialog(this);
+        }
+
         // Events
 
         private void bbiNew_ItemClick(object sender, ItemClickEventArgs e)
@@ -171,7 +184,19 @@ namespace TourDuLich_GUI.GUI
 
         private void bbiEdit_ItemClick(object sender, ItemClickEventArgs e)
         {
-            handleEditTour();
+            switch (getCurrentPage())
+            {
+                case Page.Tours:
+                    {
+                        handleEditTour();
+                        break;
+                    }
+                case Page.TourGroups:
+                    {
+                        handleEditTourGroup();
+                        break;
+                    }
+            }
 
             // Post-Disposal of Dialog
             InitializeDataSources();
