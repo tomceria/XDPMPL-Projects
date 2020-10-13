@@ -32,7 +32,14 @@ namespace TourDuLich_GUI.GUI
         public MainView()
         {
             InitializeComponent();
+            ConfigureControls();
             InitializeDataSources();
+        }
+
+        private void ConfigureControls()
+        {
+            gridView_Tours.OptionsBehavior.Editable = false;
+            gridView_TourGroups.OptionsBehavior.Editable = false;
         }
 
         private Page getCurrentPage()
