@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainView));
-            this.gridControl = new DevExpress.XtraGrid.GridControl();
+            this.gridControl_Tours = new DevExpress.XtraGrid.GridControl();
             this.gridView_Tours = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colDescription = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -48,7 +48,7 @@
             this.xtraTabControl_Tours = new DevExpress.XtraTab.XtraTabControl();
             this.xtraTabPage_Tours = new DevExpress.XtraTab.XtraTabPage();
             this.xtraTabPage_TourGroups = new DevExpress.XtraTab.XtraTabPage();
-            this.gridControl1 = new DevExpress.XtraGrid.GridControl();
+            this.gridControl_TourGroups = new DevExpress.XtraGrid.GridControl();
             this.tourGroupBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.gridView_TourGroups = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colTour = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -56,7 +56,7 @@
             this.colDateStart = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colDateEnd = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colPriceGroup = new DevExpress.XtraGrid.Columns.GridColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControl_Tours)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView_Tours)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tourBindingSource)).BeginInit();
@@ -64,22 +64,22 @@
             this.xtraTabControl_Tours.SuspendLayout();
             this.xtraTabPage_Tours.SuspendLayout();
             this.xtraTabPage_TourGroups.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControl_TourGroups)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tourGroupBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView_TourGroups)).BeginInit();
             this.SuspendLayout();
             // 
-            // gridControl
+            // gridControl_Tours
             // 
-            this.gridControl.DataSource = typeof(TourDuLich_GUI.Models.Tour);
-            this.gridControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl.Location = new System.Drawing.Point(0, 0);
-            this.gridControl.MainView = this.gridView_Tours;
-            this.gridControl.MenuManager = this.ribbonControl;
-            this.gridControl.Name = "gridControl";
-            this.gridControl.Size = new System.Drawing.Size(788, 392);
-            this.gridControl.TabIndex = 2;
-            this.gridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridControl_Tours.DataSource = typeof(TourDuLich_GUI.Models.Tour);
+            this.gridControl_Tours.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridControl_Tours.Location = new System.Drawing.Point(0, 0);
+            this.gridControl_Tours.MainView = this.gridView_Tours;
+            this.gridControl_Tours.MenuManager = this.ribbonControl;
+            this.gridControl_Tours.Name = "gridControl_Tours";
+            this.gridControl_Tours.Size = new System.Drawing.Size(788, 392);
+            this.gridControl_Tours.TabIndex = 2;
+            this.gridControl_Tours.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView_Tours});
             // 
             // gridView_Tours
@@ -89,7 +89,7 @@
             this.colName,
             this.colDescription,
             this.colPriceRef});
-            this.gridView_Tours.GridControl = this.gridControl;
+            this.gridView_Tours.GridControl = this.gridControl_Tours;
             this.gridView_Tours.Name = "gridView_Tours";
             this.gridView_Tours.OptionsBehavior.Editable = false;
             this.gridView_Tours.OptionsBehavior.ReadOnly = true;
@@ -224,29 +224,29 @@
             // 
             // xtraTabPage_Tours
             // 
-            this.xtraTabPage_Tours.Controls.Add(this.gridControl);
+            this.xtraTabPage_Tours.Controls.Add(this.gridControl_Tours);
             this.xtraTabPage_Tours.Name = "xtraTabPage_Tours";
             this.xtraTabPage_Tours.Size = new System.Drawing.Size(788, 392);
             this.xtraTabPage_Tours.Text = "Tour";
             // 
             // xtraTabPage_TourGroups
             // 
-            this.xtraTabPage_TourGroups.Controls.Add(this.gridControl1);
+            this.xtraTabPage_TourGroups.Controls.Add(this.gridControl_TourGroups);
             this.xtraTabPage_TourGroups.Name = "xtraTabPage_TourGroups";
             this.xtraTabPage_TourGroups.Size = new System.Drawing.Size(788, 392);
             this.xtraTabPage_TourGroups.Text = "Đoàn Tour";
             // 
-            // gridControl1
+            // gridControl_TourGroups
             // 
-            this.gridControl1.DataSource = this.tourGroupBindingSource;
-            this.gridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl1.Location = new System.Drawing.Point(0, 0);
-            this.gridControl1.MainView = this.gridView_TourGroups;
-            this.gridControl1.MenuManager = this.ribbonControl;
-            this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(788, 392);
-            this.gridControl1.TabIndex = 0;
-            this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridControl_TourGroups.DataSource = this.tourGroupBindingSource;
+            this.gridControl_TourGroups.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridControl_TourGroups.Location = new System.Drawing.Point(0, 0);
+            this.gridControl_TourGroups.MainView = this.gridView_TourGroups;
+            this.gridControl_TourGroups.MenuManager = this.ribbonControl;
+            this.gridControl_TourGroups.Name = "gridControl_TourGroups";
+            this.gridControl_TourGroups.Size = new System.Drawing.Size(788, 392);
+            this.gridControl_TourGroups.TabIndex = 0;
+            this.gridControl_TourGroups.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView_TourGroups});
             // 
             // tourGroupBindingSource
@@ -262,7 +262,7 @@
             this.colDateStart,
             this.colDateEnd,
             this.colPriceGroup});
-            this.gridView_TourGroups.GridControl = this.gridControl1;
+            this.gridView_TourGroups.GridControl = this.gridControl_TourGroups;
             this.gridView_TourGroups.Name = "gridView_TourGroups";
             // 
             // colTour
@@ -312,7 +312,7 @@
             this.Name = "MainView";
             this.Ribbon = this.ribbonControl;
             this.StatusBar = this.ribbonStatusBar;
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControl_Tours)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView_Tours)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tourBindingSource)).EndInit();
@@ -320,7 +320,7 @@
             this.xtraTabControl_Tours.ResumeLayout(false);
             this.xtraTabPage_Tours.ResumeLayout(false);
             this.xtraTabPage_TourGroups.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControl_TourGroups)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tourGroupBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView_TourGroups)).EndInit();
             this.ResumeLayout(false);
@@ -329,7 +329,7 @@
         }
 
         #endregion
-        private DevExpress.XtraGrid.GridControl gridControl;
+        private DevExpress.XtraGrid.GridControl gridControl_Tours;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView_Tours;
         private DevExpress.XtraBars.Ribbon.RibbonControl ribbonControl;
         private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPage1;
@@ -347,7 +347,7 @@
         private DevExpress.XtraTab.XtraTabControl xtraTabControl_Tours;
         private DevExpress.XtraTab.XtraTabPage xtraTabPage_Tours;
         private DevExpress.XtraTab.XtraTabPage xtraTabPage_TourGroups;
-        private DevExpress.XtraGrid.GridControl gridControl1;
+        private DevExpress.XtraGrid.GridControl gridControl_TourGroups;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView_TourGroups;
         private System.Windows.Forms.BindingSource tourGroupBindingSource;
         private DevExpress.XtraGrid.Columns.GridColumn colName1;
