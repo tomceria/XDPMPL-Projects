@@ -26,5 +26,10 @@ namespace TourDuLich_GUI.Models
         public virtual ICollection<TourDetail> TourDetails { get; set; }
         public virtual ICollection<TourPrice> TourPrices { get; set; }
         public virtual ICollection<TourGroup> TourGroups { get; set; }
+
+        public override string ToString()
+        {
+            return $"{this.Name}";
+        }
     }
 }

@@ -93,6 +93,7 @@ namespace TourDuLich_GUI.GUI
             // UI changes
             gridView_Tours.HideLoadingPanel();
             gridControl_Tours.DataSource = list;
+            gridControl_Tours.RefreshDataSource();
             bsiListCount.Caption = $"{list.Count} items";
         }
 
@@ -105,6 +106,7 @@ namespace TourDuLich_GUI.GUI
 
             // UI changes
             gridControl_TourGroups.DataSource = list;
+            gridControl_TourGroups.RefreshDataSource();
             bsiListCount.Caption = $"{list.Count} items";
         }
 
