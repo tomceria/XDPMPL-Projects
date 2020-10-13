@@ -318,7 +318,7 @@
             // 
             // LookUpEdit_TourID
             // 
-            this.LookUpEdit_TourID.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", typeof(TourDuLich_GUI.Models.TourGroup), "TourID", true));
+            this.LookUpEdit_TourID.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", typeof(TourDuLich_GUI.Models.TourGroup), "TourID", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.LookUpEdit_TourID.Location = new System.Drawing.Point(489, 12);
             this.LookUpEdit_TourID.MenuManager = this.mainRibbonControl;
             this.LookUpEdit_TourID.Name = "LookUpEdit_TourID";
@@ -333,7 +333,7 @@
             // 
             // NameTextEdit
             // 
-            this.NameTextEdit.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", typeof(TourDuLich_GUI.Models.TourGroup), "Name", true));
+            this.NameTextEdit.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", typeof(TourDuLich_GUI.Models.TourGroup), "Name", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.NameTextEdit.Location = new System.Drawing.Point(100, 12);
             this.NameTextEdit.MenuManager = this.mainRibbonControl;
             this.NameTextEdit.Name = "NameTextEdit";
@@ -344,7 +344,7 @@
             // 
             // DateStartDateEdit
             // 
-            this.DateStartDateEdit.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", typeof(TourDuLich_GUI.Models.TourGroup), "DateStart", true));
+            this.DateStartDateEdit.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", typeof(TourDuLich_GUI.Models.TourGroup), "DateStart", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.DateStartDateEdit.EditValue = null;
             this.DateStartDateEdit.Location = new System.Drawing.Point(100, 36);
             this.DateStartDateEdit.MenuManager = this.mainRibbonControl;
@@ -360,7 +360,7 @@
             // 
             // DateEndDateEdit
             // 
-            this.DateEndDateEdit.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", typeof(TourDuLich_GUI.Models.TourGroup), "DateEnd", true));
+            this.DateEndDateEdit.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", typeof(TourDuLich_GUI.Models.TourGroup), "DateEnd", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.DateEndDateEdit.EditValue = null;
             this.DateEndDateEdit.Location = new System.Drawing.Point(489, 36);
             this.DateEndDateEdit.MenuManager = this.mainRibbonControl;
@@ -376,7 +376,7 @@
             // 
             // TextEdit_PriceGroup
             // 
-            this.TextEdit_PriceGroup.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", typeof(TourDuLich_GUI.Models.TourGroup), "PriceGroup", true));
+            this.TextEdit_PriceGroup.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", typeof(TourDuLich_GUI.Models.TourGroup), "PriceGroup", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.TextEdit_PriceGroup.Location = new System.Drawing.Point(100, 60);
             this.TextEdit_PriceGroup.MenuManager = this.mainRibbonControl;
             this.TextEdit_PriceGroup.Name = "TextEdit_PriceGroup";
@@ -392,7 +392,7 @@
             // 
             // GridControl_TourGroupCosts
             // 
-            this.GridControl_TourGroupCosts.DataBindings.Add(new System.Windows.Forms.Binding("DataSource", typeof(TourDuLich_GUI.Models.TourGroup), "TourGroupCosts", true));
+            this.GridControl_TourGroupCosts.DataBindings.Add(new System.Windows.Forms.Binding("DataSource", typeof(TourDuLich_GUI.Models.TourGroup), "TourGroupCosts", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.GridControl_TourGroupCosts.DataSource = this.tourGroupCostBindingSource;
             this.GridControl_TourGroupCosts.Location = new System.Drawing.Point(24, 119);
             this.GridControl_TourGroupCosts.MainView = this.gridView_TourGroupCosts;
@@ -455,7 +455,7 @@
             // 
             // ListBoxControl_TourGroupDetails
             // 
-            this.ListBoxControl_TourGroupDetails.DataBindings.Add(new System.Windows.Forms.Binding("DataSource", typeof(TourDuLich_GUI.Models.TourGroup), "TourGroupDetails", true));
+            this.ListBoxControl_TourGroupDetails.DataBindings.Add(new System.Windows.Forms.Binding("DataSource", typeof(TourDuLich_GUI.Models.TourGroup), "TourGroupDetails", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.ListBoxControl_TourGroupDetails.Location = new System.Drawing.Point(592, 119);
             this.ListBoxControl_TourGroupDetails.Name = "ListBoxControl_TourGroupDetails";
             this.ListBoxControl_TourGroupDetails.Size = new System.Drawing.Size(182, 298);
@@ -464,7 +464,7 @@
             // 
             // ListBoxControl_TourGroupStaffs
             // 
-            this.ListBoxControl_TourGroupStaffs.DataBindings.Add(new System.Windows.Forms.Binding("DataSource", typeof(TourDuLich_GUI.Models.TourGroup), "TourGroupStaffs", true));
+            this.ListBoxControl_TourGroupStaffs.DataBindings.Add(new System.Windows.Forms.Binding("DataSource", typeof(TourDuLich_GUI.Models.TourGroup), "TourGroupStaffs", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.ListBoxControl_TourGroupStaffs.Location = new System.Drawing.Point(590, 119);
             this.ListBoxControl_TourGroupStaffs.Name = "ListBoxControl_TourGroupStaffs";
             this.ListBoxControl_TourGroupStaffs.Size = new System.Drawing.Size(184, 298);
