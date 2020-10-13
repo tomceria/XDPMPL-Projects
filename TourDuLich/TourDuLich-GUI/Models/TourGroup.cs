@@ -8,6 +8,12 @@ namespace TourDuLich_GUI.Models
 {
     public class TourGroup
     {
+        public TourGroup()
+        {
+            DateStart = DateTime.Now;
+            DateEnd = DateTime.Now;
+        }
+
         [Key, Display(AutoGenerateField = false)]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }

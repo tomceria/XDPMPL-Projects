@@ -1,20 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using DevExpress.XtraEditors;
-using System.ComponentModel.DataAnnotations;
-using System.IO;
-using DevExpress.XtraLayout.Helpers;
 using DevExpress.XtraLayout;
 using TourDuLich_GUI.Models;
 using TourDuLich_GUI.BUS;
-using System.Data.Entity;
 using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraEditors.Controls;
 
@@ -64,10 +54,10 @@ namespace TourDuLich_GUI.GUI
             }
 
             // TODO: REMOVE PLACEHOLDER
-            item.TourGroupCosts = new List<TourGroupCost>()
-            {
+            item.TourGroupCosts = new List<TourGroupCost>();
+/*            {
                 new TourGroupCost() { CostType = costTypes.ElementAt(0) }
-            };
+            };*/
 
             // Data binding
             BindingList<TourGroup> itemBL = new BindingList<TourGroup>( new List<TourGroup>() { item } );
@@ -152,8 +142,11 @@ namespace TourDuLich_GUI.GUI
                 TourGroupBUS.UpdateOne(getItemState());
             } else
             {
-                TourGroupBUS.CreateOne(getItemState());
-                isUpdate = true;
+                var temp = TourGroupBUS.CreateOne(getItemState());
+                if (temp.ID != 0)
+                {
+                    isUpdate = true;
+                }
             }
         }
 
@@ -165,7 +158,7 @@ namespace TourDuLich_GUI.GUI
         private void handleAddTourGroupDetailToTourGroup()
         {
             Customer customer = getSelectedCustomer();
-            // TourGroupBUS.AddTourGroupDetailToTourGroup(getItemState(), customer);
+            TourGroupBUS.AddTourGroupDetailToTourGroup(getItemState(), customer);
         }
 
         private void handleDeleteTourGroupDetailFromTourGroup()

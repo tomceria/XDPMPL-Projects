@@ -14,7 +14,7 @@ namespace TourDuLich_GUI
         [STAThread]
         static void Main() {
 
-            var context = new TourContext();
+/*            var context = new TourContext();*/
             /*
              List<TourType> tourTypes = new List<TourType>() {
                  new TourType() {
@@ -67,9 +67,9 @@ namespace TourDuLich_GUI
                 new CostType() { Name = "Chi phí khác" }
             };
             costTypes.ForEach(s => context.CostTypes.Add(s));
-*/
-/*            context.SaveChanges();
-*/
+
+            context.SaveChanges();*/
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainView());
