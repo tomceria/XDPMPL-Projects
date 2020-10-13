@@ -53,12 +53,6 @@ namespace TourDuLich_GUI.GUI
                 _item = item;
             }
 
-            // TODO: REMOVE PLACEHOLDER
-            item.TourGroupCosts = new List<TourGroupCost>();
-/*            {
-                new TourGroupCost() { CostType = costTypes.ElementAt(0) }
-            };*/
-
             // Data binding
             BindingList<TourGroup> itemBL = new BindingList<TourGroup>( new List<TourGroup>() { item } );
             BindingList<Tour> toursBL = new BindingList<Tour>(tours);
@@ -94,12 +88,11 @@ namespace TourDuLich_GUI.GUI
 
             // Staffs
             gridView_Staffs.GridControl.DataSource = staffsBL;
-            gridView_Customers.OptionsBehavior.ReadOnly = true;
+            gridView_Staffs.OptionsBehavior.ReadOnly = true;
             gridView_Staffs.Columns["TourGroupStaffs"].Visible = false;
 
             // TourGroupCosts
             gridView_TourGroupCosts.GridControl.DataSource = tourGroupCostsBL;
-
             gridView_TourGroupCosts.Columns["TourGroup"].Visible = false;
             gridView_TourGroupCosts.Columns["TourGroupID"].Visible = false;
             gridView_TourGroupCosts.Columns["CostType"].Visible = false;
