@@ -122,8 +122,15 @@ namespace TourDuLich_GUI.BUS
                 TourGroupID = tourGroup.ID,
                 CustomerID = customer.ID
             };
-            tourGroup.TourGroupDetails.Add(tourGroupDetail);
-            _ctx.SaveChanges();
+
+            if (tourGroupDetail.TourGroupID != 0)
+            {
+                tourGroup.TourGroupDetails.Add(tourGroupDetail);
+            }
+            else
+            {
+                Console.WriteLine("Lỗi rồi");
+            }
         }
 
         /// <param name="tourGroupDetail">A detail to be deleted</param>
@@ -134,6 +141,67 @@ namespace TourDuLich_GUI.BUS
             if (detail != null)
             {
                 _ctx.TourGroupDetails.Remove(detail);
+            }
+        }
+
+        /// <param name="tourGroup">A tour group to add staff</param>
+        /// <param name="staff">Staff to be added to tour group staffs</param>
+        public void AddTourGroupStaffToTourGroup(TourGroup tourGroup, Staff staff)
+        {
+            TourGroupStaff tourGroupStaff = new TourGroupStaff
+            {
+                TourGroupID = tourGroup.ID,
+                StaffID = staff.ID
+            };
+
+            if (tourGroupStaff.TourGroupID != 0)
+            {
+                tourGroup.TourGroupStaffs.Add(tourGroupStaff);
+            }
+            else
+            {
+                Console.WriteLine("Lỗi rồi");
+            }
+        }
+
+        /// <param name="tourGroupStaff">A tour group staff to be deleted</param>
+        public void DeleteTourGroupStaffFromTourGroup(TourGroupStaff tourGroupStaff)
+        {
+            var staff = _ctx.TourGroupDetails.Find(tourGroupStaff.ID);
+
+            if (staff != null)
+            {
+                _ctx.TourGroupDetails.Remove(staff);
+            }
+        }
+
+        /// <param name="tourGroup">A tour group to create new cost</param>
+        public void CreateTourGroupCostForTour(TourGroup tourGroup)
+        {
+            var costType = _ctx.CostTypes.First();
+            TourGroupCost tourGroupCost = new TourGroupCost
+            {
+                TourGroupID = tourGroup.ID,
+                CostTypeID = costType.ID
+            };
+
+            if (tourGroupCost.TourGroupID != 0)
+            {
+                _ctx.TourGroupCosts.Add(tourGroupCost);
+            } else
+            {
+                Console.WriteLine("Lỗi rồi");
+            }
+        }
+
+        /// <param name="tourGroupCost">A tour group cost to be deleted</param>
+        public void DeleteTourGroupCostFromTour(TourGroupCost tourGroupCost)
+        {
+            var cost = _ctx.TourGroupCosts.Find(tourGroupCost.ID);
+
+            if (cost != null)
+            {
+                _ctx.TourGroupCosts.Remove(cost);
             }
         }
     }

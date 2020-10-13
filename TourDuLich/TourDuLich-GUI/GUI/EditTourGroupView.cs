@@ -181,7 +181,7 @@ namespace TourDuLich_GUI.GUI
 
         private void handleAddTourGroupCostToTourGroup()
         {
-            // TourGroupBUS.CreateTourGroupCostForTour(getItemState());
+            TourGroupBUS.CreateTourGroupCostForTour(getItemState());
             gridView_TourGroupCosts.GridControl.RefreshDataSource();
         }
 
