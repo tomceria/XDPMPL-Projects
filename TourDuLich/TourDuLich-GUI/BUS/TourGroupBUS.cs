@@ -47,12 +47,37 @@ namespace TourDuLich_GUI.BUS
 
         public TourGroup UpdateOne(TourGroup tourGroup)
         {
+            Console.WriteLine("instance: " + tourGroup.TourGroupDetails.Count);
+            Console.WriteLine("context: " + _ctx.TourGroupDetails.Where(o => o.TourGroupID == tourGroup.ID).ToList().Count);
 
             var tourGroupToUpdate = _ctx.TourGroups.Find(tourGroup.ID);
 
-            if (tourGroupToUpdate != null && validate(tourGroup))
+/*            if (tourGroupToUpdate != null && validate(tourGroup))
+*/
+            if (tourGroupToUpdate != null)
             {
                 _ctx.Entry(tourGroup).State = EntityState.Modified;
+
+                List<TourGroupDetail> tourGroupDetails = tourGroup.TourGroupDetails.ToList();
+                List<TourGroupDetail> ogTourGroupDetails = _ctx.TourGroupDetails.Where(o => o.TourGroupID == tourGroup.ID).ToList();
+                foreach (TourGroupDetail tourGroupDetail in ogTourGroupDetails)
+                {
+                    if (tourGroupDetails.FirstOrDefault(o => o.ID == tourGroupDetail.ID) == null)
+                    {
+                        _ctx.Entry(tourGroupDetail).State = EntityState.Deleted;
+                    }
+                }
+                foreach (TourGroupDetail tourGroupDetail in tourGroupDetails)
+                {
+                    if (ogTourGroupDetails.FirstOrDefault(o => o.ID == tourGroupDetail.ID) == null)
+                    {
+                        _ctx.Entry(tourGroupDetail).State = EntityState.Added;
+                    } else
+                    {
+                        _ctx.Entry(tourGroupDetail).State = EntityState.Modified;
+                    }
+                }
+
                 _ctx.SaveChanges();
             }
 
@@ -124,9 +149,8 @@ namespace TourDuLich_GUI.BUS
         }
 
         /// <param name="tourGroupDetail">A detail to be deleted</param>
-        public void DeleteTourGroupDetailFromTourGroup(TourGroupDetail tourGroupDetail)
+        public void DeleteTourGroupDetailFromTourGroup(TourGroup tourGroup, TourGroupDetail tourGroupDetail)
         {
-            TourGroup tourGroup = tourGroupDetail.TourGroup;
             tourGroup.TourGroupDetails.Remove(tourGroupDetail);
         }
 

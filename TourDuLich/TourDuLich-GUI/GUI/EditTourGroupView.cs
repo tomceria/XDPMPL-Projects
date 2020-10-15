@@ -19,6 +19,8 @@ namespace TourDuLich_GUI.GUI
         CostTypeBUS CostTypeBUS = new CostTypeBUS();
 
         private TourGroup _item;
+        private List<TourGroupDetail> _tourGroupDetails;
+
         private bool isUpdate = false;
 
         // Data Sources
@@ -77,11 +79,10 @@ namespace TourDuLich_GUI.GUI
                     : new List<TourGroupCost>()
                 );
             // TourGroup.TourGroupDetails
-            tourGroupDetailsBL = new BindingList<TourGroupDetail>(
-                (item.TourGroupDetails != null)
+            _tourGroupDetails = (item.TourGroupDetails != null)
                     ? item.TourGroupDetails.ToList()
-                    : new List<TourGroupDetail>()
-                );
+                    : new List<TourGroupDetail>();
+            tourGroupDetailsBL = new BindingList<TourGroupDetail>(_tourGroupDetails);
             // TourGroup.TourGroupStaffs
             tourGroupStaffsBL = new BindingList<TourGroupStaff>(
                 (item.TourGroupStaffs != null)
@@ -216,7 +217,7 @@ namespace TourDuLich_GUI.GUI
             }
             Customer customer = tourGroupDetail.Customer;
 
-            TourGroupBUS.DeleteTourGroupDetailFromTourGroup(tourGroupDetail);
+            TourGroupBUS.DeleteTourGroupDetailFromTourGroup(_item, tourGroupDetail);
             ((BindingList<Customer>)gridView_Customers.GridControl.DataSource).Add(customer);
         }
 
