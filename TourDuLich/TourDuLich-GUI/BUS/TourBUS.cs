@@ -39,7 +39,7 @@ namespace TourDuLich_GUI.BUS
             {
                 result.TourPrices = result.TourPrices.OrderBy(o => o.TimeStart).ToList();
             }
-            if (result.TourDetails != null & result.TourDetails.Count > 0)
+            if (result.TourPrices != null & result.TourPrices.Count > 0)
             {
                 result.TourDetails = result.TourDetails.OrderBy(o => o.Order).ToList();
             }
@@ -64,34 +64,56 @@ namespace TourDuLich_GUI.BUS
             ValidateOne(item);
 
             // as "item" is loaded from a DataSource/BindingList, it is ALREADY ATTACHED => Must detach TourPrices before deleting/adding
-
-            _ctx.Entry(item).State = EntityState.Modified;
+            _ctx.Entry(item).State = EntityState.Modified;    
+            Console.WriteLine("Original item : " + _ctx.TourDetails.Where(o => o.TourID == item.ID).ToList().Count);// Context
+            Console.WriteLine("Updated item : " + item.TourDetails.Count);// Instance
 
             // TourPrices
             List<TourPrice> tourPrices = item.TourPrices.ToList();
+            List<TourPrice> ogTourPrices = _ctx.TourPrices.Where(o => o.TourID == item.ID).ToList();
 
-            foreach (TourPrice tP in tourPrices)
+            foreach (TourPrice ogTourPrice in ogTourPrices)
             {
-                _ctx.Entry(tP).State = EntityState.Detached;
+                if (tourPrices.FirstOrDefault(o => o.ID == ogTourPrice.ID) == null )
+                {
+                    _ctx.Entry(ogTourPrice).State = EntityState.Deleted;
+                }
             }
-            item.TourPrices.Clear();
-            _ctx.TourPrices.RemoveRange(_ctx.TourPrices.Where(o => o.TourID == item.ID));
-            foreach (TourPrice tP in tourPrices)
+
+            foreach (TourPrice tourPrice in tourPrices)
             {
-                _ctx.Entry(tP).State = EntityState.Added;
+                if( ogTourPrices.FirstOrDefault(o => o.ID == tourPrice.ID) == null)
+                {
+                    _ctx.Entry(tourPrice).State = EntityState.Added;
+                }
+                else
+                {
+                    _ctx.Entry(tourPrice).State = EntityState.Modified;
+                }
             }
 
             // TourDetails
             List<TourDetail> tourDetails = item.TourDetails.ToList();
-            foreach (TourDetail tP in tourDetails)
+            List<TourDetail> ogTourDetails = _ctx.TourDetails.Where(o => o.TourID == item.ID).ToList();
+
+            foreach (TourDetail ogTourDetail in ogTourDetails)
             {
-                _ctx.Entry(tP).State = EntityState.Detached;
+                if (tourDetails.FirstOrDefault(o => o.ID == ogTourDetail.ID) == null)
+                {
+                    _ctx.Entry(ogTourDetail).State = EntityState.Deleted;
+                }
             }
-            item.TourDetails.Clear();
-            _ctx.TourDetails.RemoveRange(_ctx.TourDetails.Where(o => o.TourID == item.ID));
-            foreach (TourDetail tP in tourDetails)
+
+            foreach (TourDetail tourDetail in tourDetails)
             {
-                _ctx.Entry(tP).State = EntityState.Added;
+                if (ogTourDetails.FirstOrDefault(o => o.ID == tourDetail.ID) == null)
+                {
+                    _ctx.Entry(tourDetail).State = EntityState.Added;
+                }
+                else
+                {
+                    _ctx.Entry(tourDetail).State = EntityState.Modified;
+                }
             }
 
             _ctx.SaveChanges();
@@ -147,6 +169,7 @@ namespace TourDuLich_GUI.BUS
 
         public void AddTourDetailToTour(Tour tour, Destination destination)
         {
+
             // Destination is fetched from ANOTHER Context instance => Make a copy
             Destination newDestination = _ctx.Destinations.First(o => o.ID == destination.ID);
 
@@ -163,7 +186,7 @@ namespace TourDuLich_GUI.BUS
                 Order = lastOrderValue + 1,
                 Destination = newDestination
             };
-
+            Console.WriteLine("AddTourDetailToTour : Updated length  =  " + tour.TourDetails.Count);
             tour.TourDetails.Add(tourDetail);
         }
 

@@ -152,7 +152,8 @@ namespace TourDuLich_GUI {
         // Begin Destination of TourDetail
         private void handleAddTourDetailToTour() {
             Destination destination = getSelectedDestination();
-            TourBUS.AddTourDetailToTour(getItemState(), destination);
+
+            TourBUS.AddTourDetailToTour(_item, destination);
             listBoxControl_TourDetail.Refresh();
         }
 
