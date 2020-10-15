@@ -21,6 +21,16 @@ namespace TourDuLich_GUI.GUI
         private TourGroup _item;
         private bool isUpdate = false;
 
+        // Data Sources
+        BindingList<TourGroup> itemBL;
+        BindingList<Tour> toursBL;
+        BindingList<Customer> customersBL;
+        BindingList<Staff> staffsBL;
+        BindingList<CostType> costTypesBL;
+        BindingList<TourGroupCost> tourGroupCostsBL;
+        BindingList<TourGroupDetail> tourGroupDetailsBL;
+        BindingList<TourGroupStaff> tourGroupStaffsBL;
+
         public EditTourGroupView()
         {
             InitializeComponent();
@@ -54,26 +64,26 @@ namespace TourDuLich_GUI.GUI
             }
 
             // Data binding
-            BindingList<TourGroup> itemBL = new BindingList<TourGroup>( new List<TourGroup>() { item } );
-            BindingList<Tour> toursBL = new BindingList<Tour>(tours);
-            BindingList<Customer> customersBL = new BindingList<Customer>(customers);
-            BindingList<Staff> staffsBL = new BindingList<Staff>(staffs);
-            BindingList<CostType> costTypesBL = new BindingList<CostType>(costTypes);
+            itemBL = new BindingList<TourGroup>( new List<TourGroup>() { item } );
+            toursBL = new BindingList<Tour>(tours);
+            customersBL = new BindingList<Customer>(customers);
+            staffsBL = new BindingList<Staff>(staffs);
+            costTypesBL = new BindingList<CostType>(costTypes);
 
             // TourGroup.TourGroupCosts
-            BindingList<TourGroupCost> tourGroupCostsBL = new BindingList<TourGroupCost>(
+            tourGroupCostsBL = new BindingList<TourGroupCost>(
                 (item.TourGroupCosts != null)
                     ? item.TourGroupCosts.ToList()
                     : new List<TourGroupCost>()
                 );
             // TourGroup.TourGroupDetails
-            BindingList<TourGroupDetail> tourGroupDetailsBL = new BindingList<TourGroupDetail>(
+            tourGroupDetailsBL = new BindingList<TourGroupDetail>(
                 (item.TourGroupDetails != null)
                     ? item.TourGroupDetails.ToList()
                     : new List<TourGroupDetail>()
                 );
             // TourGroup.TourGroupStaffs
-            BindingList<TourGroupStaff> tourGroupStaffsBL = new BindingList<TourGroupStaff>(
+            tourGroupStaffsBL = new BindingList<TourGroupStaff>(
                 (item.TourGroupStaffs != null)
                     ? item.TourGroupStaffs.ToList()
                     : new List<TourGroupStaff>()
@@ -128,6 +138,27 @@ namespace TourDuLich_GUI.GUI
             GridControl_TourGroupCosts.RepositoryItems.Add(lookUpEdit_TourGroupCost_CostType);
             gridView_TourGroupCosts.Columns["CostTypeID"].ColumnEdit = lookUpEdit_TourGroupCost_CostType;
 
+        }
+
+        private void RefreshDataSources()
+        {
+            // Tours
+            LookUpEdit_TourID.Properties.DataSource = toursBL;
+
+            // Customers
+            gridView_Customers.GridControl.DataSource = customersBL;
+
+            // Staffs
+            gridView_Staffs.GridControl.DataSource = staffsBL;
+
+            // TourGroupDetails
+            ListBoxControl_TourGroupDetails.DataSource = tourGroupDetailsBL;
+
+            // TourGroupStaffs
+            ListBoxControl_TourGroupStaffs.DataSource = tourGroupStaffsBL;
+
+            // TourGroupCosts
+            gridView_TourGroupCosts.GridControl.DataSource = tourGroupCostsBL;
         }
 
         // States
@@ -283,7 +314,7 @@ namespace TourDuLich_GUI.GUI
 
         private void tabbedControlGroup1_SelectedPageChanged(object sender, LayoutTabPageChangedEventArgs e)
         {
-            InitializeDataSources();            // TODO: Optimization
+            RefreshDataSources();
         }
     }
 }
