@@ -161,10 +161,11 @@ namespace TourDuLich_GUI.BUS
             // Staff is fetched from ANOTHER Context instance => Make a copy
             Staff newStaff = _ctx.Staffs.First(o => o.ID == staff.ID);
 
-            TourGroupStaff tourGroupStaff = new TourGroupStaff() 
+            TourGroupStaff tourGroupStaff = new TourGroupStaff()
             {
                 TourGroup = tourGroup,
-                Staff = newStaff
+                Staff = newStaff,
+                StaffTask = TourGroupStaff.Tasks.First()
             };
 
             tourGroup.TourGroupStaffs.Add(tourGroupStaff);

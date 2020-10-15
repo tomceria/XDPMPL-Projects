@@ -7,6 +7,8 @@ using TourDuLich_GUI.Models;
 using TourDuLich_GUI.BUS;
 using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraEditors.Controls;
+using System.Windows.Forms;
+using DevExpress.XtraGrid.Columns;
 
 namespace TourDuLich_GUI.GUI
 {
@@ -138,6 +140,18 @@ namespace TourDuLich_GUI.GUI
             // TourGroupStaffs
             gridView_TourGroupStaffs.GridControl.DataSource = tourGroupStaffsBL;
             gridView_TourGroupStaffs.PopulateColumns();
+            foreach (GridColumn column in gridView_TourGroupStaffs.Columns)
+            {
+                column.Visible = false;
+            }
+            gridView_TourGroupStaffs.Columns["Staff"].VisibleIndex = 0;
+            gridView_TourGroupStaffs.Columns["StaffTask"].VisibleIndex = 1;
+            gridView_TourGroupStaffs.Columns["Staff"].Visible = true;
+            gridView_TourGroupStaffs.Columns["StaffTask"].Visible = true;
+            RepositoryItemLookUpEdit lookUpEdit_TourGroupStaff_StaffTask = new RepositoryItemLookUpEdit();
+            lookUpEdit_TourGroupStaff_StaffTask.DataSource = TourGroupStaff.Tasks;
+            GridControl_TourGroupStaffs.RepositoryItems.Add(lookUpEdit_TourGroupStaff_StaffTask);
+            gridView_TourGroupStaffs.Columns["StaffTask"].ColumnEdit = lookUpEdit_TourGroupStaff_StaffTask;
 
             // TourGroupCosts
             gridView_TourGroupCosts.GridControl.DataSource = tourGroupCostsBL;
@@ -153,7 +167,6 @@ namespace TourDuLich_GUI.GUI
             lookUpEdit_TourGroupCost_CostType.DisplayMember = "Name";
             lookUpEdit_TourGroupCost_CostType.PopulateColumns();
             lookUpEdit_TourGroupCost_CostType.Columns["TourGroupCosts"].Visible = false;
-
             GridControl_TourGroupCosts.RepositoryItems.Add(lookUpEdit_TourGroupCost_CostType);
             gridView_TourGroupCosts.Columns["CostTypeID"].ColumnEdit = lookUpEdit_TourGroupCost_CostType;
 
