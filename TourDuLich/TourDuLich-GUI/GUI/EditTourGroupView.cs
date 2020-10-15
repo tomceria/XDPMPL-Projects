@@ -215,10 +215,11 @@ namespace TourDuLich_GUI.GUI
             {
                 return;
             }
-            Customer customer = tourGroupDetail.Customer;
+            //Customer customer = tourGroupDetail.Customer;
 
             TourGroupBUS.DeleteTourGroupDetailFromTourGroup(_item, tourGroupDetail);
-            ((BindingList<Customer>)gridView_Customers.GridControl.DataSource).Add(customer);
+
+            // ((BindingList<Customer>)gridView_Customers.GridControl.DataSource).Add(customer);
         }
 
         private void handleAddTourGroupStaffToTourGroup()
@@ -240,10 +241,12 @@ namespace TourDuLich_GUI.GUI
             {
                 return;
             }
-            Staff staff = tourGroupDetail.Staff;
+            //Staff staff = tourGroupDetail.Staff;
 
             TourGroupBUS.DeleteTourGroupStaffFromTourGroup(tourGroupDetail);
-            ((BindingList<Staff>)gridView_Staffs.GridControl.DataSource).Add(staff);
+
+            // ((BindingList<Staff>)gridView_Staffs.GridControl.DataSource).Add(staff);
+
         }
 
         private void handleAddTourGroupCostToTourGroup()
