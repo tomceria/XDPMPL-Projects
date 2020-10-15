@@ -162,11 +162,6 @@ namespace TourDuLich_GUI.GUI
         }
 
         // States
-        private TourGroup getItemState()
-        {
-            return ((BindingList<TourGroup>)dataLayoutControl_TourGroup.DataSource).ElementAt(0);
-        }
-
         private Customer getSelectedCustomer()
         {
             return (Customer)gridView_Customers.GetFocusedRow();
@@ -183,10 +178,10 @@ namespace TourDuLich_GUI.GUI
         {
             if (isUpdate)
             {
-                TourGroupBUS.UpdateOne(getItemState());
+                TourGroupBUS.UpdateOne(_item);
             } else
             {
-                var temp = TourGroupBUS.CreateOne(getItemState());
+                var temp = TourGroupBUS.CreateOne(_item);
                 if (temp.ID != 0)
                 {
                     isUpdate = true;
@@ -208,7 +203,7 @@ namespace TourDuLich_GUI.GUI
                 return;
             }
 
-            TourGroupBUS.AddTourGroupDetailToTourGroup(getItemState(), customer);
+            TourGroupBUS.AddTourGroupDetailToTourGroup(_item, customer);
             ((BindingList<Customer>)gridView_Customers.GridControl.DataSource).Remove(customer);
         }
 
@@ -233,7 +228,7 @@ namespace TourDuLich_GUI.GUI
                 return;
             }
 
-            TourGroupBUS.AddTourGroupStaffToTourGroup(getItemState(), staff);
+            TourGroupBUS.AddTourGroupStaffToTourGroup(_item, staff);
             ((BindingList<Staff>)gridView_Staffs.GridControl.DataSource).Remove(staff);
         }
 
@@ -252,7 +247,7 @@ namespace TourDuLich_GUI.GUI
 
         private void handleAddTourGroupCostToTourGroup()
         {
-            TourGroupBUS.CreateTourGroupCostForTour(getItemState());
+            TourGroupBUS.CreateTourGroupCostForTour(_item);
             gridView_TourGroupCosts.GridControl.RefreshDataSource();
         }
 
@@ -262,7 +257,7 @@ namespace TourDuLich_GUI.GUI
             {
                 return;
             }
-            ICollection<TourGroupCost> tourGroupCosts = getItemState().TourGroupCosts;
+            ICollection<TourGroupCost> tourGroupCosts = _item.TourGroupCosts;
             TourGroupCost tourGroupCost = tourGroupCosts.ElementAt(gridView_TourGroupCosts.FocusedRowHandle);
 
             // TourGroupBUS.DeleteTourGroupCostFromTour(tourGroupCost);
