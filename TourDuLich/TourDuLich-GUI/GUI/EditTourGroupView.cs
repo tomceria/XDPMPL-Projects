@@ -260,7 +260,7 @@ namespace TourDuLich_GUI.GUI
             ICollection<TourGroupCost> tourGroupCosts = _item.TourGroupCosts;
             TourGroupCost tourGroupCost = tourGroupCosts.ElementAt(gridView_TourGroupCosts.FocusedRowHandle);
 
-            // TourGroupBUS.DeleteTourGroupCostFromTour(tourGroupCost);
+            TourGroupBUS.DeleteTourGroupCostFromTour(tourGroupCost);
             gridView_TourGroupCosts.GridControl.RefreshDataSource();
         }
 

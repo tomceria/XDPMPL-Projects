@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.Entity.Validation;
 using System.Data.SqlClient;
 using System.Linq;
@@ -34,7 +35,10 @@ namespace TourDuLich_GUI.BUS
         {
             if (validate(tourGroup))
             {
-                tourGroup = _ctx.TourGroups.Add(tourGroup);
+                _ctx.Entry(tourGroup).State = EntityState.Added;
+
+/*                tourGroup = _ctx.TourGroups.Add(tourGroup);
+*/
                 _ctx.SaveChanges();
             }
 
@@ -43,26 +47,16 @@ namespace TourDuLich_GUI.BUS
 
         public TourGroup UpdateOne(TourGroup tourGroup)
         {
-            // get by id
+
             var tourGroupToUpdate = _ctx.TourGroups.Find(tourGroup.ID);
 
-            if (tourGroupToUpdate != null)
+            if (tourGroupToUpdate != null && validate(tourGroup))
             {
-                // update entity
-                if (validate(tourGroup))
-                {
-                    tourGroupToUpdate.TourID = tourGroup.TourID;
-                    tourGroupToUpdate.Name = tourGroup.Name;
-                    tourGroupToUpdate.DateStart = tourGroup.DateStart;
-                    tourGroupToUpdate.DateEnd = tourGroup.DateEnd;
-                    tourGroupToUpdate.PriceGroup = tourGroup.PriceGroup;
-
-                    // save change to db
-                    _ctx.SaveChanges();
-                }
+                _ctx.Entry(tourGroup).State = EntityState.Modified;
+                _ctx.SaveChanges();
             }
 
-            return tourGroupToUpdate;
+            return tourGroup;
         }
 
         public void DeleteOne(int id)
@@ -168,27 +162,19 @@ namespace TourDuLich_GUI.BUS
             TourGroupCost tourGroupCost = new TourGroupCost
             {
                 TourGroupID = tourGroup.ID,
-                CostTypeID = costType.ID
+                TourGroup = tourGroup,
+                CostTypeID = costType.ID,
+                CostType = costType
             };
 
-            if (tourGroupCost.TourGroupID != 0)
-            {
-                _ctx.TourGroupCosts.Add(tourGroupCost);
-            } else
-            {
-                Console.WriteLine("Lỗi rồi");
-            }
+            tourGroup.TourGroupCosts.Add(tourGroupCost);
         }
 
         /// <param name="tourGroupCost">A tour group cost to be deleted</param>
         public void DeleteTourGroupCostFromTour(TourGroupCost tourGroupCost)
         {
-            var cost = _ctx.TourGroupCosts.Find(tourGroupCost.ID);
-
-            if (cost != null)
-            {
-                _ctx.TourGroupCosts.Remove(cost);
-            }
+            TourGroup tourGroup = tourGroupCost.TourGroup;
+            tourGroup.TourGroupCosts.Remove(tourGroupCost);
         }
     }
 }
