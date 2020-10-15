@@ -171,25 +171,52 @@ namespace TourDuLich_GUI.GUI
         private void handleAddTourGroupDetailToTourGroup()
         {
             Customer customer = getSelectedCustomer();
+
+            if (customer == null)
+            {
+                return;
+            }
+
             TourGroupBUS.AddTourGroupDetailToTourGroup(getItemState(), customer);
+            ((BindingList<Customer>)gridView_Customers.GridControl.DataSource).Remove(customer);
         }
 
         private void handleDeleteTourGroupDetailFromTourGroup()
         {
             TourGroupDetail tourGroupDetail = (TourGroupDetail)ListBoxControl_TourGroupDetails.SelectedItem;
+            if (tourGroupDetail == null)
+            {
+                return;
+            }
+            Customer customer = tourGroupDetail.Customer;
+
             TourGroupBUS.DeleteTourGroupDetailFromTourGroup(tourGroupDetail);
+            ((BindingList<Customer>)gridView_Customers.GridControl.DataSource).Add(customer);
         }
 
         private void handleAddTourGroupStaffToTourGroup()
         {
             Staff staff = getSelectedStaff();
+            if (staff == null)
+            {
+                return;
+            }
+
             TourGroupBUS.AddTourGroupStaffToTourGroup(getItemState(), staff);
+            ((BindingList<Staff>)gridView_Staffs.GridControl.DataSource).Remove(staff);
         }
 
         private void handleDeleteTourGroupStaffFromTourGroup()
         {
             TourGroupStaff tourGroupDetail = (TourGroupStaff)ListBoxControl_TourGroupStaffs.SelectedItem;
+            if (tourGroupDetail == null)
+            {
+                return;
+            }
+            Staff staff = tourGroupDetail.Staff;
+
             TourGroupBUS.DeleteTourGroupStaffFromTourGroup(tourGroupDetail);
+            ((BindingList<Staff>)gridView_Staffs.GridControl.DataSource).Add(staff);
         }
 
         private void handleAddTourGroupCostToTourGroup()
