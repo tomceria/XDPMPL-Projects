@@ -60,15 +60,29 @@ namespace TourDuLich_GUI.GUI
             BindingList<Staff> staffsBL = new BindingList<Staff>(staffs);
             BindingList<CostType> costTypesBL = new BindingList<CostType>(costTypes);
 
+            // TourGroup.TourGroupCosts
             BindingList<TourGroupCost> tourGroupCostsBL = new BindingList<TourGroupCost>(
                 (item.TourGroupCosts != null)
                     ? item.TourGroupCosts.ToList()
                     : new List<TourGroupCost>()
                 );
+            // TourGroup.TourGroupDetails
+            BindingList<TourGroupDetail> tourGroupDetailsBL = new BindingList<TourGroupDetail>(
+                (item.TourGroupDetails != null)
+                    ? item.TourGroupDetails.ToList()
+                    : new List<TourGroupDetail>()
+                );
+            // TourGroup.TourGroupStaffs
+            BindingList<TourGroupStaff> tourGroupStaffsBL = new BindingList<TourGroupStaff>(
+                (item.TourGroupStaffs != null)
+                    ? item.TourGroupStaffs.ToList()
+                    : new List<TourGroupStaff>()
+                );
 
             dataLayoutControl_TourGroup.DataSource = itemBL;
 
             TextEdit_PriceGroup.Enabled = false;
+
 
             // Tours
             LookUpEdit_TourID.Properties.DataSource = toursBL;
@@ -83,13 +97,19 @@ namespace TourDuLich_GUI.GUI
 
             // Customers
             gridView_Customers.GridControl.DataSource = customersBL;
-            gridView_Customers.OptionsBehavior.ReadOnly = true;
+            gridView_Customers.OptionsBehavior.Editable = false;
             gridView_Customers.Columns["TourGroupDetails"].Visible = false;
 
             // Staffs
             gridView_Staffs.GridControl.DataSource = staffsBL;
-            gridView_Staffs.OptionsBehavior.ReadOnly = true;
+            gridView_Staffs.OptionsBehavior.Editable = false;
             gridView_Staffs.Columns["TourGroupStaffs"].Visible = false;
+
+            // TourGroupDetails
+            ListBoxControl_TourGroupDetails.DataSource = tourGroupDetailsBL;
+
+            // TourGroupStaffs
+            ListBoxControl_TourGroupStaffs.DataSource = tourGroupStaffsBL;
 
             // TourGroupCosts
             gridView_TourGroupCosts.GridControl.DataSource = tourGroupCostsBL;
@@ -157,19 +177,19 @@ namespace TourDuLich_GUI.GUI
         private void handleDeleteTourGroupDetailFromTourGroup()
         {
             TourGroupDetail tourGroupDetail = (TourGroupDetail)ListBoxControl_TourGroupDetails.SelectedItem;
-            // TourGroupBUS.DeleteTourGroupDetailFromTourGroup(tourGroupDetail);
+            TourGroupBUS.DeleteTourGroupDetailFromTourGroup(tourGroupDetail);
         }
 
         private void handleAddTourGroupStaffToTourGroup()
         {
             Staff staff = getSelectedStaff();
-            // TourGroupBUS.AddTourGroupStaffToTourGroup(getItemState(), staff);
+            TourGroupBUS.AddTourGroupStaffToTourGroup(getItemState(), staff);
         }
 
         private void handleDeleteTourGroupStaffFromTourGroup()
         {
             TourGroupStaff tourGroupDetail = (TourGroupStaff)ListBoxControl_TourGroupStaffs.SelectedItem;
-            // TourGroupBUS.DeleteTourGroupStaffFromTourGroup(tourGroupDetail);
+            TourGroupBUS.DeleteTourGroupStaffFromTourGroup(tourGroupDetail);
         }
 
         private void handleAddTourGroupCostToTourGroup()

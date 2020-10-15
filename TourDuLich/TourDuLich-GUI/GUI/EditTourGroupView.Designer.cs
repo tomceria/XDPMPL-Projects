@@ -53,7 +53,6 @@
             this.DateEndDateEdit = new DevExpress.XtraEditors.DateEdit();
             this.TextEdit_PriceGroup = new DevExpress.XtraEditors.TextEdit();
             this.GridControl_TourGroupCosts = new DevExpress.XtraGrid.GridControl();
-            this.tourGroupCostBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.gridView_TourGroupCosts = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.ListBoxControl_TourGroupDetails = new DevExpress.XtraEditors.ListBoxControl();
             this.ListBoxControl_TourGroupStaffs = new DevExpress.XtraEditors.ListBoxControl();
@@ -79,6 +78,7 @@
             this.ItemForName = new DevExpress.XtraLayout.LayoutControlItem();
             this.ItemForDateEnd = new DevExpress.XtraLayout.LayoutControlItem();
             this.ItemForPriceGroup = new DevExpress.XtraLayout.LayoutControlItem();
+            this.tourGroupCostBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl_TourGroup)).BeginInit();
             this.dataLayoutControl_TourGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GridControl_Staffs)).BeginInit();
@@ -94,7 +94,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.DateEndDateEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.TextEdit_PriceGroup.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GridControl_TourGroupCosts)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tourGroupCostBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView_TourGroupCosts)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ListBoxControl_TourGroupDetails)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ListBoxControl_TourGroupStaffs)).BeginInit();
@@ -120,6 +119,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.ItemForName)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForDateEnd)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForPriceGroup)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tourGroupCostBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // dataLayoutControl_TourGroup
@@ -397,10 +397,6 @@
             this.GridControl_TourGroupCosts.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView_TourGroupCosts});
             // 
-            // tourGroupCostBindingSource
-            // 
-            this.tourGroupCostBindingSource.DataSource = typeof(TourDuLich_GUI.Models.TourGroupCost);
-            // 
             // gridView_TourGroupCosts
             // 
             this.gridView_TourGroupCosts.GridControl = this.GridControl_TourGroupCosts;
@@ -470,7 +466,7 @@
             this.tabbedControlGroup1.CustomizationFormText = "tabbedControlGroup_TourGroups";
             this.tabbedControlGroup1.Location = new System.Drawing.Point(0, 72);
             this.tabbedControlGroup1.Name = "tabbedControlGroup1";
-            this.tabbedControlGroup1.SelectedTabPage = this.layoutControlGroup3;
+            this.tabbedControlGroup1.SelectedTabPage = this.layoutControlGroup4;
             this.tabbedControlGroup1.Size = new System.Drawing.Size(778, 349);
             this.tabbedControlGroup1.TabPages.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlGroup3,
@@ -645,6 +641,10 @@
             this.ItemForPriceGroup.Size = new System.Drawing.Size(778, 24);
             this.ItemForPriceGroup.TextSize = new System.Drawing.Size(85, 13);
             // 
+            // tourGroupCostBindingSource
+            // 
+            this.tourGroupCostBindingSource.DataSource = typeof(TourDuLich_GUI.Models.TourGroupCost);
+            // 
             // EditTourGroupView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -670,7 +670,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.DateEndDateEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.TextEdit_PriceGroup.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.GridControl_TourGroupCosts)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tourGroupCostBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView_TourGroupCosts)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ListBoxControl_TourGroupDetails)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ListBoxControl_TourGroupStaffs)).EndInit();
@@ -696,6 +695,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.ItemForName)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForDateEnd)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForPriceGroup)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tourGroupCostBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

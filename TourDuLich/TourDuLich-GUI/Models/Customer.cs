@@ -27,5 +27,6 @@ namespace TourDuLich_GUI.Models
         public string PhoneNumber { get; set; }
 
         public virtual ICollection<TourGroupDetail> TourGroupDetails { get; set; }
+
     }
 }

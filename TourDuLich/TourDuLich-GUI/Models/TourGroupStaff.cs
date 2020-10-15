@@ -29,5 +29,10 @@ namespace TourDuLich_GUI.Models
             public Task Driver { get { return new Task("Tài xế"); } }
             public Task TourGuide { get { return new Task("Hướng dẫn viên"); } }
         }
+
+        public override string ToString()
+        {
+            return $"{this.Staff.Name}";
+        }
     }
 }
