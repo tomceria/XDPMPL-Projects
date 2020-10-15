@@ -167,15 +167,12 @@ namespace TourDuLich_GUI.BUS
                 Staff = newStaff
             };
 
-            Console.WriteLine("count: " + tourGroup.TourGroupStaffs.Count);
             tourGroup.TourGroupStaffs.Add(tourGroupStaff);
-            Console.WriteLine("after count: " + tourGroup.TourGroupStaffs.Count);
         }
 
         /// <param name="tourGroupStaff">A tour group staff to be deleted</param>
-        public void DeleteTourGroupStaffFromTourGroup(TourGroupStaff tourGroupStaff)
+        public void DeleteTourGroupStaffFromTourGroup(TourGroup tourGroup, TourGroupStaff tourGroupStaff)
         {
-            TourGroup tourGroup = tourGroupStaff.TourGroup;
             tourGroup.TourGroupStaffs.Remove(tourGroupStaff);
         }
 

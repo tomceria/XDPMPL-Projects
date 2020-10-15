@@ -20,6 +20,8 @@ namespace TourDuLich_GUI.GUI
 
         private TourGroup _item;
         private List<TourGroupDetail> _tourGroupDetails;
+        private List<TourGroupStaff> _tourGroupStaffs;
+        private List<TourGroupCost> _tourGroupCosts;
 
         private bool isUpdate = false;
 
@@ -73,22 +75,34 @@ namespace TourDuLich_GUI.GUI
             costTypesBL = new BindingList<CostType>(costTypes);
 
             // TourGroup.TourGroupCosts
-            tourGroupCostsBL = new BindingList<TourGroupCost>(
-                (item.TourGroupCosts != null)
-                    ? item.TourGroupCosts.ToList()
-                    : new List<TourGroupCost>()
-                );
+            if (item.TourGroupCosts != null)
+            {
+                _tourGroupCosts = item.TourGroupCosts.ToList();
+            } else
+            {
+                _tourGroupCosts = new List<TourGroupCost>();
+            }
+            tourGroupCostsBL = new BindingList<TourGroupCost>(_tourGroupCosts);
             // TourGroup.TourGroupDetails
-            _tourGroupDetails = (item.TourGroupDetails != null)
-                    ? item.TourGroupDetails.ToList()
-                    : new List<TourGroupDetail>();
+            if (item.TourGroupDetails != null)
+            {
+                _tourGroupDetails = item.TourGroupDetails.ToList();
+            } else
+            {
+                _tourGroupDetails = new List<TourGroupDetail>();
+                item.TourGroupDetails = _tourGroupDetails;
+            }
             tourGroupDetailsBL = new BindingList<TourGroupDetail>(_tourGroupDetails);
             // TourGroup.TourGroupStaffs
-            tourGroupStaffsBL = new BindingList<TourGroupStaff>(
-                (item.TourGroupStaffs != null)
-                    ? item.TourGroupStaffs.ToList()
-                    : new List<TourGroupStaff>()
-                );
+            if (item.TourGroupStaffs != null)
+            {
+                _tourGroupStaffs = item.TourGroupStaffs.ToList();
+            } else
+            {
+                _tourGroupStaffs = new List<TourGroupStaff>();
+                item.TourGroupStaffs = _tourGroupStaffs;
+            }
+            tourGroupStaffsBL = new BindingList<TourGroupStaff>(_tourGroupStaffs);
 
             dataLayoutControl_TourGroup.DataSource = itemBL;
 
@@ -108,11 +122,13 @@ namespace TourDuLich_GUI.GUI
 
             // Customers
             gridView_Customers.GridControl.DataSource = customersBL;
+            gridView_Customers.PopulateColumns();
             gridView_Customers.OptionsBehavior.Editable = false;
             gridView_Customers.Columns["TourGroupDetails"].Visible = false;
 
             // Staffs
             gridView_Staffs.GridControl.DataSource = staffsBL;
+            gridView_Staffs.PopulateColumns();
             gridView_Staffs.OptionsBehavior.Editable = false;
             gridView_Staffs.Columns["TourGroupStaffs"].Visible = false;
 
@@ -120,10 +136,12 @@ namespace TourDuLich_GUI.GUI
             ListBoxControl_TourGroupDetails.DataSource = tourGroupDetailsBL;
 
             // TourGroupStaffs
-            ListBoxControl_TourGroupStaffs.DataSource = tourGroupStaffsBL;
+            gridView_TourGroupStaffs.GridControl.DataSource = tourGroupStaffsBL;
+            gridView_TourGroupStaffs.PopulateColumns();
 
             // TourGroupCosts
             gridView_TourGroupCosts.GridControl.DataSource = tourGroupCostsBL;
+            gridView_TourGroupCosts.PopulateColumns();
             gridView_TourGroupCosts.Columns["TourGroup"].Visible = false;
             gridView_TourGroupCosts.Columns["TourGroupID"].Visible = false;
             gridView_TourGroupCosts.Columns["CostType"].Visible = false;
@@ -156,7 +174,7 @@ namespace TourDuLich_GUI.GUI
             ListBoxControl_TourGroupDetails.DataSource = tourGroupDetailsBL;
 
             // TourGroupStaffs
-            ListBoxControl_TourGroupStaffs.DataSource = tourGroupStaffsBL;
+            gridView_TourGroupStaffs.GridControl.DataSource = tourGroupStaffsBL;
 
             // TourGroupCosts
             gridView_TourGroupCosts.GridControl.DataSource = tourGroupCostsBL;
@@ -205,7 +223,7 @@ namespace TourDuLich_GUI.GUI
             }
 
             TourGroupBUS.AddTourGroupDetailToTourGroup(_item, customer);
-            ((BindingList<Customer>)gridView_Customers.GridControl.DataSource).Remove(customer);
+            //((BindingList<Customer>)gridView_Customers.GridControl.DataSource).Remove(customer);
         }
 
         private void handleDeleteTourGroupDetailFromTourGroup()
@@ -230,20 +248,32 @@ namespace TourDuLich_GUI.GUI
                 return;
             }
 
+            Console.WriteLine(_item.TourGroupStaffs.Count);
             TourGroupBUS.AddTourGroupStaffToTourGroup(_item, staff);
-            ((BindingList<Staff>)gridView_Staffs.GridControl.DataSource).Remove(staff);
+            gridView_TourGroupStaffs.GridControl.RefreshDataSource();
+            Console.WriteLine(_item.TourGroupStaffs.Count);
+
+            //((BindingList<Staff>)gridView_Staffs.GridControl.DataSource).Remove(staff);
         }
 
         private void handleDeleteTourGroupStaffFromTourGroup()
         {
-            TourGroupStaff tourGroupDetail = (TourGroupStaff)ListBoxControl_TourGroupStaffs.SelectedItem;
-            if (tourGroupDetail == null)
+            if (gridView_TourGroupStaffs.FocusedRowHandle < 0)
+            {
+                return;
+            }
+            ICollection<TourGroupStaff> tourGroupStaffs = _item.TourGroupStaffs;
+            TourGroupStaff tourGroupStaff = tourGroupStaffs.ElementAt(gridView_TourGroupStaffs.FocusedRowHandle);
+            if (tourGroupStaff == null)
             {
                 return;
             }
             //Staff staff = tourGroupDetail.Staff;
 
-            TourGroupBUS.DeleteTourGroupStaffFromTourGroup(tourGroupDetail);
+            Console.WriteLine(_item.TourGroupStaffs.Count);
+            TourGroupBUS.DeleteTourGroupStaffFromTourGroup(_item, tourGroupStaff);
+            gridView_TourGroupStaffs.GridControl.RefreshDataSource();
+            Console.WriteLine(_item.TourGroupStaffs.Count);
 
             // ((BindingList<Staff>)gridView_Staffs.GridControl.DataSource).Add(staff);
 
