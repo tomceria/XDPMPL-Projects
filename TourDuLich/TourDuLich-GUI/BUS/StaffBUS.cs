@@ -5,11 +5,11 @@ using TourDuLich_GUI.Models;
 
 namespace TourDuLich_GUI.BUS
 {
-    class StaffBUSS
+    class StaffBUS
     {
         private TourContext _ctx;
 
-        public StaffBUSS()
+        public StaffBUS()
         {
             _ctx = new TourContext();
         }

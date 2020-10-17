@@ -17,5 +17,10 @@ namespace TourDuLich_GUI.Models
 
         public virtual TourGroup TourGroup { get; set; }
         public virtual Customer Customer { get; set; }
+
+        public override string ToString()
+        {
+            return $"{this.Customer.Name}";
+        }
     }
 }

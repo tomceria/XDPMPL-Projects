@@ -1,4 +1,4 @@
-﻿namespace TourDuLich_GUI
+﻿namespace TourDuLich_GUI.GUI
 {
     partial class EditTourView
     {
@@ -471,7 +471,7 @@
             // 
             this.tabbedDetails.Location = new System.Drawing.Point(0, 72);
             this.tabbedDetails.Name = "tabbedDetails";
-            this.tabbedDetails.SelectedTabPage = this.layoutControlGroup3;
+            this.tabbedDetails.SelectedTabPage = this.layoutControlGroup4;
             this.tabbedDetails.Size = new System.Drawing.Size(778, 349);
             this.tabbedDetails.TabPages.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlGroup4,

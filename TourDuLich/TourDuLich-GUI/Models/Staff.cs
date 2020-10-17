@@ -15,5 +15,10 @@ namespace TourDuLich_GUI.Models
         public string Name { get; set; }
 
         public virtual ICollection<TourGroupStaff> TourGroupStaffs { get; set; }
+
+        public override string ToString()
+        {
+            return $"{this.Name}";
+        }
     }
 }
