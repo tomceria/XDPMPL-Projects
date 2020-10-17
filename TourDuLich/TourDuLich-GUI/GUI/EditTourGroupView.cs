@@ -208,11 +208,9 @@ namespace TourDuLich_GUI.GUI
 
         /// <param name="tourGroup">A tour group to validate</param>
         /// <returns>Returns true if validated</returns>
-        public bool validateForm()
+        public bool ValidateForm()
         {
             TourGroup tourGroup = _item;
-
-            string errorMsg;
 
             try
             {
@@ -258,7 +256,7 @@ namespace TourDuLich_GUI.GUI
 
         private void handleSaveTourGroup()
         {
-            if (validateForm() == false)
+            if (ValidateForm() == false)
             {
                 return;
             }

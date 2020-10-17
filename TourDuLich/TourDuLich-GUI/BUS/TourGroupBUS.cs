@@ -70,6 +70,46 @@ namespace TourDuLich_GUI.BUS
                 }
             }
 
+            List<TourGroupStaff> tourGroupStaffs = tourGroup.TourGroupStaffs.ToList();
+            List<TourGroupStaff> ogTourGroupStaffs = _ctx.TourGroupStaffs.Where(o => o.TourGroupID == tourGroup.ID).ToList();
+            foreach (TourGroupStaff tourGroupStaff in ogTourGroupStaffs)
+            {
+                if (tourGroupStaffs.FirstOrDefault(o => o.ID == tourGroupStaff.ID) == null)
+                {
+                    _ctx.Entry(tourGroupStaff).State = EntityState.Deleted;
+                }
+            }
+            foreach (TourGroupStaff tourGroupStaff in tourGroupStaffs)
+            {
+                if (ogTourGroupStaffs.FirstOrDefault(o => o.ID == tourGroupStaff.ID) == null)
+                {
+                    _ctx.Entry(tourGroupStaff).State = EntityState.Added;
+                } else
+                {
+                    _ctx.Entry(tourGroupStaff).State = EntityState.Modified;
+                }
+            }
+
+            List<TourGroupCost> tourGroupCosts = tourGroup.TourGroupCosts.ToList();
+            List<TourGroupCost> ogTourGroupCosts = _ctx.TourGroupCosts.Where(o => o.TourGroupID == tourGroup.ID).ToList();
+            foreach (TourGroupCost tourGroupCost in ogTourGroupCosts)
+            {
+                if (tourGroupCosts.FirstOrDefault(o => o.ID == tourGroupCost.ID) == null)
+                {
+                    _ctx.Entry(tourGroupCost).State = EntityState.Deleted;
+                }
+            }
+            foreach (TourGroupCost tourGroupCost in tourGroupCosts)
+            {
+                if (ogTourGroupCosts.FirstOrDefault(o => o.ID == tourGroupCost.ID) == null)
+                {
+                    _ctx.Entry(tourGroupCost).State = EntityState.Added;
+                } else
+                {
+                    _ctx.Entry(tourGroupCost).State = EntityState.Modified;
+                }
+            }
+
             _ctx.SaveChanges();
             return tourGroup;
         }
