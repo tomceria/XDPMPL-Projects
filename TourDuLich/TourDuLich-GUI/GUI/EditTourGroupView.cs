@@ -214,35 +214,40 @@ namespace TourDuLich_GUI.GUI
 
             string errorMsg;
 
-            // validate tour group name
-            if (string.IsNullOrEmpty(tourGroup.Name))
+            try
             {
-                errorMsg = "Name is empty";
-                Console.WriteLine(errorMsg);
-                return false;
-            }
+                // validate tour group name
+                if (string.IsNullOrEmpty(tourGroup.Name))
+                {
+                    throw new ArgumentException("Tên Đoàn rỗng.", "TourGroup.Name");
+                }
 
-            // validate tour 
-            if (tourGroup.TourID == 0)
-            {
-                errorMsg = "Tour is empty";
-                Console.WriteLine(errorMsg);
-                return false;
-            }
+                // validate tour 
+                if (tourGroup.TourID == 0)
+                {
+                    throw new ArgumentException("Tour của Đoàn rỗng.", "TourGroup.Tour");
+                }
 
-            // valitdate datetime
-/*            if (DateTime.Compare(tourGroup.DateStart.Date, DateTime.Now.Date) < 0)
+                // valitdate datetime
+    /*            if (DateTime.Compare(tourGroup.DateStart.Date, DateTime.Now.Date) < 0)
+                {
+                    errorMsg = "Start date is not valid";
+                    Console.WriteLine(errorMsg);
+                    return false;
+                }
+    */
+                // valitdate datetime
+                if (DateTime.Compare(tourGroup.DateStart.Date, tourGroup.DateEnd.Date) > 0)
+                {
+                    throw new ArgumentException("Ngày bắt đầu và ngày kết thúc không hợp lệ.", "TourGroup.Date");
+                }
+            } catch (ArgumentException e)
             {
-                errorMsg = "Start date is not valid";
-                Console.WriteLine(errorMsg);
-                return false;
-            }
-*/
-            // valitdate datetime
-            if (DateTime.Compare(tourGroup.DateStart.Date, tourGroup.DateEnd.Date) > 0)
-            {
-                errorMsg = "Date is not valid";
-                Console.WriteLine(errorMsg);
+                string message = e.Message.Split(Environment.NewLine.ToCharArray())[0];
+                MessageBox.Show(message, "Lỗi dữ liệu nhập", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                // TODO: Focus on controls
+
                 return false;
             }
 
