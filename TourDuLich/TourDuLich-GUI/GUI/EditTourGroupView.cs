@@ -77,33 +77,22 @@ namespace TourDuLich_GUI.GUI
             costTypesBL = new BindingList<CostType>(costTypes);
 
             // TourGroup.TourGroupCosts
-            if (item.TourGroupCosts != null)
-            {
-                _tourGroupCosts = item.TourGroupCosts.ToList();
-            } else
-            {
-                _tourGroupCosts = new List<TourGroupCost>();
-            }
+            _tourGroupCosts = item.TourGroupCosts != null
+                ? item.TourGroupCosts.ToList()
+                : new List<TourGroupCost>();
+            item.TourGroupCosts = _tourGroupCosts;
             tourGroupCostsBL = new BindingList<TourGroupCost>(_tourGroupCosts);
             // TourGroup.TourGroupDetails
-            if (item.TourGroupDetails != null)
-            {
-                _tourGroupDetails = item.TourGroupDetails.ToList();
-            } else
-            {
-                _tourGroupDetails = new List<TourGroupDetail>();
-                item.TourGroupDetails = _tourGroupDetails;
-            }
+            _tourGroupDetails = item.TourGroupDetails != null
+                ? item.TourGroupDetails.ToList()
+                : new List<TourGroupDetail>();
+            item.TourGroupDetails = _tourGroupDetails;
             tourGroupDetailsBL = new BindingList<TourGroupDetail>(_tourGroupDetails);
             // TourGroup.TourGroupStaffs
-            if (item.TourGroupStaffs != null)
-            {
-                _tourGroupStaffs = item.TourGroupStaffs.ToList();
-            } else
-            {
-                _tourGroupStaffs = new List<TourGroupStaff>();
-                item.TourGroupStaffs = _tourGroupStaffs;
-            }
+            _tourGroupStaffs = item.TourGroupStaffs != null
+                ? item.TourGroupStaffs.ToList()
+                : new List<TourGroupStaff>();
+            item.TourGroupStaffs = _tourGroupStaffs;
             tourGroupStaffsBL = new BindingList<TourGroupStaff>(_tourGroupStaffs);
 
             dataLayoutControl_TourGroup.DataSource = itemBL;
