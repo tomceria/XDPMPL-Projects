@@ -204,17 +204,67 @@ namespace TourDuLich_GUI.GUI
             return (Staff)gridView_Staffs.GetFocusedRow();
         }
 
+        // Functions
+
+        /// <param name="tourGroup">A tour group to validate</param>
+        /// <returns>Returns true if validated</returns>
+        public bool validateForm()
+        {
+            TourGroup tourGroup = _item;
+
+            string errorMsg;
+
+            // validate tour group name
+            if (string.IsNullOrEmpty(tourGroup.Name))
+            {
+                errorMsg = "Name is empty";
+                Console.WriteLine(errorMsg);
+                return false;
+            }
+
+            // validate tour 
+            if (tourGroup.TourID == 0)
+            {
+                errorMsg = "Tour is empty";
+                Console.WriteLine(errorMsg);
+                return false;
+            }
+
+            // valitdate datetime
+/*            if (DateTime.Compare(tourGroup.DateStart.Date, DateTime.Now.Date) < 0)
+            {
+                errorMsg = "Start date is not valid";
+                Console.WriteLine(errorMsg);
+                return false;
+            }
+*/
+            // valitdate datetime
+            if (DateTime.Compare(tourGroup.DateStart.Date, tourGroup.DateEnd.Date) > 0)
+            {
+                errorMsg = "Date is not valid";
+                Console.WriteLine(errorMsg);
+                return false;
+            }
+
+            return true;
+        }
+
         // Event Handlers
 
         private void handleSaveTourGroup()
         {
+            if (validateForm() == false)
+            {
+                return;
+            }
+
             if (isUpdate)
             {
                 TourGroupBUS.UpdateOne(_item);
             } else
             {
                 var temp = TourGroupBUS.CreateOne(_item);
-                if (temp.ID != 0)
+                if (temp.ID != 0)   // tourGroup added to Database => ID changed from 0
                 {
                     isUpdate = true;
                 }
