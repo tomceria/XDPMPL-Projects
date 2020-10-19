@@ -162,6 +162,16 @@ namespace TourDuLich_GUI.GUI
             editTourGroupView.ShowDialog(this);
         }
 
+        private void handleDeleteTourGroup( ) { 
+            TourGroup selectedTourGroup = (TourGroup)gridView_TourGroups.GetFocusedRow();
+
+            if (selectedTourGroup == null) {
+                return;
+            }
+
+            TourGroupBUS.DeleteOne(selectedTourGroup.ID);
+        }
+
         // Events
 
         private void bbiNew_ItemClick(object sender, ItemClickEventArgs e)
@@ -206,7 +216,16 @@ namespace TourDuLich_GUI.GUI
 
         private void bbiDelete_ItemClick(object sender, ItemClickEventArgs e)
         {
-            handleDeleteTour();
+            switch (getCurrentPage()) {
+                case Page.Tours: {
+                        handleDeleteTour();
+                        break;
+                    }
+                case Page.TourGroups: {
+                        handleDeleteTourGroup();
+                        break;
+                    }
+            }
 
             // Refresh
             InitializeDataSources();

@@ -1,5 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
+using System.Data.SqlClient;
 using System.Linq;
 using TourDuLich_GUI.DAL;
 using TourDuLich_GUI.Models;
@@ -114,7 +117,12 @@ namespace TourDuLich_GUI.BUS
         public void DeleteOne(int id)
         {
             var tourGroup = _ctx.TourGroups.Find(id);
+
+            _ctx.TourGroupCosts.RemoveRange(tourGroup.TourGroupCosts);
+            _ctx.TourGroupDetails.RemoveRange(tourGroup.TourGroupDetails);
+            _ctx.TourGroupStaffs.RemoveRange(tourGroup.TourGroupStaffs);
             _ctx.TourGroups.Remove(tourGroup);
+
             _ctx.SaveChanges();
         }
 
