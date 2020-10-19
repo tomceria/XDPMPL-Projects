@@ -7,13 +7,13 @@ namespace TourDuLich_GUI.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class EmptyMigration : IMigrationMetadata
+    public sealed partial class TourDBv1 : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(EmptyMigration));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(TourDBv1));
         
         string IMigrationMetadata.Id
         {
-            get { return "202009281631422_EmptyMigration"; }
+            get { return "202010190138050_TourDB-v1"; }
         }
         
         string IMigrationMetadata.Source
