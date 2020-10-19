@@ -124,17 +124,50 @@ namespace TourDuLich_GUI.BUS
 
         /// <param name="tourGroup">A tour group to add detail</param>
         /// <param name="customer">Customer to be added to tour group details</param>
+        
+        public bool isExistTourGroupDetail(TourGroup tourGroup, int idCustomer)
+        {
+
+            foreach (TourGroupDetail tourGroupDetail in tourGroup.TourGroupDetails)
+            {
+                //If exist return true
+                if (tourGroupDetail.CustomerID == idCustomer) return true;
+            }
+            //If not exist return false
+            return false;
+        }
+
+        public bool isExistTourGroupStaff(TourGroup tourGroup, int idStaff)
+        {
+
+            foreach (TourGroupStaff tourGroupStaff in tourGroup.TourGroupStaffs)
+            {
+                //If exist return true
+                if (tourGroupStaff.StaffID == idStaff) return true;
+            }
+            //If not exist return false
+            return false;
+        }
+
+
         public void AddTourGroupDetailToTourGroup(TourGroup tourGroup, Customer customer)
         {
+            if(isExistTourGroupDetail(tourGroup,customer.ID))
+            {
+                Console.WriteLine("Customer exist");
+                return;
+            }
+
             // Customer is fetched from ANOTHER Context instance => Make a copy
             Customer newCustomer = _ctx.Customers.First(o => o.ID == customer.ID);
 
             TourGroupDetail tourGroupDetail = new TourGroupDetail() 
             {
-                TourGroup = tourGroup,
-                Customer = newCustomer
-            };
 
+                TourGroup = tourGroup,
+                Customer = newCustomer,
+                CustomerID = newCustomer.ID
+            };
             tourGroup.TourGroupDetails.Add(tourGroupDetail);
         }
 
@@ -148,6 +181,11 @@ namespace TourDuLich_GUI.BUS
         /// <param name="staff">Staff to be added to tour group staffs</param>
         public void AddTourGroupStaffToTourGroup(TourGroup tourGroup, Staff staff)
         {
+            if(isExistTourGroupStaff(tourGroup, staff.ID))
+            {
+                Console.WriteLine("Staff exist");
+                return;
+            }
             // Staff is fetched from ANOTHER Context instance => Make a copy
             Staff newStaff = _ctx.Staffs.First(o => o.ID == staff.ID);
 
@@ -155,6 +193,7 @@ namespace TourDuLich_GUI.BUS
             {
                 TourGroup = tourGroup,
                 Staff = newStaff,
+                StaffID = newStaff.ID,
                 StaffTask = TourGroupStaff.Tasks.First()
             };
 
