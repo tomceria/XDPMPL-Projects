@@ -90,32 +90,12 @@
       <DependentUpon>EditTourGroupView.cs</DependentUpon>
     </Compile>
     <Compile Include="MainViewModel.cs" />
-    <Compile Include="Migrations\202009281631422_EmptyMigration.cs" />
-    <Compile Include="Migrations\202009281631422_EmptyMigration.designer.cs">
-      <DependentUpon>202009281631422_EmptyMigration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202010010623184_ForeignKeysUpdated.cs" />
-    <Compile Include="Migrations\202010010623184_ForeignKeysUpdated.designer.cs">
-      <DependentUpon>202010010623184_ForeignKeysUpdated.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202010010701440_TourANDTourGroup.cs" />
-    <Compile Include="Migrations\202010010701440_TourANDTourGroup.designer.cs">
-      <DependentUpon>202010010701440_TourANDTourGroup.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202010090931371_TourGroupCost-Value.cs" />
-    <Compile Include="Migrations\202010090931371_TourGroupCost-Value.designer.cs">
-      <DependentUpon>202010090931371_TourGroupCost-Value.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202010130701388_CustomerUpdated.cs" />
-    <Compile Include="Migrations\202010130701388_CustomerUpdated.designer.cs">
-      <DependentUpon>202010130701388_CustomerUpdated.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202010151011046_TourGroupStaff_StaffTask.cs" />
-    <Compile Include="Migrations\202010151011046_TourGroupStaff_StaffTask.designer.cs">
-      <DependentUpon>202010151011046_TourGroupStaff_StaffTask.cs</DependentUpon>
+    <Compile Include="DAL\TourContext.cs" />
+    <Compile Include="Migrations\202010190138050_TourDB-v1.cs" />
+    <Compile Include="Migrations\202010190138050_TourDB-v1.designer.cs">
+      <DependentUpon>202010190138050_TourDB-v1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="DAL\TourContext.cs" />
     <Compile Include="Models\CostType.cs" />
     <Compile Include="Models\Staff.cs" />
     <Compile Include="Models\TourGroupCost.cs" />
@@ -151,23 +131,8 @@
     <EmbeddedResource Include="GUI\MainView.resx">
       <DependentUpon>MainView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202009281631422_EmptyMigration.resx">
-      <DependentUpon>202009281631422_EmptyMigration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202010010623184_ForeignKeysUpdated.resx">
-      <DependentUpon>202010010623184_ForeignKeysUpdated.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202010010701440_TourANDTourGroup.resx">
-      <DependentUpon>202010010701440_TourANDTourGroup.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202010090931371_TourGroupCost-Value.resx">
-      <DependentUpon>202010090931371_TourGroupCost-Value.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202010130701388_CustomerUpdated.resx">
-      <DependentUpon>202010130701388_CustomerUpdated.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202010151011046_TourGroupStaff_StaffTask.resx">
-      <DependentUpon>202010151011046_TourGroupStaff_StaffTask.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202010190138050_TourDB-v1.resx">
+      <DependentUpon>202010190138050_TourDB-v1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">

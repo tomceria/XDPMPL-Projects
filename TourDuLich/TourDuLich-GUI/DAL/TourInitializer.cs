@@ -1,20 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TourDuLich_GUI.Models;
+using System.Data.Entity;
 
 namespace TourDuLich_GUI.DAL {
-    class TourInitializer : System.Data.Entity.DropCreateDatabaseIfModelChanges<TourContext> {
+    class TourInitializer : DropCreateDatabaseIfModelChanges<TourContext> {
         protected override void Seed(TourContext context) {
+            IList<TourType> tourTypes = new List<TourType>();
+            tourTypes.Add(new TourType() { Name = "Du lịch di động" });
+            tourTypes.Add(new TourType() { Name = "Du lịch kết hợp nghề nghiệp" });
+            tourTypes.Add(new TourType() { Name = "Du lịch xã hội và gia đình" });
 
-/*            var tours = new List<Tour> {
-                new Tour { ID = 1, Name = "HCM - Hanoi", PriceRef = 1050, Description = "Hello world" }
-            };
-            tours.ForEach(s => context.Tours.Add(s));
+            context.TourTypes.AddRange(tourTypes);
             context.SaveChanges();
-*/
         }
     }
 }

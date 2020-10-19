@@ -1,29 +1,26 @@
-using System;
 using System.Data.Entity;
-using System.Linq;
+using System.Data.Entity.ModelConfiguration.Conventions;
 using TourDuLich_GUI.Models;
 
-namespace TourDuLich_GUI.DAL
-{
-    public class TourContext : DbContext
-    {
-        // Your context has been configured to use a 'Model1' connection string from your application's 
+namespace TourDuLich_GUI.DAL {
+    public class TourContext : DbContext {
+        // Your context has been configured to use a 'TourContext' connection string from your application's 
         // configuration file (App.config or Web.config). By default, this connection string targets the 
-        // 'TourDuLich_GUI.Model1' database on your LocalDb instance. 
+        // 'TourDuLich_GUI.TourContext' database on your LocalDb instance. 
         // 
-        // If you wish to target a different database and/or database provider, modify the 'Model1' 
+        // If you wish to target a different database and/or database provider, modify the 'TourContext' 
         // connection string in the application configuration file.
-        public TourContext()
-            : base("TDLMinhHoangPCContext")
-        {
+        public TourContext() : base("TDLMinhHoangPCContext") {
+            Database.SetInitializer(new TourInitializer());
         }
 
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
+        protected override void OnModelCreating(DbModelBuilder modelBuilder) {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<TourPrice>()
                 .HasRequired<Tour>(o => o.Tour).WithMany(o => o.TourPrices).HasForeignKey<int>(o => o.TourID)
                 .WillCascadeOnDelete(true);
+            modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
+            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
         }
 
 

@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace TourDuLich_GUI.Models
-{
+namespace TourDuLich_GUI.Models {
     public class Tour {
         [Key, Display(AutoGenerateField = false, Name = "Mã số tour")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -27,8 +27,7 @@ namespace TourDuLich_GUI.Models
         public virtual ICollection<TourPrice> TourPrices { get; set; }
         public virtual ICollection<TourGroup> TourGroups { get; set; }
 
-        public override string ToString()
-        {
+        public override string ToString() {
             return $"{this.Name}";
         }
     }
