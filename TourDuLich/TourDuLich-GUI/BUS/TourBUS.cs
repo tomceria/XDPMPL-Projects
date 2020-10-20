@@ -244,7 +244,7 @@ namespace TourDuLich_GUI.BUS {
             var tourPrice = _ctx.TourPrices.Where(tp => tp.TourID == id
                 && DbFunctions.TruncateTime(tp.TimeStart) <= startDate.Date
                 && startDate.Date <= DbFunctions.TruncateTime(tp.TimeEnd))
-                .First();
+                .FirstOrDefault();
 
             if (tourPrice != null) {
                 price = tourPrice.Value;
