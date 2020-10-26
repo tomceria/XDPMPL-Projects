@@ -264,6 +264,8 @@ namespace TourDuLich_GUI.GUI
                     isUpdate = true;
                 }
             }
+
+            InitializeDataSources();    // Reload data with updated data
         }
 
         private void handleCloseEdit()
