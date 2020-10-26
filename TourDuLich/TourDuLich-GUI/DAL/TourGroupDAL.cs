@@ -26,8 +26,6 @@ namespace TourDuLich_GUI.DAL {
         }
 
         public static TourGroup CreateOne(TourGroup tourGroup) {
-            tourGroup.PriceGroup = TourGroup.CalculateTourGroupPrice(tourGroup);
-
             _ctx.Entry(tourGroup).State = EntityState.Added;
             _ctx.SaveChanges();
 
@@ -40,8 +38,6 @@ namespace TourDuLich_GUI.DAL {
             if (tourGroupToUpdate == null) {
                 return null;
             }
-
-            tourGroup.PriceGroup = TourGroup.CalculateTourGroupPrice(tourGroup);
 
             _ctx.Entry(tourGroup).State = EntityState.Modified;
 

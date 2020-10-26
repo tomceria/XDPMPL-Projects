@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using TourDuLich_GUI.DAL;
@@ -112,9 +113,17 @@ namespace TourDuLich_GUI.Models {
         /// <param name="id">TourID</param>
         /// <param name="startDate">Tour group start date</param>
         /// <returns>Tour price on specific date</returns>
-        public static long GetPriceOnDate(int id, DateTime startDate) {
-            long price = 0;
-            price = TourDAL.GetPriceOnDate(id, startDate);
+        public static long GetTourPriceOrPriceRef(int tourId, DateTime startDate) {
+            long price;
+
+            var tourPrice = TourDAL.GetTourPriceOnDate(tourId, startDate);
+
+            if (tourPrice != null) {
+                price = tourPrice.Value;
+            } else {
+                price = GetOne(tourId).PriceRef;
+            }
+
             return price;
         }
     }

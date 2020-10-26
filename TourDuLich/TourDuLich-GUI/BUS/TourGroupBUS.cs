@@ -25,38 +25,19 @@ namespace TourDuLich_GUI.Models
 
         public TourGroup Create()
         {
+            this.PriceGroup = CalculateTourGroupPrice(this);
             return TourGroupDAL.CreateOne(this);
         }
 
         public void Update()
         {
+            this.PriceGroup = CalculateTourGroupPrice(this);
             TourGroupDAL.UpdateOne(this);
         }
 
-        /// <param name="tourGroup">A tour group to add detail</param>
         /// <param name="customer">Customer to be added to tour group details</param>
-        public static bool isExistTourGroupDetail(TourGroup tourGroup, int idCustomer) {
-
-            foreach (TourGroupDetail tourGroupDetail in tourGroup.TourGroupDetails) {
-                //If exist return true
-                if (tourGroupDetail.CustomerID == idCustomer) return true;
-            }
-            //If not exist return false
-            return false;
-        }
-
-        public static bool isExistTourGroupStaff(TourGroup tourGroup, int idStaff) {
-
-            foreach (TourGroupStaff tourGroupStaff in tourGroup.TourGroupStaffs) {
-                //If exist return true
-                if (tourGroupStaff.StaffID == idStaff) return true;
-            }
-            //If not exist return false
-            return false;
-        }
-
         public void AddTourGroupDetailToTourGroup(Customer customer) {
-            if (isExistTourGroupDetail(this, customer.ID)) {
+            if (this.doesExistTourGroupDetail(customer.ID)) {
                 Console.WriteLine("Customer exist");
                 return;
             }
@@ -73,7 +54,7 @@ namespace TourDuLich_GUI.Models
         /// <param name="tourGroup">A tour group to add staff</param>
         /// <param name="staff">Staff to be added to tour group staffs</param>
         public void AddTourGroupStaffToTourGroup(Staff staff) {
-            if (isExistTourGroupStaff(this, staff.ID)) {
+            if (this.doesExistTourGroupStaff(staff.ID)) {
                 Console.WriteLine("Staff exist");
                 return;
             }
@@ -106,7 +87,7 @@ namespace TourDuLich_GUI.Models
         /// </summary>
         /// <returns>TourGroupPrice</returns>
         public static long CalculateTourGroupPrice(TourGroup tourGroup) {
-            var tourPrice = Tour.GetPriceOnDate(tourGroup.TourID, tourGroup.DateStart);
+            var tourPrice = Tour.GetTourPriceOrPriceRef(tourGroup.TourID, tourGroup.DateStart);
 
             long costs = 0;
             foreach (TourGroupCost cost in tourGroup.TourGroupCosts) {
@@ -115,5 +96,27 @@ namespace TourDuLich_GUI.Models
 
             return tourPrice + costs;
         }
+
+
+        private bool doesExistTourGroupDetail(int idCustomer) {
+
+            foreach (TourGroupDetail tourGroupDetail in this.TourGroupDetails) {
+                //If exist return true
+                if (tourGroupDetail.CustomerID == idCustomer) return true;
+            }
+            //If not exist return false
+            return false;
+        }
+
+        private bool doesExistTourGroupStaff(int idStaff) {
+
+            foreach (TourGroupStaff tourGroupStaff in this.TourGroupStaffs) {
+                //If exist return true
+                if (tourGroupStaff.StaffID == idStaff) return true;
+            }
+            //If not exist return false
+            return false;
+        }
+
     }
 }

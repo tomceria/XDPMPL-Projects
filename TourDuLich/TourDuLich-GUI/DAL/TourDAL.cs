@@ -165,23 +165,14 @@ namespace TourDuLich_GUI.DAL {
             }
         }
 
-        public static long GetPriceOnDate(int id, DateTime startDate) {
-            long price = 0;
-
-            var tourPrice = _ctx.TourPrices.Where(tp => tp.TourID == id
+        public static TourPrice GetTourPriceOnDate(int tourId, DateTime startDate)
+        {
+            var tourPrice = _ctx.TourPrices.Where(tp => tp.TourID == tourId
                 && DbFunctions.TruncateTime(tp.TimeStart) <= startDate.Date
                 && startDate.Date <= DbFunctions.TruncateTime(tp.TimeEnd))
                 .FirstOrDefault();
 
-            if (tourPrice != null) {
-                price = tourPrice.Value;
-            } else {
-                var tour = _ctx.Tours.Find(id);
-                price = tour.PriceRef;
-            }
-
-            return price;
+            return tourPrice;
         }
-
     }
 }
