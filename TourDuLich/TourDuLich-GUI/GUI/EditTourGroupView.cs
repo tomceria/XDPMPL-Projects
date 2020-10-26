@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using DevExpress.XtraLayout;
 using TourDuLich_GUI.Models;
-using TourDuLich_GUI.BUS;
+using TourDuLich_GUI.DAL;
 using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraEditors.Controls;
 using System.Windows.Forms;
@@ -14,11 +14,11 @@ namespace TourDuLich_GUI.GUI
 {
     public partial class EditTourGroupView : DevExpress.XtraBars.Ribbon.RibbonForm
     {
-        TourGroupBUS TourGroupBUS = new TourGroupBUS();
-        TourBUS TourBUS = new TourBUS();
-        CustomerBUS CustomerBUS = new CustomerBUS();
-        StaffBUS StaffBUS = new StaffBUS();
-        CostTypeBUS CostTypeBUS = new CostTypeBUS();
+        TourGroupDAL TourGroupBUS = new TourGroupDAL();
+        TourDAL TourBUS = new TourDAL();
+        CustomerDAL CustomerBUS = new CustomerDAL();
+        StaffDAL StaffBUS = new StaffDAL();
+        CostTypeDAL CostTypeBUS = new CostTypeDAL();
 
         private TourGroup _item;
         private List<TourGroupDetail> _tourGroupDetails;

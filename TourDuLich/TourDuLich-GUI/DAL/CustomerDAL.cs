@@ -1,15 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using TourDuLich_GUI.DAL;
 using TourDuLich_GUI.Models;
 
-namespace TourDuLich_GUI.BUS
+namespace TourDuLich_GUI.DAL
 {
-    class CustomerBUS
+    class CustomerDAL
     {
         private TourContext _ctx;
 
-        public CustomerBUS()
+        public CustomerDAL()
         {
             _ctx = new TourContext();
         }

@@ -6,12 +6,11 @@ using System.Drawing.Text;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TourDuLich_GUI.DAL;
 using TourDuLich_GUI.Models;
 
-namespace TourDuLich_GUI.BUS
+namespace TourDuLich_GUI.DAL
 {
-    public class TourDetailBUS
+    public class TourDetailDAL
     {
 
         TourContext _ctx = new TourContext();

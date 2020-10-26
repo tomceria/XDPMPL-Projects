@@ -8,11 +8,10 @@ using System.Linq;
 using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
-using TourDuLich_GUI.DAL;
 using TourDuLich_GUI.Models;
 
-namespace TourDuLich_GUI.BUS {
-    public class TourBUS {
+namespace TourDuLich_GUI.DAL {
+    public class TourDAL {
         TourContext _ctx = new TourContext();
 
         public async Task<List<Tour>> GetAll() {

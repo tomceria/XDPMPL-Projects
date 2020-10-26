@@ -4,18 +4,17 @@ using System.Data.Entity;
 using System.Data.Entity.Validation;
 using System.Data.SqlClient;
 using System.Linq;
-using TourDuLich_GUI.DAL;
 using TourDuLich_GUI.Models;
 
-namespace TourDuLich_GUI.BUS {
+namespace TourDuLich_GUI.DAL {
 
-    class TourGroupBUS {
+    class TourGroupDAL {
         private TourContext _ctx;
-        private TourBUS tourBUS;
+        private TourDAL tourBUS;
 
-        public TourGroupBUS() {
+        public TourGroupDAL() {
             _ctx = new TourContext();
-            tourBUS = new TourBUS();
+            tourBUS = new TourDAL();
         }
 
         public List<TourGroup> GetAll() {

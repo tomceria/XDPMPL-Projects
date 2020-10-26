@@ -12,7 +12,6 @@ using DevExpress.XtraBars;
 using System.ComponentModel.DataAnnotations;
 using TourDuLich_GUI.Models;
 using System.Data.Entity;
-using TourDuLich_GUI.BUS;
 using System.Collections.ObjectModel;
 using TourDuLich_GUI.DAL;
 
@@ -20,8 +19,8 @@ namespace TourDuLich_GUI.GUI
 {
     public partial class MainView : DevExpress.XtraBars.Ribbon.RibbonForm
     {
-        TourBUS TourBUS = new TourBUS();
-        TourGroupBUS TourGroupBUS = new TourGroupBUS();
+        TourDAL TourBUS = new TourDAL();
+        TourGroupDAL TourGroupBUS = new TourGroupDAL();
 
         enum Page
         {

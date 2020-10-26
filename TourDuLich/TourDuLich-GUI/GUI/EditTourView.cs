@@ -14,16 +14,16 @@ using DevExpress.XtraEditors;
 using DevExpress.XtraGrid;
 using DevExpress.XtraLayout;
 using DevExpress.XtraLayout.Helpers;
-using TourDuLich_GUI.BUS;
+using TourDuLich_GUI.DAL;
 using TourDuLich_GUI.Models;
 
 namespace TourDuLich_GUI.GUI
 {
     public partial class EditTourView : DevExpress.XtraBars.Ribbon.RibbonForm
     {
-        TourBUS TourBUS = new TourBUS();
-        TourTypeBUS TourTypeBUS = new TourTypeBUS();
-        DestinationBUS DestinationBUS = new DestinationBUS();
+        TourDAL TourBUS = new TourDAL();
+        TourTypeDAL TourTypeBUS = new TourTypeDAL();
+        DestinationDAL DestinationBUS = new DestinationDAL();
         private Tour _item;
         private bool isUpdate = false;
 

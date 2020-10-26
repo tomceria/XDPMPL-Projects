@@ -77,7 +77,7 @@
     <Compile Include="DAL\StaffDAL.cs" />
     <Compile Include="DAL\TourDAL.cs" />
     <Compile Include="DAL\TourGroupDAL.cs" />
-    <Compile Include="DAL\TourGroupCostBUS.cs" />
+    <Compile Include="DAL\TourGroupCostDAL.cs" />
     <Compile Include="DAL\TourGroupDetailDAL.cs" />
     <Compile Include="DAL\TourGroupStaffDAL.cs" />
     <Compile Include="DAL\TourDetailDAL.cs" />

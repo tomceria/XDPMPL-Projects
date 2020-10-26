@@ -4,12 +4,11 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TourDuLich_GUI.DAL;
 using TourDuLich_GUI.Models;
 
-namespace TourDuLich_GUI.BUS
+namespace TourDuLich_GUI.DAL
 {
-    class TourTypeBUS
+    class TourTypeDAL
     {
         TourContext _ctx = new TourContext();
 
