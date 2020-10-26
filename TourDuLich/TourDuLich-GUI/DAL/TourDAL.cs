@@ -8,7 +8,7 @@ using System.Linq;
 using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
-using TourDuLich_GUI.Models;
+using TourDuLich_GUI.BUS;
 
 namespace TourDuLich_GUI.DAL {
     public class TourDAL {

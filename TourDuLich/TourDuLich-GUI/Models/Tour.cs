@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace TourDuLich_GUI.Models {
+namespace TourDuLich_GUI.BUS {
     public partial class Tour {
         public Tour()
         {

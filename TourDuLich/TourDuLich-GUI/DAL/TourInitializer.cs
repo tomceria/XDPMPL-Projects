@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using TourDuLich_GUI.Models;
+using TourDuLich_GUI.BUS;
 using System.Data.Entity;
 
 namespace TourDuLich_GUI.DAL {

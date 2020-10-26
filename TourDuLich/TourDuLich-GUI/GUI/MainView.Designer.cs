@@ -71,7 +71,7 @@
             // 
             // gridControl_Tours
             // 
-            this.gridControl_Tours.DataSource = typeof(TourDuLich_GUI.Models.Tour);
+            this.gridControl_Tours.DataSource = typeof(TourDuLich_GUI.BUS.Tour);
             this.gridControl_Tours.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridControl_Tours.Location = new System.Drawing.Point(0, 0);
             this.gridControl_Tours.MainView = this.gridView_Tours;
@@ -207,7 +207,7 @@
             // 
             // tourBindingSource
             // 
-            this.tourBindingSource.DataSource = typeof(TourDuLich_GUI.Models.Tour);
+            this.tourBindingSource.DataSource = typeof(TourDuLich_GUI.BUS.Tour);
             // 
             // xtraTabControl_Tours
             // 
@@ -251,7 +251,7 @@
             // 
             // tourGroupBindingSource
             // 
-            this.tourGroupBindingSource.DataSource = typeof(TourDuLich_GUI.Models.TourGroup);
+            this.tourGroupBindingSource.DataSource = typeof(TourDuLich_GUI.BUS.TourGroup);
             // 
             // gridView_TourGroups
             // 

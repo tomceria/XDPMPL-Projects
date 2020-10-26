@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using DevExpress.XtraLayout;
-using TourDuLich_GUI.Models;
+using TourDuLich_GUI.BUS;
 using TourDuLich_GUI.DAL;
 using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraEditors.Controls;

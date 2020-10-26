@@ -15,7 +15,7 @@ using DevExpress.XtraGrid;
 using DevExpress.XtraLayout;
 using DevExpress.XtraLayout.Helpers;
 using TourDuLich_GUI.DAL;
-using TourDuLich_GUI.Models;
+using TourDuLich_GUI.BUS;
 
 namespace TourDuLich_GUI.GUI
 {

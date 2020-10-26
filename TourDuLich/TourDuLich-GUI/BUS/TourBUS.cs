@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TourDuLich_GUI.DAL;
 
-namespace TourDuLich_GUI.Models {
+namespace TourDuLich_GUI.BUS {
     public partial class Tour
     {
         public static List<Tour> GetAll() {

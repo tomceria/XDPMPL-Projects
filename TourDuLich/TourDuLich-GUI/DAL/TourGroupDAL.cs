@@ -4,7 +4,7 @@ using System.Data.Entity;
 using System.Data.Entity.Validation;
 using System.Data.SqlClient;
 using System.Linq;
-using TourDuLich_GUI.Models;
+using TourDuLich_GUI.BUS;
 
 namespace TourDuLich_GUI.DAL {
 

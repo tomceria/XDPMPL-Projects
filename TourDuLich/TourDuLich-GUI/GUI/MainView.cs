@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using DevExpress.XtraBars;
 using System.ComponentModel.DataAnnotations;
-using TourDuLich_GUI.Models;
+using TourDuLich_GUI.BUS;
 using System.Data.Entity;
 using System.Collections.ObjectModel;
 
