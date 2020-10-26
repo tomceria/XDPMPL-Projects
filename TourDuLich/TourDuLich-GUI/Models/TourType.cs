@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TourDuLich_GUI.Models
 {
-    public class TourType
+    public partial class TourType
     {
         [Key, Display(AutoGenerateField = false, Name = "Mã loại Tour")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

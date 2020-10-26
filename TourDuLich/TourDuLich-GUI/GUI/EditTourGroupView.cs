@@ -14,12 +14,6 @@ namespace TourDuLich_GUI.GUI
 {
     public partial class EditTourGroupView : DevExpress.XtraBars.Ribbon.RibbonForm
     {
-        TourGroupDAL TourGroupBUS = new TourGroupDAL();
-        TourDAL TourBUS = new TourDAL();
-        CustomerDAL CustomerBUS = new CustomerDAL();
-        StaffDAL StaffBUS = new StaffDAL();
-        CostTypeDAL CostTypeBUS = new CostTypeDAL();
-
         private TourGroup _item;
         private List<TourGroupDetail> _tourGroupDetails;
         private List<TourGroupStaff> _tourGroupStaffs;
@@ -52,14 +46,14 @@ namespace TourDuLich_GUI.GUI
             InitializeDataSources();
         }
 
-        private async void InitializeDataSources()
+        private void InitializeDataSources()
         {
             // Data fetch
-            TourGroup item = TourGroupBUS.GetOne(_item.ID);
-            List<Tour> tours = await TourBUS.GetAll();
-            List<Customer> customers = CustomerBUS.GetAll();
-            List<Staff> staffs = StaffBUS.GetAll();
-            List<CostType> costTypes = CostTypeBUS.GetAll();
+            TourGroup item = TourGroup.GetOne(_item.ID);
+            List<Tour> tours = Tour.GetAll();
+            List<Customer> customers = Customer.GetAll();
+            List<Staff> staffs = Staff.GetAll();
+            List<CostType> costTypes = CostType.GetAll();
 
             if (item == null)
             {
@@ -252,10 +246,13 @@ namespace TourDuLich_GUI.GUI
 
             if (isUpdate)
             {
-                TourGroupBUS.UpdateOne(_item);
+                _item.Update();
             } else
             {
-                var temp = TourGroupBUS.CreateOne(_item);
+                var temp = _item.Create();
+
+/*                var temp = TourGroupBUS.CreateOne(_item);
+*/
                 if (temp.ID != 0)   // tourGroup added to Database => ID changed from 0
                 {
                     isUpdate = true;
@@ -277,7 +274,7 @@ namespace TourDuLich_GUI.GUI
                 return;
             }
 
-            TourGroupBUS.AddTourGroupDetailToTourGroup(_item, customer);
+            _item.AddTourGroupDetailToTourGroup(customer);
             //((BindingList<Customer>)gridView_Customers.GridControl.DataSource).Remove(customer);
         }
 
@@ -290,7 +287,7 @@ namespace TourDuLich_GUI.GUI
             }
             //Customer customer = tourGroupDetail.Customer;
 
-            TourGroupBUS.DeleteTourGroupDetailFromTourGroup(_item, tourGroupDetail);
+            _item.DeleteTourGroupDetailFromTourGroup(tourGroupDetail);
 
             // ((BindingList<Customer>)gridView_Customers.GridControl.DataSource).Add(customer);
         }
@@ -304,7 +301,7 @@ namespace TourDuLich_GUI.GUI
             }
 
             Console.WriteLine(_item.TourGroupStaffs.Count);
-            TourGroupBUS.AddTourGroupStaffToTourGroup(_item, staff);
+            _item.AddTourGroupStaffToTourGroup(staff);
             gridView_TourGroupStaffs.GridControl.RefreshDataSource();
             Console.WriteLine(_item.TourGroupStaffs.Count);
 
@@ -326,7 +323,7 @@ namespace TourDuLich_GUI.GUI
             //Staff staff = tourGroupDetail.Staff;
 
             Console.WriteLine(_item.TourGroupStaffs.Count);
-            TourGroupBUS.DeleteTourGroupStaffFromTourGroup(_item, tourGroupStaff);
+            _item.DeleteTourGroupStaffFromTourGroup(tourGroupStaff);
             gridView_TourGroupStaffs.GridControl.RefreshDataSource();
             Console.WriteLine(_item.TourGroupStaffs.Count);
 
@@ -336,7 +333,7 @@ namespace TourDuLich_GUI.GUI
 
         private void handleAddTourGroupCostToTourGroup()
         {
-            TourGroupBUS.CreateTourGroupCostForTour(_item);
+            _item.CreateTourGroupCostForTour();
             gridView_TourGroupCosts.GridControl.RefreshDataSource();
         }
 
@@ -349,7 +346,7 @@ namespace TourDuLich_GUI.GUI
             ICollection<TourGroupCost> tourGroupCosts = _item.TourGroupCosts;
             TourGroupCost tourGroupCost = tourGroupCosts.ElementAt(gridView_TourGroupCosts.FocusedRowHandle);
 
-            TourGroupBUS.DeleteTourGroupCostFromTour(tourGroupCost);
+            _item.DeleteTourGroupCostFromTour(tourGroupCost);
             gridView_TourGroupCosts.GridControl.RefreshDataSource();
         }
 

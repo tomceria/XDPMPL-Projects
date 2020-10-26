@@ -6,32 +6,32 @@ namespace TourDuLich_GUI.DAL
 {
     class StaffDAL
     {
-        private TourContext _ctx;
+        private static TourContext _ctx;
 
         public StaffDAL()
         {
             _ctx = new TourContext();
         }
 
-        public List<Staff> GetAll()
+        public static List<Staff> GetAll()
         {
             var staffs = _ctx.Staffs.ToList();
 
             return staffs;
         }
-        public Staff GetOne(int id)
+        public static Staff GetOne(int id)
         {
             // if found => return staff, else return null
             return _ctx.Staffs.Find(id);
         }
 
-        public void CreateOne(Staff staff)
+        public static void CreateOne(Staff staff)
         {
             _ctx.Staffs.Add(staff);
             _ctx.SaveChanges();
         }
 
-        public Staff UpdateOne(Staff staff)
+        public static Staff UpdateOne(Staff staff)
         {
             // get by id
             var staffToUpdate = _ctx.Staffs.Find(staff.ID);
@@ -45,7 +45,7 @@ namespace TourDuLich_GUI.DAL
             return staffToUpdate;
         }
 
-        public void DeleteOne(int id)
+        public static void DeleteOne(int id)
         {
             var staff = _ctx.Staffs.Find(id);
             _ctx.Staffs.Remove(staff);

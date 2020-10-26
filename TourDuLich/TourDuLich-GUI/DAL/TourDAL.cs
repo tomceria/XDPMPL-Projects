@@ -12,18 +12,19 @@ using TourDuLich_GUI.Models;
 
 namespace TourDuLich_GUI.DAL {
     public class TourDAL {
-        TourContext _ctx = new TourContext();
+        static TourContext _ctx = new TourContext();
 
-        public async Task<List<Tour>> GetAll() {
-            List<Tour> result = await _ctx.Set<Tour>().ToListAsync();
+        public static List<Tour> GetAll() {
+            List<Tour> result = _ctx.Set<Tour>().ToList();
             return result;
         }
-        public async Task<Tour> GetOne(int id) {
-            Tour result = await _ctx.Set<Tour>()
+
+        public static Tour GetOne(int id) {
+            Tour result = _ctx.Set<Tour>()
                 .Include(o => o.TourType)
                 .Include(o => o.TourPrices)
                 .Include(o => o.TourDetails)
-                .FirstOrDefaultAsync(o => o.ID == id);
+                .FirstOrDefault(o => o.ID == id);
 
             if (result == null) {
                 return null;
@@ -39,7 +40,7 @@ namespace TourDuLich_GUI.DAL {
             return result;
         }
 
-        public void CreateOne(Tour item) {
+        public static Tour CreateOne(Tour item) {
             ValidateOne(item);
 
             // This "item" is unattached => ATTACH!
@@ -47,10 +48,10 @@ namespace TourDuLich_GUI.DAL {
 
             _ctx.SaveChanges();
 
-            return;
+            return item;
         }
 
-        public void UpdateOne(Tour item) {
+        public static void UpdateOne(Tour item) {
             ValidateOne(item);
 
             // as "item" is loaded from a DataSource/BindingList, it is ALREADY ATTACHED => Must detach TourPrices before deleting/adding
@@ -110,7 +111,7 @@ namespace TourDuLich_GUI.DAL {
             return;
         }
 
-        public void DeleteOne(Tour item) {
+        public static void DeleteOne(Tour item) {
             Tour tour = _ctx.Set<Tour>().Include(o => o.TourPrices).First(o => o.ID == item.ID);
             _ctx.Tours.Remove(tour);
             /*_ctx.Entry(tour).State = EntityState.Deleted;
@@ -119,7 +120,7 @@ namespace TourDuLich_GUI.DAL {
 
         }
 
-        public bool ValidateOne(Tour item) {
+        public static bool ValidateOne(Tour item) {
             // Sanitize => update item
             SanitizeTimeOfTourPrices(item.TourPrices);
             // End Sanitize
@@ -143,101 +144,28 @@ namespace TourDuLich_GUI.DAL {
             return true;
         }
 
-        public void SanitizeTimeOfTourPrices(ICollection<TourPrice> tourPrices) {
+        public static TourDetail CreateTourDetail(Tour tour, int order, int destinationId)
+        {
+            // Destination is fetched from ANOTHER Context instance => Make a copy
+            Destination newDestination = _ctx.Destinations.First(o => o.ID == destinationId);
+
+            return new TourDetail()
+            {
+                Tour = tour,
+                Order = order,
+                Destination = newDestination,
+                DestinationID = destinationId
+            };
+        }
+
+        public static void SanitizeTimeOfTourPrices(ICollection<TourPrice> tourPrices) {
             foreach (TourPrice tourPrice in tourPrices) {
                 tourPrice.TimeStart = new DateTime(tourPrice.TimeStart.Year, tourPrice.TimeStart.Month, tourPrice.TimeStart.Day, 0, 0, 0);
                 tourPrice.TimeEnd = new DateTime(tourPrice.TimeEnd.Year, tourPrice.TimeEnd.Month, tourPrice.TimeEnd.Day, 23, 59, 59);
             }
         }
 
-        public void CreateTourPriceForTour(Tour item) {
-            TourPrice tourPrice = new TourPrice(item);
-            item.TourPrices.Add(tourPrice);
-        }
-
-        public void DeleteTourPriceFromTour(TourPrice tourPrice) {
-            Tour tour = tourPrice.Tour;
-            tour.TourPrices.Remove(tourPrice);
-        }
-
-        public void AddTourDetailToTour(Tour tour, Destination destination) {
-            // Destination is fetched from ANOTHER Context instance => Make a copy
-            Destination newDestination = _ctx.Destinations.First(o => o.ID == destination.ID);
-
-            int lastOrderValue = 0;
-            if (tour.TourDetails != null && tour.TourDetails.Count > 0) {
-                lastOrderValue = tour.TourDetails.Last().Order; // Get value order of LastTourDetail
-            }
-
-            TourDetail tourDetail = new TourDetail() {
-                Tour = tour,
-                Order = lastOrderValue + 1,
-                Destination = newDestination
-            };
-            Console.WriteLine("AddTourDetailToTour : Updated length  =  " + tour.TourDetails.Count);
-            tour.TourDetails.Add(tourDetail);
-        }
-
-        public void DeleteTourDetailFromTour(TourDetail tourDetail) {
-            Tour tour = tourDetail.Tour;
-            tour.TourDetails.Remove(tourDetail);
-            SortTourDetails(tour); // Sort TourDetail
-        }
-
-        public void SortTourDetails(Tour tour) {
-            int tdIndex = 1;
-            foreach (TourDetail t in tour.TourDetails) {
-                t.Order = tdIndex;
-                tdIndex++;
-            }
-        }
-
-        public void MoveUpTourDetailOfTour(TourDetail tourDetail) {
-            //Skip first element
-            if (tourDetail.Order > 1) {
-                //Get previous value order of TourDetail
-                int previousOrderTourDetail = tourDetail.Order - 1;
-                //Because Row Table begin from 0 but Order begin from 1
-
-                //Get tourDetail above current tourDetail
-                TourDetail previousTourDetail = tourDetail.Tour.TourDetails.First(o => o.Order == previousOrderTourDetail);
-
-                SwapTourDetail(tourDetail, previousTourDetail);
-
-            }
-
-        }
-
-        public void MoveDownTourDetailOfTour(TourDetail tourDetail)// Current TourDetail
-        {
-            int lengthTourDetails = tourDetail.Tour.TourDetails.Count;
-            //Skip last element
-            if (tourDetail.Order < lengthTourDetails) {
-                //Get next value order of TourDetail
-                int nextOrderOfTourDetail = tourDetail.Order + 1;
-
-                //Get tourDetail below current tourDetail
-                TourDetail nextTourDetail = tourDetail.Tour.TourDetails.First(o => o.Order == nextOrderOfTourDetail);
-                Console.WriteLine("next value order= " + nextTourDetail.Order + "current value order= " + tourDetail.Order);
-                SwapTourDetail(tourDetail, nextTourDetail);
-
-            }
-        }
-
-        private void SwapTourDetail(TourDetail tourDetail_1, TourDetail tourDetail_2) {
-            int temp_OrderOfTourDetail_1 = tourDetail_1.Order;
-
-            tourDetail_1.Order = tourDetail_2.Order;
-            tourDetail_2.Order = temp_OrderOfTourDetail_1;
-        }
-
-        /// <summary>
-        /// Get tour price on specific date
-        /// </summary>
-        /// <param name="id">TourID</param>
-        /// <param name="startDate">Tour group start date</param>
-        /// <returns>Tour price on specific date</returns>
-        public long GetPriceOnDate(int id, DateTime startDate) {
+        public static long GetPriceOnDate(int id, DateTime startDate) {
             long price = 0;
 
             var tourPrice = _ctx.TourPrices.Where(tp => tp.TourID == id
@@ -254,5 +182,6 @@ namespace TourDuLich_GUI.DAL {
 
             return price;
         }
+
     }
 }

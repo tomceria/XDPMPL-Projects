@@ -6,32 +6,32 @@ namespace TourDuLich_GUI.DAL
 {
     class CustomerDAL
     {
-        private TourContext _ctx;
+        private static TourContext _ctx;
 
         public CustomerDAL()
         {
             _ctx = new TourContext();
         }
 
-        public List<Customer> GetAll()
+        public static List<Customer> GetAll()
         {
             var customers = _ctx.Customers.ToList();
 
             return customers;
         }
-        public Customer GetOne(int id)
+        public static Customer GetOne(int id)
         {
             // if found => return customer, else return null
             return _ctx.Customers.Find(id);
         }
 
-        public void CreateOne(Customer customer)
+        public static void CreateOne(Customer customer)
         {
             _ctx.Customers.Add(customer);
             _ctx.SaveChanges();
         }
 
-        public Customer UpdateOne(Customer customer)
+        public static Customer UpdateOne(Customer customer)
         {
             // get by id
             var customerToUpdate = _ctx.Customers.Find(customer.ID);
@@ -45,7 +45,7 @@ namespace TourDuLich_GUI.DAL
             return customerToUpdate;
         }
 
-        public void DeleteOne(int id)
+        public static void DeleteOne(int id)
         {
             var customer = _ctx.Customers.Find(id);
             _ctx.Customers.Remove(customer);

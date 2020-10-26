@@ -9,26 +9,24 @@ using TourDuLich_GUI.Models;
 namespace TourDuLich_GUI.DAL {
 
     class TourGroupDAL {
-        private TourContext _ctx;
-        private TourDAL tourBUS;
+        private static TourContext _ctx;
 
         public TourGroupDAL() {
             _ctx = new TourContext();
-            tourBUS = new TourDAL();
         }
 
-        public List<TourGroup> GetAll() {
+        public static List<TourGroup> GetAll() {
             var tourGroups = _ctx.TourGroups.ToList();
 
             return tourGroups;
         }
-        public TourGroup GetOne(int id) {
+        public static TourGroup GetOne(int id) {
             // if found => return tourGroup, else return null
             return _ctx.TourGroups.Find(id);
         }
 
-        public TourGroup CreateOne(TourGroup tourGroup) {
-            tourGroup.PriceGroup = this.CalculateTourGroupPrice(tourGroup);
+        public static TourGroup CreateOne(TourGroup tourGroup) {
+            tourGroup.PriceGroup = TourGroup.CalculateTourGroupPrice(tourGroup);
 
             _ctx.Entry(tourGroup).State = EntityState.Added;
             _ctx.SaveChanges();
@@ -36,14 +34,14 @@ namespace TourDuLich_GUI.DAL {
             return tourGroup;
         }
 
-        public TourGroup UpdateOne(TourGroup tourGroup) {
+        public static TourGroup UpdateOne(TourGroup tourGroup) {
             var tourGroupToUpdate = _ctx.TourGroups.Find(tourGroup.ID);
 
             if (tourGroupToUpdate == null) {
                 return null;
             }
 
-            tourGroup.PriceGroup = this.CalculateTourGroupPrice(tourGroup);
+            tourGroup.PriceGroup = TourGroup.CalculateTourGroupPrice(tourGroup);
 
             _ctx.Entry(tourGroup).State = EntityState.Modified;
 
@@ -96,7 +94,7 @@ namespace TourDuLich_GUI.DAL {
             return tourGroup;
         }
 
-        public void DeleteOne(int id) {
+        public static void DeleteOne(int id) {
             var tourGroup = _ctx.TourGroups.Find(id);
 
             _ctx.TourGroupCosts.RemoveRange(tourGroup.TourGroupCosts);
@@ -107,60 +105,22 @@ namespace TourDuLich_GUI.DAL {
             _ctx.SaveChanges();
         }
 
-        /// <param name="tourGroup">A tour group to add detail</param>
-        /// <param name="customer">Customer to be added to tour group details</param>
 
-        public bool isExistTourGroupDetail(TourGroup tourGroup, int idCustomer) {
-
-            foreach (TourGroupDetail tourGroupDetail in tourGroup.TourGroupDetails) {
-                //If exist return true
-                if (tourGroupDetail.CustomerID == idCustomer) return true;
-            }
-            //If not exist return false
-            return false;
-        }
-
-        public bool isExistTourGroupStaff(TourGroup tourGroup, int idStaff) {
-
-            foreach (TourGroupStaff tourGroupStaff in tourGroup.TourGroupStaffs) {
-                //If exist return true
-                if (tourGroupStaff.StaffID == idStaff) return true;
-            }
-            //If not exist return false
-            return false;
-        }
-
-        public void AddTourGroupDetailToTourGroup(TourGroup tourGroup, Customer customer) {
-            if (isExistTourGroupDetail(tourGroup, customer.ID)) {
-                Console.WriteLine("Customer exist");
-                return;
-            }
-
-            // Customer is fetched from ANOTHER Context instance => Make a copy
+        public static TourGroupDetail CreateTourGroupDetail(TourGroup tourGroup, Customer customer)
+        {
             Customer newCustomer = _ctx.Customers.First(o => o.ID == customer.ID);
 
             TourGroupDetail tourGroupDetail = new TourGroupDetail() {
-
                 TourGroup = tourGroup,
                 Customer = newCustomer,
                 CustomerID = newCustomer.ID
             };
-            tourGroup.TourGroupDetails.Add(tourGroupDetail);
+
+            return tourGroupDetail;
         }
 
-        /// <param name="tourGroupDetail">A detail to be deleted</param>
-        public void DeleteTourGroupDetailFromTourGroup(TourGroup tourGroup, TourGroupDetail tourGroupDetail) {
-            tourGroup.TourGroupDetails.Remove(tourGroupDetail);
-        }
-
-        /// <param name="tourGroup">A tour group to add staff</param>
-        /// <param name="staff">Staff to be added to tour group staffs</param>
-        public void AddTourGroupStaffToTourGroup(TourGroup tourGroup, Staff staff) {
-            if (isExistTourGroupStaff(tourGroup, staff.ID)) {
-                Console.WriteLine("Staff exist");
-                return;
-            }
-            // Staff is fetched from ANOTHER Context instance => Make a copy
+        public static TourGroupStaff CreateTourGroupStaff(TourGroup tourGroup, Staff staff)
+        {
             Staff newStaff = _ctx.Staffs.First(o => o.ID == staff.ID);
 
             TourGroupStaff tourGroupStaff = new TourGroupStaff() {
@@ -170,46 +130,20 @@ namespace TourDuLich_GUI.DAL {
                 StaffTask = TourGroupStaff.Tasks.First()
             };
 
-            tourGroup.TourGroupStaffs.Add(tourGroupStaff);
+            return tourGroupStaff;
         }
 
-        /// <param name="tourGroupStaff">A tour group staff to be deleted</param>
-        public void DeleteTourGroupStaffFromTourGroup(TourGroup tourGroup, TourGroupStaff tourGroupStaff) {
-            tourGroup.TourGroupStaffs.Remove(tourGroupStaff);
-        }
-
-        /// <param name="tourGroup">A tour group to create new cost</param>
-        public void CreateTourGroupCostForTour(TourGroup tourGroup) {
+        public static TourGroupCost CreateTourGroupCost(TourGroup tourGroup)
+        {
             var costType = _ctx.CostTypes.First();
-            TourGroupCost tourGroupCost = new TourGroupCost {
-                TourGroupID = tourGroup.ID,
+
+            TourGroupCost tourGroupCost = new TourGroupCost() {
                 TourGroup = tourGroup,
-                CostTypeID = costType.ID,
-                CostType = costType
+                CostType = costType,
+                CostTypeID = costType.ID
             };
 
-            tourGroup.TourGroupCosts.Add(tourGroupCost);
-        }
-
-        /// <param name="tourGroupCost">A tour group cost to be deleted</param>
-        public void DeleteTourGroupCostFromTour(TourGroupCost tourGroupCost) {
-            TourGroup tourGroup = tourGroupCost.TourGroup;
-            tourGroup.TourGroupCosts.Remove(tourGroupCost);
-        }
-
-        /// <summary>
-        /// Calculate TourGroupPrice = TourPrice + TourGroupCosts
-        /// </summary>
-        /// <returns>TourGroupPrice</returns>
-        public long CalculateTourGroupPrice(TourGroup tourGroup) {
-            var tourPrice = tourBUS.GetPriceOnDate(tourGroup.TourID, tourGroup.DateStart);
-
-            long costs = 0;
-            foreach (TourGroupCost cost in tourGroup.TourGroupCosts) {
-                costs += cost.Value;
-            }
-
-            return tourPrice + costs;
+            return tourGroupCost;
         }
     }
 }

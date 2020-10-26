@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TourDuLich_GUI.Models
 {
-    public class Staff
+    public partial class Staff
     {
         [Key, Display(AutoGenerateField = false)]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

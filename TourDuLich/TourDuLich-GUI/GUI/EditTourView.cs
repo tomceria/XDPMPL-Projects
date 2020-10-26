@@ -21,9 +21,6 @@ namespace TourDuLich_GUI.GUI
 {
     public partial class EditTourView : DevExpress.XtraBars.Ribbon.RibbonForm
     {
-        TourDAL TourBUS = new TourDAL();
-        TourTypeDAL TourTypeBUS = new TourTypeDAL();
-        DestinationDAL DestinationBUS = new DestinationDAL();
         private Tour _item;
         private bool isUpdate = false;
 
@@ -42,11 +39,11 @@ namespace TourDuLich_GUI.GUI
             InitializeDataSources();
         }
 
-        private async void InitializeDataSources() {
+        private void InitializeDataSources() {
             // Data fetch
-            Tour item = await TourBUS.GetOne(_item.ID);
-            List<TourType> tourTypes = await TourTypeBUS.GetAll();
-            List<Destination> destinations = await DestinationBUS.GetAll();
+            Tour item = Tour.GetOne(_item.ID);
+            List<TourType> tourTypes = TourType.GetAll();
+            List<Destination> destinations = Destination.GetAll();
 
             if (item == null) {
                 item = _item; // this "_item" would be INITIALIZED before running this method, meaning it has no reference to ANY BindingList, unlike EditTourView(Tour tour)
@@ -76,7 +73,10 @@ namespace TourDuLich_GUI.GUI
             LookUpEdit_TourTypeID.Properties.DisplayMember = "Name";
             LookUpEdit_TourTypeID.Properties.ValueMember = "ID";
             LookUpEdit_TourTypeID.Properties.PopulateColumns();
-            LookUpEdit_TourTypeID.Properties.Columns["Tours"].Visible = false;
+
+            // TODO: Fix this!!!
+/*            LookUpEdit_TourTypeID.Properties.Columns["Tours"].Visible = false;
+*/
             LookUpEdit_TourTypeID.EditValue = itemBL[0].TourTypeID;
 
             gridView_TourPrice.GridControl.DataSource = tourPricesBL;
@@ -88,10 +88,10 @@ namespace TourDuLich_GUI.GUI
         }
 
         private Tour getItemState() {
-            /*            return _item;
-             */
-            return ((BindingList<Tour>) dataLayoutControl_Tour.DataSource).ElementAt(0);
+            return _item;
 
+            /*            return ((BindingList<Tour>) dataLayoutControl_Tour.DataSource).ElementAt(0);
+            */
         }
 
         private Destination getSelectedDestination() {
@@ -103,10 +103,14 @@ namespace TourDuLich_GUI.GUI
         private void handleSaveTour() {
             try {
                 if (isUpdate) {
-                    TourBUS.UpdateOne(getItemState());
+                    _item.Update();
                 } else {
-                    TourBUS.CreateOne(getItemState());
-                    isUpdate = true;
+                    var temp = _item.Create();
+
+                    if (temp.ID != 0)   // tourGroup added to Database => ID changed from 0
+                    {
+                        isUpdate = true;
+                    }
                 }
             } catch (Exception e) {
                 MessageBox.Show(e.Message, "Lỗi dữ liệu nhập", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -121,8 +125,7 @@ namespace TourDuLich_GUI.GUI
         }
 
         private void handleDeleteTour() {
-            Tour selectedTour = getItemState();
-            TourBUS.DeleteOne(selectedTour);
+            Tour.DeleteOne(_item);
             // close window
             Dispose();
         }
@@ -132,7 +135,7 @@ namespace TourDuLich_GUI.GUI
         }
 
         private void handleAddTourPrice() {
-            TourBUS.CreateTourPriceForTour(getItemState());
+            _item.CreateTourPriceForTour();
             gridView_TourPrice.GridControl.RefreshDataSource();
         }
 
@@ -146,7 +149,7 @@ namespace TourDuLich_GUI.GUI
                 .TourPrices;
             TourPrice tourPrice = tourPrices.ElementAt(gridView_TourPrice.FocusedRowHandle);
 
-            TourBUS.DeleteTourPriceFromTour(tourPrice);
+            _item.DeleteTourPriceFromTour(tourPrice);
             gridView_TourPrice.GridControl.RefreshDataSource();
         }
 
@@ -154,14 +157,14 @@ namespace TourDuLich_GUI.GUI
         private void handleAddTourDetailToTour() {
             Destination destination = getSelectedDestination();
 
-            TourBUS.AddTourDetailToTour(_item, destination);
+            _item.AddTourDetailToTour(destination);
             listBoxControl_TourDetail.Refresh();
         }
 
         private void handleDeleteDestinationFromTour() {
             TourDetail tourDetail = (TourDetail) listBoxControl_TourDetail.SelectedItem;
             if (tourDetail != null) {
-                TourBUS.DeleteTourDetailFromTour(tourDetail);
+                _item.DeleteTourDetailFromTour(tourDetail);
                 listBoxControl_TourDetail.Refresh();
             }
         }
@@ -181,11 +184,11 @@ namespace TourDuLich_GUI.GUI
             if (direction < 0) // Move up
             {
                 if (selectedI == 0) { return; }
-                TourBUS.MoveUpTourDetailOfTour(tourDetail);
+                _item.MoveUpTourDetailOfTour(tourDetail);
             } else // Move down
             {
                 if (selectedI == tourDetails.Count - 1) { return; }
-                TourBUS.MoveDownTourDetailOfTour(tourDetail);
+                _item.MoveDownTourDetailOfTour(tourDetail);
             }
 
             listBoxControl_TourDetail.DataSource = getItemState().TourDetails.OrderBy(o => o.Order).ToList();

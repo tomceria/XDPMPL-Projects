@@ -10,23 +10,20 @@ namespace TourDuLich_GUI.DAL
 {
     public class DestinationDAL
     {
-        TourContext _ctx = new TourContext();
+        static TourContext _ctx = new TourContext();
 
-        public async Task<List<Destination>> GetAll()
+        public static List<Destination> GetAll()
         {
 
-            List<Destination> result = await _ctx.Set<Destination>().ToListAsync();
-            /*List<Tour> = */
-
-            Console.WriteLine("Count: " + result.Count);
+            List<Destination> result = _ctx.Set<Destination>().ToList();
 
             return result;
         }
-        public async Task<Destination> GetOne(int id)
+        public static Destination GetOne(int id)
         {
 
-            Destination result = await _ctx.Set<Destination>()                
-                .FirstOrDefaultAsync(o => o.ID == id);
+            Destination result = _ctx.Set<Destination>()                
+                .FirstOrDefault(o => o.ID == id);
 
             return result;
         }

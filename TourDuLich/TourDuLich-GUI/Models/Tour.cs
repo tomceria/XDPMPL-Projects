@@ -4,7 +4,14 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TourDuLich_GUI.Models {
-    public class Tour {
+    public partial class Tour {
+        public Tour()
+        {
+            TourDetails = new List<TourDetail>();
+            TourPrices = new List<TourPrice>();
+            TourGroups = new List<TourGroup>();
+        }
+
         [Key, Display(AutoGenerateField = false, Name = "Mã số tour")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
