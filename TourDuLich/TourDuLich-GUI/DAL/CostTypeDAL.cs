@@ -6,7 +6,7 @@ namespace TourDuLich_GUI.DAL
 {
     class CostTypeDAL
     {
-        private static TourContext _ctx;
+        static TourContext _ctx = new TourContext();
 
         public CostTypeDAL()
         {

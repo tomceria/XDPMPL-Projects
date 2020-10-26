@@ -16,7 +16,7 @@ namespace TourDuLich_GUI.Models
 
         public static TourGroup GetOne(int id)
         {
-            return TourGroup.GetOne(id);
+            return TourGroupDAL.GetOne(id);
         }
 
         public static void DeleteOne(int id) {

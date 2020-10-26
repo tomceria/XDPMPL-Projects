@@ -6,7 +6,7 @@ namespace TourDuLich_GUI.DAL
 {
     class CustomerDAL
     {
-        private static TourContext _ctx;
+        static TourContext _ctx = new TourContext();
 
         public CustomerDAL()
         {

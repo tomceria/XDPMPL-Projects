@@ -9,7 +9,7 @@ using TourDuLich_GUI.Models;
 namespace TourDuLich_GUI.DAL {
 
     class TourGroupDAL {
-        private static TourContext _ctx;
+        private static TourContext _ctx = new TourContext();
 
         public TourGroupDAL() {
             _ctx = new TourContext();
