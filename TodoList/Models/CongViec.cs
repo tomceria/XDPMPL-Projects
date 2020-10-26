@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TodoList.Models
 {
@@ -21,8 +22,11 @@ namespace TodoList.Models
         public Status TrangThai { get; set; }
         public Access Privacy { get; set; }
 
+        [ForeignKey("NhanVien")]
+        public int NhanVienID { get; set; }
+
         public virtual NhanVien NhanVien { get; set; }
-        public virtual ICollection<NhanVien> NgLamChung { get; set; }
+        public virtual ICollection<NguoiLamChung> NguoiLamChung { get; set; }
 
     }
 }

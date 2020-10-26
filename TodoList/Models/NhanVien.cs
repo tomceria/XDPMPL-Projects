@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace TodoList.Models
 {
     public enum Level
@@ -11,5 +14,7 @@ namespace TodoList.Models
         public string Email { get; set; }
         public string Password { get; set; }
         public Level Level { get; set; }
+
+        public virtual ICollection<CongViec> DSCongViec { get; set; }
     }
 }
