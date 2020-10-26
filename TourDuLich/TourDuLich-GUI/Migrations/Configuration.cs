@@ -3,7 +3,7 @@
     using System.Collections.Generic;
     using System.Data.Entity.Migrations;
     using System.Linq;
-    using TourDuLich_GUI.Models;
+    using TourDuLich_GUI.BUS;
 
     internal sealed class Configuration : DbMigrationsConfiguration<DAL.TourContext> {
         public Configuration() {

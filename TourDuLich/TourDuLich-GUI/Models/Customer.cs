@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace TourDuLich_GUI.Models
+namespace TourDuLich_GUI.BUS
 {
-    public class Customer
+    public partial class Customer
     {
         [Key, Display(AutoGenerateField = false)]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

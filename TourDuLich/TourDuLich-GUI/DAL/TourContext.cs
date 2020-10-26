@@ -1,6 +1,6 @@
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
-using TourDuLich_GUI.Models;
+using TourDuLich_GUI.BUS;
 
 namespace TourDuLich_GUI.DAL {
     public class TourContext : DbContext {

@@ -1,56 +1,21 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using TourDuLich_GUI.DAL;
-using TourDuLich_GUI.Models;
 
 namespace TourDuLich_GUI.BUS
 {
-    class CostTypeBUS
+    public partial class CostType
     {
-        private TourContext _ctx;
-
-        public CostTypeBUS()
-        {
-            _ctx = new TourContext();
+        public static List<CostType> GetAll() {
+            return CostTypeDAL.GetAll();
         }
 
-        public List<CostType> GetAll()
+        public static CostType GetOne(int id)
         {
-            var costTypes = _ctx.CostTypes.ToList();
-
-            return costTypes;
-        }
-        public CostType GetOne(int id)
-        {
-            // if found => return costType, else return null
-            return _ctx.CostTypes.Find(id);
-        }
-
-        public void CreateOne(CostType costType)
-        {
-            _ctx.CostTypes.Add(costType);
-            _ctx.SaveChanges();
-        }
-
-        public CostType UpdateOne(CostType costType)
-        {
-            // get by id
-            var costTypeToUpdate = _ctx.CostTypes.Find(costType.ID);
-
-            // update entity
-            costTypeToUpdate.Name = costType.Name;
-
-            // save change to db
-            _ctx.SaveChanges();
-
-            return costTypeToUpdate;
-        }
-
-        public void DeleteOne(int id)
-        {
-            var costType = _ctx.CostTypes.Find(id);
-            _ctx.CostTypes.Remove(costType);
-            _ctx.SaveChanges();
+            return CostTypeDAL.GetOne(id);
         }
     }
 }

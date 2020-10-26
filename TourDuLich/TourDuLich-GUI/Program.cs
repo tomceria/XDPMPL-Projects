@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using TourDuLich_GUI.DAL;
 using TourDuLich_GUI.GUI;
-using TourDuLich_GUI.Models;
+using TourDuLich_GUI.BUS;
 
 namespace TourDuLich_GUI
 {

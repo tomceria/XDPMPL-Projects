@@ -2,9 +2,9 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace TourDuLich_GUI.Models
+namespace TourDuLich_GUI.BUS
 {
-    public class TourType
+    public partial class TourType
     {
         [Key, Display(AutoGenerateField = false, Name = "Mã loại Tour")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

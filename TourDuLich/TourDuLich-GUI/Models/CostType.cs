@@ -2,9 +2,9 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace TourDuLich_GUI.Models
+namespace TourDuLich_GUI.BUS
 {
-    public class CostType
+    public partial class CostType
     {
         [Key, Display(AutoGenerateField = false)]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

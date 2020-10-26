@@ -2,9 +2,9 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace TourDuLich_GUI.Models
+namespace TourDuLich_GUI.BUS
 {
-    public class Destination
+    public partial class Destination
     {
         [Key, Display(AutoGenerateField = false, Name = "Mã địa điểm")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
