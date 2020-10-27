@@ -74,7 +74,10 @@ namespace TourDuLich_GUI.GUI
 
             LookUpEdit_TourTypeID.Properties.DisplayMember = "Name";
             LookUpEdit_TourTypeID.Properties.ValueMember = "ID";
-            LookUpEdit_TourTypeID.Properties.Columns.Add(new LookUpColumnInfo("Name"));
+
+            var valueNameColumnOfTourType = LookUpEdit_TourTypeID.GetColumnValue(new LookUpColumnInfo("Name"));
+            if(valueNameColumnOfTourType == null) LookUpEdit_TourTypeID.Properties.Columns.Add(new LookUpColumnInfo("Name"));
+
             LookUpEdit_TourTypeID.EditValue = itemBL[0].TourTypeID;
 
             gridView_TourPrice.GridControl.DataSource = tourPricesBL;
