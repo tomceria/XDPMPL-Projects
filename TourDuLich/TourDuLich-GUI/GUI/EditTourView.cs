@@ -81,7 +81,11 @@ namespace TourDuLich_GUI.GUI
             LookUpEdit_TourTypeID.EditValue = itemBL[0].TourTypeID;
 
             gridView_TourPrice.GridControl.DataSource = tourPricesBL;
+            //Format currency
+            gridView_TourPrice.Columns["Value"].DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            gridView_TourPrice.Columns["Value"].DisplayFormat.FormatString = "N0";
             gridView_TourPrice.GridControl.RefreshDataSource();
+
 
             listBoxControl_Destination.DataSource = destinationsBL;
             listBoxControl_TourDetail.DataSource = tourDetailsBL;

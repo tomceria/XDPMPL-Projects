@@ -140,6 +140,9 @@ namespace TourDuLich_GUI.GUI
             gridView_TourGroupCosts.Columns["TourGroup"].Visible = false;
             gridView_TourGroupCosts.Columns["TourGroupID"].Visible = false;
             gridView_TourGroupCosts.Columns["CostType"].Visible = false;
+            //Format currency
+            gridView_TourGroupCosts.Columns["Value"].DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            gridView_TourGroupCosts.Columns["Value"].DisplayFormat.FormatString = "N0";
 
             // CostTypes
             RepositoryItemLookUpEdit lookUpEdit_TourGroupCost_CostType = new RepositoryItemLookUpEdit();

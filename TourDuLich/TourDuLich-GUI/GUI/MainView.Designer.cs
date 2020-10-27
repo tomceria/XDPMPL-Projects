@@ -35,6 +35,9 @@
             this.colName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colDescription = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colPriceRef = new DevExpress.XtraGrid.Columns.GridColumn();
+            //Format Currency
+            this.colPriceRef.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.colPriceRef.DisplayFormat.FormatString = "N0";
             this.ribbonControl = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.bbiNew = new DevExpress.XtraBars.BarButtonItem();
             this.bbiEdit = new DevExpress.XtraBars.BarButtonItem();
@@ -56,6 +59,10 @@
             this.colDateStart = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colDateEnd = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colPriceGroup = new DevExpress.XtraGrid.Columns.GridColumn();
+            //Format Currency
+            this.colPriceGroup.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.colPriceGroup.DisplayFormat.FormatString = "N0";
+
             ((System.ComponentModel.ISupportInitialize)(this.gridControl_Tours)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView_Tours)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl)).BeginInit();
@@ -81,6 +88,7 @@
             this.gridControl_Tours.TabIndex = 2;
             this.gridControl_Tours.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView_Tours});
+
             // 
             // gridView_Tours
             // 
