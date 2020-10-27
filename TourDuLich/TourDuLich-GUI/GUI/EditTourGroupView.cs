@@ -9,6 +9,7 @@ using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraEditors.Controls;
 using System.Windows.Forms;
 using DevExpress.XtraGrid.Columns;
+using DevExpress.XtraGrid.Drawing;
 
 namespace TourDuLich_GUI.GUI
 {
@@ -98,31 +99,22 @@ namespace TourDuLich_GUI.GUI
             LookUpEdit_TourID.Properties.DataSource = toursBL;
             LookUpEdit_TourID.Properties.DisplayMember = "Name";
             LookUpEdit_TourID.Properties.ValueMember = "ID";
-            LookUpEdit_TourID.Properties.PopulateColumns();
-            foreach (LookUpColumnInfo column in LookUpEdit_TourID.Properties.Columns)
-            {
-                column.Visible = false;
-            }
+            LookUpEdit_TourID.Properties.Columns.Add(new LookUpColumnInfo("Name"));
 
-            // TODO: Fix this
-/*            LookUpEdit_TourID.Properties.Columns["Name"].Visible = true;
-*/
+
             // Customers
             gridView_Customers.GridControl.DataSource = customersBL;
+
             gridView_Customers.PopulateColumns();
             gridView_Customers.OptionsBehavior.Editable = false;
+            gridView_Customers.Columns["TourGroupDetails"].Visible = false;
 
-            // TODO: Fix this
-/*            gridView_Customers.Columns["TourGroupDetails"].Visible = false;
-*/
             // Staffs
             gridView_Staffs.GridControl.DataSource = staffsBL;
             gridView_Staffs.PopulateColumns();
             gridView_Staffs.OptionsBehavior.Editable = false;
+            gridView_Staffs.Columns["TourGroupStaffs"].Visible = false;
 
-            // TODO: Fix this
-/*            gridView_Staffs.Columns["TourGroupStaffs"].Visible = false;
-*/
             // TourGroupDetails
             ListBoxControl_TourGroupDetails.DataSource = tourGroupDetailsBL;
 
