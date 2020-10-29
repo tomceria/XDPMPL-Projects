@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TodoList.Models
@@ -16,10 +17,15 @@ namespace TodoList.Models
     public class CongViec
     {
         public int ID { get; set; }
+        [DisplayName("Tên công việc")]
         public string Name { get; set; }
+        [DisplayName("Ngày bắt đầu")]
         public DateTime StartDate { get; set; }
+        [DisplayName("Ngày kết thúc")]
         public DateTime EndDate { get; set; }
+        [DisplayName("Trạng thái")]
         public Status TrangThai { get; set; }
+        [DisplayName("Quyền truy cập")]
         public Access Privacy { get; set; }
 
         [ForeignKey("NhanVien")]

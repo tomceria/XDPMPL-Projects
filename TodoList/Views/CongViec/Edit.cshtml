@@ -1,3 +1,5 @@
+@model CongViec
+
 @{
     ViewBag.Title = "Viewing CongViec";
     Layout = "_Layout";
@@ -12,8 +14,11 @@
 <h2>You are editing individual CongViec</h2>
 <p>Hello there.</p>
 
-<input type="text" value="@ViewData["CongViecID"]" >
-<input type="text" value="@ViewData["CongViecName"]" >
-<input type="text">
-<input type="text">
-<input type="text">
+<label for="@Html.NameFor(model => model.ID)">
+    @Html.DisplayNameFor(model => model.ID)
+</label>
+<input type="text" value="@Html.DisplayFor(model => model.ID)" disabled>
+<label for="@Html.NameFor(model => model.Name)">
+    @Html.DisplayNameFor(model => model.Name)
+</label>
+<input type="text" value="@Html.DisplayFor(model => model.Name)">
