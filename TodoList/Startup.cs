@@ -28,7 +28,7 @@ namespace TodoList
             services.AddControllersWithViews();
 
             services.AddDbContext<TodoContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("HuyTodoContext")));
+            options.UseSqlServer(Configuration.GetConnectionString("HoangTodoContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
