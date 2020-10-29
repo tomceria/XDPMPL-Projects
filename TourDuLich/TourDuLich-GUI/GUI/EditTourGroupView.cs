@@ -133,7 +133,7 @@ namespace TourDuLich_GUI.GUI
             lookUpEdit_TourGroupStaff_StaffTask.DataSource = TourGroupStaff.Tasks;
             GridControl_TourGroupStaffs.RepositoryItems.Add(lookUpEdit_TourGroupStaff_StaffTask);
             gridView_TourGroupStaffs.Columns["StaffTask"].ColumnEdit = lookUpEdit_TourGroupStaff_StaffTask;
-
+            gridView_TourGroupStaffs.Columns["Staff"].OptionsColumn.AllowEdit = false;
             // TourGroupCosts
             gridView_TourGroupCosts.GridControl.DataSource = tourGroupCostsBL;
             gridView_TourGroupCosts.PopulateColumns();
