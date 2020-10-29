@@ -11,15 +11,16 @@ namespace TodoList.Controllers
             return View();
         }
 
-        public string View(int id)
+        public IActionResult Edit(int id)
         {
             CongViec congViec = new CongViec();
             congViec.ID = id;
             congViec.Name = "Hello there!!!";
 
-            var result = $"{congViec.ID} | {congViec.Name}";
+            ViewData["CongViecID"] = congViec.ID;
+            ViewData["CongViecName"] = congViec.Name;
 
-            return result;
+            return View();
         }
     }
 }
