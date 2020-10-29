@@ -16,6 +16,7 @@ using DevExpress.XtraLayout;
 using DevExpress.XtraLayout.Helpers;
 using TourDuLich_GUI.DAL;
 using TourDuLich_GUI.BUS;
+using DevExpress.XtraEditors.Controls;
 
 namespace TourDuLich_GUI.GUI
 {
@@ -70,17 +71,21 @@ namespace TourDuLich_GUI.GUI
             dataLayoutControl_Tour.DataSource = itemBL;
 
             LookUpEdit_TourTypeID.Properties.DataSource = tourTypesBL;
+
             LookUpEdit_TourTypeID.Properties.DisplayMember = "Name";
             LookUpEdit_TourTypeID.Properties.ValueMember = "ID";
-            LookUpEdit_TourTypeID.Properties.PopulateColumns();
 
-            // TODO: Fix this!!!
-/*            LookUpEdit_TourTypeID.Properties.Columns["Tours"].Visible = false;
-*/
+            var valueNameColumnOfTourType = LookUpEdit_TourTypeID.GetColumnValue(new LookUpColumnInfo("Name"));
+            if(valueNameColumnOfTourType == null) LookUpEdit_TourTypeID.Properties.Columns.Add(new LookUpColumnInfo("Name"));
+
             LookUpEdit_TourTypeID.EditValue = itemBL[0].TourTypeID;
 
             gridView_TourPrice.GridControl.DataSource = tourPricesBL;
+            //Format currency
+            gridView_TourPrice.Columns["Value"].DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            gridView_TourPrice.Columns["Value"].DisplayFormat.FormatString = "N0";
             gridView_TourPrice.GridControl.RefreshDataSource();
+
 
             listBoxControl_Destination.DataSource = destinationsBL;
             listBoxControl_TourDetail.DataSource = tourDetailsBL;
