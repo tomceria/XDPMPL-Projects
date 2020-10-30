@@ -3,25 +3,31 @@
     ViewData["Title"] = "The CongViec List";
 }
 
-<h2>This is the CongViec list.</h2>
+<h2>Danh sách Công việc</h2>
+
+<form asp-action="Create">
+    <input for="name" class="form-control" placeholder="Nhập tên công việc..."/>
+    <input type="submit" value="Tạo mới" class="btn btn-primary"/>
+</form>
+
 <table>
     <tr>
-        <th>NhanVien</th>
-        <th>Name</th>
-        <th>Start Date</th>
-        <th>End Date</th>
-        <th>Trang Thai</th>
-        <th>Privacy</th>
+        <th>@Html.DisplayNameFor(model => model.NhanVienID)</th>
+        <th>@Html.DisplayNameFor(model => model.Name)</th>
+        <th>@Html.DisplayNameFor(model => model.StartDate)</th>
+        <th>@Html.DisplayNameFor(model => model.EndDate)</th>
+        <th>@Html.DisplayNameFor(model => model.TrangThai)</th>
+        <th>@Html.DisplayNameFor(model => model.Privacy)</th>
     </tr>
     @foreach (var item in Model)
     {
         <tr>
             <td></td>
-            <td>@Html.DisplayNameFor(model => model.Name)</td>
-            <td>@Html.DisplayNameFor(model => model.StartDate)</td>
-            <td>@Html.DisplayNameFor(model => model.EndDate)</td>
-            <td>@Html.DisplayNameFor(model => model.TrangThai)</td>
-            <td>@Html.DisplayNameFor(model => model.Privacy)</td>
+            <td>@Html.DisplayFor(model => item.Name)</td>
+            <td>@Html.DisplayFor(model => item.StartDate)</td>
+            <td>@Html.DisplayFor(model => item.EndDate)</td>
+            <td>@Html.DisplayFor(model => item.TrangThai)</td>
+            <td>@Html.DisplayFor(model => item.Privacy)</td>
         </tr>
     }
 </table>

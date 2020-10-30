@@ -20,25 +20,51 @@ namespace TodoList.Controllers
         {
             return View(await _context.DSCongViec.ToListAsync());
         }
-        
+
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)    // TODO: Check with database
+            if (id == null)
             {
                 return NotFound();
             }
-            
-            CongViec congViec = new CongViec();
-            congViec.ID = (int) id;
-            congViec.Name = "Hello there!!!";
-            congViec.StartDate = DateTime.Now;
+            CongViec congViec = await _context.DSCongViec.FindAsync(id);
+            if (congViec == null)
+            {
+                return NotFound();
+            }
 
             return View(congViec);
         }
-        
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Name,StartDate,EndDate,TrangThai,Privacy")] CongViec congViec)
+        public async Task<IActionResult> Create(string name)
+        {
+            // TODO: Must be authorized to run this action
+
+            CongViec congViec = new CongViec
+            {
+                Name = name,
+                StartDate = DateTime.Now,
+                EndDate = (DateTime.Now).AddDays(7),
+                TrangThai = Status.inProgress,
+                Privacy = Access.isPrivate,
+            };
+
+            // TODO: Replacing with current user
+            var nhanVien = await _context.DSNhanVien.FirstOrDefaultAsync();
+            congViec.NhanVienID = nhanVien.ID;
+
+            await _context.AddAsync(congViec);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Edit", new {id = congViec.ID});
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Bind("ID,Name,StartDate,EndDate,TrangThai,Privacy,NhanVienID")]
+            CongViec congViec)
         {
             if (id != congViec.ID)
             {
@@ -63,6 +89,7 @@ namespace TodoList.Controllers
                 //     throw;
                 // }
             }
+
             return RedirectToAction("Index");
         }
     }

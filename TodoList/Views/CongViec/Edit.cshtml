@@ -16,6 +16,7 @@
 <form asp-action="Edit">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <input type="hidden" asp-for="ID"/>
+    <input type="hidden" asp-for="NhanVienID"/>
     <div class="form-group">
         <label asp-for="Name" class="control-label"></label>
         <input asp-for="Name" class="form-control"/>
@@ -27,10 +28,23 @@
         <span asp-validation-for="StartDate" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <input type="submit" value="Lưu" class="btn btn-primary"/>
+        <label asp-for="EndDate" class="control-label"></label>
+        <input asp-for="EndDate" class="form-control"/>
+        <span asp-validation-for="EndDate" class="text-danger"></span>
     </div>
+    <div class="form-group">
+        <label asp-for="TrangThai" class="control-label"></label>
+        <input asp-for="TrangThai" class="form-control"/>
+        <span asp-validation-for="TrangThai" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Privacy" class="control-label"></label>
+        <input asp-for="Privacy" class="form-control"/>
+        <span asp-validation-for="Privacy" class="text-danger"></span>
+    </div>
+   <input type="submit" value="Lưu" class="btn btn-primary" /> 
 </form>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
 }
