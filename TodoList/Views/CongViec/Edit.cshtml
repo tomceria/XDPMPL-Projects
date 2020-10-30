@@ -1,7 +1,7 @@
 @model CongViec
 
 @{
-    ViewBag.Title = "Viewing CongViec";
+    ViewBag.Title = "Editing " + @Html.ViewData.Model.Name;
     Layout = "_Layout";
 }
 
@@ -14,11 +14,20 @@
 <h2>You are editing individual CongViec</h2>
 <p>Hello there.</p>
 
-<label for="@Html.NameFor(model => model.ID)">
-    @Html.DisplayNameFor(model => model.ID)
-</label>
-<input type="text" value="@Html.DisplayFor(model => model.ID)" disabled>
-<label for="@Html.NameFor(model => model.Name)">
-    @Html.DisplayNameFor(model => model.Name)
-</label>
-<input type="text" value="@Html.DisplayFor(model => model.Name)">
+<form asp-action="Edit">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="ID"/>
+    <div class="form-group">
+        <label asp-for="Name" class="control-label"></label>
+        <input asp-for="Name" class="form-control"/>
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="StartDate" class="control-label"></label>
+        <input asp-for="StartDate" class="form-control"/>
+        <span asp-validation-for="StartDate" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Save" class="btn btn-primary"/>
+    </div>
+</form>

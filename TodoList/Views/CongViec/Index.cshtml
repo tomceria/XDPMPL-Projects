@@ -1,3 +1,4 @@
+@model IEnumerable<CongViec>
 @{
     ViewData["Title"] = "The CongViec List";
 }
@@ -12,12 +13,15 @@
         <th>Trang Thai</th>
         <th>Privacy</th>
     </tr>
-    <tr>
-        <td>wow</td>
-        <td>wow</td>
-        <td>wow</td>
-        <td>wow</td>
-        <td>wow</td>
-        <td>wow</td>
-    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td></td>
+            <td>@Html.DisplayNameFor(model => model.Name)</td>
+            <td>@Html.DisplayNameFor(model => model.StartDate)</td>
+            <td>@Html.DisplayNameFor(model => model.EndDate)</td>
+            <td>@Html.DisplayNameFor(model => model.TrangThai)</td>
+            <td>@Html.DisplayNameFor(model => model.Privacy)</td>
+        </tr>
+    }
 </table>
