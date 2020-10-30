@@ -21,7 +21,8 @@ namespace TourDuLich_GUI.GUI
         enum Page
         {
             Tours,
-            TourGroups
+            TourGroups,
+            Customers
         }
 
         public MainView()
@@ -35,6 +36,7 @@ namespace TourDuLich_GUI.GUI
         {
             gridView_Tours.OptionsBehavior.Editable = false;
             gridView_TourGroups.OptionsBehavior.Editable = false;
+            gridView_Customers.OptionsBehavior.Editable = false;
         }
 
         private Page getCurrentPage()
@@ -50,6 +52,10 @@ namespace TourDuLich_GUI.GUI
                 case 1:
                     {
                         curPage = Page.TourGroups; break;
+                    }
+                case 2:
+                    {
+                        curPage = Page.Customers; break;
                     }
             }
 
@@ -103,6 +109,11 @@ namespace TourDuLich_GUI.GUI
             gridControl_TourGroups.DataSource = list;
             gridControl_TourGroups.RefreshDataSource();
             bsiListCount.Caption = $"{list.Count} items";
+        }
+
+        private void InitializeDataSources_Customers()
+        {
+
         }
 
         // Event Handlers
@@ -238,7 +249,12 @@ namespace TourDuLich_GUI.GUI
                     }
                 case Page.TourGroups:
                     {
-                        selectedItem = gridView_Tours.GetFocusedRow();
+                        selectedItem = gridView_TourGroups.GetFocusedRow();
+                        break;
+                    }
+                case Page.Customers:
+                    {
+                        selectedItem = gridView_TourGroups.GetFocusedRow();
                         break;
                     }
             }

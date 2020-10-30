@@ -35,17 +35,22 @@
             this.colName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colDescription = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colPriceRef = new DevExpress.XtraGrid.Columns.GridColumn();
-            //Format Currency
-            this.colPriceRef.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            this.colPriceRef.DisplayFormat.FormatString = "N0";
             this.ribbonControl = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.bbiNew = new DevExpress.XtraBars.BarButtonItem();
             this.bbiEdit = new DevExpress.XtraBars.BarButtonItem();
             this.bbiDelete = new DevExpress.XtraBars.BarButtonItem();
             this.bbiRefresh = new DevExpress.XtraBars.BarButtonItem();
             this.bsiListCount = new DevExpress.XtraBars.BarStaticItem();
+            this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem3 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem4 = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.ribbonPage2 = new DevExpress.XtraBars.Ribbon.RibbonPage();
+            this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.ribbonPageGroup3 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.ribbonPageGroup4 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonStatusBar = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
             this.tourBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.xtraTabControl_Tours = new DevExpress.XtraTab.XtraTabControl();
@@ -59,10 +64,16 @@
             this.colDateStart = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colDateEnd = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colPriceGroup = new DevExpress.XtraGrid.Columns.GridColumn();
-            //Format Currency
-            this.colPriceGroup.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            this.colPriceGroup.DisplayFormat.FormatString = "N0";
-
+            this.xtraTabPage_Customers = new DevExpress.XtraTab.XtraTabPage();
+            this.gridControl_Customers = new DevExpress.XtraGrid.GridControl();
+            this.customerBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.gridView_Customers = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.colName2 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colCMND = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colAddress = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colGender = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colPhoneNumber = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colTourGroupDetails = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl_Tours)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView_Tours)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl)).BeginInit();
@@ -74,6 +85,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridControl_TourGroups)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tourGroupBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView_TourGroups)).BeginInit();
+            this.xtraTabPage_Customers.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControl_Customers)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.customerBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView_Customers)).BeginInit();
             this.SuspendLayout();
             // 
             // gridControl_Tours
@@ -88,7 +103,6 @@
             this.gridControl_Tours.TabIndex = 2;
             this.gridControl_Tours.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView_Tours});
-
             // 
             // gridView_Tours
             // 
@@ -121,6 +135,8 @@
             // 
             // colPriceRef
             // 
+            this.colPriceRef.DisplayFormat.FormatString = "N0";
+            this.colPriceRef.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colPriceRef.FieldName = "PriceRef";
             this.colPriceRef.Name = "colPriceRef";
             this.colPriceRef.Visible = true;
@@ -136,12 +152,17 @@
             this.bbiEdit,
             this.bbiDelete,
             this.bbiRefresh,
-            this.bsiListCount});
+            this.bsiListCount,
+            this.barButtonItem1,
+            this.barButtonItem2,
+            this.barButtonItem3,
+            this.barButtonItem4});
             this.ribbonControl.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl.MaxItemId = 21;
+            this.ribbonControl.MaxItemId = 25;
             this.ribbonControl.Name = "ribbonControl";
             this.ribbonControl.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
-            this.ribbonPage1});
+            this.ribbonPage1,
+            this.ribbonPage2});
             this.ribbonControl.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonControlStyle.Office2013;
             this.ribbonControl.ShowApplicationButton = DevExpress.Utils.DefaultBoolean.False;
             this.ribbonControl.Size = new System.Drawing.Size(790, 158);
@@ -186,6 +207,34 @@
             this.bsiListCount.Id = 20;
             this.bsiListCount.Name = "bsiListCount";
             // 
+            // barButtonItem1
+            // 
+            this.barButtonItem1.Caption = "Tình hình Hoạt động";
+            this.barButtonItem1.Id = 21;
+            this.barButtonItem1.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItem1.ImageOptions.SvgImage")));
+            this.barButtonItem1.Name = "barButtonItem1";
+            // 
+            // barButtonItem2
+            // 
+            this.barButtonItem2.Caption = "Chi phí";
+            this.barButtonItem2.Id = 22;
+            this.barButtonItem2.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItem2.ImageOptions.SvgImage")));
+            this.barButtonItem2.Name = "barButtonItem2";
+            // 
+            // barButtonItem3
+            // 
+            this.barButtonItem3.Caption = "Chi phí chung";
+            this.barButtonItem3.Id = 23;
+            this.barButtonItem3.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItem3.ImageOptions.SvgImage")));
+            this.barButtonItem3.Name = "barButtonItem3";
+            // 
+            // barButtonItem4
+            // 
+            this.barButtonItem4.Caption = "Hoạt động";
+            this.barButtonItem4.Id = 24;
+            this.barButtonItem4.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItem4.ImageOptions.SvgImage")));
+            this.barButtonItem4.Name = "barButtonItem4";
+            // 
             // ribbonPage1
             // 
             this.ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -204,6 +253,35 @@
             this.ribbonPageGroup1.ItemLinks.Add(this.bbiRefresh);
             this.ribbonPageGroup1.Name = "ribbonPageGroup1";
             this.ribbonPageGroup1.Text = "Hành động";
+            // 
+            // ribbonPage2
+            // 
+            this.ribbonPage2.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
+            this.ribbonPageGroup2,
+            this.ribbonPageGroup3,
+            this.ribbonPageGroup4});
+            this.ribbonPage2.Name = "ribbonPage2";
+            this.ribbonPage2.Text = "Thống kê";
+            // 
+            // ribbonPageGroup2
+            // 
+            this.ribbonPageGroup2.ItemLinks.Add(this.barButtonItem1);
+            this.ribbonPageGroup2.ItemLinks.Add(this.barButtonItem2);
+            this.ribbonPageGroup2.Name = "ribbonPageGroup2";
+            this.ribbonPageGroup2.Text = "Tour";
+            // 
+            // ribbonPageGroup3
+            // 
+            this.ribbonPageGroup3.AllowTextClipping = false;
+            this.ribbonPageGroup3.ItemLinks.Add(this.barButtonItem3);
+            this.ribbonPageGroup3.Name = "ribbonPageGroup3";
+            this.ribbonPageGroup3.Text = "Đoàn tham quan";
+            // 
+            // ribbonPageGroup4
+            // 
+            this.ribbonPageGroup4.ItemLinks.Add(this.barButtonItem4);
+            this.ribbonPageGroup4.Name = "ribbonPageGroup4";
+            this.ribbonPageGroup4.Text = "Nhân viên";
             // 
             // ribbonStatusBar
             // 
@@ -227,7 +305,8 @@
             this.xtraTabControl_Tours.TabIndex = 5;
             this.xtraTabControl_Tours.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.xtraTabPage_Tours,
-            this.xtraTabPage_TourGroups});
+            this.xtraTabPage_TourGroups,
+            this.xtraTabPage_Customers});
             this.xtraTabControl_Tours.SelectedPageChanged += new DevExpress.XtraTab.TabPageChangedEventHandler(this.xtraTabControl_Tours_SelectedPageChanged);
             // 
             // xtraTabPage_Tours
@@ -242,7 +321,7 @@
             this.xtraTabPage_TourGroups.Controls.Add(this.gridControl_TourGroups);
             this.xtraTabPage_TourGroups.Name = "xtraTabPage_TourGroups";
             this.xtraTabPage_TourGroups.Size = new System.Drawing.Size(788, 392);
-            this.xtraTabPage_TourGroups.Text = "Đoàn Tour";
+            this.xtraTabPage_TourGroups.Text = "Đoàn Tham quan";
             // 
             // gridControl_TourGroups
             // 
@@ -303,10 +382,91 @@
             // 
             // colPriceGroup
             // 
+            this.colPriceGroup.DisplayFormat.FormatString = "N0";
+            this.colPriceGroup.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colPriceGroup.FieldName = "PriceGroup";
             this.colPriceGroup.Name = "colPriceGroup";
             this.colPriceGroup.Visible = true;
             this.colPriceGroup.VisibleIndex = 3;
+            // 
+            // xtraTabPage_Customers
+            // 
+            this.xtraTabPage_Customers.Controls.Add(this.gridControl_Customers);
+            this.xtraTabPage_Customers.Name = "xtraTabPage_Customers";
+            this.xtraTabPage_Customers.Size = new System.Drawing.Size(788, 392);
+            this.xtraTabPage_Customers.Text = "Khách hàng";
+            // 
+            // gridControl_Customers
+            // 
+            this.gridControl_Customers.DataSource = this.customerBindingSource;
+            this.gridControl_Customers.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridControl_Customers.Location = new System.Drawing.Point(0, 0);
+            this.gridControl_Customers.MainView = this.gridView_Customers;
+            this.gridControl_Customers.MenuManager = this.ribbonControl;
+            this.gridControl_Customers.Name = "gridControl_Customers";
+            this.gridControl_Customers.Size = new System.Drawing.Size(788, 392);
+            this.gridControl_Customers.TabIndex = 0;
+            this.gridControl_Customers.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridView_Customers});
+            // 
+            // customerBindingSource
+            // 
+            this.customerBindingSource.DataSource = typeof(TourDuLich_GUI.BUS.Customer);
+            // 
+            // gridView_Customers
+            // 
+            this.gridView_Customers.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.gridView_Customers.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.colName2,
+            this.colCMND,
+            this.colAddress,
+            this.colGender,
+            this.colPhoneNumber,
+            this.colTourGroupDetails});
+            this.gridView_Customers.GridControl = this.gridControl_Customers;
+            this.gridView_Customers.Name = "gridView_Customers";
+            // 
+            // colName2
+            // 
+            this.colName2.FieldName = "Name";
+            this.colName2.Name = "colName2";
+            this.colName2.Visible = true;
+            this.colName2.VisibleIndex = 0;
+            // 
+            // colCMND
+            // 
+            this.colCMND.FieldName = "CMND";
+            this.colCMND.Name = "colCMND";
+            this.colCMND.Visible = true;
+            this.colCMND.VisibleIndex = 1;
+            // 
+            // colAddress
+            // 
+            this.colAddress.FieldName = "Address";
+            this.colAddress.Name = "colAddress";
+            this.colAddress.Visible = true;
+            this.colAddress.VisibleIndex = 2;
+            // 
+            // colGender
+            // 
+            this.colGender.FieldName = "Gender";
+            this.colGender.Name = "colGender";
+            this.colGender.Visible = true;
+            this.colGender.VisibleIndex = 3;
+            // 
+            // colPhoneNumber
+            // 
+            this.colPhoneNumber.FieldName = "PhoneNumber";
+            this.colPhoneNumber.Name = "colPhoneNumber";
+            this.colPhoneNumber.Visible = true;
+            this.colPhoneNumber.VisibleIndex = 4;
+            // 
+            // colTourGroupDetails
+            // 
+            this.colTourGroupDetails.FieldName = "TourGroupDetails";
+            this.colTourGroupDetails.Name = "colTourGroupDetails";
+            this.colTourGroupDetails.Visible = true;
+            this.colTourGroupDetails.VisibleIndex = 5;
             // 
             // MainView
             // 
@@ -331,6 +491,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridControl_TourGroups)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tourGroupBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView_TourGroups)).EndInit();
+            this.xtraTabPage_Customers.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gridControl_Customers)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.customerBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView_Customers)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -363,5 +527,23 @@
         private DevExpress.XtraGrid.Columns.GridColumn colDateEnd;
         private DevExpress.XtraGrid.Columns.GridColumn colPriceGroup;
         private DevExpress.XtraGrid.Columns.GridColumn colTour;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem1;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem2;
+        private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPage2;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup2;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem3;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem4;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup3;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup4;
+        private DevExpress.XtraTab.XtraTabPage xtraTabPage_Customers;
+        private DevExpress.XtraGrid.GridControl gridControl_Customers;
+        private System.Windows.Forms.BindingSource customerBindingSource;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView_Customers;
+        private DevExpress.XtraGrid.Columns.GridColumn colName2;
+        private DevExpress.XtraGrid.Columns.GridColumn colCMND;
+        private DevExpress.XtraGrid.Columns.GridColumn colAddress;
+        private DevExpress.XtraGrid.Columns.GridColumn colGender;
+        private DevExpress.XtraGrid.Columns.GridColumn colPhoneNumber;
+        private DevExpress.XtraGrid.Columns.GridColumn colTourGroupDetails;
     }
 }

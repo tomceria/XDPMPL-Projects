@@ -149,6 +149,7 @@
     </Compile>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\TourDuLich_GUI.BUS.Customer.datasource" />
     <None Include="Properties\DataSources\TourDuLich_GUI.Models.Destination.datasource" />
     <None Include="Properties\DataSources\TourDuLich_GUI.Models.Tour.datasource" />
     <None Include="Properties\DataSources\TourDuLich_GUI.Models.TourGroup.datasource" />
