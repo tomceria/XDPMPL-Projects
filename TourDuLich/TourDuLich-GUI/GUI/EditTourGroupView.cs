@@ -393,12 +393,19 @@ namespace TourDuLich_GUI.GUI
 
         private void Button_DeleteTourGroupCost_Click(object sender, EventArgs e)
         {
-            handleDeleteTourGroupCostFromTourGroup();
+            DialogResult res = MessageBox.Show("Bạn chắc chắn muốn xóa loại chi phí này?", "Xác nhận", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+            if (res == DialogResult.OK)
+            {
+                handleDeleteTourGroupCostFromTourGroup();
+                MessageBox.Show("Xóa thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         private void tabbedControlGroup1_SelectedPageChanged(object sender, LayoutTabPageChangedEventArgs e)
         {
             RefreshDataSources();
         }
+
+
     }
 }

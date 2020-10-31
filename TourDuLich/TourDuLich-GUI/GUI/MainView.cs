@@ -213,11 +213,21 @@ namespace TourDuLich_GUI.GUI
         {
             switch (getCurrentPage()) {
                 case Page.Tours: {
-                        handleDeleteTour();
+                        DialogResult res = MessageBox.Show("Bạn chắc chắn muốn xóa tour du lịch này?", "Xác nhận", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                        if (res == DialogResult.OK)
+                        {
+                            handleDeleteTour();
+                            MessageBox.Show("Xóa thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
                         break;
                     }
                 case Page.TourGroups: {
-                        handleDeleteTourGroup();
+                        DialogResult res = MessageBox.Show("Bạn chắc chắn muốn xóa đoàn tour du lịch này?", "Xác nhận", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                        if (res == DialogResult.OK)
+                        {
+                            handleDeleteTourGroup();
+                            MessageBox.Show("Xóa thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
                         break;
                     }
             }
