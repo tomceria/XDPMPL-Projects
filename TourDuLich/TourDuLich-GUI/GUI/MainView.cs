@@ -84,10 +84,16 @@ namespace TourDuLich_GUI.GUI
             BindingList<Tour> list = new BindingList<Tour>(
                 Tour.GetAll()
             );
-
+            //Mapping tour price
+            foreach( Tour tour in list)
+            {
+                tour.PriceRef = Tour.GetTourPriceOrPriceRef(tour.ID, DateTime.Now);
+            }
             // UI changes
             gridView_Tours.HideLoadingPanel();
             gridControl_Tours.DataSource = list;
+            /*            gridControl_Tours.DataMember.
+            */
             gridControl_Tours.RefreshDataSource();
             bsiListCount.Caption = $"{list.Count} items";
         }
