@@ -1,7 +1,7 @@
-@model CongViec
+@model TodoList.ViewModels.CongViecEditVm
 
 @{
-    ViewBag.Title = "Editing " + @Html.ViewData.Model.Name;
+    ViewBag.Title = "Editing " + @Html.ViewData.Model.CongViec.Name;
     Layout = "_Layout";
 }
 
@@ -11,42 +11,42 @@
     </a>
 </h6>
 
-<h2>Editing @Html.ViewData.Model.Name</h2>
+<h2>Editing @Html.ViewData.Model.CongViec.Name</h2>
 
 <form asp-action="Edit">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <input type="hidden" asp-for="ID"/>
-    <input type="hidden" asp-for="NhanVienID"/>
+    <input type="hidden" asp-for="CongViec.ID"/>
+    <input type="hidden" asp-for="CongViec.NhanVienID"/>
     <div class="form-group">
-        <label asp-for="Name" class="control-label"></label>
-        <input asp-for="Name" class="form-control"/>
-        <span asp-validation-for="Name" class="text-danger"></span>
+        <label asp-for="CongViec.Name" class="control-label"></label>
+        <input asp-for="CongViec.Name" class="form-control"/>
+        <span asp-validation-for="CongViec.Name" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="StartDate" class="control-label"></label>
-        <input asp-for="StartDate" class="form-control"/>
-        <span asp-validation-for="StartDate" class="text-danger"></span>
+        <label asp-for="CongViec.StartDate" class="control-label"></label>
+        <input asp-for="CongViec.StartDate" class="form-control"/>
+        <span asp-validation-for="CongViec.StartDate" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="EndDate" class="control-label"></label>
-        <input asp-for="EndDate" class="form-control"/>
-        <span asp-validation-for="EndDate" class="text-danger"></span>
+        <label asp-for="CongViec.EndDate" class="control-label"></label>
+        <input asp-for="CongViec.EndDate" class="form-control"/>
+        <span asp-validation-for="CongViec.EndDate" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="TrangThai" class="control-label"></label>
-        <input asp-for="TrangThai" class="form-control"/>
-        <span asp-validation-for="TrangThai" class="text-danger"></span>
+        <label asp-for="CongViec.TrangThai" class="control-label"></label>
+        <input asp-for="CongViec.TrangThai" class="form-control"/>
+        <span asp-validation-for="CongViec.TrangThai" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="Privacy" class="control-label"></label>
-        <input asp-for="Privacy" class="form-control"/>
-        <span asp-validation-for="Privacy" class="text-danger"></span>
+        <label asp-for="CongViec.Privacy" class="control-label"></label>
+        <input asp-for="CongViec.Privacy" class="form-control"/>
+        <span asp-validation-for="CongViec.Privacy" class="text-danger"></span>
     </div>
     <input type="submit" value="Lưu" class="btn btn-primary"/>
 </form>
 
 <form asp-action="Delete">
-    <input type="hidden" asp-for="ID"/>
+    <input type="hidden" asp-for="CongViec.ID"/>
     <input type="submit" value="Xoá" class="btn btn-danger"/>
 </form>
 

@@ -19,7 +19,9 @@ namespace TodoList.Services
 
         public async Task<IEnumerable<CongViec>> GetAllCongViecs()
         {
-            return await _context.DSCongViec.ToListAsync();
+            return await _context.DSCongViec
+                .Include(o => o.NhanVien)
+                .ToListAsync();
         }
 
         public async Task<CongViec> GetOneCongViec(int id)

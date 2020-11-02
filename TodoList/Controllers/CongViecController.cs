@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using TodoList.Data;
 using TodoList.Models;
 using TodoList.Services.IService;
+using TodoList.ViewModels;
 
 namespace TodoList.Controllers
 {
@@ -24,17 +25,23 @@ namespace TodoList.Controllers
 
         public async Task<IActionResult> Edit(int? id)
         {
+            // Get CongViec
             if (id == null)
             {
                 return NotFound();
             }
+
             var congViec = await _congViecService.GetOneCongViec((int) id);
             if (congViec == null)
             {
                 return NotFound();
             }
 
-            return View(congViec);
+            // Constructs VietModel
+            CongViecEditVm viewModel = new CongViecEditVm();
+            viewModel.CongViec = congViec;
+
+            return View(viewModel);
         }
 
         [HttpPost]
@@ -58,7 +65,12 @@ namespace TodoList.Controllers
                 return NotFound();
             }
 
-            if (!ModelState.IsValid) return View(congViec);
+            if (!ModelState.IsValid)
+            {
+                return View(
+                    new CongViecEditVm { CongViec = congViec }
+                );
+            }
 
             _congViecService.UpdateCongViec(congViec);
             await _congViecService.Save();
@@ -75,12 +87,12 @@ namespace TodoList.Controllers
             {
                 return NotFound();
             }
-            
-            if (!ModelState.IsValid) return RedirectToAction("Edit", new { id = id });
-            
+
+            if (!ModelState.IsValid) return RedirectToAction("Edit", new {id = id});
+
             _congViecService.DeleteCongViec(congViec);
             await _congViecService.Save();
-            
+
             return RedirectToAction("Index");
         }
     }

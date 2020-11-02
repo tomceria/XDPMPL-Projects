@@ -28,6 +28,7 @@ namespace TodoList.Models
         [DisplayName("Quyền truy cập")]
         public Access Privacy { get; set; }
 
+        [DisplayName("Nhân viên")]
         [ForeignKey("NhanVien")]
         public int NhanVienID { get; set; }
 
