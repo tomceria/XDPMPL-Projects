@@ -9,5 +9,11 @@ namespace TodoList.ViewModels
         
         [DisplayName("Mật khẩu")]
         public string Password { get; set; }
+
+        public void Deconstruct(out string username, out string password)
+        {
+            username = Username;
+            password = Password;
+        }
     }
 }

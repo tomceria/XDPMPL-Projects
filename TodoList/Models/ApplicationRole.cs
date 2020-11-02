@@ -1,18 +1,22 @@
+using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Identity;
 
 namespace TodoList.Models
 {
-    public class ApplicationRole : IdentityRole
+    public sealed class ApplicationRole : IdentityRole
     {
-        public static Dictionary<string, ApplicationRole> Roles = new Dictionary<string, ApplicationRole>
+        public static readonly List<string> Roles = new List<string>
         {
-            { "NhanVien", new ApplicationRole("NhanVien") },
-            { "LanhDao", new ApplicationRole("LanhDao") }
+            "NhanVien", "LanhDao"
         };
+        
+        public ApplicationRole() {
+        }
 
-        private ApplicationRole(string roleName) : base(roleName)
+        public ApplicationRole(string roleName) : base(roleName)
         {
+            NormalizedName = roleName.ToUpper();
         }
     }
 }

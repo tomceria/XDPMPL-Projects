@@ -1,9 +1,10 @@
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using TodoList.Models;
 
 namespace TodoList.Data
 {
-    public class TodoContext : DbContext
+    public class TodoContext : IdentityDbContext<ApplicationUser, ApplicationRole, string>
     {
         public TodoContext(DbContextOptions<TodoContext> options)
             : base(options)

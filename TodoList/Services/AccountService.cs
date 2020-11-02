@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using TodoList.Models;
 using TodoList.Services.IService;
+using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
 
 namespace TodoList.Services
 {

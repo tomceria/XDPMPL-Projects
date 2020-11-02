@@ -51,6 +51,7 @@ namespace TodoList
             });
 
             /**/ // Registering Business Services
+            services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<ICongViecService, CongViecService>();
             // services.AddScoped<INhanVienService, NhanVienService>();
         }
@@ -74,6 +75,7 @@ namespace TodoList
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
