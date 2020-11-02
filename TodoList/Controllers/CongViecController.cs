@@ -4,21 +4,22 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TodoList.Data;
 using TodoList.Models;
+using TodoList.Services.IService;
 
 namespace TodoList.Controllers
 {
     public class CongViecController : Controller
     {
-        private readonly TodoContext _context;
+        private readonly ICongViecService _congViecService;
 
-        public CongViecController(TodoContext context)
+        public CongViecController(ICongViecService congViecService)
         {
-            _context = context;
+            _congViecService = congViecService;
         }
 
         public async Task<IActionResult> Index()
         {
-            return View(await _context.DSCongViec.ToListAsync());
+            return View(await _congViecService.GetAllCongViecs());
         }
 
         public async Task<IActionResult> Edit(int? id)
@@ -27,7 +28,7 @@ namespace TodoList.Controllers
             {
                 return NotFound();
             }
-            CongViec congViec = await _context.DSCongViec.FindAsync(id);
+            var congViec = await _congViecService.GetOneCongViec((int) id);
             if (congViec == null)
             {
                 return NotFound();
@@ -40,23 +41,9 @@ namespace TodoList.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(string name)
         {
-            // TODO: Must be authorized to run this action
-
-            CongViec congViec = new CongViec
-            {
-                Name = name,
-                StartDate = DateTime.Now,
-                EndDate = (DateTime.Now).AddDays(7),
-                TrangThai = Status.inProgress,
-                Privacy = Access.isPrivate,
-            };
-
-            // TODO: Replacing with current user
-            var nhanVien = await _context.DSNhanVien.FirstOrDefaultAsync();
-            congViec.NhanVienID = nhanVien.ID;
-
-            await _context.AddAsync(congViec);
-            await _context.SaveChangesAsync();
+            var congViec = await _congViecService.CreateCongViec(name);
+            _congViecService.AddCongViec(congViec);
+            await _congViecService.Save();
 
             return RedirectToAction("Edit", new {id = congViec.ID});
         }
@@ -72,9 +59,9 @@ namespace TodoList.Controllers
             }
 
             if (!ModelState.IsValid) return View(congViec);
-            
-            _context.Update(congViec);
-            await _context.SaveChangesAsync();
+
+            _congViecService.UpdateCongViec(congViec);
+            await _congViecService.Save();
 
             return RedirectToAction("Index");
         }
@@ -83,7 +70,7 @@ namespace TodoList.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id)
         {
-            CongViec congViec = await _context.DSCongViec.FindAsync(id);
+            CongViec congViec = await _congViecService.GetOneCongViec(id);
             if (congViec == null)
             {
                 return NotFound();
@@ -91,8 +78,8 @@ namespace TodoList.Controllers
             
             if (!ModelState.IsValid) return RedirectToAction("Edit", new { id = id });
             
-            _context.Remove(congViec);
-            await _context.SaveChangesAsync();
+            _congViecService.DeleteCongViec(congViec);
+            await _congViecService.Save();
             
             return RedirectToAction("Index");
         }

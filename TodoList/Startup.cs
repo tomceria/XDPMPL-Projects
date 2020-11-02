@@ -10,6 +10,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using TodoList.Data;
+using TodoList.Services;
+using TodoList.Services.IService;
 
 namespace TodoList
 {
@@ -29,6 +31,9 @@ namespace TodoList
 
             services.AddDbContext<TodoContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("HoangTodoContext")));
+            
+            // Registering Business Services
+            services.AddScoped<ICongViecService, CongViecService>();
         }
 
         /**/// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
