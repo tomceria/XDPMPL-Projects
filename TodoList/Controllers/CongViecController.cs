@@ -37,9 +37,11 @@ namespace TodoList.Controllers
                 return NotFound();
             }
 
-            // Constructs VietModel
-            CongViecEditVm viewModel = new CongViecEditVm();
-            viewModel.CongViec = congViec;
+            // Constructs ViewModel
+            var viewModel = new CongViecEditVm
+            {
+                CongViec = congViec
+            };
 
             return View(viewModel);
         }
@@ -57,18 +59,15 @@ namespace TodoList.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Name,StartDate,EndDate,TrangThai,Privacy,NhanVienID")]
-            CongViec congViec)
+        public async Task<IActionResult> Edit(
+            [Bind("ID,Name,StartDate,EndDate,TrangThai,Privacy,NhanVienID")]
+            CongViec congViec
+        )
         {
-            if (id != congViec.ID)
-            {
-                return NotFound();
-            }
-
             if (!ModelState.IsValid)
             {
                 return View(
-                    new CongViecEditVm { CongViec = congViec }
+                    new CongViecEditVm {CongViec = congViec}
                 );
             }
 
@@ -80,15 +79,9 @@ namespace TodoList.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete([Bind("ID")] CongViec congViec)
         {
-            CongViec congViec = await _congViecService.GetOneCongViec(id);
-            if (congViec == null)
-            {
-                return NotFound();
-            }
-
-            if (!ModelState.IsValid) return RedirectToAction("Edit", new {id = id});
+            if (!ModelState.IsValid) return RedirectToAction("Edit", new {id = congViec.ID});
 
             _congViecService.DeleteCongViec(congViec);
             await _congViecService.Save();

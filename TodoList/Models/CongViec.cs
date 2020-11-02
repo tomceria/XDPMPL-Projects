@@ -1,17 +1,26 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TodoList.Models
 {
     public enum Status
     {
-        inProgress, completed, overdue
+        [Display(Name = "Đang làm")] 
+        inProgress,
+        [Display(Name = "Hoàn tất")] 
+        completed,
+        [Display(Name = "Trễ hạn")] 
+        overdue
     }
     public enum Access
     {
-        isPublic, isPrivate
+        [Display(Name = "Công khai")] 
+        isPublic,
+        [Display(Name = "Cá nhân")] 
+        isPrivate
     }
 
     public class CongViec
