@@ -5,7 +5,7 @@ namespace TodoList.Models
 {
     public enum Level
     {
-        A = 0, B = 1
+        NhanVien = 0, LanhDao = 1
     }
     public class NhanVien
     {

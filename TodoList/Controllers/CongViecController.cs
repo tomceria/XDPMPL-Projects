@@ -60,7 +60,7 @@ namespace TodoList.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(
-            [Bind("ID,Name,StartDate,EndDate,TrangThai,Privacy,NhanVienID")]
+            [Bind("ID,Name,StartDate,EndDate,Status,Access,NhanVienID")]
             CongViec congViec
         )
         {

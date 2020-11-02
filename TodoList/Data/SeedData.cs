@@ -19,7 +19,7 @@ namespace TodoList.Data
                     {
                         HoTen = "Luu Minh Hoàng",
                         Email = "ceriagame@gmail.com",
-                        Level = Level.A
+                        Level = Level.NhanVien
                     }
                 );
             }

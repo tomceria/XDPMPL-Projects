@@ -6,21 +6,19 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TodoList.Models
 {
-    public enum Status
+    public enum TaskStatus
     {
         [Display(Name = "Đang làm")] 
-        inProgress,
+        InProgress,
         [Display(Name = "Hoàn tất")] 
-        completed,
-        [Display(Name = "Trễ hạn")] 
-        overdue
+        Completed
     }
-    public enum Access
+    public enum TaskAccess
     {
         [Display(Name = "Công khai")] 
-        isPublic,
+        IsPublic,
         [Display(Name = "Cá nhân")] 
-        isPrivate
+        IsPrivate
     }
 
     public class CongViec
@@ -33,9 +31,9 @@ namespace TodoList.Models
         [DisplayName("Ngày kết thúc")]
         public DateTime EndDate { get; set; }
         [DisplayName("Trạng thái")]
-        public Status TrangThai { get; set; }
+        public TaskStatus Status { get; set; }
         [DisplayName("Quyền truy cập")]
-        public Access Privacy { get; set; }
+        public TaskAccess Access { get; set; }
 
         [DisplayName("Nhân viên")]
         [ForeignKey("NhanVien")]

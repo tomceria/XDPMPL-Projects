@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using TodoList.Data;
 using TodoList.Models;
 using TodoList.Services.IService;
+using TaskStatus = TodoList.Models.TaskStatus;
 
 namespace TodoList.Services
 {
@@ -37,8 +38,8 @@ namespace TodoList.Services
                 Name = name,
                 StartDate = DateTime.Now,
                 EndDate = (DateTime.Now).AddDays(7),
-                TrangThai = Status.inProgress,
-                Privacy = Access.isPrivate,
+                Status = TaskStatus.InProgress,
+                Access = TaskAccess.IsPrivate,
             };
             
             // TODO: Replacing with current user
