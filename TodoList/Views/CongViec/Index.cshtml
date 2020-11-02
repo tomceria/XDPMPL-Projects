@@ -18,6 +18,7 @@
         <th>@Html.DisplayNameFor(model => model.EndDate)</th>
         <th>@Html.DisplayNameFor(model => model.TrangThai)</th>
         <th>@Html.DisplayNameFor(model => model.Privacy)</th>
+        <th>Hành động</th>
     </tr>
     @foreach (var item in Model)
     {
@@ -28,6 +29,9 @@
             <td>@Html.DisplayFor(model => item.EndDate)</td>
             <td>@Html.DisplayFor(model => item.TrangThai)</td>
             <td>@Html.DisplayFor(model => item.Privacy)</td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ID">Chỉnh sửa</a>
+            </td>
         </tr>
     }
 </table>

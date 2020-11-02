@@ -42,8 +42,14 @@
         <input asp-for="Privacy" class="form-control"/>
         <span asp-validation-for="Privacy" class="text-danger"></span>
     </div>
-   <input type="submit" value="Lưu" class="btn btn-primary" /> 
+    <input type="submit" value="Lưu" class="btn btn-primary"/>
 </form>
+
+<form asp-action="Delete">
+    <input type="hidden" asp-for="ID"/>
+    <input type="submit" value="Xoá" class="btn btn-danger"/>
+</form>
+
 
 @section Scripts {
     @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }

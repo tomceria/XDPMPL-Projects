@@ -72,24 +72,28 @@ namespace TodoList.Controllers
             }
 
             if (!ModelState.IsValid) return View(congViec);
-            try
-            {
-                _context.Update(congViec);
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
+            
+            _context.Update(congViec);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete(int id)
+        {
+            CongViec congViec = await _context.DSCongViec.FindAsync(id);
+            if (congViec == null)
             {
                 return NotFound();
-                // if (!CongViecExists(congViec.ID))
-                // {
-                //     return NotFound();
-                // }
-                // else
-                // {
-                //     throw;
-                // }
             }
-
+            
+            if (!ModelState.IsValid) return RedirectToAction("Edit", new { id = id });
+            
+            _context.Remove(congViec);
+            await _context.SaveChangesAsync();
+            
             return RedirectToAction("Index");
         }
     }
