@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -38,8 +39,16 @@ namespace TodoList
                 )
             );
             
+            /**/ // Registering Identity Service
             services.AddIdentity<ApplicationUser, ApplicationRole>()
                     .AddEntityFrameworkStores<TodoContext>();
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.AccessDeniedPath = "/Account/AccessDenied";
+                options.LoginPath = "/Account/Login";
+                options.ReturnUrlParameter = CookieAuthenticationDefaults.ReturnUrlParameter;
+                options.SlidingExpiration = true;
+            });
 
             /**/ // Registering Business Services
             services.AddScoped<ICongViecService, CongViecService>();

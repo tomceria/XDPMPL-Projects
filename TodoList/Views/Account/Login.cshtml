@@ -1,0 +1,26 @@
+@model TodoList.ViewModels.AccountLoginVm
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "_LayoutEmpty";
+}
+
+<h2>TodoList Inc.</h2>
+
+<form asp-action="Login">
+    <div class="form-group">
+        <input
+            asp-for="Username"
+            class="form-control"
+            placeholder="@Html.DisplayNameFor(model => model.Username)"/>
+        <span asp-validation-for="Username" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input
+            asp-for="Password"
+            class="form-control"
+            placeholder="@Html.DisplayNameFor(model => model.Password)"/>
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+    <input type="submit" value="Đăng nhập" class="btn btn-primary"/>
+</form>

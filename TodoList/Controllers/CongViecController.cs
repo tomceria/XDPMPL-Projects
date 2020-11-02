@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TodoList.Data;
@@ -9,6 +10,7 @@ using TodoList.ViewModels;
 
 namespace TodoList.Controllers
 {
+    [Authorize]
     public class CongViecController : Controller
     {
         private readonly ICongViecService _congViecService;
@@ -23,6 +25,7 @@ namespace TodoList.Controllers
             return View(await _congViecService.GetAllCongViecs());
         }
 
+        [Authorize(Roles = "NhanVien")]
         public async Task<IActionResult> Edit(int? id)
         {
             // Get CongViec
