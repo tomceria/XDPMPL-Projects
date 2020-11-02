@@ -1,0 +1,38 @@
+@using TodoList.Common.Utilities
+@model IEnumerable<CongViec>
+@{
+    ViewData["Title"] = "The CongViec List";
+}
+
+<h2>Danh sách Công việc</h2>
+
+<form asp-action="Create">
+    <input name="name" class="form-control" placeholder="Nhập tên công việc..."/>
+    <input type="submit" value="Tạo mới" class="btn btn-primary"/>
+</form>
+
+<table>
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.NhanVienID)</th>
+        <th>@Html.DisplayNameFor(model => model.Name)</th>
+        <th>@Html.DisplayNameFor(model => model.StartDate)</th>
+        <th>@Html.DisplayNameFor(model => model.EndDate)</th>
+        <th>@Html.DisplayNameFor(model => model.Status)</th>
+        <th>@Html.DisplayNameFor(model => model.Access)</th>
+        <th>Hành động</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(model => item.NhanVien.HoTen)</td>
+            <td>@Html.DisplayFor(model => item.Name)</td>
+            <td>@Html.DisplayFor(model => item.StartDate)</td>
+            <td>@Html.DisplayFor(model => item.EndDate)</td>
+            <td>@Html.DisplayFor(model => item.Status)</td>
+            <td>@Html.DisplayFor(model => item.Access)</td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ID">Chỉnh sửa</a>
+            </td>
+        </tr>
+    }
+</table>

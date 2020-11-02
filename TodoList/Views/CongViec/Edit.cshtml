@@ -1,0 +1,75 @@
+@using TodoList.Common.Utilities
+@using Microsoft.EntityFrameworkCore.Metadata.Internal
+@using TaskStatus = TodoList.Models.TaskStatus
+@model TodoList.ViewModels.CongViecEditVm
+
+@{
+    ViewBag.Title = "Editing " + @Html.ViewData.Model.CongViec.Name;
+    Layout = "_Layout";
+}
+
+<h6>
+    <a asp-controller="CongViec" asp-action="Index">
+        Trở về Danh sách Công việc
+    </a>
+</h6>
+
+<form asp-action="Edit">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="CongViec.ID"/>
+    <input type="hidden" asp-for="CongViec.NhanVienID"/>
+
+    <div class="form-group">
+        <input asp-for="CongViec.Name" class="form-control col-form-label col-form-label-lg"/>
+        <span asp-validation-for="CongViec.Name" class="text-danger"></span>
+    </div>
+    <hr>
+
+    <div class="form-row">
+        <div class="form-group col">
+            <label asp-for="CongViec.StartDate" class="control-label"></label>
+            <input asp-for="CongViec.StartDate" class="form-control"/>
+            <span asp-validation-for="CongViec.StartDate" class="text-danger"></span>
+        </div>
+        <div class="form-group col">
+            <label asp-for="CongViec.EndDate" class="control-label"></label>
+            <input asp-for="CongViec.EndDate" class="form-control"/>
+            <span asp-validation-for="CongViec.EndDate" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="CongViec.Status" class="control-label"></label>
+        <select asp-for="CongViec.Status" class="form-control">
+            @foreach (var item in Enum.GetValues(typeof(TaskStatus)).Cast<TaskStatus>())
+            {
+                <option value="@item">
+                    @Html.DisplayFor(model => item)
+                </option>
+            }
+        </select>
+        <span asp-validation-for="CongViec.Status" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="CongViec.Access" class="control-label"></label>
+        <select asp-for="CongViec.Access" class="form-control">
+            @foreach (var item in Enum.GetValues(typeof(TaskAccess)).Cast<TaskAccess>())
+            {
+                <option value="@item">
+                    @Html.DisplayFor(model => item)
+                </option>
+            }
+        </select>
+        <span asp-validation-for="CongViec.Access" class="text-danger"></span>
+    </div>
+    <input type="submit" value="Lưu" class="btn btn-primary"/>
+</form>
+
+<form asp-action="Delete">
+    <input type="hidden" asp-for="CongViec.ID"/>
+    <input type="submit" value="Xoá" class="btn btn-danger"/>
+</form>
+
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}
