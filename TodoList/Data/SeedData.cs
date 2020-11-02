@@ -1,6 +1,6 @@
 using System;
+using System.Linq;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.Extensions.DependencyInjection;
 using TodoList.Models;
 

@@ -31,7 +31,7 @@ namespace TodoList
         {
             services.AddControllersWithViews();
 
-            // Registering Database Connection
+            /**/ // Registering Database Connection
             services.AddDbContext<TodoContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("HoangTodoContext")
@@ -39,10 +39,11 @@ namespace TodoList
             );
             
             services.AddIdentity<ApplicationUser, ApplicationRole>()
-                    .AddEntityFrameworkStores<HighSchoolContext>();
+                    .AddEntityFrameworkStores<TodoContext>();
 
-            // Registering Business Services
+            /**/ // Registering Business Services
             services.AddScoped<ICongViecService, CongViecService>();
+            // services.AddScoped<INhanVienService, NhanVienService>();
         }
 
         /**/ // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
