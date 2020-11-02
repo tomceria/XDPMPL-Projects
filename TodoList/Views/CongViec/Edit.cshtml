@@ -1,3 +1,5 @@
+@using TodoList.Common.Utilities
+@using Microsoft.EntityFrameworkCore.Metadata.Internal
 @model TodoList.ViewModels.CongViecEditVm
 
 @{
@@ -34,12 +36,22 @@
     </div>
     <div class="form-group">
         <label asp-for="CongViec.TrangThai" class="control-label"></label>
-        <input asp-for="CongViec.TrangThai" class="form-control"/>
+        <select asp-for="CongViec.TrangThai" class="form-control">
+            @foreach (var item in Enum.GetValues(typeof(Status)).Cast<Status>())
+            {
+                <option value="@item">@item.GetDisplayName()</option>
+            }
+        </select>
         <span asp-validation-for="CongViec.TrangThai" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="CongViec.Privacy" class="control-label"></label>
-        <input asp-for="CongViec.Privacy" class="form-control"/>
+        <select asp-for="CongViec.TrangThai" class="form-control">
+            @foreach (var item in Enum.GetValues(typeof(Access)).Cast<Access>())
+            {
+                <option value="@item">@item.GetDisplayName()</option>
+            }
+        </select>
         <span asp-validation-for="CongViec.Privacy" class="text-danger"></span>
     </div>
     <input type="submit" value="Lưu" class="btn btn-primary"/>
