@@ -39,17 +39,21 @@
         <select asp-for="CongViec.TrangThai" class="form-control">
             @foreach (var item in Enum.GetValues(typeof(Status)).Cast<Status>())
             {
-                <option value="@item">@item.GetDisplayName()</option>
+                <option value="@item">
+                    @Html.DisplayFor(model => item)
+                </option>
             }
         </select>
         <span asp-validation-for="CongViec.TrangThai" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="CongViec.Privacy" class="control-label"></label>
-        <select asp-for="CongViec.TrangThai" class="form-control">
+        <select asp-for="CongViec.Privacy" class="form-control">
             @foreach (var item in Enum.GetValues(typeof(Access)).Cast<Access>())
             {
-                <option value="@item">@item.GetDisplayName()</option>
+                <option value="@item">
+                    @Html.DisplayFor(model => item)
+                </option>
             }
         </select>
         <span asp-validation-for="CongViec.Privacy" class="text-danger"></span>

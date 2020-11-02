@@ -28,8 +28,8 @@
             <td>@Html.DisplayFor(model => item.Name)</td>
             <td>@Html.DisplayFor(model => item.StartDate)</td>
             <td>@Html.DisplayFor(model => item.EndDate)</td>
-            <td>@item.TrangThai.GetDisplayName()</td>
-            <td>@item.Privacy.GetDisplayName()</td>
+            <td>@Html.DisplayFor(model => item.TrangThai)</td>
+            <td>@Html.DisplayFor(model => item.Privacy)</td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.ID">Chỉnh sửa</a>
             </td>
