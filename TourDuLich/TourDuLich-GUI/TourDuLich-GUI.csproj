@@ -113,11 +113,11 @@
     <Compile Include="Models\TourType.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="GUI\MainView.cs">
+    <Compile Include="GUI\ManageView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\MainView.Designer.cs">
-      <DependentUpon>MainView.cs</DependentUpon>
+    <Compile Include="GUI\ManageView.Designer.cs">
+      <DependentUpon>ManageView.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\EditTourView.cs">
       <SubType>Form</SubType>
@@ -131,8 +131,8 @@
     <EmbeddedResource Include="GUI\EditTourView.resx">
       <DependentUpon>EditTourView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\MainView.resx">
-      <DependentUpon>MainView.cs</DependentUpon>
+    <EmbeddedResource Include="GUI\ManageView.resx">
+      <DependentUpon>ManageView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202010190138050_TourDB-v1.resx">
       <DependentUpon>202010190138050_TourDB-v1.cs</DependentUpon>

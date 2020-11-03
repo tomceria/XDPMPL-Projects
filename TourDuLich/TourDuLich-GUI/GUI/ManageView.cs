@@ -16,7 +16,7 @@ using System.Collections.ObjectModel;
 
 namespace TourDuLich_GUI.GUI
 {
-    public partial class MainView : DevExpress.XtraBars.Ribbon.RibbonForm
+    public partial class ManageView : DevExpress.XtraBars.Ribbon.RibbonForm
     {
         enum Page
         {
@@ -24,7 +24,7 @@ namespace TourDuLich_GUI.GUI
             TourGroups
         }
 
-        public MainView()
+        public ManageView()
         {
             InitializeComponent();
             ConfigureControls();
@@ -84,10 +84,17 @@ namespace TourDuLich_GUI.GUI
             BindingList<Tour> list = new BindingList<Tour>(
                 Tour.GetAll()
             );
+            //Mapping tour price
+            foreach( Tour tour in list)
+            {
+                tour.CurrentPrice = Tour.GetTourPriceOrPriceRef(tour.ID, DateTime.Now);
+            }
 
             // UI changes
             gridView_Tours.HideLoadingPanel();
             gridControl_Tours.DataSource = list;
+            /*            gridControl_Tours.DataMember.
+            */
             gridControl_Tours.RefreshDataSource();
             bsiListCount.Caption = $"{list.Count} items";
         }
@@ -213,11 +220,21 @@ namespace TourDuLich_GUI.GUI
         {
             switch (getCurrentPage()) {
                 case Page.Tours: {
-                        handleDeleteTour();
+                        DialogResult res = MessageBox.Show("Bạn chắc chắn muốn xóa tour du lịch này?", "Xác nhận", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                        if (res == DialogResult.OK)
+                        {
+                            handleDeleteTour();
+                            MessageBox.Show("Xóa thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
                         break;
                     }
                 case Page.TourGroups: {
-                        handleDeleteTourGroup();
+                        DialogResult res = MessageBox.Show("Bạn chắc chắn muốn xóa đoàn tour du lịch này?", "Xác nhận", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                        if (res == DialogResult.OK)
+                        {
+                            handleDeleteTourGroup();
+                            MessageBox.Show("Xóa thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
                         break;
                     }
             }

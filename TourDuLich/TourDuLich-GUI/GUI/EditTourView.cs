@@ -255,7 +255,12 @@ namespace TourDuLich_GUI.GUI
         }
 
         private void bbiDelete_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e) {
-            handleDeleteTour();
+            DialogResult res = MessageBox.Show("Bạn chắc chắn muốn xóa tour du lịch này?\n Mọi thay đổi của bạn sẽ không được lưu!", "Xác nhận", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+            if (res == DialogResult.OK)
+            {
+                handleDeleteTour();
+                MessageBox.Show("Xóa thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         private void button_AddTourPrice_Click(object sender, EventArgs e) {
@@ -263,7 +268,12 @@ namespace TourDuLich_GUI.GUI
         }
 
         private void button_DeleteTourPrice_Click(object sender, EventArgs e) {
-            handleDeleteTourPrice();
+            DialogResult res = MessageBox.Show("Bạn chắc chắn muốn xóa giá tour này?", "Xác nhận", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+            if (res == DialogResult.OK)
+            {
+                handleDeleteTourPrice();
+                MessageBox.Show("Xóa thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         private void listBoxControl_Destination_SelectedIndexChanged(object sender, EventArgs e) {
