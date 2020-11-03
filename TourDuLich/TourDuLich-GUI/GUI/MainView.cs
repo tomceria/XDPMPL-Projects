@@ -87,8 +87,9 @@ namespace TourDuLich_GUI.GUI
             //Mapping tour price
             foreach( Tour tour in list)
             {
-                tour.PriceRef = Tour.GetTourPriceOrPriceRef(tour.ID, DateTime.Now);
+                tour.CurrentPrice = Tour.GetTourPriceOrPriceRef(tour.ID, DateTime.Now);
             }
+
             // UI changes
             gridView_Tours.HideLoadingPanel();
             gridControl_Tours.DataSource = list;

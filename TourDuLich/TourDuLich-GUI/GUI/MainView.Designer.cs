@@ -35,9 +35,6 @@
             this.colName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colDescription = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colPriceRef = new DevExpress.XtraGrid.Columns.GridColumn();
-            //Format Currency
-            this.colPriceRef.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            this.colPriceRef.DisplayFormat.FormatString = "N0";
             this.ribbonControl = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.bbiNew = new DevExpress.XtraBars.BarButtonItem();
             this.bbiEdit = new DevExpress.XtraBars.BarButtonItem();
@@ -59,10 +56,7 @@
             this.colDateStart = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colDateEnd = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colPriceGroup = new DevExpress.XtraGrid.Columns.GridColumn();
-            //Format Currency
-            this.colPriceGroup.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            this.colPriceGroup.DisplayFormat.FormatString = "N0";
-
+            this.colCurrentPrice = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl_Tours)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView_Tours)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl)).BeginInit();
@@ -88,7 +82,6 @@
             this.gridControl_Tours.TabIndex = 2;
             this.gridControl_Tours.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView_Tours});
-
             // 
             // gridView_Tours
             // 
@@ -96,7 +89,8 @@
             this.gridView_Tours.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colName,
             this.colDescription,
-            this.colPriceRef});
+            this.colPriceRef,
+            this.colCurrentPrice});
             this.gridView_Tours.GridControl = this.gridControl_Tours;
             this.gridView_Tours.Name = "gridView_Tours";
             this.gridView_Tours.OptionsBehavior.Editable = false;
@@ -121,10 +115,21 @@
             // 
             // colPriceRef
             // 
+            this.colPriceRef.DisplayFormat.FormatString = "N0";
+            this.colPriceRef.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colPriceRef.FieldName = "PriceRef";
             this.colPriceRef.Name = "colPriceRef";
             this.colPriceRef.Visible = true;
             this.colPriceRef.VisibleIndex = 2;
+            // 
+            // colCurrentPrice
+            // 
+            this.colCurrentPrice.DisplayFormat.FormatString = "N0";
+            this.colCurrentPrice.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.colCurrentPrice.FieldName = "CurrentPrice";
+            this.colCurrentPrice.Name = "colCurrentPrice";
+            this.colCurrentPrice.Visible = true;
+            this.colCurrentPrice.VisibleIndex = 3;
             // 
             // ribbonControl
             // 
@@ -303,10 +308,20 @@
             // 
             // colPriceGroup
             // 
+            this.colPriceGroup.DisplayFormat.FormatString = "N0";
+            this.colPriceGroup.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colPriceGroup.FieldName = "PriceGroup";
             this.colPriceGroup.Name = "colPriceGroup";
             this.colPriceGroup.Visible = true;
             this.colPriceGroup.VisibleIndex = 3;
+            // 
+            // colCurrentPrice
+            // 
+            this.colCurrentPrice.Caption = "Giá hiện tại";
+            this.colCurrentPrice.FieldName = "CurrentPrice";
+            this.colCurrentPrice.Name = "colCurrentPrice";
+            this.colCurrentPrice.Visible = true;
+            this.colCurrentPrice.VisibleIndex = 3;
             // 
             // MainView
             // 
@@ -363,5 +378,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn colDateEnd;
         private DevExpress.XtraGrid.Columns.GridColumn colPriceGroup;
         private DevExpress.XtraGrid.Columns.GridColumn colTour;
+        private DevExpress.XtraGrid.Columns.GridColumn colCurrentPrice;
     }
 }

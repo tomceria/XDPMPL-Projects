@@ -28,6 +28,9 @@ namespace TourDuLich_GUI.BUS {
         [ForeignKey("TourType"), Display(Name = "Loại tour")]
         public int TourTypeID { get; set; }
 
+        [NotMapped]
+        public long CurrentPrice { get; set; }
+
         public virtual TourType TourType { get; set; }
 
         public virtual ICollection<TourDetail> TourDetails { get; set; }
