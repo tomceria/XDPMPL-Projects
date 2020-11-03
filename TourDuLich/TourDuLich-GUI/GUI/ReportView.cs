@@ -15,7 +15,6 @@ namespace TourDuLich_GUI.GUI
     {
         public ReportView()
         {
-            Console.WriteLine("WE're INNNNNN");
             InitializeComponent();
         }
     }

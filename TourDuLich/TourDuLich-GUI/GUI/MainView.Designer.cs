@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraBars.Docking2010.Views.Tabbed.DockingContainer dockingContainer1 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.DockingContainer();
+            DevExpress.XtraBars.Docking2010.Views.Tabbed.DockingContainer dockingContainer2 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.DockingContainer();
             this.documentGroup1 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.DocumentGroup(this.components);
             this.manageViewDocument = new DevExpress.XtraBars.Docking2010.Views.Tabbed.Document(this.components);
             this.fluentDesignFormContainer1 = new DevExpress.XtraBars.FluentDesignSystem.FluentDesignFormContainer();
-            this.accordionControl1 = new DevExpress.XtraBars.Navigation.AccordionControl();
+            this.accordionControl_Main = new DevExpress.XtraBars.Navigation.AccordionControl();
             this.accordionControlElement_ManageView = new DevExpress.XtraBars.Navigation.AccordionControlElement();
             this.accordionControlElement_ReportView = new DevExpress.XtraBars.Navigation.AccordionControlElement();
             this.fluentDesignFormControl1 = new DevExpress.XtraBars.FluentDesignSystem.FluentDesignFormControl();
@@ -42,7 +42,7 @@
             this.reportViewDocument = new DevExpress.XtraBars.Docking2010.Views.Tabbed.Document(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.documentGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.manageViewDocument)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.accordionControl1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.accordionControl_Main)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fluentDesignFormControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.documentManager_MainView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabbedView1)).BeginInit();
@@ -71,20 +71,21 @@
             this.fluentDesignFormContainer1.Size = new System.Drawing.Size(596, 442);
             this.fluentDesignFormContainer1.TabIndex = 0;
             // 
-            // accordionControl1
+            // accordionControl_Main
             // 
-            this.accordionControl1.AllowItemSelection = true;
-            this.accordionControl1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.accordionControl1.Elements.AddRange(new DevExpress.XtraBars.Navigation.AccordionControlElement[] {
+            this.accordionControl_Main.AllowItemSelection = true;
+            this.accordionControl_Main.Dock = System.Windows.Forms.DockStyle.Left;
+            this.accordionControl_Main.Elements.AddRange(new DevExpress.XtraBars.Navigation.AccordionControlElement[] {
             this.accordionControlElement_ManageView,
             this.accordionControlElement_ReportView});
-            this.accordionControl1.Location = new System.Drawing.Point(0, 31);
-            this.accordionControl1.Name = "accordionControl1";
-            this.accordionControl1.OptionsMinimizing.AllowMinimizeMode = DevExpress.Utils.DefaultBoolean.False;
-            this.accordionControl1.ScrollBarMode = DevExpress.XtraBars.Navigation.ScrollBarMode.Touch;
-            this.accordionControl1.Size = new System.Drawing.Size(95, 442);
-            this.accordionControl1.TabIndex = 1;
-            this.accordionControl1.ViewType = DevExpress.XtraBars.Navigation.AccordionControlViewType.HamburgerMenu;
+            this.accordionControl_Main.Location = new System.Drawing.Point(0, 31);
+            this.accordionControl_Main.Name = "accordionControl_Main";
+            this.accordionControl_Main.OptionsMinimizing.AllowMinimizeMode = DevExpress.Utils.DefaultBoolean.False;
+            this.accordionControl_Main.ScrollBarMode = DevExpress.XtraBars.Navigation.ScrollBarMode.Touch;
+            this.accordionControl_Main.Size = new System.Drawing.Size(95, 442);
+            this.accordionControl_Main.TabIndex = 1;
+            this.accordionControl_Main.ViewType = DevExpress.XtraBars.Navigation.AccordionControlViewType.HamburgerMenu;
+            this.accordionControl_Main.SelectedElementChanged += new DevExpress.XtraBars.Navigation.SelectedElementChangedEventHandler(this.accordionControl_Main_SelectedElementChanged);
             // 
             // accordionControlElement_ManageView
             // 
@@ -116,15 +117,16 @@
             // 
             // tabbedView1
             // 
+            this.tabbedView1.DocumentGroupProperties.ShowTabHeader = false;
             this.tabbedView1.DocumentGroups.AddRange(new DevExpress.XtraBars.Docking2010.Views.Tabbed.DocumentGroup[] {
             this.documentGroup1});
             this.tabbedView1.DocumentProperties.AllowClose = false;
             this.tabbedView1.Documents.AddRange(new DevExpress.XtraBars.Docking2010.Views.BaseDocument[] {
             this.reportViewDocument,
             this.manageViewDocument});
-            dockingContainer1.Element = this.documentGroup1;
+            dockingContainer2.Element = this.documentGroup1;
             this.tabbedView1.RootContainer.Nodes.AddRange(new DevExpress.XtraBars.Docking2010.Views.Tabbed.DockingContainer[] {
-            dockingContainer1});
+            dockingContainer2});
             this.tabbedView1.Style = DevExpress.XtraBars.Docking2010.Views.DockingViewStyle.Light;
             // 
             // reportViewDocument
@@ -142,15 +144,15 @@
             this.ClientSize = new System.Drawing.Size(691, 473);
             this.ControlContainer = this.fluentDesignFormContainer1;
             this.Controls.Add(this.fluentDesignFormContainer1);
-            this.Controls.Add(this.accordionControl1);
+            this.Controls.Add(this.accordionControl_Main);
             this.Controls.Add(this.fluentDesignFormControl1);
             this.FluentDesignFormControl = this.fluentDesignFormControl1;
             this.Name = "MainView";
-            this.NavigationControl = this.accordionControl1;
+            this.NavigationControl = this.accordionControl_Main;
             this.Text = "MainView";
             ((System.ComponentModel.ISupportInitialize)(this.documentGroup1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.manageViewDocument)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.accordionControl1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.accordionControl_Main)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fluentDesignFormControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.documentManager_MainView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabbedView1)).EndInit();
@@ -161,7 +163,7 @@
 
         #endregion
         private DevExpress.XtraBars.FluentDesignSystem.FluentDesignFormContainer fluentDesignFormContainer1;
-        private DevExpress.XtraBars.Navigation.AccordionControl accordionControl1;
+        private DevExpress.XtraBars.Navigation.AccordionControl accordionControl_Main;
         private DevExpress.XtraBars.Navigation.AccordionControlElement accordionControlElement_ManageView;
         private DevExpress.XtraBars.FluentDesignSystem.FluentDesignFormControl fluentDesignFormControl1;
         private DevExpress.XtraBars.Navigation.AccordionControlElement accordionControlElement_ReportView;
