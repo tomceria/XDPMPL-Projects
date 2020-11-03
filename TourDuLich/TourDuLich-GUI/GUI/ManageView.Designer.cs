@@ -1,6 +1,6 @@
 ﻿namespace TourDuLich_GUI.GUI
 {
-    partial class MainView
+    partial class ManageView
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainView));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ManageView));
             this.gridControl_Tours = new DevExpress.XtraGrid.GridControl();
             this.gridView_Tours = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colName = new DevExpress.XtraGrid.Columns.GridColumn();

@@ -16,7 +16,7 @@ using System.Collections.ObjectModel;
 
 namespace TourDuLich_GUI.GUI
 {
-    public partial class MainView : DevExpress.XtraBars.Ribbon.RibbonForm
+    public partial class ManageView : DevExpress.XtraBars.Ribbon.RibbonForm
     {
         enum Page
         {
@@ -24,7 +24,7 @@ namespace TourDuLich_GUI.GUI
             TourGroups
         }
 
-        public MainView()
+        public ManageView()
         {
             InitializeComponent();
             ConfigureControls();
