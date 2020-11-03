@@ -18,8 +18,8 @@ namespace TourDuLich_GUI.BUS {
             return TourDAL.GetOne(id);
         }
 
-        public static void DeleteOne(Tour item) {
-            TourDAL.DeleteOne(item);
+        public static void DeleteOne(int id) {
+            TourDAL.DeleteOne(id);
         }
 
         public Tour Create()
@@ -31,7 +31,16 @@ namespace TourDuLich_GUI.BUS {
         {
             TourDAL.UpdateOne(this);
         }
-
+        
+        public void SanitizeTimeOfTourPrices() {
+            ICollection<TourPrice> tourPrices = this.TourPrices;
+            
+            foreach (TourPrice tourPrice in tourPrices) {
+                tourPrice.TimeStart = new DateTime(tourPrice.TimeStart.Year, tourPrice.TimeStart.Month, tourPrice.TimeStart.Day, 0, 0, 0);
+                tourPrice.TimeEnd = new DateTime(tourPrice.TimeEnd.Year, tourPrice.TimeEnd.Month, tourPrice.TimeEnd.Day, 23, 59, 59);
+            }
+        }
+        
         public void CreateTourPriceForTour() {
             TourPrice tourPrice = new TourPrice(this);
             this.TourPrices.Add(tourPrice);

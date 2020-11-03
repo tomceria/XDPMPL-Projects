@@ -41,8 +41,6 @@ namespace TourDuLich_GUI.DAL {
         }
 
         public static Tour CreateOne(Tour item) {
-            ValidateOne(item);
-
             // This "item" is unattached => ATTACH!
             _ctx.Entry(item).State = EntityState.Added;
 
@@ -52,8 +50,6 @@ namespace TourDuLich_GUI.DAL {
         }
 
         public static void UpdateOne(Tour item) {
-            ValidateOne(item);
-
             // as "item" is loaded from a DataSource/BindingList, it is ALREADY ATTACHED => Must detach TourPrices before deleting/adding
             _ctx.Entry(item).State = EntityState.Modified;    
             Console.WriteLine("Original item : " + _ctx.TourDetails.Where(o => o.TourID == item.ID).ToList().Count);// Context
@@ -111,37 +107,13 @@ namespace TourDuLich_GUI.DAL {
             return;
         }
 
-        public static void DeleteOne(Tour item) {
-            Tour tour = _ctx.Set<Tour>().Include(o => o.TourPrices).First(o => o.ID == item.ID);
+        public static void DeleteOne(int id) {
+            Tour tour = _ctx.Set<Tour>().Include(o => o.TourPrices).First(o => o.ID == id);
             _ctx.Tours.Remove(tour);
             /*_ctx.Entry(tour).State = EntityState.Deleted;
 */
             _ctx.SaveChanges();
 
-        }
-
-        public static bool ValidateOne(Tour item) {
-            // Sanitize => update item
-            SanitizeTimeOfTourPrices(item.TourPrices);
-            // End Sanitize
-
-            List<TourPrice> tourPrices = item.TourPrices.ToList();
-
-            for (int i = 0; i < tourPrices.Count - 1; i++) {
-                // Check Valid TimeStart < TimeEnd
-                if (!(tourPrices[i].TimeStart < tourPrices[i].TimeEnd)) {
-                    throw new Exception("Khoảng thời gian không hợp lệ (Ngày bắt đầu phải trước Ngày kết thúc)");
-                }
-
-                for (int j = i + 1; j < tourPrices.Count; j++) {
-                    // Check non-intersect: (A1>B2) || (B1>A2); assumes A1<A2,B1<B2
-                    if (!(tourPrices[i].TimeStart >= tourPrices[j].TimeEnd || tourPrices[j].TimeStart >= tourPrices[i].TimeEnd)) {
-                        throw new Exception("Tồn tại khoảng thời gian trùng trong bảng giá");
-                    }
-                }
-            }
-
-            return true;
         }
 
         public static TourDetail CreateTourDetail(Tour tour, int order, int destinationId)
@@ -158,19 +130,12 @@ namespace TourDuLich_GUI.DAL {
             };
         }
 
-        public static void SanitizeTimeOfTourPrices(ICollection<TourPrice> tourPrices) {
-            foreach (TourPrice tourPrice in tourPrices) {
-                tourPrice.TimeStart = new DateTime(tourPrice.TimeStart.Year, tourPrice.TimeStart.Month, tourPrice.TimeStart.Day, 0, 0, 0);
-                tourPrice.TimeEnd = new DateTime(tourPrice.TimeEnd.Year, tourPrice.TimeEnd.Month, tourPrice.TimeEnd.Day, 23, 59, 59);
-            }
-        }
-
         public static TourPrice GetTourPriceOnDate(int tourId, DateTime startDate)
         {
-            var tourPrice = _ctx.TourPrices.Where(tp => tp.TourID == tourId
-                && DbFunctions.TruncateTime(tp.TimeStart) <= startDate.Date
-                && startDate.Date <= DbFunctions.TruncateTime(tp.TimeEnd))
-                .FirstOrDefault();
+            var tourPrice = _ctx.TourPrices
+                .FirstOrDefault(tp => tp.TourID == tourId
+                              && DbFunctions.TruncateTime(tp.TimeStart) <= startDate.Date
+                              && startDate.Date <= DbFunctions.TruncateTime(tp.TimeEnd));
 
             return tourPrice;
         }

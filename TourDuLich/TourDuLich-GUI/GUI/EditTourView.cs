@@ -102,23 +102,61 @@ namespace TourDuLich_GUI.GUI
         private Destination getSelectedDestination() {
             return (Destination) listBoxControl_Destination.SelectedItem;
         }
+        
+        private bool ValidateForm()
+        {
+            Tour item = _item;
+            List<TourPrice> tourPrices = item.TourPrices.ToList();
+
+            try
+            {
+                for (int i = 0; i < tourPrices.Count - 1; i++) {
+                    // Check Valid TimeStart < TimeEnd
+                    if (!(tourPrices[i].TimeStart < tourPrices[i].TimeEnd)) {
+                        throw new ArgumentException("Khoảng thời gian không hợp lệ (Ngày bắt đầu phải trước Ngày kết thúc)");
+                    }
+
+                    for (int j = i + 1; j < tourPrices.Count; j++) {
+                        // Check non-intersect: (A1>B2) || (B1>A2); assumes A1<A2,B1<B2
+                        if (!(tourPrices[i].TimeStart >= tourPrices[j].TimeEnd || tourPrices[j].TimeStart >= tourPrices[i].TimeEnd)) {
+                            throw new ArgumentException("Tồn tại khoảng thời gian trùng trong bảng giá");
+                        }
+                    }
+                }
+            } catch (ArgumentException e)
+            {
+                string message = e.Message.Split(Environment.NewLine.ToCharArray())[0];
+                MessageBox.Show(message, "Lỗi dữ liệu nhập", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                // TODO: Focus on controls
+
+                return false;
+            }
+
+            return true;
+        }
 
         // Event Handlers
 
         private void handleSaveTour() {
-            try {
-                if (isUpdate) {
-                    _item.Update();
-                } else {
-                    var temp = _item.Create();
+            // Sanitizations
+            _item.SanitizeTimeOfTourPrices();
+            
+            // Validations
+            if (ValidateForm() == false)
+            {
+                return;
+            }
+            
+            if (isUpdate) {
+                _item.Update();
+            } else {
+                var temp = _item.Create();
 
-                    if (temp.ID != 0)   // tourGroup added to Database => ID changed from 0
-                    {
-                        isUpdate = true;
-                    }
+                if (temp.ID != 0)   // tourGroup added to Database => ID changed from 0
+                {
+                    isUpdate = true;
                 }
-            } catch (Exception e) {
-                MessageBox.Show(e.Message, "Lỗi dữ liệu nhập", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -130,7 +168,7 @@ namespace TourDuLich_GUI.GUI
         }
 
         private void handleDeleteTour() {
-            Tour.DeleteOne(_item);
+            Tour.DeleteOne(_item.ID);
             // close window
             Dispose();
         }
@@ -202,38 +240,6 @@ namespace TourDuLich_GUI.GUI
 
         }
 
-        // ** HIẾU'S APPROACH **
-        // private void UpdateListBoxControl_TourDetail(TourDetail tourDetail, int nextSelectedKey) {
-        //     BindingList<TourDetail> tourDetailsBL1 = new BindingList<TourDetail>(tourDetail.Tour.TourDetails.OrderBy(o => o.Order).ToList());
-        //     listBoxControl_TourDetail.DataSource = tourDetailsBL1;
-        //     listBoxControl_TourDetail.SetSelected(nextSelectedKey, true);
-        // }
-        // private void handleMoveUpTourDetail() { // Hiếu's approach 
-        //     TourDetail tourDetail = (TourDetail) listBoxControl_TourDetail.SelectedItem;
-        //     if (tourDetail != null) {
-        //         int selectedKeyOfListBox = tourDetail.Order;
-        //         TourBUS.MoveUpTourDetailOfTour(tourDetail);
-        //         //Next key of row table = selectedKeyOfListBox - 1, Order Begin from 1 and Row Table begin from 0   => next key of row table = -1 +(-1) = -2 
-        //         if (selectedKeyOfListBox > 1) {
-        //             UpdateListBoxControl_TourDetail(tourDetail, selectedKeyOfListBox - 2);
-        //         }
-        //     }
-        // }
-        // private void handleMoveDownTourDetail() { // Hiếu's approach 
-        //     TourDetail tourDetail = (TourDetail) listBoxControl_TourDetail.SelectedItem;
-        //     if (tourDetail != null)
-        //     {
-        //                 // Next key = current key + 1; But key Order Begin from 1 and Row Table begin from 0 => original number 
-        //                 int selectedKeyOfListBox = tourDetail.Order;
-        //                 TourBUS.MoveDownTourDetailOfTour(tourDetail);
-        //                 if (selectedKeyOfListBox < tourDetail.Tour.TourDetails.Count) 
-        //                 {
-        //                     UpdateListBoxControl_TourDetail(tourDetail, selectedKeyOfListBox);
-        //                 }
-        //     }
-        // }
-
-        //End TourDetail event
         // Events
 
         private void bbiSave_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e) {
@@ -255,11 +261,10 @@ namespace TourDuLich_GUI.GUI
         }
 
         private void bbiDelete_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e) {
-            DialogResult res = MessageBox.Show("Bạn chắc chắn muốn xóa tour du lịch này?\n Mọi thay đổi của bạn sẽ không được lưu!", "Xác nhận", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+            DialogResult res = MessageBox.Show("Bạn chắc chắn muốn xóa tour du lịch này?\nMọi dữ liệu liên quan sẽ bị xoá.", "Xác nhận", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
             if (res == DialogResult.OK)
             {
                 handleDeleteTour();
-                MessageBox.Show("Xóa thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 

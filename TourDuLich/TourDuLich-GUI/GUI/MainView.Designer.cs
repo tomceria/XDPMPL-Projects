@@ -32,6 +32,7 @@
             DevExpress.XtraBars.Docking2010.Views.Tabbed.DockingContainer dockingContainer2 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.DockingContainer();
             this.documentGroup1 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.DocumentGroup(this.components);
             this.manageViewDocument = new DevExpress.XtraBars.Docking2010.Views.Tabbed.Document(this.components);
+            this.reportViewDocument = new DevExpress.XtraBars.Docking2010.Views.Tabbed.Document(this.components);
             this.fluentDesignFormContainer1 = new DevExpress.XtraBars.FluentDesignSystem.FluentDesignFormContainer();
             this.accordionControl_Main = new DevExpress.XtraBars.Navigation.AccordionControl();
             this.accordionControlElement_ManageView = new DevExpress.XtraBars.Navigation.AccordionControlElement();
@@ -39,14 +40,13 @@
             this.fluentDesignFormControl1 = new DevExpress.XtraBars.FluentDesignSystem.FluentDesignFormControl();
             this.documentManager_MainView = new DevExpress.XtraBars.Docking2010.DocumentManager(this.components);
             this.tabbedView1 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.TabbedView(this.components);
-            this.reportViewDocument = new DevExpress.XtraBars.Docking2010.Views.Tabbed.Document(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.documentGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.manageViewDocument)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.reportViewDocument)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.accordionControl_Main)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fluentDesignFormControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.documentManager_MainView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabbedView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.reportViewDocument)).BeginInit();
             this.SuspendLayout();
             // 
             // documentGroup1
@@ -63,12 +63,20 @@
             this.manageViewDocument.FloatLocation = new System.Drawing.Point(145, 139);
             this.manageViewDocument.FloatSize = new System.Drawing.Size(590, 413);
             // 
+            // reportViewDocument
+            // 
+            this.reportViewDocument.Caption = "Thống kê";
+            this.reportViewDocument.ControlName = "ReportView";
+            this.reportViewDocument.ControlTypeName = "TourDuLich_GUI.GUI.ReportView";
+            this.reportViewDocument.FloatLocation = new System.Drawing.Point(250, 139);
+            this.reportViewDocument.FloatSize = new System.Drawing.Size(590, 413);
+            // 
             // fluentDesignFormContainer1
             // 
             this.fluentDesignFormContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.fluentDesignFormContainer1.Location = new System.Drawing.Point(95, 31);
             this.fluentDesignFormContainer1.Name = "fluentDesignFormContainer1";
-            this.fluentDesignFormContainer1.Size = new System.Drawing.Size(596, 442);
+            this.fluentDesignFormContainer1.Size = new System.Drawing.Size(703, 568);
             this.fluentDesignFormContainer1.TabIndex = 0;
             // 
             // accordionControl_Main
@@ -82,7 +90,7 @@
             this.accordionControl_Main.Name = "accordionControl_Main";
             this.accordionControl_Main.OptionsMinimizing.AllowMinimizeMode = DevExpress.Utils.DefaultBoolean.False;
             this.accordionControl_Main.ScrollBarMode = DevExpress.XtraBars.Navigation.ScrollBarMode.Touch;
-            this.accordionControl_Main.Size = new System.Drawing.Size(95, 442);
+            this.accordionControl_Main.Size = new System.Drawing.Size(95, 568);
             this.accordionControl_Main.TabIndex = 1;
             this.accordionControl_Main.ViewType = DevExpress.XtraBars.Navigation.AccordionControlViewType.HamburgerMenu;
             this.accordionControl_Main.SelectedElementChanged += new DevExpress.XtraBars.Navigation.SelectedElementChangedEventHandler(this.accordionControl_Main_SelectedElementChanged);
@@ -104,7 +112,7 @@
             this.fluentDesignFormControl1.FluentDesignForm = this;
             this.fluentDesignFormControl1.Location = new System.Drawing.Point(0, 0);
             this.fluentDesignFormControl1.Name = "fluentDesignFormControl1";
-            this.fluentDesignFormControl1.Size = new System.Drawing.Size(691, 31);
+            this.fluentDesignFormControl1.Size = new System.Drawing.Size(798, 31);
             this.fluentDesignFormControl1.TabIndex = 2;
             this.fluentDesignFormControl1.TabStop = false;
             // 
@@ -129,19 +137,11 @@
             dockingContainer2});
             this.tabbedView1.Style = DevExpress.XtraBars.Docking2010.Views.DockingViewStyle.Light;
             // 
-            // reportViewDocument
-            // 
-            this.reportViewDocument.Caption = "Thống kê";
-            this.reportViewDocument.ControlName = "ReportView";
-            this.reportViewDocument.ControlTypeName = "TourDuLich_GUI.GUI.ReportView";
-            this.reportViewDocument.FloatLocation = new System.Drawing.Point(250, 139);
-            this.reportViewDocument.FloatSize = new System.Drawing.Size(590, 413);
-            // 
             // MainView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(691, 473);
+            this.ClientSize = new System.Drawing.Size(798, 599);
             this.ControlContainer = this.fluentDesignFormContainer1;
             this.Controls.Add(this.fluentDesignFormContainer1);
             this.Controls.Add(this.accordionControl_Main);
@@ -149,14 +149,14 @@
             this.FluentDesignFormControl = this.fluentDesignFormControl1;
             this.Name = "MainView";
             this.NavigationControl = this.accordionControl_Main;
-            this.Text = "MainView";
+            this.Text = "Tour Du Lịch";
             ((System.ComponentModel.ISupportInitialize)(this.documentGroup1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.manageViewDocument)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.reportViewDocument)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.accordionControl_Main)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fluentDesignFormControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.documentManager_MainView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabbedView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.reportViewDocument)).EndInit();
             this.ResumeLayout(false);
 
         }

@@ -192,7 +192,7 @@ namespace TourDuLich_GUI.GUI
 
         /// <param name="tourGroup">A tour group to validate</param>
         /// <returns>Returns true if validated</returns>
-        public bool ValidateForm()
+        private bool ValidateForm()
         {
             TourGroup tourGroup = _item;
 
@@ -210,14 +210,6 @@ namespace TourDuLich_GUI.GUI
                     throw new ArgumentException("Tour của Đoàn rỗng.", "TourGroup.Tour");
                 }
 
-                // valitdate datetime
-    /*            if (DateTime.Compare(tourGroup.DateStart.Date, DateTime.Now.Date) < 0)
-                {
-                    errorMsg = "Start date is not valid";
-                    Console.WriteLine(errorMsg);
-                    return false;
-                }
-    */
                 // valitdate datetime
                 if (DateTime.Compare(tourGroup.DateStart.Date, tourGroup.DateEnd.Date) > 0)
                 {
@@ -252,8 +244,6 @@ namespace TourDuLich_GUI.GUI
             {
                 var temp = _item.Create();
 
-/*                var temp = TourGroupBUS.CreateOne(_item);
-*/
                 if (temp.ID != 0)   // tourGroup added to Database => ID changed from 0
                 {
                     isUpdate = true;
@@ -268,6 +258,13 @@ namespace TourDuLich_GUI.GUI
             Dispose();
         }
 
+        private void handleDeleteTourGroup()
+        {
+            TourGroup.DeleteOne(_item.ID);
+            // close window
+            Dispose();
+        }
+        
         private void handleAddTourGroupDetailToTourGroup()
         {
             Customer customer = getSelectedCustomer();
@@ -366,6 +363,15 @@ namespace TourDuLich_GUI.GUI
             handleCloseEdit();
         }
 
+        private void bbiDelete_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            DialogResult res = MessageBox.Show("Bạn chắc chắn muốn xóa Đoàn tham quan này?\nMọi dữ liệu liên quan sẽ bị xoá.", "Xác nhận", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+            if (res == DialogResult.OK)
+            {
+                handleDeleteTourGroup();
+            }
+        }
+        
         private void button_AddTourDetail_Click(object sender, EventArgs e)
         {
             handleAddTourGroupDetailToTourGroup();
@@ -405,7 +411,5 @@ namespace TourDuLich_GUI.GUI
         {
             RefreshDataSources();
         }
-
-
     }
 }

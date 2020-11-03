@@ -153,7 +153,7 @@ namespace TourDuLich_GUI.GUI
                 return;
             }
 
-            Tour.DeleteOne(selectedTour);
+            Tour.DeleteOne(selectedTour.ID);
         }
 
         private void handleNewTourGroup()
