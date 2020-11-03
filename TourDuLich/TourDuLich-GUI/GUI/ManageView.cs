@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -16,12 +16,13 @@ using System.Collections.ObjectModel;
 
 namespace TourDuLich_GUI.GUI
 {
-    public partial class ManageView : DevExpress.XtraBars.Ribbon.RibbonForm
+    public partial class ManageView : DevExpress.XtraEditors.XtraUserControl
     {
         enum Page
         {
             Tours,
-            TourGroups
+            TourGroups,
+            Customers
         }
 
         public ManageView()
@@ -35,6 +36,7 @@ namespace TourDuLich_GUI.GUI
         {
             gridView_Tours.OptionsBehavior.Editable = false;
             gridView_TourGroups.OptionsBehavior.Editable = false;
+            gridView_Customers.OptionsBehavior.Editable = false;
         }
 
         private Page getCurrentPage()
@@ -50,6 +52,10 @@ namespace TourDuLich_GUI.GUI
                 case 1:
                     {
                         curPage = Page.TourGroups; break;
+                    }
+                case 2:
+                    {
+                        curPage = Page.Customers; break;
                     }
             }
 
@@ -110,6 +116,11 @@ namespace TourDuLich_GUI.GUI
             gridControl_TourGroups.DataSource = list;
             gridControl_TourGroups.RefreshDataSource();
             bsiListCount.Caption = $"{list.Count} items";
+        }
+
+        private void InitializeDataSources_Customers()
+        {
+
         }
 
         // Event Handlers
@@ -255,7 +266,12 @@ namespace TourDuLich_GUI.GUI
                     }
                 case Page.TourGroups:
                     {
-                        selectedItem = gridView_Tours.GetFocusedRow();
+                        selectedItem = gridView_TourGroups.GetFocusedRow();
+                        break;
+                    }
+                case Page.Customers:
+                    {
+                        selectedItem = gridView_TourGroups.GetFocusedRow();
                         break;
                     }
             }

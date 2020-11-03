@@ -10,7 +10,7 @@ namespace TourDuLich_GUI.DAL {
         // 
         // If you wish to target a different database and/or database provider, modify the 'TourContext' 
         // connection string in the application configuration file.
-        public TourContext() : base("TDLMinhHoangPCContext") {
+        public TourContext() : base("TDLMinhHoangVMContext") {
             Database.SetInitializer(new TourInitializer());
         }
 
