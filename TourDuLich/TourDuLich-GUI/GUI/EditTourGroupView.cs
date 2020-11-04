@@ -277,6 +277,7 @@ namespace TourDuLich_GUI.GUI
 
             _item.AddTourGroupDetailToTourGroup(customer);
             //((BindingList<Customer>)gridView_Customers.GridControl.DataSource).Remove(customer);
+            ListBoxControl_TourGroupDetails.Refresh();
         }
 
         private void handleDeleteTourGroupDetailFromTourGroup()
@@ -289,7 +290,7 @@ namespace TourDuLich_GUI.GUI
             //Customer customer = tourGroupDetail.Customer;
 
             _item.DeleteTourGroupDetailFromTourGroup(tourGroupDetail);
-
+            ListBoxControl_TourGroupDetails.Refresh();
             // ((BindingList<Customer>)gridView_Customers.GridControl.DataSource).Add(customer);
         }
 
