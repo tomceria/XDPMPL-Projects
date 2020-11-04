@@ -99,8 +99,9 @@ namespace TourDuLich_GUI.GUI
             LookUpEdit_TourID.Properties.DataSource = toursBL;
             LookUpEdit_TourID.Properties.DisplayMember = "Name";
             LookUpEdit_TourID.Properties.ValueMember = "ID";
-            LookUpEdit_TourID.Properties.Columns.Add(new LookUpColumnInfo("Name"));
-
+            //Check exist
+            var valueNameColumnOfTourType = LookUpEdit_TourID.GetColumnValue(new LookUpColumnInfo("Name"));
+            if (valueNameColumnOfTourType == null) LookUpEdit_TourID.Properties.Columns.Add(new LookUpColumnInfo("Name"));
 
             // Customers
             gridView_Customers.GridControl.DataSource = customersBL;
