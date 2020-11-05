@@ -174,7 +174,7 @@ namespace TourDuLich_GUI.GUI
         }
 
         private void handleCloseEdit() {
-            Dispose();
+            // TODO: Hiếu's implementation of RevertChanges
         }
 
         private void handleAddTourPrice() {
@@ -246,20 +246,6 @@ namespace TourDuLich_GUI.GUI
             handleSaveTour();
         }
 
-        private void bbiSaveAndClose_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e) {
-            handleSaveTour();
-            handleCloseEdit();
-        }
-
-        private void bbiSaveAndNew_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e) {
-            handleSaveTour();
-            handleResetTour();
-        }
-
-        private void bbiReset_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e) {
-            handleResetTour();
-        }
-
         private void bbiDelete_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e) {
             DialogResult res = MessageBox.Show("Bạn chắc chắn muốn xóa tour du lịch này?\nMọi dữ liệu liên quan sẽ bị xoá.", "Xác nhận", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
             if (res == DialogResult.OK)
@@ -305,16 +291,17 @@ namespace TourDuLich_GUI.GUI
 
         }
 
-        private void simpleButton2_Click(object sender, EventArgs e) {
-
-        }
-
         private void btn_MoveUpTourDetail_Click(object sender, EventArgs e) {
             handleMoveTourDetail(-1);
         }
 
         private void btn_MoveDownTourDetail_Click(object sender, EventArgs e) {
             handleMoveTourDetail(1);
+        }
+
+        private void EditTourView_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            handleCloseEdit();
         }
     }
 }

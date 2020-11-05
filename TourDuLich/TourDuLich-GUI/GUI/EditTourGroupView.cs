@@ -4,12 +4,10 @@ using System.ComponentModel;
 using System.Linq;
 using DevExpress.XtraLayout;
 using TourDuLich_GUI.BUS;
-using TourDuLich_GUI.DAL;
 using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraEditors.Controls;
 using System.Windows.Forms;
 using DevExpress.XtraGrid.Columns;
-using DevExpress.XtraGrid.Drawing;
 
 namespace TourDuLich_GUI.GUI
 {
@@ -256,7 +254,7 @@ namespace TourDuLich_GUI.GUI
 
         private void handleCloseEdit()
         {
-            Dispose();
+            // TODO: Hiếu's implementation of RevertChanges
         }
 
         private void handleDeleteTourGroup()
@@ -359,12 +357,6 @@ namespace TourDuLich_GUI.GUI
             handleSaveTourGroup();
         }
 
-        private void bbiSaveAndClose_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            handleSaveTourGroup();
-            handleCloseEdit();
-        }
-
         private void bbiDelete_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             DialogResult res = MessageBox.Show("Bạn chắc chắn muốn xóa Đoàn tham quan này?\nMọi dữ liệu liên quan sẽ bị xoá.", "Xác nhận", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
@@ -412,6 +404,11 @@ namespace TourDuLich_GUI.GUI
         private void tabbedControlGroup1_SelectedPageChanged(object sender, LayoutTabPageChangedEventArgs e)
         {
             RefreshDataSources();
+        }
+
+        private void EditTourGroupView_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            handleCloseEdit();
         }
     }
 }
