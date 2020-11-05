@@ -16,6 +16,15 @@ namespace TourDuLich_GUI.GUI
         public ReportView()
         {
             InitializeComponent();
+            ConfigureControls();
+        }
+
+        private void ConfigureControls()
+        {
+            DateTime defaultStartDate = DateTime.Today.AddMonths(-1);
+            DateTime defaultEndDate = DateTime.Today;
+            dateEdit_TBR_StartDate.EditValue = defaultStartDate;
+            dateEdit_TBR_EndDate.EditValue = defaultEndDate;
         }
     }
 }
