@@ -27,6 +27,7 @@ namespace TourDuLich_GUI.GUI
         
         private void ConfigureControls()
         {
+            // Default document is ManageView. This will trigger handleSelectMenuItem()
             this.accordionControl_Main.SelectElement(accordionControlElement_ManageView);
 
             // Handling the QueryControl event that will populate all automatically generated Documents
@@ -45,8 +46,6 @@ namespace TourDuLich_GUI.GUI
                 if (selected == accordionControlElement_ManageView)
                 {
                     this.documentManager_MainView.View.Controller.Activate(manageViewDocument);
-
-
                 }
                 else if (selected == accordionControlElement_ReportView)
                 {

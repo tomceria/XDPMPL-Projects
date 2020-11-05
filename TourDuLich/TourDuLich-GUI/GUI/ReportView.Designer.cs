@@ -28,15 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DevExpress.XtraCharts.XYDiagram xyDiagram1 = new DevExpress.XtraCharts.XYDiagram();
-            DevExpress.XtraCharts.Series series2 = new DevExpress.XtraCharts.Series();
-            DevExpress.XtraCharts.ChartTitle chartTitle2 = new DevExpress.XtraCharts.ChartTitle();
-            DevExpress.XtraCharts.Series series1 = new DevExpress.XtraCharts.Series();
+            DevExpress.XtraCharts.Series series_TBR_TourCost = new DevExpress.XtraCharts.Series();
             DevExpress.XtraCharts.PieSeriesView pieSeriesView1 = new DevExpress.XtraCharts.PieSeriesView();
             DevExpress.XtraCharts.ChartTitle chartTitle1 = new DevExpress.XtraCharts.ChartTitle();
+            DevExpress.XtraCharts.XYDiagram xyDiagram1 = new DevExpress.XtraCharts.XYDiagram();
+            DevExpress.XtraCharts.Series Series_TBR_Sales = new DevExpress.XtraCharts.Series();
+            DevExpress.XtraCharts.ChartTitle chartTitle2 = new DevExpress.XtraCharts.ChartTitle();
             this.xtraTabControl_Report = new DevExpress.XtraTab.XtraTabControl();
             this.xtraTabPage_TourBusinessReport = new DevExpress.XtraTab.XtraTabPage();
             this.dataLayoutControl_TBR = new DevExpress.XtraDataLayout.DataLayoutControl();
+            this.gridControl1 = new DevExpress.XtraGrid.GridControl();
+            this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.chartControl_TBR_TourCost = new DevExpress.XtraCharts.ChartControl();
+            this.chartControl_TBR_Sales = new DevExpress.XtraCharts.ChartControl();
             this.btn_TBR_Generate = new DevExpress.XtraEditors.SimpleButton();
             this.dateEdit_TBR_EndDate = new DevExpress.XtraEditors.DateEdit();
             this.dateEdit_TBR_StartDate = new DevExpress.XtraEditors.DateEdit();
@@ -44,6 +48,9 @@
             this.layoutControlItem_LBR_StartDate = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem_TBR_StartDate = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
             this.xtraTabPage_StaffActivityReport = new DevExpress.XtraTab.XtraTabPage();
             this.dataLayoutControl_SAR = new DevExpress.XtraDataLayout.DataLayoutControl();
             this.btn_SAR_Generate = new DevExpress.XtraEditors.SimpleButton();
@@ -54,18 +61,19 @@
             this.emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.layoutControlItem_SAR_EndDate = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.chartControl1 = new DevExpress.XtraCharts.ChartControl();
-            this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.chartControl2 = new DevExpress.XtraCharts.ChartControl();
-            this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.gridControl1 = new DevExpress.XtraGrid.GridControl();
-            this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl_Report)).BeginInit();
             this.xtraTabControl_Report.SuspendLayout();
             this.xtraTabPage_TourBusinessReport.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl_TBR)).BeginInit();
             this.dataLayoutControl_TBR.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chartControl_TBR_TourCost)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(series_TBR_TourCost)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(pieSeriesView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chartControl_TBR_Sales)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(xyDiagram1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(Series_TBR_Sales)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEdit_TBR_EndDate.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEdit_TBR_EndDate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEdit_TBR_StartDate.Properties.CalendarTimeProperties)).BeginInit();
@@ -74,6 +82,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem_LBR_StartDate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem_TBR_StartDate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
             this.xtraTabPage_StaffActivityReport.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl_SAR)).BeginInit();
             this.dataLayoutControl_SAR.SuspendLayout();
@@ -86,17 +97,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem_SAR_EndDate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chartControl1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(xyDiagram1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(series2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chartControl2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(series1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(pieSeriesView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
             this.SuspendLayout();
             // 
             // xtraTabControl_Report
@@ -121,8 +121,8 @@
             // dataLayoutControl_TBR
             // 
             this.dataLayoutControl_TBR.Controls.Add(this.gridControl1);
-            this.dataLayoutControl_TBR.Controls.Add(this.chartControl2);
-            this.dataLayoutControl_TBR.Controls.Add(this.chartControl1);
+            this.dataLayoutControl_TBR.Controls.Add(this.chartControl_TBR_TourCost);
+            this.dataLayoutControl_TBR.Controls.Add(this.chartControl_TBR_Sales);
             this.dataLayoutControl_TBR.Controls.Add(this.btn_TBR_Generate);
             this.dataLayoutControl_TBR.Controls.Add(this.dateEdit_TBR_EndDate);
             this.dataLayoutControl_TBR.Controls.Add(this.dateEdit_TBR_StartDate);
@@ -134,6 +134,58 @@
             this.dataLayoutControl_TBR.Size = new System.Drawing.Size(712, 503);
             this.dataLayoutControl_TBR.TabIndex = 0;
             this.dataLayoutControl_TBR.Text = "dataLayoutControl1";
+            // 
+            // gridControl1
+            // 
+            this.gridControl1.Location = new System.Drawing.Point(12, 239);
+            this.gridControl1.MainView = this.gridView1;
+            this.gridControl1.Name = "gridControl1";
+            this.gridControl1.Size = new System.Drawing.Size(688, 252);
+            this.gridControl1.TabIndex = 9;
+            this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridView1});
+            // 
+            // gridView1
+            // 
+            this.gridView1.GridControl = this.gridControl1;
+            this.gridView1.Name = "gridView1";
+            // 
+            // chartControl_TBR_TourCost
+            // 
+            this.chartControl_TBR_TourCost.Legend.Name = "Default Legend";
+            this.chartControl_TBR_TourCost.Legend.Visibility = DevExpress.Utils.DefaultBoolean.False;
+            this.chartControl_TBR_TourCost.Location = new System.Drawing.Point(358, 62);
+            this.chartControl_TBR_TourCost.Name = "chartControl_TBR_TourCost";
+            series_TBR_TourCost.Name = "Series_TBR_TourCost";
+            series_TBR_TourCost.View = pieSeriesView1;
+            this.chartControl_TBR_TourCost.SeriesSerializable = new DevExpress.XtraCharts.Series[] {
+        series_TBR_TourCost};
+            this.chartControl_TBR_TourCost.Size = new System.Drawing.Size(342, 173);
+            this.chartControl_TBR_TourCost.TabIndex = 8;
+            chartTitle1.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            chartTitle1.Text = "Tổng chi phí cho các đoàn tham quan";
+            this.chartControl_TBR_TourCost.Titles.AddRange(new DevExpress.XtraCharts.ChartTitle[] {
+            chartTitle1});
+            // 
+            // chartControl_TBR_Sales
+            // 
+            xyDiagram1.AxisX.VisibleInPanesSerializable = "-1";
+            xyDiagram1.AxisY.VisibleInPanesSerializable = "-1";
+            xyDiagram1.Rotated = true;
+            this.chartControl_TBR_Sales.Diagram = xyDiagram1;
+            this.chartControl_TBR_Sales.Legend.Name = "Default Legend";
+            this.chartControl_TBR_Sales.Legend.Visibility = DevExpress.Utils.DefaultBoolean.False;
+            this.chartControl_TBR_Sales.Location = new System.Drawing.Point(12, 62);
+            this.chartControl_TBR_Sales.Name = "chartControl_TBR_Sales";
+            Series_TBR_Sales.Name = "Series_TBR_Sales";
+            this.chartControl_TBR_Sales.SeriesSerializable = new DevExpress.XtraCharts.Series[] {
+        Series_TBR_Sales};
+            this.chartControl_TBR_Sales.Size = new System.Drawing.Size(342, 173);
+            this.chartControl_TBR_Sales.TabIndex = 7;
+            chartTitle2.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            chartTitle2.Text = "Top 10 các Tour có doanh thu cao nhất";
+            this.chartControl_TBR_Sales.Titles.AddRange(new DevExpress.XtraCharts.ChartTitle[] {
+            chartTitle2});
             // 
             // btn_TBR_Generate
             // 
@@ -213,6 +265,33 @@
             this.layoutControlItem1.Size = new System.Drawing.Size(692, 26);
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
+            // 
+            // layoutControlItem3
+            // 
+            this.layoutControlItem3.Control = this.chartControl_TBR_Sales;
+            this.layoutControlItem3.Location = new System.Drawing.Point(0, 50);
+            this.layoutControlItem3.Name = "layoutControlItem3";
+            this.layoutControlItem3.Size = new System.Drawing.Size(346, 177);
+            this.layoutControlItem3.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem3.TextVisible = false;
+            // 
+            // layoutControlItem4
+            // 
+            this.layoutControlItem4.Control = this.chartControl_TBR_TourCost;
+            this.layoutControlItem4.Location = new System.Drawing.Point(346, 50);
+            this.layoutControlItem4.Name = "layoutControlItem4";
+            this.layoutControlItem4.Size = new System.Drawing.Size(346, 177);
+            this.layoutControlItem4.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem4.TextVisible = false;
+            // 
+            // layoutControlItem5
+            // 
+            this.layoutControlItem5.Control = this.gridControl1;
+            this.layoutControlItem5.Location = new System.Drawing.Point(0, 227);
+            this.layoutControlItem5.Name = "layoutControlItem5";
+            this.layoutControlItem5.Size = new System.Drawing.Size(692, 256);
+            this.layoutControlItem5.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem5.TextVisible = false;
             // 
             // xtraTabPage_StaffActivityReport
             // 
@@ -318,85 +397,6 @@
             this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem2.TextVisible = false;
             // 
-            // chartControl1
-            // 
-            xyDiagram1.AxisX.VisibleInPanesSerializable = "-1";
-            xyDiagram1.AxisY.VisibleInPanesSerializable = "-1";
-            xyDiagram1.Rotated = true;
-            this.chartControl1.Diagram = xyDiagram1;
-            this.chartControl1.Legend.Name = "Default Legend";
-            this.chartControl1.Legend.Visibility = DevExpress.Utils.DefaultBoolean.False;
-            this.chartControl1.Location = new System.Drawing.Point(12, 62);
-            this.chartControl1.Name = "chartControl1";
-            series2.Name = "Series 1";
-            this.chartControl1.SeriesSerializable = new DevExpress.XtraCharts.Series[] {
-        series2};
-            this.chartControl1.Size = new System.Drawing.Size(342, 173);
-            this.chartControl1.TabIndex = 7;
-            chartTitle2.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            chartTitle2.Text = "Top 10 các Tour có doanh thu cao nhất";
-            this.chartControl1.Titles.AddRange(new DevExpress.XtraCharts.ChartTitle[] {
-            chartTitle2});
-            // 
-            // layoutControlItem3
-            // 
-            this.layoutControlItem3.Control = this.chartControl1;
-            this.layoutControlItem3.Location = new System.Drawing.Point(0, 50);
-            this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(346, 177);
-            this.layoutControlItem3.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem3.TextVisible = false;
-            // 
-            // chartControl2
-            // 
-            this.chartControl2.Legend.Name = "Default Legend";
-            this.chartControl2.Legend.Visibility = DevExpress.Utils.DefaultBoolean.False;
-            this.chartControl2.Location = new System.Drawing.Point(358, 62);
-            this.chartControl2.Name = "chartControl2";
-            series1.Name = "Series 1";
-            series1.View = pieSeriesView1;
-            this.chartControl2.SeriesSerializable = new DevExpress.XtraCharts.Series[] {
-        series1};
-            this.chartControl2.Size = new System.Drawing.Size(342, 173);
-            this.chartControl2.TabIndex = 8;
-            chartTitle1.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            chartTitle1.Text = "Tổng chi phí cho các đoàn tham quan";
-            this.chartControl2.Titles.AddRange(new DevExpress.XtraCharts.ChartTitle[] {
-            chartTitle1});
-            // 
-            // layoutControlItem4
-            // 
-            this.layoutControlItem4.Control = this.chartControl2;
-            this.layoutControlItem4.Location = new System.Drawing.Point(346, 50);
-            this.layoutControlItem4.Name = "layoutControlItem4";
-            this.layoutControlItem4.Size = new System.Drawing.Size(346, 177);
-            this.layoutControlItem4.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem4.TextVisible = false;
-            // 
-            // gridControl1
-            // 
-            this.gridControl1.Location = new System.Drawing.Point(12, 239);
-            this.gridControl1.MainView = this.gridView1;
-            this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(688, 252);
-            this.gridControl1.TabIndex = 9;
-            this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridView1});
-            // 
-            // gridView1
-            // 
-            this.gridView1.GridControl = this.gridControl1;
-            this.gridView1.Name = "gridView1";
-            // 
-            // layoutControlItem5
-            // 
-            this.layoutControlItem5.Control = this.gridControl1;
-            this.layoutControlItem5.Location = new System.Drawing.Point(0, 227);
-            this.layoutControlItem5.Name = "layoutControlItem5";
-            this.layoutControlItem5.Size = new System.Drawing.Size(692, 256);
-            this.layoutControlItem5.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem5.TextVisible = false;
-            // 
             // ReportView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -409,6 +409,14 @@
             this.xtraTabPage_TourBusinessReport.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl_TBR)).EndInit();
             this.dataLayoutControl_TBR.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(pieSeriesView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(series_TBR_TourCost)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chartControl_TBR_TourCost)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(xyDiagram1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(Series_TBR_Sales)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chartControl_TBR_Sales)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEdit_TBR_EndDate.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEdit_TBR_EndDate.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEdit_TBR_StartDate.Properties.CalendarTimeProperties)).EndInit();
@@ -417,6 +425,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem_LBR_StartDate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem_TBR_StartDate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
             this.xtraTabPage_StaffActivityReport.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl_SAR)).EndInit();
             this.dataLayoutControl_SAR.ResumeLayout(false);
@@ -429,17 +440,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem_SAR_EndDate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(xyDiagram1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(series2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chartControl1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(pieSeriesView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(series1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chartControl2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -468,8 +468,8 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
         private DevExpress.XtraGrid.GridControl gridControl1;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
-        private DevExpress.XtraCharts.ChartControl chartControl2;
-        private DevExpress.XtraCharts.ChartControl chartControl1;
+        private DevExpress.XtraCharts.ChartControl chartControl_TBR_TourCost;
+        private DevExpress.XtraCharts.ChartControl chartControl_TBR_Sales;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem4;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem5;

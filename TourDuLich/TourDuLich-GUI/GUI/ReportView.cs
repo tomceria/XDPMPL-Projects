@@ -7,6 +7,7 @@ using System.Text;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DevExpress.XtraCharts;
 using DevExpress.XtraEditors;
 using TourDuLich_GUI.BUS;
 using TourDuLich_GUI.BUS.Report;
@@ -23,6 +24,8 @@ namespace TourDuLich_GUI.GUI
             ConfigureControls();
             
             PLACEHOLDER_getDumpReport();
+            
+            InitializeDataSources();
         }
 
         private void ConfigureControls()
@@ -33,6 +36,16 @@ namespace TourDuLich_GUI.GUI
             dateEdit_TBR_EndDate.EditValue = defaultEndDate;
             dateEdit_SAR_StartDate.EditValue = defaultStartDate;
             dateEdit_SAR_EndDate.EditValue = defaultEndDate;
+        }
+
+        private void InitializeDataSources()
+        {
+            ChartControl chartSales = chartControl_TBR_Sales;
+            Series seriesTbrSales = chartSales.GetSeriesByName("Series_TBR_Sales");
+            seriesTbrSales.ArgumentDataMember = "Tour.Name";
+            seriesTbrSales.ValueDataMembers.Clear();
+            seriesTbrSales.ValueDataMembers.AddRange("Sales");
+            seriesTbrSales.DataSource = new BindingList<TourBusinessReport>(_tourBusinessReports);
         }
 
         // Functions
@@ -46,7 +59,7 @@ namespace TourDuLich_GUI.GUI
                 new TourBusinessReport()
                 {
                     Tour = tours[0],
-                    Sales = 10000,
+                    Sales = 5340000,
                     CustomerCount = 30,
                     TourGroupCount = 2,
                     TotalCost = 500000,
@@ -61,7 +74,7 @@ namespace TourDuLich_GUI.GUI
                 new TourBusinessReport()
                 {
                     Tour = tours[1],
-                    Sales = 10000,
+                    Sales = 3680000,
                     CustomerCount = 30,
                     TourGroupCount = 2,
                     TotalCost = 500000,
