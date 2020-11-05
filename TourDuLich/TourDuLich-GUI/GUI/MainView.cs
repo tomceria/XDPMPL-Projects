@@ -12,8 +12,8 @@ namespace TourDuLich_GUI.GUI
 {
     public partial class MainView : DevExpress.XtraBars.FluentDesignSystem.FluentDesignForm
     {
-        ManageView manageView;
-        ReportView reportView;
+        private ManageView _manageView;
+        private ReportView _reportView;
 
         public MainView()
         {
@@ -21,11 +21,12 @@ namespace TourDuLich_GUI.GUI
             ConfigureControls();
         }
 
+        /**
+         * Functions
+         */
+        
         private void ConfigureControls()
         {
-            manageView = new ManageView();
-            reportView = new ReportView();
-
             this.accordionControl_Main.SelectElement(accordionControlElement_ManageView);
 
             // Handling the QueryControl event that will populate all automatically generated Documents
@@ -33,25 +34,10 @@ namespace TourDuLich_GUI.GUI
         }
 
         /**
-         * LISTENERS
+         * Event Handlers
          */
-        // Assigning a required content for each auto generated Document
-        void tabbedView1_QueryControl(object sender, DevExpress.XtraBars.Docking2010.Views.QueryControlEventArgs e)
-        {
 
-            if (e.Document == manageViewDocument)
-            {
-                e.Control = manageView;
-            }
-            if (e.Document == reportViewDocument)
-            {
-                e.Control = reportView;
-            }
-            if (e.Control == null)
-                e.Control = new System.Windows.Forms.Control();
-        }
-
-        private void accordionControl_Main_SelectedElementChanged(object sender, DevExpress.XtraBars.Navigation.SelectedElementChangedEventArgs e)
+        private void handleSelectMenuItem()
         {
             try
             {
@@ -69,8 +55,47 @@ namespace TourDuLich_GUI.GUI
             }
             catch (DevExpress.XtraBars.Docking2010.Views.DeferredLoadingException)
             {
+                // This method will be called upon startup (which it shouldn't be).
+                // At the time, documents have not been loaded yet.
                 Console.WriteLine("Ignore this.");
             }
+        }
+
+        private void handleOnActivateDocument(DevExpress.XtraBars.Docking2010.Views.QueryControlEventArgs e)
+        {
+            if (e.Document == manageViewDocument)
+            {
+                if (_manageView == null)
+                {
+                    _manageView = new ManageView();
+                }
+                e.Control = _manageView;
+            }
+            if (e.Document == reportViewDocument)
+            {
+                if (_reportView == null)
+                {
+                    _reportView = new ReportView();
+                }
+                e.Control = _reportView;
+            }
+            if (e.Control == null)
+                e.Control = new System.Windows.Forms.Control();
+        }
+        
+        /**
+         * Events
+         */
+
+        // Assigning a required content for each auto generated Document
+        void tabbedView1_QueryControl(object sender, DevExpress.XtraBars.Docking2010.Views.QueryControlEventArgs e)
+        {
+            handleOnActivateDocument(e);
+        }
+
+        private void accordionControl_Main_SelectedElementChanged(object sender, DevExpress.XtraBars.Navigation.SelectedElementChangedEventArgs e)
+        {
+            handleSelectMenuItem();
         }
     }
 }
