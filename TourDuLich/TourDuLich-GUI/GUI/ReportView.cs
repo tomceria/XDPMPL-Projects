@@ -1,18 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Text;
 using System.Linq;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using DevExpress.Data;
 using DevExpress.Utils;
 using DevExpress.XtraCharts;
-using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Columns;
+using DevExpress.XtraGrid.Views.Base;
 using TourDuLich_GUI.BUS;
 using TourDuLich_GUI.BUS.Report;
 
@@ -51,7 +45,7 @@ namespace TourDuLich_GUI.GUI
                         CostType = row.Key,
                         Value = row.Value / 1000
                     }
-                );
+                ).ToList();
 
             // Sales
             ChartControl chartSales = chartControl_TBR_Sales;
@@ -73,7 +67,7 @@ namespace TourDuLich_GUI.GUI
             seriesTbrTourCost.ValueDataMembers.AddRange("Value");
             seriesTbrTourCost.Label.TextPattern = "{V:#,#}k ({VP:0.00%})";
             seriesTbrTourCost.LegendTextPattern = "{A}";
-            seriesTbrTourCost.DataSource = tourCostPerCostTypeArr.ToArray();
+            seriesTbrTourCost.DataSource = tourCostPerCostTypeArr;
 
             // Complete Table
             gridView_TBR.GridControl.DataSource = _tourBusinessReports;
@@ -86,7 +80,7 @@ namespace TourDuLich_GUI.GUI
             foreach (var row in tourCostPerCostTypeArr)
             {
                 var fieldName = $"costType_{row.CostType.ID}";
-                
+
                 gridView_TBR.Columns.Add(new GridColumn()
                 {
                     Caption = row.CostType.Name,
@@ -98,7 +92,6 @@ namespace TourDuLich_GUI.GUI
                 gridView_TBR.Columns[fieldName].DisplayFormat.FormatType = FormatType.Numeric;
                 gridView_TBR.Columns[fieldName].DisplayFormat.FormatString = "#,# VND";
             }
-
             gridView_TBR.CustomUnboundColumnData += (sender, e) =>
             {
                 if (new Regex(@"^costType_\d+").IsMatch(e.Column.FieldName))
@@ -109,22 +102,23 @@ namespace TourDuLich_GUI.GUI
                             .TourCostPerCostType
                             .Select(row => new
                                 {
-                                    CostType = row.Key,
-                                    Value = row.Value
+                                    CostType = row.Key, row.Value
                                 }
                             )
                             .First(o =>
-                                o.CostType.ID == Int32.Parse(
+                                o.CostType.ID == int.Parse(
                                     e.Column.FieldName.Split('_')[1])
                             ).Value;
                     }
 
                     if (e.IsSetData && e.Value != null)
                     {
-                        // Does nothing as Reports are uneditable
+                        // Does nothing as Reports are readonly
                     }
                 }
             };
+            gridView_TBR.OptionsView.ColumnAutoWidth = false;
+            gridView_TBR.BestFitColumns();
         }
 
         // Functions
