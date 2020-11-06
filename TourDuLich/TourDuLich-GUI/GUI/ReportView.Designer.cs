@@ -28,11 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DevExpress.XtraCharts.Series series_TBR_TourCost = new DevExpress.XtraCharts.Series();
+            DevExpress.XtraCharts.Series series1 = new DevExpress.XtraCharts.Series();
             DevExpress.XtraCharts.PieSeriesView pieSeriesView1 = new DevExpress.XtraCharts.PieSeriesView();
             DevExpress.XtraCharts.ChartTitle chartTitle1 = new DevExpress.XtraCharts.ChartTitle();
             DevExpress.XtraCharts.XYDiagram xyDiagram1 = new DevExpress.XtraCharts.XYDiagram();
-            DevExpress.XtraCharts.Series Series_TBR_Sales = new DevExpress.XtraCharts.Series();
+            DevExpress.XtraCharts.Series series2 = new DevExpress.XtraCharts.Series();
             DevExpress.XtraCharts.ChartTitle chartTitle2 = new DevExpress.XtraCharts.ChartTitle();
             this.xtraTabControl_Report = new DevExpress.XtraTab.XtraTabControl();
             this.xtraTabPage_TourBusinessReport = new DevExpress.XtraTab.XtraTabPage();
@@ -69,11 +69,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartControl_TBR_TourCost)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(series_TBR_TourCost)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(series1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(pieSeriesView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartControl_TBR_Sales)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(xyDiagram1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(Series_TBR_Sales)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(series2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEdit_TBR_EndDate.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEdit_TBR_EndDate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEdit_TBR_StartDate.Properties.CalendarTimeProperties)).BeginInit();
@@ -153,13 +153,13 @@
             // chartControl_TBR_TourCost
             // 
             this.chartControl_TBR_TourCost.Legend.Name = "Default Legend";
-            this.chartControl_TBR_TourCost.Legend.Visibility = DevExpress.Utils.DefaultBoolean.False;
+            this.chartControl_TBR_TourCost.Legend.Visibility = DevExpress.Utils.DefaultBoolean.True;
             this.chartControl_TBR_TourCost.Location = new System.Drawing.Point(358, 62);
             this.chartControl_TBR_TourCost.Name = "chartControl_TBR_TourCost";
-            series_TBR_TourCost.Name = "Series_TBR_TourCost";
-            series_TBR_TourCost.View = pieSeriesView1;
+            series1.Name = "Series_TBR_TourCost";
+            series1.View = pieSeriesView1;
             this.chartControl_TBR_TourCost.SeriesSerializable = new DevExpress.XtraCharts.Series[] {
-        series_TBR_TourCost};
+        series1};
             this.chartControl_TBR_TourCost.Size = new System.Drawing.Size(342, 173);
             this.chartControl_TBR_TourCost.TabIndex = 8;
             chartTitle1.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -177,9 +177,9 @@
             this.chartControl_TBR_Sales.Legend.Visibility = DevExpress.Utils.DefaultBoolean.False;
             this.chartControl_TBR_Sales.Location = new System.Drawing.Point(12, 62);
             this.chartControl_TBR_Sales.Name = "chartControl_TBR_Sales";
-            Series_TBR_Sales.Name = "Series_TBR_Sales";
+            series2.Name = "Series_TBR_Sales";
             this.chartControl_TBR_Sales.SeriesSerializable = new DevExpress.XtraCharts.Series[] {
-        Series_TBR_Sales};
+        series2};
             this.chartControl_TBR_Sales.Size = new System.Drawing.Size(342, 173);
             this.chartControl_TBR_Sales.TabIndex = 7;
             chartTitle2.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -412,10 +412,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(pieSeriesView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(series_TBR_TourCost)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(series1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartControl_TBR_TourCost)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(xyDiagram1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(Series_TBR_Sales)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(series2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartControl_TBR_Sales)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEdit_TBR_EndDate.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEdit_TBR_EndDate.Properties)).EndInit();

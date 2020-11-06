@@ -17,14 +17,15 @@ namespace TourDuLich_GUI.GUI
     public partial class ReportView : DevExpress.XtraEditors.XtraUserControl
     {
         private List<TourBusinessReport> _tourBusinessReports;
+        private TourBusinessReport _tourBusinessReportSum;
 
         public ReportView()
         {
             InitializeComponent();
             ConfigureControls();
-            
+
             PLACEHOLDER_getDumpReport();
-            
+
             InitializeDataSources();
         }
 
@@ -45,7 +46,28 @@ namespace TourDuLich_GUI.GUI
             seriesTbrSales.ArgumentDataMember = "Tour.Name";
             seriesTbrSales.ValueDataMembers.Clear();
             seriesTbrSales.ValueDataMembers.AddRange("Sales");
+            seriesTbrSales.CrosshairLabelPattern = "{A}: {V:#,#}";
+            seriesTbrSales.Label.TextPattern = "{V:#,#}";
+            ((XYDiagram) chartSales.Diagram).AxisX.Label.TextPattern = "{A}";
+            ((XYDiagram) chartSales.Diagram).AxisY.Label.TextPattern = "{V:#,#}";
             seriesTbrSales.DataSource = new BindingList<TourBusinessReport>(_tourBusinessReports);
+
+            ChartControl chartTourCost = chartControl_TBR_TourCost;
+            Series seriesTbrTourCost = chartTourCost.GetSeriesByName("Series_TBR_TourCost");
+            var tourCostPerCostTypeArr =
+                from row
+                    in _tourBusinessReportSum.TourCostPerCostType
+                select new
+                {
+                    CostType = row.Key,
+                    Value = row.Value / 1000
+                };
+            seriesTbrTourCost.ArgumentDataMember = "CostType.Name";
+            seriesTbrTourCost.ValueDataMembers.Clear();
+            seriesTbrTourCost.ValueDataMembers.AddRange("Value");
+            seriesTbrTourCost.Label.TextPattern = "{V:#,#}k ({VP:0.00%})";
+            seriesTbrTourCost.LegendTextPattern = "{A}";
+            seriesTbrTourCost.DataSource = tourCostPerCostTypeArr.ToArray();
         }
 
         // Functions
@@ -85,6 +107,20 @@ namespace TourDuLich_GUI.GUI
                         {costTypes[2], 470000},
                         {costTypes[3], 580000},
                     }
+                }
+            };
+            _tourBusinessReportSum = new TourBusinessReport()
+            {
+                Sales = 5340000 + 3680000,
+                CustomerCount = 30 * 2,
+                TourGroupCount = 2 * 2,
+                TotalCost = 500000 * 2,
+                TourCostPerCostType = new Dictionary<CostType, long>
+                {
+                    {costTypes[0], 250000 * 2},
+                    {costTypes[1], 360000 * 2},
+                    {costTypes[2], 470000 * 2},
+                    {costTypes[3], 580000 * 2},
                 }
             };
         }
