@@ -19,6 +19,17 @@ namespace TourDuLich_GUI.DAL {
             return result;
         }
 
+        public static List<Tour> GetAll(DateTime startDate, DateTime endDate) {
+            IQueryable<Tour> result = _ctx.Tours;
+
+            // lọc ra những tour group có ngày khởi hành trong khoảng thời gian tìm kiếm
+            foreach (Tour t in result) {
+                t.TourGroups = t.TourGroups.Where(tg => tg.DateStart >= startDate && tg.DateEnd <= endDate).ToList();
+            }
+
+            return result.ToList();
+        }
+
         public static Tour GetOne(int id) {
             Tour result = _ctx.Set<Tour>()
                 .Include(o => o.TourType)

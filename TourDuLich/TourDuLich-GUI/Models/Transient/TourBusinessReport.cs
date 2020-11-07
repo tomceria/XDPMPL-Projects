@@ -8,5 +8,13 @@ namespace TourDuLich_GUI.BUS.Report {
         int TourGroupCount;
         long TotalCost;
         Dictionary<CostType, long> TourCostPerCostType;
+
+        public TourBusinessReport() {
+            Sales = 0;
+            CustomerCount = 0;
+            TourGroupCount = 0;
+            TotalCost = 0;
+            TourCostPerCostType = new Dictionary<CostType, long>();
+        }
     }
 }
