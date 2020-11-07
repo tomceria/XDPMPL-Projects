@@ -18,5 +18,13 @@ namespace TourDuLich_GUI.BUS.Report {
         [Display(Name = "Tổng chi phí")]
         public long TotalCost { get; set; }
         public Dictionary<CostType, long> TourCostPerCostType { get; set; }
+
+        public TourBusinessReport() {
+            Sales = 0;
+            CustomerCount = 0;
+            TourGroupCount = 0;
+            TotalCost = 0;
+            TourCostPerCostType = new Dictionary<CostType, long>();
+        }
     }
 }
