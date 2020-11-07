@@ -19,7 +19,11 @@ namespace TourDuLich_GUI.BUS.Report {
                     
                     foreach (TourGroupCost tourGroupCost in tourGroup.TourGroupCosts) {
                         report.TotalCost += tourGroupCost.Value;
-                        report.TourCostPerCostType.Add(tourGroupCost.CostType, tourGroupCost.Value);
+                        if (report.TourCostPerCostType.ContainsKey(tourGroupCost.CostType)) {
+                            report.TourCostPerCostType[tourGroupCost.CostType] += tourGroupCost.Value;
+                        } else {
+                            report.TourCostPerCostType.Add(tourGroupCost.CostType, tourGroupCost.Value);
+                        }
                     }
                 }
 
