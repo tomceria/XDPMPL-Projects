@@ -254,7 +254,8 @@ namespace TourDuLich_GUI.GUI
 
         private void handleCloseEdit()
         {
-            // TODO: Hiếu's implementation of RevertChanges
+            //Revert changes when click close button
+            _item.RevertChanges();
         }
 
         private void handleDeleteTourGroup()

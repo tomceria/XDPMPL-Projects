@@ -174,7 +174,8 @@ namespace TourDuLich_GUI.GUI
         }
 
         private void handleCloseEdit() {
-            // TODO: Hiếu's implementation of RevertChanges
+            //Revert changes when click close button
+            getItemState().RevertChanges();
         }
 
         private void handleAddTourPrice() {
@@ -285,10 +286,6 @@ namespace TourDuLich_GUI.GUI
 
         private void tabbedDetails_SelectedPageChanged(object sender, LayoutTabPageChangedEventArgs e) {
             InitializeDataSources(); // TODO: This works for some reasons?????
-        }
-
-        private void mainRibbonControl_Click(object sender, EventArgs e) {
-
         }
 
         private void btn_MoveUpTourDetail_Click(object sender, EventArgs e) {

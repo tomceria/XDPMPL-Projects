@@ -141,5 +141,10 @@ namespace TourDuLich_GUI.DAL {
 
             return tourGroupCost;
         }
+
+        public static void RevertChanges(TourGroup tourGroup)
+        {
+            _ctx.Entry(tourGroup).State = EntityState.Unchanged;
+        }
     }
 }
