@@ -4,14 +4,19 @@ using TourDuLich_GUI.DAL;
 
 namespace TourDuLich_GUI.BUS.Report {
     public partial class TourBusinessReport {
-        public TourBusinessReportResource getTourBusinessReport(DateTime startDate, DateTime endDate) {
+        public static void GetReports(DateTime startDate, DateTime endDate, out List<TourBusinessReport> toursReport, out TourBusinessReport summaryReport) {
+            var result = new
+            {
+                ReportOnTours = new List<TourBusinessReport>(),
+                Summary = new TourBusinessReport()
+            };
+            
             // lấy tất cả các tour
             List<Tour> tours = TourDAL.GetAll(startDate, endDate);
-            TourBusinessReportResource response = new TourBusinessReportResource();
 
             // thống kê theo từng tour
             foreach (Tour tour in tours) {
-                TourBusinessReport report = new TourBusinessReport();
+                TourBusinessReport report = new TourBusinessReport {Tour = tour};
 
                 // tính chi phí, số lượng khách của từng đoàn
                 foreach (TourGroup tourGroup in tour.TourGroups) {
@@ -31,10 +36,10 @@ namespace TourDuLich_GUI.BUS.Report {
                         }
 
                         // tổng từng loại chi phí của tất cả tour
-                        if (response.sumary.TourCostPerCostType.ContainsKey(tourGroupCost.CostType)) {
-                            response.sumary.TourCostPerCostType[tourGroupCost.CostType] += tourGroupCost.Value;
+                        if (result.Summary.TourCostPerCostType.ContainsKey(tourGroupCost.CostType)) {
+                            result.Summary.TourCostPerCostType[tourGroupCost.CostType] += tourGroupCost.Value;
                         } else {
-                            response.sumary.TourCostPerCostType.Add(tourGroupCost.CostType, tourGroupCost.Value);
+                            result.Summary.TourCostPerCostType.Add(tourGroupCost.CostType, tourGroupCost.Value);
                         }
                     }
                 }
@@ -42,16 +47,19 @@ namespace TourDuLich_GUI.BUS.Report {
                 report.TourGroupCount = tour.TourGroups.Count;
 
                 // tính tổng tất cả tour
-                response.sumary.CustomerCount += report.CustomerCount;
-                response.sumary.Sales += report.Sales;
-                response.sumary.TotalCost += report.TotalCost;
-                response.sumary.TourGroupCount += report.TourGroupCount;
+                result.Summary.CustomerCount += report.CustomerCount;
+                result.Summary.Sales += report.Sales;
+                result.Summary.TotalCost += report.TotalCost;
+                result.Summary.TourGroupCount += report.TourGroupCount;
 
                 // thêm report của 1 tour vào danh sách nhiều tour
-                response.reports.Add(report);
+                result.ReportOnTours.Add(report);
             }
             
-            return response;
+            
+            // Trả về các kết quả
+            toursReport = result.ReportOnTours;
+            summaryReport = result.Summary;
         }
     }
 }

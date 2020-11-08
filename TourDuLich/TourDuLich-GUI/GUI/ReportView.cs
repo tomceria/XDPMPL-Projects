@@ -22,10 +22,13 @@ namespace TourDuLich_GUI.GUI
             InitializeComponent();
             ConfigureControls();
 
-            PLACEHOLDER_getDumpReport();
+            _tourBusinessReports = new List<TourBusinessReport>();
+            _tourBusinessReportSum = new TourBusinessReport();
 
-            InitializeDataSources();
+            PopulateDataSources();
         }
+
+        // Private Functions
 
         private void ConfigureControls()
         {
@@ -37,7 +40,7 @@ namespace TourDuLich_GUI.GUI
             dateEdit_SAR_EndDate.EditValue = defaultEndDate;
         }
 
-        private void InitializeDataSources()
+        private void PopulateDataSources()
         {
             var tourCostPerCostTypeArr =
                 _tourBusinessReportSum.TourCostPerCostType.Select(row => new
@@ -57,6 +60,7 @@ namespace TourDuLich_GUI.GUI
             seriesTbrSales.Label.TextPattern = "{V:#,#}";
             ((XYDiagram) chartSales.Diagram).AxisX.Label.TextPattern = "{A}";
             ((XYDiagram) chartSales.Diagram).AxisY.Label.TextPattern = "{V:#,#}";
+            seriesTbrSales.DataSource = null;
             seriesTbrSales.DataSource = _tourBusinessReports;
 
             // TourCost
@@ -67,9 +71,11 @@ namespace TourDuLich_GUI.GUI
             seriesTbrTourCost.ValueDataMembers.AddRange("Value");
             seriesTbrTourCost.Label.TextPattern = "{V:#,#}k ({VP:0.00%})";
             seriesTbrTourCost.LegendTextPattern = "{A}";
+            seriesTbrTourCost.DataSource = null;
             seriesTbrTourCost.DataSource = tourCostPerCostTypeArr;
 
             // Complete Table
+            gridView_TBR.GridControl.DataSource = null;
             gridView_TBR.GridControl.DataSource = _tourBusinessReports;
             gridView_TBR.OptionsBehavior.Editable = false;
             gridView_TBR.Columns["Sales"].DisplayFormat.FormatType = FormatType.Numeric;
@@ -81,6 +87,12 @@ namespace TourDuLich_GUI.GUI
             {
                 var fieldName = $"costType_{row.CostType.ID}";
 
+                var existingColumn = gridView_TBR.Columns.FirstOrDefault(o => o.FieldName == fieldName);
+                if (existingColumn != null)
+                {
+                    gridView_TBR.Columns.Remove(existingColumn);
+                }
+                
                 gridView_TBR.Columns.Add(new GridColumn()
                 {
                     Caption = row.CostType.Name,
@@ -92,6 +104,7 @@ namespace TourDuLich_GUI.GUI
                 gridView_TBR.Columns[fieldName].DisplayFormat.FormatType = FormatType.Numeric;
                 gridView_TBR.Columns[fieldName].DisplayFormat.FormatString = "#,# VND";
             }
+
             gridView_TBR.CustomUnboundColumnData += (sender, e) =>
             {
                 if (new Regex(@"^costType_\d+").IsMatch(e.Column.FieldName))
@@ -105,10 +118,10 @@ namespace TourDuLich_GUI.GUI
                                     CostType = row.Key, row.Value
                                 }
                             )
-                            .First(o =>
+                            .FirstOrDefault(o =>
                                 o.CostType.ID == int.Parse(
                                     e.Column.FieldName.Split('_')[1])
-                            ).Value;
+                            )?.Value ?? 0;
                     }
 
                     if (e.IsSetData && e.Value != null)
@@ -121,67 +134,17 @@ namespace TourDuLich_GUI.GUI
             gridView_TBR.BestFitColumns();
         }
 
-        // Functions
-
-        private void PLACEHOLDER_getDumpReport()
-        {
-            List<CostType> costTypes = CostType.GetAll();
-            List<Tour> tours = Tour.GetAll();
-            _tourBusinessReports = new List<TourBusinessReport>
-            {
-                new TourBusinessReport()
-                {
-                    Tour = tours[0],
-                    Sales = 5340000,
-                    CustomerCount = 30,
-                    TourGroupCount = 2,
-                    TotalCost = 500000,
-                    TourCostPerCostType = new Dictionary<CostType, long>
-                    {
-                        {costTypes[0], 150000},
-                        {costTypes[1], 260000},
-                        {costTypes[2], 470000},
-                        {costTypes[3], 580000},
-                    }
-                },
-                new TourBusinessReport()
-                {
-                    Tour = tours[1],
-                    Sales = 3680000,
-                    CustomerCount = 30,
-                    TourGroupCount = 2,
-                    TotalCost = 500000,
-                    TourCostPerCostType = new Dictionary<CostType, long>
-                    {
-                        {costTypes[0], 250000},
-                        {costTypes[1], 360000},
-                        {costTypes[2], 370000},
-                        {costTypes[3], 680000},
-                    }
-                }
-            };
-            _tourBusinessReportSum = new TourBusinessReport()
-            {
-                Sales = 5340000 + 3680000,
-                CustomerCount = 30 * 2,
-                TourGroupCount = 2 * 2,
-                TotalCost = 500000 * 2,
-                TourCostPerCostType = new Dictionary<CostType, long>
-                {
-                    {costTypes[0], 250000 * 2},
-                    {costTypes[1], 360000 * 2},
-                    {costTypes[2], 470000 * 2},
-                    {costTypes[3], 580000 * 2},
-                }
-            };
-        }
-
         // Event Handlers
 
         private void handleGenerateReport_TBR()
         {
-            // TODO: Implement Huy's report business function
-            Console.WriteLine("TBR!!!");
+            TourBusinessReport.GetReports(
+                (DateTime) dateEdit_TBR_StartDate.EditValue,
+                (DateTime) dateEdit_TBR_EndDate.EditValue,
+                out _tourBusinessReports,
+                out _tourBusinessReportSum
+            );
+            PopulateDataSources();
         }
 
         private void handleGenerateReport_SAR()
