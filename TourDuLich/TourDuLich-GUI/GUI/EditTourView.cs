@@ -175,7 +175,7 @@ namespace TourDuLich_GUI.GUI
 
         private void handleCloseEdit() {
             //Revert changes when click close button
-            getItemState().RevertChanges();
+            Tour.RevertChanges();
         }
 
         private void handleAddTourPrice() {

@@ -154,9 +154,9 @@ namespace TourDuLich_GUI.DAL {
             return tourPrice;
         }
 
-        public static void RevertChanges(Tour tour)
+        public static void Reload()
         {
-            _ctx.Entry(tour).State = EntityState.Unchanged;
+            _ctx = new TourContext();
         }
     }
 }

@@ -232,7 +232,6 @@
             this.mainRibbonControl.ShowApplicationButton = DevExpress.Utils.DefaultBoolean.False;
             this.mainRibbonControl.Size = new System.Drawing.Size(798, 158);
             this.mainRibbonControl.ToolbarLocation = DevExpress.XtraBars.Ribbon.RibbonQuickAccessToolbarLocation.Hidden;
-            this.mainRibbonControl.Click += new System.EventHandler(this.mainRibbonControl_Click);
             // 
             // bbiSave
             // 

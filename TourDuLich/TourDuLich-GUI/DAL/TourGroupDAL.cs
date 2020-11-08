@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Core.Objects;
+using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
 using System.Data.SqlClient;
 using System.Linq;
@@ -21,8 +23,13 @@ namespace TourDuLich_GUI.DAL {
             return tourGroups;
         }
         public static TourGroup GetOne(int id) {
-            // if found => return tourGroup, else return null
-            return _ctx.TourGroups.Find(id);
+            TourGroup result = _ctx.Set<TourGroup>()
+                .Include(o => o.TourGroupDetails)
+                .Include(o => o.TourGroupStaffs)
+                .Include(o => o.TourGroupCosts)
+                .FirstOrDefault(o => o.ID == id);
+            
+            return result;
         }
 
         public static TourGroup CreateOne(TourGroup tourGroup) {
@@ -142,9 +149,9 @@ namespace TourDuLich_GUI.DAL {
             return tourGroupCost;
         }
 
-        public static void RevertChanges(TourGroup tourGroup)
+        public static void Reload()
         {
-            _ctx.Entry(tourGroup).State = EntityState.Unchanged;
+            _ctx = new TourContext();
         }
     }
 }

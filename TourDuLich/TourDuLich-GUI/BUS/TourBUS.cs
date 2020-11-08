@@ -136,10 +136,9 @@ namespace TourDuLich_GUI.BUS {
             return price;
         }
 
-        public void RevertChanges()
+        public static void RevertChanges()
         {
-            //Refresh _item in Edit tour view
-            TourDAL.RevertChanges(this);
+            TourDAL.Reload();
         }
     }
 }
