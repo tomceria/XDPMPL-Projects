@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using TourDuLich_GUI.DAL;
 
 namespace TourDuLich_GUI.BUS.Report {
@@ -11,13 +12,26 @@ namespace TourDuLich_GUI.BUS.Report {
                 Summary = new TourBusinessReport()
             };
             
-            // lấy tất cả các tour
+            // lấy dữ liệu mới nhất từ database
+            TourDAL.Reload();
+            
+            // chuẩn bị dữ liệu
             List<Tour> tours = TourDAL.GetAll(startDate, endDate);
+            List<CostType> costTypes = CostTypeDAL.GetAll();
+            foreach (var costType in costTypes)
+            {
+                result.Summary.TourCostPerCostType.Add(costType, 0);
+            }
 
             // thống kê theo từng tour
             foreach (Tour tour in tours) {
                 TourBusinessReport report = new TourBusinessReport {Tour = tour};
 
+                foreach (var costType in costTypes)
+                {
+                    report.TourCostPerCostType.Add(costType, 0);
+                }
+                
                 // tính chi phí, số lượng khách của từng đoàn
                 foreach (TourGroup tourGroup in tour.TourGroups) {
                     report.Sales += tourGroup.PriceGroup;
@@ -28,19 +42,11 @@ namespace TourDuLich_GUI.BUS.Report {
                         // tổng chi phí của 1 đoàn
                         report.TotalCost += tourGroupCost.Value;
 
-                        // nếu đã có loại chi phí rồi thì cộng thêm, chưa thì thêm mới
-                        if (report.TourCostPerCostType.ContainsKey(tourGroupCost.CostType)) {
-                            report.TourCostPerCostType[tourGroupCost.CostType] += tourGroupCost.Value;
-                        } else {
-                            report.TourCostPerCostType.Add(tourGroupCost.CostType, tourGroupCost.Value);
-                        }
-
+                        var costType = costTypes.First(cT => cT.ID == tourGroupCost.CostType.ID);
+                        // cập nhật loại chi phí. đảm bảo rằng mọi loại chi phí đã được them vào TourCostPerCostType
+                        report.TourCostPerCostType[costType] += tourGroupCost.Value;
                         // tổng từng loại chi phí của tất cả tour
-                        if (result.Summary.TourCostPerCostType.ContainsKey(tourGroupCost.CostType)) {
-                            result.Summary.TourCostPerCostType[tourGroupCost.CostType] += tourGroupCost.Value;
-                        } else {
-                            result.Summary.TourCostPerCostType.Add(tourGroupCost.CostType, tourGroupCost.Value);
-                        }
+                        result.Summary.TourCostPerCostType[costType] += tourGroupCost.Value;
                     }
                 }
 

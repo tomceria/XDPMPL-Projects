@@ -9,10 +9,10 @@ namespace TourDuLich_GUI.BUS.Report {
         [Display(Name = "Doanh thu")]
         public long Sales { get; set; }
         
-        [Display(Name = "Số Khách tham quan")]
+        [Display(Name = "Số Khách")]
         public int CustomerCount { get; set; }
         
-        [Display(Name = "Số Đoàn tham quan")]
+        [Display(Name = "Số Đoàn")]
         public int TourGroupCount { get; set; }
         
         [Display(Name = "Tổng chi phí")]

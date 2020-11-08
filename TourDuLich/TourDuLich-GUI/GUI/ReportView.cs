@@ -80,9 +80,9 @@ namespace TourDuLich_GUI.GUI
             gridView_TBR.GridControl.RefreshDataSource();
             gridView_TBR.OptionsBehavior.Editable = false;
             gridView_TBR.Columns["Sales"].DisplayFormat.FormatType = FormatType.Numeric;
-            gridView_TBR.Columns["Sales"].DisplayFormat.FormatString = "#,# VND";
+            gridView_TBR.Columns["Sales"].DisplayFormat.FormatString = "0,0 VND";
             gridView_TBR.Columns["TotalCost"].DisplayFormat.FormatType = FormatType.Numeric;
-            gridView_TBR.Columns["TotalCost"].DisplayFormat.FormatString = "#,# VND";
+            gridView_TBR.Columns["TotalCost"].DisplayFormat.FormatString = "0,0 VND";
             gridView_TBR.Columns["TourCostPerCostType"].Visible = false;
             foreach (var costType in CostType.GetAll())
             {
@@ -103,7 +103,7 @@ namespace TourDuLich_GUI.GUI
                 });
 
                 gridView_TBR.Columns[fieldName].DisplayFormat.FormatType = FormatType.Numeric;
-                gridView_TBR.Columns[fieldName].DisplayFormat.FormatString = "#,# VND";
+                gridView_TBR.Columns[fieldName].DisplayFormat.FormatString = "0,0 VND";
             }
 
             gridView_TBR.CustomUnboundColumnData += (sender, e) =>
