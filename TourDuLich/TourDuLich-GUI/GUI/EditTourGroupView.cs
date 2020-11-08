@@ -4,12 +4,10 @@ using System.ComponentModel;
 using System.Linq;
 using DevExpress.XtraLayout;
 using TourDuLich_GUI.BUS;
-using TourDuLich_GUI.DAL;
 using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraEditors.Controls;
 using System.Windows.Forms;
 using DevExpress.XtraGrid.Columns;
-using DevExpress.XtraGrid.Drawing;
 
 namespace TourDuLich_GUI.GUI
 {
@@ -99,8 +97,9 @@ namespace TourDuLich_GUI.GUI
             LookUpEdit_TourID.Properties.DataSource = toursBL;
             LookUpEdit_TourID.Properties.DisplayMember = "Name";
             LookUpEdit_TourID.Properties.ValueMember = "ID";
-            LookUpEdit_TourID.Properties.Columns.Add(new LookUpColumnInfo("Name"));
-
+            //Check exist
+            var valueNameColumnOfTourType = LookUpEdit_TourID.GetColumnValue(new LookUpColumnInfo("Name"));
+            if (valueNameColumnOfTourType == null) LookUpEdit_TourID.Properties.Columns.Add(new LookUpColumnInfo("Name"));
 
             // Customers
             gridView_Customers.GridControl.DataSource = customersBL;
@@ -255,7 +254,8 @@ namespace TourDuLich_GUI.GUI
 
         private void handleCloseEdit()
         {
-            Dispose();
+            //Revert changes when click close button
+            TourGroup.RevertChanges();
         }
 
         private void handleDeleteTourGroup()
@@ -276,6 +276,7 @@ namespace TourDuLich_GUI.GUI
 
             _item.AddTourGroupDetailToTourGroup(customer);
             //((BindingList<Customer>)gridView_Customers.GridControl.DataSource).Remove(customer);
+            ListBoxControl_TourGroupDetails.Refresh();
         }
 
         private void handleDeleteTourGroupDetailFromTourGroup()
@@ -288,7 +289,7 @@ namespace TourDuLich_GUI.GUI
             //Customer customer = tourGroupDetail.Customer;
 
             _item.DeleteTourGroupDetailFromTourGroup(tourGroupDetail);
-
+            ListBoxControl_TourGroupDetails.Refresh();
             // ((BindingList<Customer>)gridView_Customers.GridControl.DataSource).Add(customer);
         }
 
@@ -357,12 +358,6 @@ namespace TourDuLich_GUI.GUI
             handleSaveTourGroup();
         }
 
-        private void bbiSaveAndClose_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            handleSaveTourGroup();
-            handleCloseEdit();
-        }
-
         private void bbiDelete_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             DialogResult res = MessageBox.Show("Bạn chắc chắn muốn xóa Đoàn tham quan này?\nMọi dữ liệu liên quan sẽ bị xoá.", "Xác nhận", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
@@ -410,6 +405,11 @@ namespace TourDuLich_GUI.GUI
         private void tabbedControlGroup1_SelectedPageChanged(object sender, LayoutTabPageChangedEventArgs e)
         {
             RefreshDataSources();
+        }
+
+        private void EditTourGroupView_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            handleCloseEdit();
         }
     }
 }

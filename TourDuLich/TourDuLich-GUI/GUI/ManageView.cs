@@ -1,18 +1,8 @@
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using DevExpress.XtraEditors;
 using DevExpress.XtraBars;
-using System.ComponentModel.DataAnnotations;
 using TourDuLich_GUI.BUS;
-using System.Data.Entity;
-using System.Collections.ObjectModel;
 
 namespace TourDuLich_GUI.GUI
 {
@@ -37,6 +27,8 @@ namespace TourDuLich_GUI.GUI
             gridView_Tours.OptionsBehavior.Editable = false;
             gridView_TourGroups.OptionsBehavior.Editable = false;
             gridView_Customers.OptionsBehavior.Editable = false;
+            gridView_Customers.PopulateColumns();
+            gridView_Customers.Columns["TourGroupDetails"].Visible = false;
         }
 
         private Page getCurrentPage()
@@ -76,16 +68,16 @@ namespace TourDuLich_GUI.GUI
                         InitializeDataSources_TourGroups();
                         break;
                     }
+                case Page.Customers:
+                    {
+                        InitializeDataSources_Customers();
+                        break;
+                    }
             }
         }
 
         private void InitializeDataSources_Tours()
         {
-            // TODO: Remove ASYNC
-
-            // Prefetch UI changes
-            gridView_Tours.ShowLoadingPanel();
-
             // Data fetch
             BindingList<Tour> list = new BindingList<Tour>(
                 Tour.GetAll()
@@ -97,10 +89,7 @@ namespace TourDuLich_GUI.GUI
             }
 
             // UI changes
-            gridView_Tours.HideLoadingPanel();
             gridControl_Tours.DataSource = list;
-            /*            gridControl_Tours.DataMember.
-            */
             gridControl_Tours.RefreshDataSource();
             bsiListCount.Caption = $"{list.Count} items";
         }
@@ -117,10 +106,18 @@ namespace TourDuLich_GUI.GUI
             gridControl_TourGroups.RefreshDataSource();
             bsiListCount.Caption = $"{list.Count} items";
         }
-
+        
         private void InitializeDataSources_Customers()
         {
+            // Data fetch
+            BindingList<Customer> list = new BindingList<Customer>(
+                Customer.GetAll()
+            );
 
+            // UI changes
+            gridControl_Customers.DataSource = list;
+            gridControl_Customers.RefreshDataSource();
+            bsiListCount.Caption = $"{list.Count} items";
         }
 
         // Event Handlers
@@ -175,7 +172,7 @@ namespace TourDuLich_GUI.GUI
             editTourGroupView.ShowDialog(this);
         }
 
-        private void handleDeleteTourGroup( ) { 
+        private void handleDeleteTourGroup() { 
             TourGroup selectedTourGroup = (TourGroup)gridView_TourGroups.GetFocusedRow();
 
             if (selectedTourGroup == null) {
@@ -185,6 +182,38 @@ namespace TourDuLich_GUI.GUI
             TourGroup.DeleteOne(selectedTourGroup.ID);
         }
 
+        private void handleUpdateSelected()
+        {
+            object selectedItem = null;
+            switch (getCurrentPage())
+            {
+                case Page.Tours:
+                    {
+                        selectedItem = gridView_Tours.GetFocusedRow();
+                        bbiNew.Enabled = true;
+                        bbiEdit.Enabled = selectedItem != null;
+                        bbiDelete.Enabled = selectedItem != null;
+                        break;
+                    }
+                case Page.TourGroups:
+                    {
+                        selectedItem = gridView_TourGroups.GetFocusedRow();
+                        bbiNew.Enabled = true;
+                        bbiEdit.Enabled = selectedItem != null;
+                        bbiDelete.Enabled = selectedItem != null;
+                        break;
+                    }
+                case Page.Customers:
+                    {
+                        selectedItem = null;    // Customers are uneditable
+                        bbiNew.Enabled = false;
+                        bbiEdit.Enabled = false;
+                        bbiDelete.Enabled = false;
+                        break;
+                    }
+            }
+        }
+        
         // Events
 
         private void bbiNew_ItemClick(object sender, ItemClickEventArgs e)
@@ -205,6 +234,7 @@ namespace TourDuLich_GUI.GUI
 
             // Post-Disposal of Dialog
             InitializeDataSources();
+            handleUpdateSelected();
         }
 
         private void bbiEdit_ItemClick(object sender, ItemClickEventArgs e)
@@ -225,6 +255,7 @@ namespace TourDuLich_GUI.GUI
 
             // Post-Disposal of Dialog
             InitializeDataSources();
+            handleUpdateSelected();
         }
 
         private void bbiDelete_ItemClick(object sender, ItemClickEventArgs e)
@@ -252,38 +283,18 @@ namespace TourDuLich_GUI.GUI
 
             // Refresh
             InitializeDataSources();
+            handleUpdateSelected();
         }
 
         private void gridView_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
-            object selectedItem = null;
-            switch (getCurrentPage())
-            {
-                case Page.Tours:
-                    {
-                        selectedItem = gridView_Tours.GetFocusedRow();
-                        break;
-                    }
-                case Page.TourGroups:
-                    {
-                        selectedItem = gridView_TourGroups.GetFocusedRow();
-                        break;
-                    }
-                case Page.Customers:
-                    {
-                        selectedItem = gridView_TourGroups.GetFocusedRow();
-                        break;
-                    }
-            }
-            bool selectedExists = selectedItem != null;
-
-            bbiEdit.Enabled = selectedExists;
-            bbiDelete.Enabled = selectedExists;
+            handleUpdateSelected();
         }
 
         private void xtraTabControl_Tours_SelectedPageChanged(object sender, DevExpress.XtraTab.TabPageChangedEventArgs e)
         {
             InitializeDataSources();
+            handleUpdateSelected();
         }
     }
 }

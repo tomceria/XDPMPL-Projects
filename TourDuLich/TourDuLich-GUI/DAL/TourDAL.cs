@@ -108,12 +108,26 @@ namespace TourDuLich_GUI.DAL {
         }
 
         public static void DeleteOne(int id) {
+
             Tour tour = _ctx.Set<Tour>().Include(o => o.TourPrices).First(o => o.ID == id);
+            //Delete all tour detail of tour
+            _ctx.TourDetails.RemoveRange(tour.TourDetails);
+            //Delete all tour group of tour
+            List<TourGroup> tourGroups = tour.TourGroups.ToList();
+            foreach (TourGroup tourGroup in tourGroups)
+            {
+                //Delete reference
+                _ctx.TourGroupCosts.RemoveRange(tourGroup.TourGroupCosts);
+                _ctx.TourGroupDetails.RemoveRange(tourGroup.TourGroupDetails);
+                _ctx.TourGroupStaffs.RemoveRange(tourGroup.TourGroupStaffs);
+                _ctx.TourGroups.Remove(tourGroup);
+
+            }
+
             _ctx.Tours.Remove(tour);
             /*_ctx.Entry(tour).State = EntityState.Deleted;
 */
             _ctx.SaveChanges();
-
         }
 
         public static TourDetail CreateTourDetail(Tour tour, int order, int destinationId)
@@ -138,6 +152,11 @@ namespace TourDuLich_GUI.DAL {
                               && startDate.Date <= DbFunctions.TruncateTime(tp.TimeEnd));
 
             return tourPrice;
+        }
+
+        public static void Reload()
+        {
+            _ctx = new TourContext();
         }
     }
 }

@@ -135,5 +135,10 @@ namespace TourDuLich_GUI.BUS {
 
             return price;
         }
+
+        public static void RevertChanges()
+        {
+            TourDAL.Reload();
+        }
     }
 }

@@ -117,6 +117,10 @@ namespace TourDuLich_GUI.BUS
             //If not exist return false
             return false;
         }
+        public static void RevertChanges()
+        {
+            TourGroupDAL.Reload();
+        }
 
     }
 }
