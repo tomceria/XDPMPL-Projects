@@ -134,6 +134,7 @@
     <Compile Include="Models\TourPrice.cs" />
     <Compile Include="Models\TourType.cs" />
     <Compile Include="Models\Transient\TourBusinessReport.cs" />
+    <Compile Include="Models\Transient\TourBusinessReportResource.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GUI\ManageView.cs">
