@@ -20,14 +20,21 @@ namespace TourDuLich_GUI.DAL {
         }
 
         public static List<Tour> GetAll(DateTime startDate, DateTime endDate) {
-            IQueryable<Tour> result = _ctx.Tours;
-
             // lọc ra những tour group có ngày khởi hành trong khoảng thời gian tìm kiếm
-            foreach (Tour t in result) {
-                t.TourGroups = t.TourGroups.Where(tg => tg.DateStart >= startDate && tg.DateEnd <= endDate).ToList();
-            }
+            var result = _ctx.Tours.ToList().ConvertAll(tour => new Tour(tour)
+                {
+                    TourGroups = tour.TourGroups.Where(tg => tg.DateStart >= startDate && tg.DateEnd <= endDate).ToList()
+                }
+            );
 
-            return result.ToList();
+            return result;
+            
+            /*
+             * HOÀNG: Không nên làm như bên dưới, thay đổi t.TourGroups sẽ tác động trực tiếp đến _ctx.Tours của dbContext hiện tại
+             */
+            // foreach (Tour t in result) {
+            //     t.TourGroups = t.TourGroups.Where(tg => tg.DateStart >= startDate && tg.DateEnd <= endDate).ToList();
+            // }
         }
 
         public static Tour GetOne(int id) {

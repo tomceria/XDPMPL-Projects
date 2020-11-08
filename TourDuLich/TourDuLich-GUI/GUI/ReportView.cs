@@ -77,15 +77,16 @@ namespace TourDuLich_GUI.GUI
             // Complete Table
             gridView_TBR.GridControl.DataSource = null;
             gridView_TBR.GridControl.DataSource = _tourBusinessReports;
+            gridView_TBR.GridControl.RefreshDataSource();
             gridView_TBR.OptionsBehavior.Editable = false;
             gridView_TBR.Columns["Sales"].DisplayFormat.FormatType = FormatType.Numeric;
             gridView_TBR.Columns["Sales"].DisplayFormat.FormatString = "#,# VND";
             gridView_TBR.Columns["TotalCost"].DisplayFormat.FormatType = FormatType.Numeric;
             gridView_TBR.Columns["TotalCost"].DisplayFormat.FormatString = "#,# VND";
             gridView_TBR.Columns["TourCostPerCostType"].Visible = false;
-            foreach (var row in tourCostPerCostTypeArr)
+            foreach (var costType in CostType.GetAll())
             {
-                var fieldName = $"costType_{row.CostType.ID}";
+                var fieldName = $"costType_{costType.ID}";
 
                 var existingColumn = gridView_TBR.Columns.FirstOrDefault(o => o.FieldName == fieldName);
                 if (existingColumn != null)
@@ -95,7 +96,7 @@ namespace TourDuLich_GUI.GUI
                 
                 gridView_TBR.Columns.Add(new GridColumn()
                 {
-                    Caption = row.CostType.Name,
+                    Caption = costType.Name,
                     FieldName = fieldName,
                     UnboundType = UnboundColumnType.Integer,
                     Visible = true

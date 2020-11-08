@@ -12,6 +12,20 @@ namespace TourDuLich_GUI.BUS {
             TourGroups = new List<TourGroup>();
         }
 
+        public Tour(Tour tour)
+        {
+            ID = tour.ID;
+            Name = tour.Name;
+            Description = tour.Description;
+            PriceRef = tour.PriceRef;
+            TourTypeID = tour.TourTypeID;
+            CurrentPrice = tour.CurrentPrice;
+            TourType = tour.TourType;
+            TourDetails = tour.TourDetails;
+            TourPrices = tour.TourPrices;
+            TourGroups = tour.TourGroups;
+        }
+
         [Key, Display(AutoGenerateField = false, Name = "Mã số tour")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
