@@ -128,9 +128,9 @@ namespace TourDuLich_GUI.GUI
             gridView_TBR.GridControl.RefreshDataSource();
             gridView_TBR.OptionsBehavior.Editable = false;
             gridView_TBR.Columns["Sales"].DisplayFormat.FormatType = FormatType.Numeric;
-            gridView_TBR.Columns["Sales"].DisplayFormat.FormatString = "0,0 VND";
+            gridView_TBR.Columns["Sales"].DisplayFormat.FormatString = "#,# VND";
             gridView_TBR.Columns["TotalCost"].DisplayFormat.FormatType = FormatType.Numeric;
-            gridView_TBR.Columns["TotalCost"].DisplayFormat.FormatString = "0,0 VND";
+            gridView_TBR.Columns["TotalCost"].DisplayFormat.FormatString = "#,# VND";
             gridView_TBR.Columns["TourCostPerCostType"].Visible = false;
             foreach (var costType in CostType.GetAll())
             {
@@ -149,12 +149,19 @@ namespace TourDuLich_GUI.GUI
                     UnboundType = UnboundColumnType.Integer,
                     Visible = true
                 });
-                gridView_TBR.Columns[fieldName].Summary.Add(
-                    new GridColumnSummaryItem(SummaryItemType.Sum, fieldName, "Tổng = {0}")
-                );
 
                 gridView_TBR.Columns[fieldName].DisplayFormat.FormatType = FormatType.Numeric;
                 gridView_TBR.Columns[fieldName].DisplayFormat.FormatString = "0,0 VND";
+                
+                gridView_TBR.Columns[fieldName].Summary.Add(
+                    new GridColumnSummaryItem(SummaryItemType.Sum, fieldName, "Tổng = {0:#,#}")
+                );
+                gridView_TBR.Columns[fieldName].Summary.Add(
+                    new GridColumnSummaryItem(SummaryItemType.Max, fieldName, "Cao nhất = {0:N0}")
+                );
+                gridView_TBR.Columns[fieldName].Summary.Add(
+                    new GridColumnSummaryItem(SummaryItemType.Average, fieldName, "Trung bình = {0:#,#.00}")
+                );
             }
 
             gridView_TBR.CustomUnboundColumnData += (sender, e) =>
@@ -186,19 +193,20 @@ namespace TourDuLich_GUI.GUI
             if (_isInitiatedTBR == false)
             {
                 gridView_TBR.OptionsView.ShowFooter = true;
-                gridView_TBR.OptionsMenu.EnableFooterMenu = true;
-                gridView_TBR.Columns["Sales"].Summary.Add(
-                    new GridColumnSummaryItem(SummaryItemType.Sum, "Sales", "Tổng = {0}")
-                );
-                gridView_TBR.Columns["CustomerCount"].Summary.Add(
-                    new GridColumnSummaryItem(SummaryItemType.Sum, "Sales", "Tổng = {0}")
-                );
-                gridView_TBR.Columns["TourGroupCount"].Summary.Add(
-                    new GridColumnSummaryItem(SummaryItemType.Sum, "Sales", "Tổng = {0}")
-                );
-                gridView_TBR.Columns["TotalCost"].Summary.Add(
-                    new GridColumnSummaryItem(SummaryItemType.Sum, "TotalCost", "Tổng = {0}")
-                );
+                gridView_TBR.OptionsMenu.EnableFooterMenu = false;
+
+                foreach (var key in new List<String> {"Sales", "CustomerCount", "TourGroupCount", "TotalCost"})
+                {
+                    gridView_TBR.Columns[key].Summary.Add(
+                        new GridColumnSummaryItem(SummaryItemType.Sum, key, "Tổng = {0:N0}")
+                    );
+                    gridView_TBR.Columns[key].Summary.Add(
+                        new GridColumnSummaryItem(SummaryItemType.Max, key, "Cao nhất = {0:N0}")
+                    );
+                    gridView_TBR.Columns[key].Summary.Add(
+                        new GridColumnSummaryItem(SummaryItemType.Average, key, "Trung bình = {0:#,#.00}")
+                    );
+                }
             }
             gridView_TBR.BestFitColumns();
             
@@ -218,10 +226,19 @@ namespace TourDuLich_GUI.GUI
             if (_isInitiatedSAR == false)
             {
                 gridView_SAR.OptionsView.ShowFooter = true;
-                gridView_SAR.OptionsMenu.EnableFooterMenu = true;
-                gridView_SAR.Columns["TourGroupCount"].Summary.Add(
-                    new GridColumnSummaryItem(SummaryItemType.Sum, "TourGroupCount", "Tổng = {0}")
-                );
+                gridView_SAR.OptionsMenu.EnableFooterMenu = false;
+                foreach (var key in new List<String> {"TourGroupCount"})
+                {
+                    gridView_SAR.Columns[key].Summary.Add(
+                        new GridColumnSummaryItem(SummaryItemType.Sum, key, "Tổng = {0:N0}")
+                    );
+                    gridView_SAR.Columns[key].Summary.Add(
+                        new GridColumnSummaryItem(SummaryItemType.Max, key, "Cao nhất = {0:N0}")
+                    );
+                    gridView_SAR.Columns[key].Summary.Add(
+                        new GridColumnSummaryItem(SummaryItemType.Average, key, "Trung bình = {0:#,#.00}")
+                    );
+                }
             }
             
             this._isInitiatedSAR = true;
