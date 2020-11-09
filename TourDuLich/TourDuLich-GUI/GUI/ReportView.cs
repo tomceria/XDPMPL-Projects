@@ -5,6 +5,7 @@ using System.Text.RegularExpressions;
 using DevExpress.Data;
 using DevExpress.Utils;
 using DevExpress.XtraCharts;
+using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Columns;
 using TourDuLich_GUI.BUS;
 using TourDuLich_GUI.BUS.Report;
@@ -22,6 +23,8 @@ namespace TourDuLich_GUI.GUI
         private List<TourBusinessReport> _tourBusinessReports;
         private TourBusinessReport _tourBusinessReportSum;
         private List<StaffActivitiesReport> _staffActivitiesReports;
+        private bool _isInitiatedTBR = false;
+        private bool _isInitiatedSAR = false;
 
         public ReportView()
         {
@@ -146,6 +149,9 @@ namespace TourDuLich_GUI.GUI
                     UnboundType = UnboundColumnType.Integer,
                     Visible = true
                 });
+                gridView_TBR.Columns[fieldName].Summary.Add(
+                    new GridColumnSummaryItem(SummaryItemType.Sum, fieldName, "Tổng = {0}")
+                );
 
                 gridView_TBR.Columns[fieldName].DisplayFormat.FormatType = FormatType.Numeric;
                 gridView_TBR.Columns[fieldName].DisplayFormat.FormatString = "0,0 VND";
@@ -177,7 +183,26 @@ namespace TourDuLich_GUI.GUI
                 }
             };
             gridView_TBR.OptionsView.ColumnAutoWidth = false;
+            if (_isInitiatedTBR == false)
+            {
+                gridView_TBR.OptionsView.ShowFooter = true;
+                gridView_TBR.OptionsMenu.EnableFooterMenu = true;
+                gridView_TBR.Columns["Sales"].Summary.Add(
+                    new GridColumnSummaryItem(SummaryItemType.Sum, "Sales", "Tổng = {0}")
+                );
+                gridView_TBR.Columns["CustomerCount"].Summary.Add(
+                    new GridColumnSummaryItem(SummaryItemType.Sum, "Sales", "Tổng = {0}")
+                );
+                gridView_TBR.Columns["TourGroupCount"].Summary.Add(
+                    new GridColumnSummaryItem(SummaryItemType.Sum, "Sales", "Tổng = {0}")
+                );
+                gridView_TBR.Columns["TotalCost"].Summary.Add(
+                    new GridColumnSummaryItem(SummaryItemType.Sum, "TotalCost", "Tổng = {0}")
+                );
+            }
             gridView_TBR.BestFitColumns();
+            
+            this._isInitiatedTBR = true;
         }
 
         private void PopulateDataSources_SAR()
@@ -190,6 +215,16 @@ namespace TourDuLich_GUI.GUI
             gridView_SAR.Columns["TourGroupCount"].DisplayFormat.FormatType = FormatType.Numeric;
             gridView_SAR.Columns["TourGroupCount"].DisplayFormat.FormatString = "N0";
             gridView_SAR.Columns["TourGroups"].Visible = false;
+            if (_isInitiatedSAR == false)
+            {
+                gridView_SAR.OptionsView.ShowFooter = true;
+                gridView_SAR.OptionsMenu.EnableFooterMenu = true;
+                gridView_SAR.Columns["TourGroupCount"].Summary.Add(
+                    new GridColumnSummaryItem(SummaryItemType.Sum, "TourGroupCount", "Tổng = {0}")
+                );
+            }
+            
+            this._isInitiatedSAR = true;
         }
 
         // Event Handlers
