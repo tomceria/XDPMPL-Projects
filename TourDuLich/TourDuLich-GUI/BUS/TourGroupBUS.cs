@@ -25,13 +25,13 @@ namespace TourDuLich_GUI.BUS
 
         public TourGroup Create()
         {
-            this.PriceGroup = CalculateTourGroupPrice(this);
+            this.PriceGroup = CalculateTotalTourGroupCost(this);
             return TourGroupDAL.CreateOne(this);
         }
 
         public void Update()
         {
-            this.PriceGroup = CalculateTourGroupPrice(this);
+            this.PriceGroup = CalculateTotalTourGroupCost(this);
             TourGroupDAL.UpdateOne(this);
         }
 
@@ -82,19 +82,16 @@ namespace TourDuLich_GUI.BUS
             tourGroup.TourGroupCosts.Remove(tourGroupCost);
         }
 
-        /// <summary>
-        /// Calculate TourGroupPrice = TourPrice + TourGroupCosts
-        /// </summary>
-        /// <returns>TourGroupPrice</returns>
-        public static long CalculateTourGroupPrice(TourGroup tourGroup) {
-            var tourPrice = Tour.GetTourPriceOrPriceRef(tourGroup.TourID, tourGroup.DateStart);
+        public static long CalculateTotalTourGroupCost(TourGroup tourGroup) {
+            // no longer get Tour.GetTourPriceOrPriceRef
+            // var tourPrice = Tour.GetTourPriceOrPriceRef(tourGroup.TourID, tourGroup.DateStart);
 
             long costs = 0;
             foreach (TourGroupCost cost in tourGroup.TourGroupCosts) {
                 costs += cost.Value;
             }
 
-            return tourPrice + costs;
+            return costs;
         }
 
 

@@ -1,13 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Data.Entity;
-using System.Data.Entity.Migrations;
 using System.Linq;
-using System.Reflection.Emit;
-using System.Text;
-using System.Threading.Tasks;
 using TourDuLich_GUI.BUS;
 
 namespace TourDuLich_GUI.DAL {
@@ -23,7 +17,7 @@ namespace TourDuLich_GUI.DAL {
             // lọc ra những tour group có ngày khởi hành trong khoảng thời gian tìm kiếm
             var result = _ctx.Tours.ToList().ConvertAll(tour => new Tour(tour)
                 {
-                    TourGroups = tour.TourGroups.Where(tg => tg.DateStart >= startDate && tg.DateEnd <= endDate).ToList()
+                    TourGroups = tour.TourGroups.Where(tg => tg.DateStart >= startDate && tg.DateStart <= endDate).ToList()
                 }
             );
 
