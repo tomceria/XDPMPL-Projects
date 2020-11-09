@@ -83,6 +83,7 @@
     <Compile Include="BUS\CostTypeBUS.cs" />
     <Compile Include="BUS\CustomerBUS.cs" />
     <Compile Include="BUS\DestinationBUS.cs" />
+    <Compile Include="BUS\Report\StaffActivitiesReport.cs" />
     <Compile Include="BUS\Report\TourBusinessReport.cs" />
     <Compile Include="BUS\StaffBUS.cs" />
     <Compile Include="BUS\TourBUS.cs" />
@@ -133,6 +134,7 @@
     <Compile Include="Models\TourGroupStaff.cs" />
     <Compile Include="Models\TourPrice.cs" />
     <Compile Include="Models\TourType.cs" />
+    <Compile Include="Models\Transient\StaffActivitiesReport.cs" />
     <Compile Include="Models\Transient\TourBusinessReport.cs" />
     <Compile Include="Models\Transient\TourBusinessReportResource.cs" />
     <Compile Include="Program.cs" />

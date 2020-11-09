@@ -6,7 +6,6 @@ using DevExpress.Data;
 using DevExpress.Utils;
 using DevExpress.XtraCharts;
 using DevExpress.XtraGrid.Columns;
-using DevExpress.XtraGrid.Views.Base;
 using TourDuLich_GUI.BUS;
 using TourDuLich_GUI.BUS.Report;
 
@@ -14,8 +13,15 @@ namespace TourDuLich_GUI.GUI
 {
     public partial class ReportView : DevExpress.XtraEditors.XtraUserControl
     {
+        enum Page
+        {
+            TourBusinessReport,
+            StaffActivitiesReport
+        }
+
         private List<TourBusinessReport> _tourBusinessReports;
         private TourBusinessReport _tourBusinessReportSum;
+        private List<StaffActivitiesReport> _staffActivitiesReports;
 
         public ReportView()
         {
@@ -24,6 +30,7 @@ namespace TourDuLich_GUI.GUI
 
             _tourBusinessReports = new List<TourBusinessReport>();
             _tourBusinessReportSum = new TourBusinessReport();
+            _staffActivitiesReports = new List<StaffActivitiesReport>();
 
             PopulateDataSources();
         }
@@ -40,7 +47,45 @@ namespace TourDuLich_GUI.GUI
             dateEdit_SAR_EndDate.EditValue = defaultEndDate;
         }
 
+        private Page getCurrentPage()
+        {
+            Page curPage = Page.TourBusinessReport;
+            int tabIndex = xtraTabControl_Report.SelectedTabPageIndex;
+            switch (tabIndex)
+            {
+                case 0:
+                {
+                    curPage = Page.TourBusinessReport;
+                    break;
+                }
+                case 1:
+                {
+                    curPage = Page.StaffActivitiesReport;
+                    break;
+                }
+            }
+
+            return curPage;
+        }
+
         private void PopulateDataSources()
+        {
+            switch (getCurrentPage())
+            {
+                case Page.TourBusinessReport:
+                {
+                    PopulateDataSources_TBR();
+                    break;
+                }
+                case Page.StaffActivitiesReport:
+                {
+                    PopulateDataSources_SAR();
+                    break;
+                }
+            }
+        }
+
+        private void PopulateDataSources_TBR()
         {
             var tourCostPerCostTypeArr =
                 _tourBusinessReportSum.TourCostPerCostType.Select(row => new
@@ -93,7 +138,7 @@ namespace TourDuLich_GUI.GUI
                 {
                     gridView_TBR.Columns.Remove(existingColumn);
                 }
-                
+
                 gridView_TBR.Columns.Add(new GridColumn()
                 {
                     Caption = costType.Name,
@@ -135,6 +180,18 @@ namespace TourDuLich_GUI.GUI
             gridView_TBR.BestFitColumns();
         }
 
+        private void PopulateDataSources_SAR()
+        {
+            // Complete Table
+            gridView_SAR.GridControl.DataSource = null;
+            gridView_SAR.GridControl.DataSource = _staffActivitiesReports;
+            gridView_SAR.GridControl.RefreshDataSource();
+            gridView_SAR.OptionsBehavior.Editable = false;
+            gridView_SAR.Columns["TourGroupCount"].DisplayFormat.FormatType = FormatType.Numeric;
+            gridView_SAR.Columns["TourGroupCount"].DisplayFormat.FormatString = "N0";
+            gridView_SAR.Columns["TourGroups"].Visible = false;
+        }
+
         // Event Handlers
 
         private void handleGenerateReport_TBR()
@@ -145,13 +202,16 @@ namespace TourDuLich_GUI.GUI
                 out _tourBusinessReports,
                 out _tourBusinessReportSum
             );
-            PopulateDataSources();
+            PopulateDataSources_TBR();
         }
 
         private void handleGenerateReport_SAR()
         {
-            // TODO: Implement Huy's report business function
-            Console.WriteLine("SAR!!!");
+            _staffActivitiesReports = StaffActivitiesReport.GetStaffActivitiesReport(
+                (DateTime) dateEdit_SAR_StartDate.EditValue,
+                (DateTime) dateEdit_SAR_EndDate.EditValue
+            );
+            PopulateDataSources_SAR();
         }
 
         // Event
@@ -164,6 +224,12 @@ namespace TourDuLich_GUI.GUI
         private void btn_SAR_Generate_Click(object sender, EventArgs e)
         {
             handleGenerateReport_SAR();
+        }
+
+        private void xtraTabControl_Report_SelectedPageChanged(object sender,
+            DevExpress.XtraTab.TabPageChangedEventArgs e)
+        {
+            PopulateDataSources();
         }
     }
 }
