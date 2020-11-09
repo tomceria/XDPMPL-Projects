@@ -127,10 +127,11 @@ namespace TourDuLich_GUI.GUI
             gridView_TBR.GridControl.DataSource = _tourBusinessReports;
             gridView_TBR.GridControl.RefreshDataSource();
             gridView_TBR.OptionsBehavior.Editable = false;
-            gridView_TBR.Columns["Sales"].DisplayFormat.FormatType = FormatType.Numeric;
-            gridView_TBR.Columns["Sales"].DisplayFormat.FormatString = "#,# VND";
-            gridView_TBR.Columns["TotalCost"].DisplayFormat.FormatType = FormatType.Numeric;
-            gridView_TBR.Columns["TotalCost"].DisplayFormat.FormatString = "#,# VND";
+            foreach (var key in new List<String> {"Sales", "TotalCost", "Profit"}) {
+                gridView_TBR.Columns[key].DisplayFormat.FormatType = FormatType.Numeric;
+                gridView_TBR.Columns[key].DisplayFormat.FormatString = "0,0 VND";
+            }
+
             gridView_TBR.Columns["TourCostPerCostType"].Visible = false;
             foreach (var costType in CostType.GetAll())
             {
@@ -190,12 +191,13 @@ namespace TourDuLich_GUI.GUI
                 }
             };
             gridView_TBR.OptionsView.ColumnAutoWidth = false;
+            
             if (_isInitiatedTBR == false)
             {
                 gridView_TBR.OptionsView.ShowFooter = true;
                 gridView_TBR.OptionsMenu.EnableFooterMenu = false;
 
-                foreach (var key in new List<String> {"Sales", "CustomerCount", "TourGroupCount", "TotalCost"})
+                foreach (var key in new List<String> {"CustomerCount", "TourGroupCount", "Sales", "TotalCost", "Profit"})
                 {
                     gridView_TBR.Columns[key].Summary.Add(
                         new GridColumnSummaryItem(SummaryItemType.Sum, key, "Tổng = {0:N0}")

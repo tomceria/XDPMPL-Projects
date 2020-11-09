@@ -33,8 +33,9 @@ namespace TourDuLich_GUI.BUS.Report {
                 }
                 
                 // tính chi phí, số lượng khách của từng đoàn
+                var tourPrice = Tour.GetTourPriceOrPriceRef(tour.ID, startDate);
                 foreach (TourGroup tourGroup in tour.TourGroups) {
-                    report.Sales += tourGroup.PriceGroup;
+                    report.Sales += tourPrice;
                     report.CustomerCount += tourGroup.TourGroupDetails.Count;
                     
                     // chi tiết từng chi phí của từng đoàn
@@ -51,12 +52,14 @@ namespace TourDuLich_GUI.BUS.Report {
                 }
 
                 report.TourGroupCount = tour.TourGroups.Count;
+                report.Profit = report.Sales - report.TotalCost;
 
                 // tính tổng tất cả tour
                 result.Summary.CustomerCount += report.CustomerCount;
+                result.Summary.TourGroupCount += report.TourGroupCount;
                 result.Summary.Sales += report.Sales;
                 result.Summary.TotalCost += report.TotalCost;
-                result.Summary.TourGroupCount += report.TourGroupCount;
+                result.Summary.Profit += report.Profit;
 
                 // thêm report của 1 tour vào danh sách nhiều tour
                 result.ReportOnTours.Add(report);
