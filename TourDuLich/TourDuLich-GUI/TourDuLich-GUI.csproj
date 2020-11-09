@@ -83,8 +83,8 @@
     <Compile Include="BUS\CostTypeBUS.cs" />
     <Compile Include="BUS\CustomerBUS.cs" />
     <Compile Include="BUS\DestinationBUS.cs" />
-    <Compile Include="BUS\Report\StaffActivitiesReport.cs" />
-    <Compile Include="BUS\Report\TourBusinessReport.cs" />
+    <Compile Include="BUS\Report\StaffActivitiesReportBUS.cs" />
+    <Compile Include="BUS\Report\TourBusinessReportBUS.cs" />
     <Compile Include="BUS\StaffBUS.cs" />
     <Compile Include="BUS\TourBUS.cs" />
     <Compile Include="BUS\TourGroupBUS.cs" />
