@@ -16,6 +16,12 @@ namespace TourDuLich_GUI.BUS
 
         public virtual ICollection<TourGroupStaff> TourGroupStaffs { get; set; }
 
+        public Staff() { }
+
+        public Staff(Staff staff) {
+            this.Name = staff.Name;
+        }
+
         public override string ToString()
         {
             return $"{this.Name}";
