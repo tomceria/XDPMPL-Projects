@@ -55,6 +55,7 @@
             this.ListBoxControl_TourGroupDetails = new DevExpress.XtraEditors.ListBoxControl();
             this.GridControl_TourGroupStaffs = new DevExpress.XtraGrid.GridControl();
             this.gridView_TourGroupStaffs = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.TextEdit_TourPrice = new DevExpress.XtraEditors.TextEdit();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlGroup2 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.ItemForTourID = new DevExpress.XtraLayout.LayoutControlItem();
@@ -77,6 +78,7 @@
             this.ItemForName = new DevExpress.XtraLayout.LayoutControlItem();
             this.ItemForDateEnd = new DevExpress.XtraLayout.LayoutControlItem();
             this.ItemForPriceGroup = new DevExpress.XtraLayout.LayoutControlItem();
+            this.ItemForTourPrice = new DevExpress.XtraLayout.LayoutControlItem();
             this.tourGroupCostBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl_TourGroup)).BeginInit();
             this.dataLayoutControl_TourGroup.SuspendLayout();
@@ -97,6 +99,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.ListBoxControl_TourGroupDetails)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GridControl_TourGroupStaffs)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView_TourGroupStaffs)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TextEdit_TourPrice.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForTourID)).BeginInit();
@@ -119,6 +122,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.ItemForName)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForDateEnd)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForPriceGroup)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForTourPrice)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tourGroupCostBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -141,6 +145,7 @@
             this.dataLayoutControl_TourGroup.Controls.Add(this.GridControl_TourGroupCosts);
             this.dataLayoutControl_TourGroup.Controls.Add(this.ListBoxControl_TourGroupDetails);
             this.dataLayoutControl_TourGroup.Controls.Add(this.GridControl_TourGroupStaffs);
+            this.dataLayoutControl_TourGroup.Controls.Add(this.TextEdit_TourPrice);
             this.dataLayoutControl_TourGroup.DataSource = typeof(TourDuLich_GUI.BUS.TourGroup);
             this.dataLayoutControl_TourGroup.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataLayoutControl_TourGroup.Location = new System.Drawing.Point(0, 158);
@@ -152,9 +157,9 @@
             // 
             // Button_DeleteTourGroupCost
             // 
-            this.Button_DeleteTourGroupCost.Location = new System.Drawing.Point(731, 145);
+            this.Button_DeleteTourGroupCost.Location = new System.Drawing.Point(730, 145);
             this.Button_DeleteTourGroupCost.Name = "Button_DeleteTourGroupCost";
-            this.Button_DeleteTourGroupCost.Size = new System.Drawing.Size(43, 22);
+            this.Button_DeleteTourGroupCost.Size = new System.Drawing.Size(44, 22);
             this.Button_DeleteTourGroupCost.StyleController = this.dataLayoutControl_TourGroup;
             this.Button_DeleteTourGroupCost.TabIndex = 21;
             this.Button_DeleteTourGroupCost.Text = "Xoá";
@@ -162,9 +167,9 @@
             // 
             // Button_AddTourGroupCost
             // 
-            this.Button_AddTourGroupCost.Location = new System.Drawing.Point(731, 119);
+            this.Button_AddTourGroupCost.Location = new System.Drawing.Point(730, 119);
             this.Button_AddTourGroupCost.Name = "Button_AddTourGroupCost";
-            this.Button_AddTourGroupCost.Size = new System.Drawing.Size(43, 22);
+            this.Button_AddTourGroupCost.Size = new System.Drawing.Size(44, 22);
             this.Button_AddTourGroupCost.StyleController = this.dataLayoutControl_TourGroup;
             this.Button_AddTourGroupCost.TabIndex = 20;
             this.Button_AddTourGroupCost.Text = "Thêm";
@@ -176,7 +181,7 @@
             this.GridControl_Staffs.MainView = this.gridView_Staffs;
             this.GridControl_Staffs.MenuManager = this.mainRibbonControl;
             this.GridControl_Staffs.Name = "GridControl_Staffs";
-            this.GridControl_Staffs.Size = new System.Drawing.Size(402, 298);
+            this.GridControl_Staffs.Size = new System.Drawing.Size(425, 298);
             this.GridControl_Staffs.TabIndex = 19;
             this.GridControl_Staffs.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView_Staffs});
@@ -239,9 +244,9 @@
             // 
             // Button_DeleteTourStaff
             // 
-            this.Button_DeleteTourStaff.Location = new System.Drawing.Point(430, 145);
+            this.Button_DeleteTourStaff.Location = new System.Drawing.Point(453, 145);
             this.Button_DeleteTourStaff.Name = "Button_DeleteTourStaff";
-            this.Button_DeleteTourStaff.Size = new System.Drawing.Size(41, 22);
+            this.Button_DeleteTourStaff.Size = new System.Drawing.Size(42, 22);
             this.Button_DeleteTourStaff.StyleController = this.dataLayoutControl_TourGroup;
             this.Button_DeleteTourStaff.TabIndex = 18;
             this.Button_DeleteTourStaff.Text = "<";
@@ -249,9 +254,9 @@
             // 
             // Button_AddTourGroupStaff
             // 
-            this.Button_AddTourGroupStaff.Location = new System.Drawing.Point(430, 119);
+            this.Button_AddTourGroupStaff.Location = new System.Drawing.Point(453, 119);
             this.Button_AddTourGroupStaff.Name = "Button_AddTourGroupStaff";
-            this.Button_AddTourGroupStaff.Size = new System.Drawing.Size(41, 22);
+            this.Button_AddTourGroupStaff.Size = new System.Drawing.Size(42, 22);
             this.Button_AddTourGroupStaff.StyleController = this.dataLayoutControl_TourGroup;
             this.Button_AddTourGroupStaff.TabIndex = 17;
             this.Button_AddTourGroupStaff.Text = ">";
@@ -263,7 +268,7 @@
             this.GridControl_Customers.MainView = this.gridView_Customers;
             this.GridControl_Customers.MenuManager = this.mainRibbonControl;
             this.GridControl_Customers.Name = "GridControl_Customers";
-            this.GridControl_Customers.Size = new System.Drawing.Size(499, 298);
+            this.GridControl_Customers.Size = new System.Drawing.Size(520, 298);
             this.GridControl_Customers.TabIndex = 16;
             this.GridControl_Customers.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView_Customers});
@@ -275,9 +280,9 @@
             // 
             // button_DeleteTourGroupDetail
             // 
-            this.button_DeleteTourGroupDetail.Location = new System.Drawing.Point(527, 145);
+            this.button_DeleteTourGroupDetail.Location = new System.Drawing.Point(548, 145);
             this.button_DeleteTourGroupDetail.Name = "button_DeleteTourGroupDetail";
-            this.button_DeleteTourGroupDetail.Size = new System.Drawing.Size(61, 22);
+            this.button_DeleteTourGroupDetail.Size = new System.Drawing.Size(28, 22);
             this.button_DeleteTourGroupDetail.StyleController = this.dataLayoutControl_TourGroup;
             this.button_DeleteTourGroupDetail.TabIndex = 15;
             this.button_DeleteTourGroupDetail.Text = "<";
@@ -285,9 +290,9 @@
             // 
             // button_AddTourDetail
             // 
-            this.button_AddTourDetail.Location = new System.Drawing.Point(527, 119);
+            this.button_AddTourDetail.Location = new System.Drawing.Point(548, 119);
             this.button_AddTourDetail.Name = "button_AddTourDetail";
-            this.button_AddTourDetail.Size = new System.Drawing.Size(61, 22);
+            this.button_AddTourDetail.Size = new System.Drawing.Size(28, 22);
             this.button_AddTourDetail.StyleController = this.dataLayoutControl_TourGroup;
             this.button_AddTourDetail.TabIndex = 14;
             this.button_AddTourDetail.Text = ">";
@@ -363,7 +368,7 @@
             this.TextEdit_PriceGroup.Properties.Mask.EditMask = "N0";
             this.TextEdit_PriceGroup.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.TextEdit_PriceGroup.Properties.Mask.UseMaskAsDisplayFormat = true;
-            this.TextEdit_PriceGroup.Size = new System.Drawing.Size(686, 20);
+            this.TextEdit_PriceGroup.Size = new System.Drawing.Size(297, 20);
             this.TextEdit_PriceGroup.StyleController = this.dataLayoutControl_TourGroup;
             this.TextEdit_PriceGroup.TabIndex = 8;
             // 
@@ -374,7 +379,7 @@
             this.GridControl_TourGroupCosts.MainView = this.gridView_TourGroupCosts;
             this.GridControl_TourGroupCosts.MenuManager = this.mainRibbonControl;
             this.GridControl_TourGroupCosts.Name = "GridControl_TourGroupCosts";
-            this.GridControl_TourGroupCosts.Size = new System.Drawing.Size(703, 298);
+            this.GridControl_TourGroupCosts.Size = new System.Drawing.Size(702, 298);
             this.GridControl_TourGroupCosts.TabIndex = 9;
             this.GridControl_TourGroupCosts.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView_TourGroupCosts});
@@ -387,20 +392,20 @@
             // ListBoxControl_TourGroupDetails
             // 
             this.ListBoxControl_TourGroupDetails.DataBindings.Add(new System.Windows.Forms.Binding("DataSource", typeof(TourDuLich_GUI.BUS.TourGroup), "TourGroupDetails", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.ListBoxControl_TourGroupDetails.Location = new System.Drawing.Point(592, 119);
+            this.ListBoxControl_TourGroupDetails.Location = new System.Drawing.Point(580, 119);
             this.ListBoxControl_TourGroupDetails.Name = "ListBoxControl_TourGroupDetails";
-            this.ListBoxControl_TourGroupDetails.Size = new System.Drawing.Size(182, 298);
+            this.ListBoxControl_TourGroupDetails.Size = new System.Drawing.Size(194, 298);
             this.ListBoxControl_TourGroupDetails.StyleController = this.dataLayoutControl_TourGroup;
             this.ListBoxControl_TourGroupDetails.TabIndex = 12;
             // 
             // GridControl_TourGroupStaffs
             // 
             this.GridControl_TourGroupStaffs.DataBindings.Add(new System.Windows.Forms.Binding("DataSource", typeof(TourDuLich_GUI.BUS.TourGroup), "TourGroupStaffs", true));
-            this.GridControl_TourGroupStaffs.Location = new System.Drawing.Point(475, 119);
+            this.GridControl_TourGroupStaffs.Location = new System.Drawing.Point(499, 119);
             this.GridControl_TourGroupStaffs.MainView = this.gridView_TourGroupStaffs;
             this.GridControl_TourGroupStaffs.MenuManager = this.mainRibbonControl;
             this.GridControl_TourGroupStaffs.Name = "GridControl_TourGroupStaffs";
-            this.GridControl_TourGroupStaffs.Size = new System.Drawing.Size(299, 298);
+            this.GridControl_TourGroupStaffs.Size = new System.Drawing.Size(275, 298);
             this.GridControl_TourGroupStaffs.TabIndex = 22;
             this.GridControl_TourGroupStaffs.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView_TourGroupStaffs});
@@ -409,6 +414,22 @@
             // 
             this.gridView_TourGroupStaffs.GridControl = this.GridControl_TourGroupStaffs;
             this.gridView_TourGroupStaffs.Name = "gridView_TourGroupStaffs";
+            // 
+            // TextEdit_TourPrice
+            // 
+            this.TextEdit_TourPrice.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", typeof(TourDuLich_GUI.BUS.TourGroup), "TourPrice", true));
+            this.TextEdit_TourPrice.Location = new System.Drawing.Point(489, 60);
+            this.TextEdit_TourPrice.MenuManager = this.mainRibbonControl;
+            this.TextEdit_TourPrice.Name = "TextEdit_TourPrice";
+            this.TextEdit_TourPrice.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
+            this.TextEdit_TourPrice.Properties.Appearance.Options.UseTextOptions = true;
+            this.TextEdit_TourPrice.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.TextEdit_TourPrice.Properties.Mask.EditMask = "N0";
+            this.TextEdit_TourPrice.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
+            this.TextEdit_TourPrice.Properties.Mask.UseMaskAsDisplayFormat = true;
+            this.TextEdit_TourPrice.Size = new System.Drawing.Size(297, 20);
+            this.TextEdit_TourPrice.StyleController = this.dataLayoutControl_TourGroup;
+            this.TextEdit_TourPrice.TabIndex = 23;
             // 
             // layoutControlGroup1
             // 
@@ -430,7 +451,8 @@
             this.tabbedControlGroup1,
             this.ItemForName,
             this.ItemForDateEnd,
-            this.ItemForPriceGroup});
+            this.ItemForPriceGroup,
+            this.ItemForTourPrice});
             this.layoutControlGroup2.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup2.Name = "autoGeneratedGroup0";
             this.layoutControlGroup2.Size = new System.Drawing.Size(778, 421);
@@ -480,9 +502,9 @@
             // ItemForTourGroupDetails
             // 
             this.ItemForTourGroupDetails.Control = this.ListBoxControl_TourGroupDetails;
-            this.ItemForTourGroupDetails.Location = new System.Drawing.Point(568, 0);
+            this.ItemForTourGroupDetails.Location = new System.Drawing.Point(556, 0);
             this.ItemForTourGroupDetails.Name = "ItemForTourGroupDetails";
-            this.ItemForTourGroupDetails.Size = new System.Drawing.Size(186, 302);
+            this.ItemForTourGroupDetails.Size = new System.Drawing.Size(198, 302);
             this.ItemForTourGroupDetails.StartNewLine = true;
             this.ItemForTourGroupDetails.Text = "Tour Group Details";
             this.ItemForTourGroupDetails.TextSize = new System.Drawing.Size(0, 0);
@@ -491,18 +513,18 @@
             // layoutControlItem1
             // 
             this.layoutControlItem1.Control = this.button_AddTourDetail;
-            this.layoutControlItem1.Location = new System.Drawing.Point(503, 0);
+            this.layoutControlItem1.Location = new System.Drawing.Point(524, 0);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(65, 26);
+            this.layoutControlItem1.Size = new System.Drawing.Size(32, 26);
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
             // layoutControlItem2
             // 
             this.layoutControlItem2.Control = this.button_DeleteTourGroupDetail;
-            this.layoutControlItem2.Location = new System.Drawing.Point(503, 26);
+            this.layoutControlItem2.Location = new System.Drawing.Point(524, 26);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(65, 276);
+            this.layoutControlItem2.Size = new System.Drawing.Size(32, 276);
             this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem2.TextVisible = false;
             // 
@@ -511,7 +533,7 @@
             this.layoutControlItem3.Control = this.GridControl_Customers;
             this.layoutControlItem3.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(503, 302);
+            this.layoutControlItem3.Size = new System.Drawing.Size(524, 302);
             this.layoutControlItem3.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem3.TextVisible = false;
             // 
@@ -531,9 +553,9 @@
             // ItemForTourGroupStaffs
             // 
             this.ItemForTourGroupStaffs.Control = this.GridControl_TourGroupStaffs;
-            this.ItemForTourGroupStaffs.Location = new System.Drawing.Point(451, 0);
+            this.ItemForTourGroupStaffs.Location = new System.Drawing.Point(475, 0);
             this.ItemForTourGroupStaffs.Name = "ItemForTourGroupStaffs";
-            this.ItemForTourGroupStaffs.Size = new System.Drawing.Size(303, 302);
+            this.ItemForTourGroupStaffs.Size = new System.Drawing.Size(279, 302);
             this.ItemForTourGroupStaffs.StartNewLine = true;
             this.ItemForTourGroupStaffs.Text = "Tour Group Staffs";
             this.ItemForTourGroupStaffs.TextSize = new System.Drawing.Size(0, 0);
@@ -542,18 +564,18 @@
             // layoutControlItem4
             // 
             this.layoutControlItem4.Control = this.Button_AddTourGroupStaff;
-            this.layoutControlItem4.Location = new System.Drawing.Point(406, 0);
+            this.layoutControlItem4.Location = new System.Drawing.Point(429, 0);
             this.layoutControlItem4.Name = "layoutControlItem4";
-            this.layoutControlItem4.Size = new System.Drawing.Size(45, 26);
+            this.layoutControlItem4.Size = new System.Drawing.Size(46, 26);
             this.layoutControlItem4.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem4.TextVisible = false;
             // 
             // layoutControlItem5
             // 
             this.layoutControlItem5.Control = this.Button_DeleteTourStaff;
-            this.layoutControlItem5.Location = new System.Drawing.Point(406, 26);
+            this.layoutControlItem5.Location = new System.Drawing.Point(429, 26);
             this.layoutControlItem5.Name = "layoutControlItem5";
-            this.layoutControlItem5.Size = new System.Drawing.Size(45, 276);
+            this.layoutControlItem5.Size = new System.Drawing.Size(46, 276);
             this.layoutControlItem5.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem5.TextVisible = false;
             // 
@@ -562,7 +584,7 @@
             this.layoutControlItem6.Control = this.GridControl_Staffs;
             this.layoutControlItem6.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem6.Name = "layoutControlItem6";
-            this.layoutControlItem6.Size = new System.Drawing.Size(406, 302);
+            this.layoutControlItem6.Size = new System.Drawing.Size(429, 302);
             this.layoutControlItem6.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem6.TextVisible = false;
             // 
@@ -583,7 +605,7 @@
             this.ItemForTourGroupCosts.Control = this.GridControl_TourGroupCosts;
             this.ItemForTourGroupCosts.Location = new System.Drawing.Point(0, 0);
             this.ItemForTourGroupCosts.Name = "ItemForTourGroupCosts";
-            this.ItemForTourGroupCosts.Size = new System.Drawing.Size(707, 302);
+            this.ItemForTourGroupCosts.Size = new System.Drawing.Size(706, 302);
             this.ItemForTourGroupCosts.StartNewLine = true;
             this.ItemForTourGroupCosts.Text = "Tour Group Costs";
             this.ItemForTourGroupCosts.TextSize = new System.Drawing.Size(0, 0);
@@ -592,18 +614,18 @@
             // layoutControlItem7
             // 
             this.layoutControlItem7.Control = this.Button_AddTourGroupCost;
-            this.layoutControlItem7.Location = new System.Drawing.Point(707, 0);
+            this.layoutControlItem7.Location = new System.Drawing.Point(706, 0);
             this.layoutControlItem7.Name = "layoutControlItem7";
-            this.layoutControlItem7.Size = new System.Drawing.Size(47, 26);
+            this.layoutControlItem7.Size = new System.Drawing.Size(48, 26);
             this.layoutControlItem7.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem7.TextVisible = false;
             // 
             // layoutControlItem8
             // 
             this.layoutControlItem8.Control = this.Button_DeleteTourGroupCost;
-            this.layoutControlItem8.Location = new System.Drawing.Point(707, 26);
+            this.layoutControlItem8.Location = new System.Drawing.Point(706, 26);
             this.layoutControlItem8.Name = "layoutControlItem8";
-            this.layoutControlItem8.Size = new System.Drawing.Size(47, 276);
+            this.layoutControlItem8.Size = new System.Drawing.Size(48, 276);
             this.layoutControlItem8.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem8.TextVisible = false;
             // 
@@ -628,8 +650,16 @@
             this.ItemForPriceGroup.Control = this.TextEdit_PriceGroup;
             this.ItemForPriceGroup.Location = new System.Drawing.Point(0, 48);
             this.ItemForPriceGroup.Name = "ItemForPriceGroup";
-            this.ItemForPriceGroup.Size = new System.Drawing.Size(778, 24);
+            this.ItemForPriceGroup.Size = new System.Drawing.Size(389, 24);
             this.ItemForPriceGroup.TextSize = new System.Drawing.Size(85, 13);
+            // 
+            // ItemForTourPrice
+            // 
+            this.ItemForTourPrice.Control = this.TextEdit_TourPrice;
+            this.ItemForTourPrice.Location = new System.Drawing.Point(389, 48);
+            this.ItemForTourPrice.Name = "ItemForTourPrice";
+            this.ItemForTourPrice.Size = new System.Drawing.Size(389, 24);
+            this.ItemForTourPrice.TextSize = new System.Drawing.Size(85, 13);
             // 
             // tourGroupCostBindingSource
             // 
@@ -665,6 +695,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.ListBoxControl_TourGroupDetails)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.GridControl_TourGroupStaffs)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView_TourGroupStaffs)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TextEdit_TourPrice.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForTourID)).EndInit();
@@ -687,6 +718,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.ItemForName)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForDateEnd)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForPriceGroup)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForTourPrice)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tourGroupCostBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -743,5 +775,7 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem8;
         private DevExpress.XtraGrid.GridControl GridControl_TourGroupStaffs;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView_TourGroupStaffs;
+        private DevExpress.XtraEditors.TextEdit TextEdit_TourPrice;
+        private DevExpress.XtraLayout.LayoutControlItem ItemForTourPrice;
     }
 }

@@ -91,7 +91,7 @@ namespace TourDuLich_GUI.GUI
             dataLayoutControl_TourGroup.DataSource = itemBL;
 
             TextEdit_PriceGroup.Enabled = false;
-
+            TextEdit_TourPrice.Enabled = false;
 
             // Tours
             LookUpEdit_TourID.Properties.DataSource = toursBL;
