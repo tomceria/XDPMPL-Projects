@@ -249,6 +249,7 @@ namespace TourDuLich_GUI.GUI
                 }
             }
 
+            MessageBox.Show("Lưu thành công.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
             InitializeDataSources();    // Reload data with updated data
         }
 

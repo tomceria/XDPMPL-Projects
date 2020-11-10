@@ -158,13 +158,8 @@ namespace TourDuLich_GUI.GUI
                     isUpdate = true;
                 }
             }
-        }
-
-        private void handleResetTour() {
-            _item = new Tour();
-
-            /*            InitializeDataSources();
-             */
+            
+            MessageBox.Show("Lưu thành công.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void handleDeleteTour() {

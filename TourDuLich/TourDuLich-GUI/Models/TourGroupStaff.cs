@@ -26,6 +26,8 @@ namespace TourDuLich_GUI.BUS
         public string StaffTask { get; set; }
 
         public virtual TourGroup TourGroup { get; set; }
+        
+        [Display(Name = "Nhân viên")]
         public virtual Staff Staff { get; set; }
 
         public override string ToString()
