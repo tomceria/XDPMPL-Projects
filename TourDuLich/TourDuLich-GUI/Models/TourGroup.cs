@@ -35,6 +35,9 @@ namespace TourDuLich_GUI.BUS
 
         [Required, Display(Name = "Chi phí của Đoàn")]
         public long PriceGroup { get; set; }
+        
+        [Required, Display(Name = "Giá Tour")]
+        public long TourPrice { get; set; }
 
         public virtual Tour Tour { get; set; }
         public virtual ICollection<TourGroupCost> TourGroupCosts { get; set; }

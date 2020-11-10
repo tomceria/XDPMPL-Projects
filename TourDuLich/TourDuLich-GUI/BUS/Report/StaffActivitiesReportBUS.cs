@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using TourDuLich_GUI.DAL;
 
 namespace TourDuLich_GUI.BUS.Report {
@@ -16,7 +17,9 @@ namespace TourDuLich_GUI.BUS.Report {
             foreach (Staff staff in staffs) {
                 StaffActivitiesReport report = new StaffActivitiesReport();
                 report.Staff = staff;
-                report.TourGroupCount = staff.TourGroupStaffs.Count;
+                report.TourGroupCount = staff.TourGroupStaffs
+                    .GroupBy(o => o.ID)
+                    .Count();
 
                 reports.Add(report);
             }

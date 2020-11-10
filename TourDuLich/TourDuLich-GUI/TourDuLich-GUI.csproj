@@ -121,6 +121,10 @@
     <Compile Include="Migrations\202010190138050_TourDB-v1.designer.cs">
       <DependentUpon>202010190138050_TourDB-v1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202011100746252_TourGroup-TourPrice.cs" />
+    <Compile Include="Migrations\202011100746252_TourGroup-TourPrice.designer.cs">
+      <DependentUpon>202011100746252_TourGroup-TourPrice.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\CostType.cs" />
     <Compile Include="Models\Staff.cs" />
@@ -168,6 +172,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202010190138050_TourDB-v1.resx">
       <DependentUpon>202010190138050_TourDB-v1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011100746252_TourGroup-TourPrice.resx">
+      <DependentUpon>202011100746252_TourGroup-TourPrice.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">

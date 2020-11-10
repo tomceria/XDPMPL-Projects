@@ -26,12 +26,14 @@ namespace TourDuLich_GUI.BUS
         public TourGroup Create()
         {
             this.PriceGroup = CalculateTotalTourGroupCost(this);
+            this.TourPrice = GetTourPriceOfTourGroup(this);
             return TourGroupDAL.CreateOne(this);
         }
 
         public void Update()
         {
             this.PriceGroup = CalculateTotalTourGroupCost(this);
+            this.TourPrice = GetTourPriceOfTourGroup(this);
             TourGroupDAL.UpdateOne(this);
         }
 
@@ -54,10 +56,10 @@ namespace TourDuLich_GUI.BUS
         /// <param name="tourGroup">A tour group to add staff</param>
         /// <param name="staff">Staff to be added to tour group staffs</param>
         public void AddTourGroupStaffToTourGroup(Staff staff) {
-            if (this.doesExistTourGroupStaff(staff.ID)) {
-                Console.WriteLine("Staff exist");
-                return;
-            }
+            // if (this.doesExistTourGroupStaff(staff.ID)) {
+            //     Console.WriteLine("Staff exist");
+            //     return;
+            // }
 
             TourGroupStaff tourGroupStaff = TourGroupDAL.CreateTourGroupStaff(this, staff);
 
@@ -90,12 +92,16 @@ namespace TourDuLich_GUI.BUS
             foreach (TourGroupCost cost in tourGroup.TourGroupCosts) {
                 costs += cost.Value;
             }
-            
-            costs *= tourGroup.TourGroupDetails.Count;
 
             return costs;
         }
 
+        public static long GetTourPriceOfTourGroup(TourGroup tourGroup)
+        {
+            long result = Tour.GetTourPriceOrPriceRef(tourGroup.Tour.ID, tourGroup.DateStart);
+            
+            return result;
+        }
 
         private bool doesExistTourGroupDetail(int idCustomer) {
 
