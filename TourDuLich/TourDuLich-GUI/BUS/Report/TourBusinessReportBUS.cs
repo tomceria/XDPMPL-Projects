@@ -32,6 +32,12 @@ namespace TourDuLich_GUI.BUS.Report {
                     report.TourCostPerCostType.Add(costType, 0);
                 }
                 
+                // giới hạn tên hiển thị của tour
+                if (report.Tour.Name.Length > 32)
+                {
+                    report.Tour.Name = $"{report.Tour.Name.Substring(0, 29)}...";
+                }
+                
                 // tính chi phí, số lượng khách của từng đoàn
                 var tourPrice = Tour.GetTourPriceOrPriceRef(tour.ID, startDate);
                 foreach (TourGroup tourGroup in tour.TourGroups) {
