@@ -7,6 +7,11 @@ namespace TourDuLich_GUI.BUS.Report {
         public static List<StaffActivitiesReport> GetStaffActivitiesReport(DateTime startDate, DateTime endDate) {
             List<StaffActivitiesReport> reports = new List<StaffActivitiesReport>();
             List<Staff> staffs = StaffDAL.GetAll(startDate, endDate);
+            
+            // lấy dữ liệu mới nhất từ database
+            TourDAL.Reload();
+            TourGroupDAL.Reload();
+            StaffDAL.Reload();
 
             foreach (Staff staff in staffs) {
                 StaffActivitiesReport report = new StaffActivitiesReport();

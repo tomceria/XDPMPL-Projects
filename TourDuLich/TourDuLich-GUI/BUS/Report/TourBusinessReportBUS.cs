@@ -35,7 +35,7 @@ namespace TourDuLich_GUI.BUS.Report {
                 // tính chi phí, số lượng khách của từng đoàn
                 var tourPrice = Tour.GetTourPriceOrPriceRef(tour.ID, startDate);
                 foreach (TourGroup tourGroup in tour.TourGroups) {
-                    report.Sales += tourPrice;
+                    report.Sales += tourPrice * tourGroup.TourGroupDetails.Count;
                     report.CustomerCount += tourGroup.TourGroupDetails.Count;
                     
                     // chi tiết từng chi phí của từng đoàn

@@ -90,6 +90,8 @@ namespace TourDuLich_GUI.BUS
             foreach (TourGroupCost cost in tourGroup.TourGroupCosts) {
                 costs += cost.Value;
             }
+            
+            costs *= tourGroup.TourGroupDetails.Count;
 
             return costs;
         }

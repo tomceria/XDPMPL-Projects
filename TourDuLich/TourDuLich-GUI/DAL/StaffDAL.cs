@@ -54,5 +54,10 @@ namespace TourDuLich_GUI.DAL {
             _ctx.Staffs.Remove(staff);
             _ctx.SaveChanges();
         }
+        
+        public static void Reload()
+        {
+            _ctx = new TourContext();
+        }
     }
 }
