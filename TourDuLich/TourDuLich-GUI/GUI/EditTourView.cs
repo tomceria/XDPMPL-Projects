@@ -110,6 +110,19 @@ namespace TourDuLich_GUI.GUI
 
             try
             {
+                if (string.IsNullOrWhiteSpace(item.Name))
+                {
+                    throw new ArgumentException("Vui lòng điền Tên Tour", "Tour.Name");
+                }
+                if (string.IsNullOrWhiteSpace(item.Description))
+                {
+                    throw new ArgumentException("Vui lòng điền Đặc điểm", "Tour.Description");
+                }
+                if (item.TourTypeID == 0)
+                {
+                    throw new ArgumentException("Vui lòng chọn Loại Tour", "Tour.Description");
+                }
+
                 for (int i = 0; i < tourPrices.Count - 1; i++) {
                     // Check Valid TimeStart < TimeEnd
                     if (!(tourPrices[i].TimeStart < tourPrices[i].TimeEnd)) {

@@ -110,8 +110,9 @@ namespace TourDuLich_GUI.GUI
             ((XYDiagram) chartSales.Diagram).AxisY.Label.TextPattern = "{V:#,#}";
             seriesTbrSales.DataSource = null;
             seriesTbrSales.DataSource = _tourBusinessReports
-                .OrderByDescending(o => o.Profit)
+                .OrderByDescending(o => o.Sales)
                 .Take(10)
+                .Reverse()
                 .ToList();
 
             // TourCost
