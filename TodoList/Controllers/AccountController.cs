@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TodoList.Services.IService;
 using TodoList.ViewModels;
@@ -37,6 +38,13 @@ namespace TodoList.Controllers
             }
 
             return View();
+        }
+
+        [Authorize]
+        public async Task<IActionResult> Logout()
+        {
+            await _accountService.Logout();
+            return RedirectToAction("Index", "Home");
         }
     }
 }

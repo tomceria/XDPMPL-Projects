@@ -24,14 +24,19 @@ namespace TodoList.Models
     public class TodoTask
     {
         public int Id { get; set; }
+        
         [DisplayName("Tên công việc")]
         public string Name { get; set; }
+        
         [DisplayName("Ngày bắt đầu")]
         public DateTime StartDate { get; set; }
+        
         [DisplayName("Ngày kết thúc")]
         public DateTime EndDate { get; set; }
+        
         [DisplayName("Trạng thái")]
         public TaskStatus Status { get; set; }
+        
         [DisplayName("Quyền truy cập")]
         public TaskAccess Access { get; set; }
 
