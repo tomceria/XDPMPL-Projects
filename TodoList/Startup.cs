@@ -52,8 +52,8 @@ namespace TodoList
 
             /**/ // Registering Business Services
             services.AddScoped<IAccountService, AccountService>();
-            services.AddScoped<ICongViecService, CongViecService>();
-            // services.AddScoped<INhanVienService, NhanVienService>();
+            services.AddScoped<ITodoTaskService, TodoTaskService>();
+            // services.AddScoped<IStaffService, StaffService>();
         }
 
         /**/ // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

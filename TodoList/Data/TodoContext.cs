@@ -11,9 +11,24 @@ namespace TodoList.Data
         {
         }
 
-        public DbSet<NhanVien> DSNhanVien { get; set; }
-        public DbSet<CongViec> DSCongViec { get; set; }
-        public DbSet<NguoiLamChung> DSNguoiLamChung { get; set; }
-        public DbSet<BinhLuan> DSBinhLuan { get; set; }
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+            builder.Entity<TodoTaskPartner>()
+                .HasKey(a => new { a.TodoTaskId, a.StaffId });
+            builder.Entity<TodoTaskPartner>()
+                .HasOne(o => o.TodoTask)
+                .WithMany(o => o.TodoTaskPartners)
+                .OnDelete(DeleteBehavior.NoAction);
+            builder.Entity<TodoTaskPartner>()
+                .HasOne(o => o.Staff)
+                .WithMany(o => o.TodoTaskPartners)
+                .OnDelete(DeleteBehavior.NoAction);
+        }
+
+        public DbSet<Staff> Staffs { get; set; }
+        public DbSet<TodoTask> TodoTasks { get; set; }
+        public DbSet<TodoTaskPartner> TodoTaskPartners { get; set; }
+        public DbSet<Comment> Comments { get; set; }
     }
 }

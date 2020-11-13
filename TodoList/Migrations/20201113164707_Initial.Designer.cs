@@ -10,8 +10,8 @@ using TodoList.Data;
 namespace TodoList.Migrations
 {
     [DbContext(typeof(TodoContext))]
-    [Migration("20201102090156_EntityInit")]
-    partial class EntityInit
+    [Migration("20201113164707_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,33 +20,6 @@ namespace TodoList.Migrations
                 .HasAnnotation("ProductVersion", "3.1.9")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
-
-                    b.Property<string>("NormalizedName")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedName")
-                        .IsUnique()
-                        .HasName("RoleNameIndex")
-                        .HasFilter("[NormalizedName] IS NOT NULL");
-
-                    b.ToTable("AspNetRoles");
-                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
@@ -152,6 +125,33 @@ namespace TodoList.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("TodoList.Models.ApplicationRole", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(256)")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("NormalizedName")
+                        .HasColumnType("nvarchar(256)")
+                        .HasMaxLength(256);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasName("RoleNameIndex")
+                        .HasFilter("[NormalizedName] IS NOT NULL");
+
+                    b.ToTable("AspNetRoles");
+                });
+
             modelBuilder.Entity("TodoList.Models.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
@@ -177,9 +177,6 @@ namespace TodoList.Migrations
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
 
-                    b.Property<int>("NhanVienID")
-                        .HasColumnType("int");
-
                     b.Property<string>("NormalizedEmail")
                         .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
@@ -200,6 +197,9 @@ namespace TodoList.Migrations
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("StaffId")
+                        .HasColumnType("int");
+
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
 
@@ -209,8 +209,6 @@ namespace TodoList.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("NhanVienID");
-
                     b.HasIndex("NormalizedEmail")
                         .HasName("EmailIndex");
 
@@ -219,32 +217,55 @@ namespace TodoList.Migrations
                         .HasName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
+                    b.HasIndex("StaffId");
+
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("TodoList.Models.BinhLuan", b =>
+            modelBuilder.Entity("TodoList.Models.Comment", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CongViecID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("NoiDung")
+                    b.Property<string>("Content")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ID");
+                    b.Property<int>("TodoTaskId")
+                        .HasColumnType("int");
 
-                    b.HasIndex("CongViecID");
+                    b.HasKey("Id");
 
-                    b.ToTable("DSBinhLuan");
+                    b.HasIndex("TodoTaskId");
+
+                    b.ToTable("Comments");
                 });
 
-            modelBuilder.Entity("TodoList.Models.CongViec", b =>
+            modelBuilder.Entity("TodoList.Models.Staff", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Level")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Staffs");
+                });
+
+            modelBuilder.Entity("TodoList.Models.TodoTask", b =>
+                {
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -258,7 +279,7 @@ namespace TodoList.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("NhanVienID")
+                    b.Property<int>("StaffId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("StartDate")
@@ -267,52 +288,31 @@ namespace TodoList.Migrations
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
-                    b.HasKey("ID");
+                    b.HasKey("Id");
 
-                    b.HasIndex("NhanVienID");
+                    b.HasIndex("StaffId");
 
-                    b.ToTable("DSCongViec");
+                    b.ToTable("TodoTasks");
                 });
 
-            modelBuilder.Entity("TodoList.Models.NguoiLamChung", b =>
+            modelBuilder.Entity("TodoList.Models.TodoTaskPartner", b =>
                 {
-                    b.Property<int>("NguoiLamChungID")
+                    b.Property<int>("TodoTaskId")
                         .HasColumnType("int");
 
-                    b.Property<int>("CongViecID")
+                    b.Property<int>("StaffId")
                         .HasColumnType("int");
 
-                    b.HasKey("NguoiLamChungID");
+                    b.HasKey("TodoTaskId", "StaffId");
 
-                    b.HasIndex("CongViecID");
+                    b.HasIndex("StaffId");
 
-                    b.ToTable("DSNguoiLamChung");
-                });
-
-            modelBuilder.Entity("TodoList.Models.NhanVien", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("HoTen")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Level")
-                        .HasColumnType("int");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("DSNhanVien");
+                    b.ToTable("TodoTaskPartners");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                    b.HasOne("TodoList.Models.ApplicationRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -339,7 +339,7 @@ namespace TodoList.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                    b.HasOne("TodoList.Models.ApplicationRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -363,43 +363,43 @@ namespace TodoList.Migrations
 
             modelBuilder.Entity("TodoList.Models.ApplicationUser", b =>
                 {
-                    b.HasOne("TodoList.Models.NhanVien", "NhanVien")
+                    b.HasOne("TodoList.Models.Staff", "Staff")
                         .WithMany()
-                        .HasForeignKey("NhanVienID")
+                        .HasForeignKey("StaffId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("TodoList.Models.BinhLuan", b =>
+            modelBuilder.Entity("TodoList.Models.Comment", b =>
                 {
-                    b.HasOne("TodoList.Models.CongViec", "CongViec")
+                    b.HasOne("TodoList.Models.TodoTask", "TodoTask")
                         .WithMany()
-                        .HasForeignKey("CongViecID")
+                        .HasForeignKey("TodoTaskId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("TodoList.Models.CongViec", b =>
+            modelBuilder.Entity("TodoList.Models.TodoTask", b =>
                 {
-                    b.HasOne("TodoList.Models.NhanVien", "NhanVien")
-                        .WithMany("DSCongViec")
-                        .HasForeignKey("NhanVienID")
+                    b.HasOne("TodoList.Models.Staff", "Staff")
+                        .WithMany("TodoTasks")
+                        .HasForeignKey("StaffId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("TodoList.Models.NguoiLamChung", b =>
+            modelBuilder.Entity("TodoList.Models.TodoTaskPartner", b =>
                 {
-                    b.HasOne("TodoList.Models.CongViec", "CongViec")
-                        .WithMany("NguoiLamChung")
-                        .HasForeignKey("CongViecID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                    b.HasOne("TodoList.Models.Staff", "Staff")
+                        .WithMany("TodoTaskPartners")
+                        .HasForeignKey("StaffId")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("TodoList.Models.NhanVien", "NhanVien")
-                        .WithMany()
-                        .HasForeignKey("NguoiLamChungID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                    b.HasOne("TodoList.Models.TodoTask", "TodoTask")
+                        .WithMany("TodoTaskPartners")
+                        .HasForeignKey("TodoTaskId")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 #pragma warning restore 612, 618

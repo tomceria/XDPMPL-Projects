@@ -13,7 +13,7 @@ namespace TodoList.Data
         {
             using var context = new TodoContext(serviceProvider.GetRequiredService<DbContextOptions<TodoContext>>());
 
-            if (context.DSNhanVien.Any())
+            if (context.Staffs.Any())
             {
                 // Data has already been seeded
                 return;
@@ -30,22 +30,22 @@ namespace TodoList.Data
                 context.Roles.Add(role);
             }
 
-            /**/ // Seeding First NhanVien
-            var nhanVien1 = new NhanVien
+            /**/ // Seeding First Staffs
+            var staff1 = new Staff
             {
-                HoTen = "Luu Minh Hoàng",
+                FirstName = "Luu Minh Hoàng",
                 Email = "ceriagame@gmail.com",
-                Level = Level.NhanVien
+                Level = Level.Member
             };
-            var nhanVien2 = new NhanVien
+            var staff2 = new Staff
             {
-                HoTen = "Nguyễn Thế Bós",
+                FirstName = "Nguyễn Thế Bós",
                 Email = "iamtheboss@gmail.com",
-                Level = Level.LanhDao
+                Level = Level.Leader
             };
-            if (!context.DSNhanVien.Any())
+            if (!context.Staffs.Any())
             {
-                context.DSNhanVien.AddRange(nhanVien1, nhanVien2);
+                context.Staffs.AddRange(staff1, staff2);
             }
 
             context.SaveChanges();
@@ -55,7 +55,7 @@ namespace TodoList.Data
             {
                 UserName = "hoangluuminh",
                 NormalizedUserName = "HOANGLUUMINH",
-                NhanVienID = nhanVien1.ID
+                StaffId = staff1.Id
             };
             var password1 = new PasswordHasher<ApplicationUser>();
             var hashed1 = password1.HashPassword(user1, "123456");
@@ -65,7 +65,7 @@ namespace TodoList.Data
             {
                 UserName = "admin",
                 NormalizedUserName = "ADMIN",
-                NhanVienID = nhanVien2.ID
+                StaffId = staff2.Id
             };
             var password2 = new PasswordHasher<ApplicationUser>();
             var hashed2 = password2.HashPassword(user2, "123123");
@@ -80,12 +80,12 @@ namespace TodoList.Data
                 new IdentityUserRole<string>
                 {
                     UserId = user1.Id,
-                    RoleId = applicationRoles[0].Id // NhanVien
+                    RoleId = applicationRoles[0].Id // Member
                 },
                 new IdentityUserRole<string>
                 {
                     UserId = user2.Id,
-                    RoleId = applicationRoles[1].Id    // LanhDao
+                    RoleId = applicationRoles[1].Id    // Leader
                 }
             );
         }

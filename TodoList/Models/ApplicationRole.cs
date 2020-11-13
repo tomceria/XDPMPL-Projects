@@ -8,7 +8,7 @@ namespace TodoList.Models
     {
         public static readonly List<string> Roles = new List<string>
         {
-            "NhanVien", "LanhDao"
+            "Member", "Leader"
         };
         
         public ApplicationRole() {

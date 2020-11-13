@@ -21,9 +21,9 @@ namespace TodoList.Models
         IsPrivate
     }
 
-    public class CongViec
+    public class TodoTask
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
         [DisplayName("Tên công việc")]
         public string Name { get; set; }
         [DisplayName("Ngày bắt đầu")]
@@ -36,11 +36,11 @@ namespace TodoList.Models
         public TaskAccess Access { get; set; }
 
         [DisplayName("Nhân viên")]
-        [ForeignKey("NhanVien")]
-        public int NhanVienID { get; set; }
+        [ForeignKey("Staff")]
+        public int StaffId { get; set; }
 
-        public virtual NhanVien NhanVien { get; set; }
-        public virtual ICollection<NguoiLamChung> NguoiLamChung { get; set; }
+        public virtual Staff Staff { get; set; }
+        public virtual ICollection<TodoTaskPartner> TodoTaskPartners { get; set; }
 
     }
 }
