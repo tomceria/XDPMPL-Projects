@@ -197,6 +197,11 @@ namespace TourDuLich_GUI.GUI
 
             try
             {
+                //validate tour group cost
+                foreach(TourGroupCost tourGroupCost in tourGroup.TourGroupCosts)
+                {
+                    if(tourGroupCost.Value <= 0) throw new ArgumentException("Chi phí Đoàn không được nhỏ hơn 0.", "TourGroup.TourGroupCost");
+                }
                 // validate tour group name
                 if (string.IsNullOrEmpty(tourGroup.Name))
                 {

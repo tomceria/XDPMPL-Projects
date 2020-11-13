@@ -110,7 +110,12 @@ namespace TourDuLich_GUI.GUI
 
             try
             {
-                if (string.IsNullOrWhiteSpace(item.Name))
+                if (item.PriceRef < 0)
+                {
+                    throw new ArgumentException("Giá Tour tham khảo không được nhỏ hơn 0", "Tour.PriceRef");
+                }    
+                
+                    if (string.IsNullOrWhiteSpace(item.Name))
                 {
                     throw new ArgumentException("Vui lòng điền Tên Tour", "Tour.Name");
                 }
@@ -124,6 +129,8 @@ namespace TourDuLich_GUI.GUI
                 }
 
                 for (int i = 0; i < tourPrices.Count - 1; i++) {
+                    //Check validate TourPrice
+                    if(tourPrices[i].Value <= 0) throw new ArgumentException("Giá Tour không được nhỏ hơn 0", "Tour.Name");
                     // Check Valid TimeStart < TimeEnd
                     if (!(tourPrices[i].TimeStart < tourPrices[i].TimeEnd)) {
                         throw new ArgumentException("Khoảng thời gian không hợp lệ (Ngày bắt đầu phải trước Ngày kết thúc)");
