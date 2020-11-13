@@ -5,11 +5,11 @@ using TodoList.Models;
 
 namespace TodoList.Controllers
 {
-    public class NhanVienController : Controller
+    public class StaffController : Controller
     {
         private readonly TodoContext _context;
 
-        public NhanVienController(TodoContext context)
+        public StaffController(TodoContext context)
         {
             _context = context;
         }

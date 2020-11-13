@@ -1,7 +1,7 @@
 @using TodoList.Common.Utilities
-@model IEnumerable<CongViec>
+@model IEnumerable<TodoTask>
 @{
-    ViewData["Title"] = "The CongViec List";
+    ViewData["Title"] = "Task List";
 }
 
 <h2>Danh sách Công việc</h2>
@@ -13,7 +13,7 @@
 
 <table>
     <tr>
-        <th>@Html.DisplayNameFor(model => model.NhanVienID)</th>
+        <th>@Html.DisplayNameFor(model => model.StaffId)</th>
         <th>@Html.DisplayNameFor(model => model.Name)</th>
         <th>@Html.DisplayNameFor(model => model.StartDate)</th>
         <th>@Html.DisplayNameFor(model => model.EndDate)</th>
@@ -24,14 +24,14 @@
     @foreach (var item in Model)
     {
         <tr>
-            <td>@Html.DisplayFor(model => item.NhanVien.HoTen)</td>
+            <td>@Html.DisplayFor(model => item.Staff.FirstName)</td>
             <td>@Html.DisplayFor(model => item.Name)</td>
             <td>@Html.DisplayFor(model => item.StartDate)</td>
             <td>@Html.DisplayFor(model => item.EndDate)</td>
             <td>@Html.DisplayFor(model => item.Status)</td>
             <td>@Html.DisplayFor(model => item.Access)</td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.ID">Chỉnh sửa</a>
+                <a asp-action="Edit" asp-route-id="@item.Id">Chỉnh sửa</a>
             </td>
         </tr>
     }

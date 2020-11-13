@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace TodoList.Views.CongViec
+namespace TodoList.Views.TodoTask
 {
     public class Index : PageModel
     {
