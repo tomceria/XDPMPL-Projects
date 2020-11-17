@@ -29,6 +29,7 @@ namespace TourDuLich_GUI.GUI
         {
             InitializeComponent();
             _item = new Tour();
+            ConfigureControls();
             InitializeDataSources();
         }
 
@@ -37,7 +38,12 @@ namespace TourDuLich_GUI.GUI
             InitializeComponent();
             _item = tour;
             isUpdate = true;
+            ConfigureControls();
             InitializeDataSources();
+        }
+
+        private void ConfigureControls() {
+            bbiDelete.Enabled = isUpdate;
         }
 
         private void InitializeDataSources() {
@@ -110,12 +116,7 @@ namespace TourDuLich_GUI.GUI
 
             try
             {
-                if (item.PriceRef < 0)
-                {
-                    throw new ArgumentException("Giá Tour tham khảo không được nhỏ hơn 0", "Tour.PriceRef");
-                }    
-                
-                    if (string.IsNullOrWhiteSpace(item.Name))
+                if (string.IsNullOrWhiteSpace(item.Name))
                 {
                     throw new ArgumentException("Vui lòng điền Tên Tour", "Tour.Name");
                 }
@@ -127,8 +128,12 @@ namespace TourDuLich_GUI.GUI
                 {
                     throw new ArgumentException("Vui lòng chọn Loại Tour", "Tour.Description");
                 }
+                if (item.PriceRef <= 0)
+                {
+                    throw new ArgumentException("Giá Tour tham khảo không được nhỏ hơn 0", "Tour.PriceRef");
+                }    
 
-                for (int i = 0; i < tourPrices.Count - 1; i++) {
+                for (int i = 0; i < tourPrices.Count; i++) {
                     //Check validate TourPrice
                     if(tourPrices[i].Value <= 0) throw new ArgumentException("Giá Tour không được nhỏ hơn 0", "Tour.Name");
                     // Check Valid TimeStart < TimeEnd
@@ -180,6 +185,9 @@ namespace TourDuLich_GUI.GUI
             }
             
             MessageBox.Show("Lưu thành công.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            
+            ConfigureControls();
+            InitializeDataSources();
         }
 
         private void handleDeleteTour() {

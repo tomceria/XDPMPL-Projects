@@ -34,6 +34,7 @@ namespace TourDuLich_GUI.GUI
         {
             InitializeComponent();
             _item = new TourGroup();
+            ConfigureControls();
             InitializeDataSources();
         }
 
@@ -42,9 +43,15 @@ namespace TourDuLich_GUI.GUI
             InitializeComponent();
             _item = tourGroup;
             isUpdate = true;
+            ConfigureControls();
             InitializeDataSources();
         }
 
+        private void ConfigureControls()
+        {
+            bbiDelete.Enabled = isUpdate;
+        }
+        
         private void InitializeDataSources()
         {
             // Data fetch
@@ -255,6 +262,7 @@ namespace TourDuLich_GUI.GUI
             }
 
             MessageBox.Show("Lưu thành công.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            ConfigureControls();
             InitializeDataSources();    // Reload data with updated data
         }
 
