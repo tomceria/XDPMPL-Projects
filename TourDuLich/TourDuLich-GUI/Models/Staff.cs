@@ -20,6 +20,7 @@ namespace TourDuLich_GUI.BUS
 
         public Staff(Staff staff) {
             this.Name = staff.Name;
+            
         }
 
         public override string ToString()

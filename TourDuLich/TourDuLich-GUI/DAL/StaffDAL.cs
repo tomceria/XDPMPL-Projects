@@ -19,8 +19,10 @@ namespace TourDuLich_GUI.DAL {
 
         public static List<Staff> GetAll(DateTime startDate, DateTime endDate) {
             // lọc ra những tour group có ngày khởi hành trong khoảng thời gian tìm kiếm
-            var result = _ctx.Staffs.ToList().ConvertAll(staff => new Staff(staff) {
-                TourGroupStaffs = staff.TourGroupStaffs.Where(tg => tg.TourGroup.DateStart >= startDate && tg.TourGroup.DateStart <= endDate).ToList()
+            var result = _ctx.Staffs.ToList().ConvertAll(staff => {
+                Staff newStaff = new Staff(staff);
+                newStaff.TourGroupStaffs = staff.TourGroupStaffs.Where(tg => tg.TourGroup.DateStart >= startDate && tg.TourGroup.DateStart <= endDate).ToList();
+                return newStaff;
             });
 
             return result;
