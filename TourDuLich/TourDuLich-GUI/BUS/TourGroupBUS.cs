@@ -98,7 +98,7 @@ namespace TourDuLich_GUI.BUS
 
         public static long GetTourPriceOfTourGroup(TourGroup tourGroup)
         {
-            long result = Tour.GetTourPriceOrPriceRef(tourGroup.Tour.ID, tourGroup.DateStart);
+            long result = Tour.GetTourPriceOrPriceRef(tourGroup.TourID, tourGroup.DateStart);
             
             return result;
         }
