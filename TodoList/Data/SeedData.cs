@@ -88,6 +88,8 @@ namespace TodoList.Data
                     RoleId = applicationRoles[1].Id    // Leader
                 }
             );
+            
+            context.SaveChanges();
         }
     }
 }

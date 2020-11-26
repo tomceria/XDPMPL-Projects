@@ -41,7 +41,9 @@ namespace TodoList
             
             /**/ // Registering Identity Service
             services.AddIdentity<ApplicationUser, ApplicationRole>()
-                    .AddEntityFrameworkStores<TodoContext>();
+                .AddRoleManager<RoleManager<ApplicationRole>>()
+                .AddEntityFrameworkStores<TodoContext>()
+                .AddDefaultTokenProviders(); 
             services.ConfigureApplicationCookie(options =>
             {
                 options.AccessDeniedPath = "/Account/AccessDenied";
