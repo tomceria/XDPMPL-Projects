@@ -1,5 +1,5 @@
 @using TodoList.Common.Utilities
-@model IEnumerable<TodoTask>
+@model TodoList.ViewModels.TodoTaskIndexVm
 @using Microsoft.AspNetCore.Authorization
 @inject IAuthorizationService AuthorizationService
 @{
@@ -8,40 +8,68 @@
 
 <h2>Danh sách Công việc</h2>
 
-@{
-    if (User.IsInRole("Leader"))
-    {
-        <h2>I am leader.</h2>
-    }
-}
+<div>
+    <h5>Công việc của tôi</h5>
+    <form asp-action="Create">
+        <input name="name" class="form-control" placeholder="Nhập tên công việc..."/>
+        <input type="submit" value="Tạo mới" class="btn btn-primary"/>
+    </form>
+    <ul class="tasklist">
+        @foreach (var todoTask in Model.CreatedTodoTasks)
+        {
+            <li class="tasklist-item">
+                <p class="tasklist-item--name">
+                    @Html.DisplayFor(model => todoTask.Name)
+                </p>
+                @if (todoTask.Access == TaskAccess.IsPrivate)
+                {
+                    <span class="tasklist-item--private">
+                        Cá nhân
+                    </span>
+                }
+                <span class="tasklist-item--enddate">
+                    @Html.DisplayFor(model => todoTask.EndDate)
+                </span>
+                <a asp-action="Edit" asp-route-id="@todoTask.Id" class="tasklist-item--edit">
+                    Chỉnh sửa
+                </a>
+                @if (todoTask.TodoTaskPartners != null)
+                {
+                    @foreach (var todoTaskPartner in todoTask.TodoTaskPartners)
+                    {
+                        <span class="tasklist-item--partner">
+                            @todoTaskPartner.Staff.FirstName
+                        </span>
+                        <span>,@Html.Raw("&nbsp")</span>
+                    }
+                }
+            </li>
+        }
+    </ul>
+</div>
 
-<form asp-action="Create">
-    <input name="name" class="form-control" placeholder="Nhập tên công việc..."/>
-    <input type="submit" value="Tạo mới" class="btn btn-primary"/>
-</form>
-
-<table>
-    <tr>
-        <th>@Html.DisplayNameFor(model => model.StaffId)</th>
-        <th>@Html.DisplayNameFor(model => model.Name)</th>
-        <th>@Html.DisplayNameFor(model => model.StartDate)</th>
-        <th>@Html.DisplayNameFor(model => model.EndDate)</th>
-        <th>@Html.DisplayNameFor(model => model.Status)</th>
-        <th>@Html.DisplayNameFor(model => model.Access)</th>
-        <th>Hành động</th>
-    </tr>
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>@Html.DisplayFor(model => item.Staff.FirstName)</td>
-            <td>@Html.DisplayFor(model => item.Name)</td>
-            <td>@Html.DisplayFor(model => item.StartDate)</td>
-            <td>@Html.DisplayFor(model => item.EndDate)</td>
-            <td>@Html.DisplayFor(model => item.Status)</td>
-            <td>@Html.DisplayFor(model => item.Access)</td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Chỉnh sửa</a>
-            </td>
-        </tr>
-    }
-</table>
+@* <table> *@
+@*     <tr> *@
+@*         <th>@Html.DisplayNameFor(model => model.StaffId)</th> *@
+@*         <th>@Html.DisplayNameFor(model => model.Name)</th> *@
+@*         <th>@Html.DisplayNameFor(model => model.StartDate)</th> *@
+@*         <th>@Html.DisplayNameFor(model => model.EndDate)</th> *@
+@*         <th>@Html.DisplayNameFor(model => model.Status)</th> *@
+@*         <th>@Html.DisplayNameFor(model => model.Access)</th> *@
+@*         <th>Hành động</th> *@
+@*     </tr> *@
+@*     @foreach (var item in Model) *@
+@*     { *@
+@*         <tr> *@
+@*             <td>@Html.DisplayFor(model => item.Staff.FirstName)</td> *@
+@*             <td>@Html.DisplayFor(model => item.Name)</td> *@
+@*             <td>@Html.DisplayFor(model => item.StartDate)</td> *@
+@*             <td>@Html.DisplayFor(model => item.EndDate)</td> *@
+@*             <td>@Html.DisplayFor(model => item.Status)</td> *@
+@*             <td>@Html.DisplayFor(model => item.Access)</td> *@
+@*             <td> *@
+@*                 <a asp-action="Edit" asp-route-id="@item.Id">Chỉnh sửa</a> *@
+@*             </td> *@
+@*         </tr> *@
+@*     } *@
+@* </table> *@

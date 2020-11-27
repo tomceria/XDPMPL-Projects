@@ -1,4 +1,7 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -22,7 +25,22 @@ namespace TodoList.Controllers
 
         public async Task<IActionResult> Index()
         {
-            return View(await _todoTaskService.GetAllTodoTasks());
+            // TODO: Get 4 different lists, use IEnumerable
+            var result = (await _todoTaskService.GetAllTodoTasks()).ToList();
+            
+            var createdTodoTasks = result;
+            var assignedTodoTasks = result;
+            var associatedTodoTasks = result;
+            var publicTodoTasks = result;
+
+            var viewModel = new TodoTaskIndexVm
+            {
+                CreatedTodoTasks = createdTodoTasks,
+                AssignedTodoTasks = assignedTodoTasks,
+                AssociatedTodoTasks = associatedTodoTasks,
+                PublicTodoTasks = publicTodoTasks
+            };
+            return View(viewModel);
         }
 
         [Authorize(Roles = "Member")]
