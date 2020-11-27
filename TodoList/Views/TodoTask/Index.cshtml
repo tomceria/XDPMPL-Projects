@@ -8,23 +8,27 @@
 
 <h2>Danh sách Công việc</h2>
 
-<div>
-    <h5>Công việc của tôi</h5>
-    <form asp-action="Create">
-        <input name="name" class="form-control" placeholder="Nhập tên công việc..."/>
-        <input type="submit" value="Tạo mới" class="btn btn-primary"/>
+<div class="tasklist">
+    <h5 class="tasklist--title">Công việc của tôi</h5>
+    <form asp-action="Create" class="row row-margin-t">
+        <div class="col">
+            <input name="name" class="form-control" placeholder="Nhập tên công việc..."/>
+        </div>
+        <div class="col-sm-auto">
+            <input type="submit" value="Tạo mới" class="btn btn-primary"/>
+        </div>
     </form>
-    <ul class="tasklist">
+    <ul class="row-margin-t">
         @foreach (var todoTask in Model.CreatedTodoTasks)
         {
-            <li class="tasklist-item">
+            <li class="tasklist-item row-margin-t card">
                 <p class="tasklist-item--name">
                     @Html.DisplayFor(model => todoTask.Name)
                 </p>
                 @if (todoTask.Access == TaskAccess.IsPrivate)
                 {
-                    <span class="tasklist-item--private">
-                        Cá nhân
+                    <span class="tasklist-item--access tasklist-item--access__public">
+                        @Html.DisplayFor(model => todoTask.Access)
                     </span>
                 }
                 <span class="tasklist-item--enddate">
@@ -33,16 +37,7 @@
                 <a asp-action="Edit" asp-route-id="@todoTask.Id" class="tasklist-item--edit">
                     Chỉnh sửa
                 </a>
-                @if (todoTask.TodoTaskPartners != null)
-                {
-                    @foreach (var todoTaskPartner in todoTask.TodoTaskPartners)
-                    {
-                        <span class="tasklist-item--partner">
-                            @todoTaskPartner.Staff.FirstName
-                        </span>
-                        <span>,@Html.Raw("&nbsp")</span>
-                    }
-                }
+                @Html.DisplayFor(model => todoTask.TodoTaskPartners)
             </li>
         }
     </ul>

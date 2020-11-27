@@ -1,0 +1,39 @@
+.card {
+  border-radius: 4px;
+  background-color: $white;
+  box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0,0,0,.12);
+  display: flex;
+  flex-direction: column; 
+}
+
+.tasklist {
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  &-- {
+    &title {
+      
+    }
+  }
+  
+  &- {
+    &item {
+      &--access {
+        &__public {
+          
+        }
+      }
+      
+      &--enddate {
+        
+      }
+
+      &--name {
+
+      }
+    }
+  }
+}

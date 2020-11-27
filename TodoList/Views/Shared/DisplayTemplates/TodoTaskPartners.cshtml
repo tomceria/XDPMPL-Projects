@@ -1,0 +1,12 @@
+@model ICollection<TodoTaskPartner>
+
+@if (Model != null)
+{
+    @foreach (var item in Model)
+    {
+        <span class="tasklist-item--partner">
+            @item.Staff.FirstName
+        </span>
+        <span>,@Html.Raw("&nbsp")</span>
+    }
+}
