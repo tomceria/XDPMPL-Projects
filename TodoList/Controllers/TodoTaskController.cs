@@ -25,7 +25,7 @@ namespace TodoList.Controllers
             return View(await _todoTaskService.GetAllTodoTasks());
         }
 
-        // [Authorize(Roles = "Member")]
+        [Authorize(Roles = "Member")]
         public async Task<IActionResult> Edit(int? id)
         {
             // Get Staff

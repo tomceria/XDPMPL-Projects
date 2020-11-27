@@ -1,10 +1,19 @@
 @using TodoList.Common.Utilities
 @model IEnumerable<TodoTask>
+@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
 @{
     ViewData["Title"] = "Task List";
 }
 
 <h2>Danh sách Công việc</h2>
+
+@{
+    if (User.IsInRole("Leader"))
+    {
+        <h2>I am leader.</h2>
+    }
+}
 
 <form asp-action="Create">
     <input name="name" class="form-control" placeholder="Nhập tên công việc..."/>
