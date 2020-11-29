@@ -7175,7 +7175,10 @@ a.text-dark:hover, a.text-dark:focus {
 
 .tasklist-item {
   display: flex;
-  flex-direction: row; }
+  flex-direction: column; }
+  .tasklist-item > * {
+    display: flex;
+    flex-direction: row; }
   .tasklist-item--access {
     display: inline-block;
     height: auto;

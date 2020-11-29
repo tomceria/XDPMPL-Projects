@@ -26,7 +26,12 @@
   &- {
     &item {
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
+      
+      & > * {
+        display: flex;
+        flex-direction: row;
+      }
       
       &--access {
         display: inline-block;
