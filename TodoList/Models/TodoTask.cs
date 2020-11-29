@@ -17,7 +17,7 @@ namespace TodoList.Models
     {
         [Display(Name = "Công khai")] 
         IsPublic,
-        [Display(Name = "Cá nhân")] 
+        [Display(Name = "Riêng tư")] 
         IsPrivate
     }
 

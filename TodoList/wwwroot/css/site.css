@@ -7165,11 +7165,38 @@ a.text-dark:hover, a.text-dark:focus {
   box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
   display: flex;
   flex-direction: column; }
+  .card__padding {
+    padding: 1rem; }
 
 .tasklist ul {
   list-style-type: none;
   margin: 0;
   padding: 0; }
+
+.tasklist-item {
+  display: flex;
+  flex-direction: row; }
+  .tasklist-item--access {
+    display: inline-block;
+    height: auto;
+    margin: 0 0.5rem 0 0;
+    padding: 0 7px;
+    font-size: 0.75rem;
+    line-height: 1.3125rem;
+    white-space: nowrap;
+    border: 1px solid #d9d9d9;
+    border-radius: 2px; }
+    .tasklist-item--access__private {
+      color: #f5222d;
+      background: #fff1f0;
+      border-color: #ffa39e; }
+    .tasklist-item--access__public {
+      color: #52c41a;
+      background: #f6ffed;
+      border-color: #b7eb8f; }
+  .tasklist-item--name {
+    margin: 0;
+    font-weight: 500; }
 
 /* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */

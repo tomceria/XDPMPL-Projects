@@ -21,13 +21,13 @@
     <ul class="row-margin-t">
         @foreach (var todoTask in Model.CreatedTodoTasks)
         {
-            <li class="tasklist-item row-margin-t card">
-                <p class="tasklist-item--name">
+            <li class="tasklist-item row-margin-t card card__padding">
+                <a class="tasklist-item--name" href="#">
                     @Html.DisplayFor(model => todoTask.Name)
-                </p>
+                </a>
                 @if (todoTask.Access == TaskAccess.IsPrivate)
                 {
-                    <span class="tasklist-item--access tasklist-item--access__public">
+                    <span class="tasklist-item--access tasklist-item--access__private">
                         @Html.DisplayFor(model => todoTask.Access)
                     </span>
                 }
