@@ -1,6 +1,10 @@
 using System.Collections.Generic;
+using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using TodoList.Data;
 using TodoList.Models;
 using TodoList.Services.IService;
 using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
@@ -9,12 +13,14 @@ namespace TodoList.Services
 {
     public class AccountService : IAccountService
     {
+        private readonly TodoContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly RoleManager<ApplicationRole> _roleManager;
 
-        public AccountService(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, RoleManager<ApplicationRole> roleManager)
+        public AccountService(TodoContext context, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, RoleManager<ApplicationRole> roleManager)
         {
+            _context = context;
             _userManager = userManager;
             _signInManager = signInManager;
             _roleManager = roleManager;
@@ -31,6 +37,17 @@ namespace TodoList.Services
             await _signInManager.SignOutAsync();
         }
 
+        public async Task<ApplicationUser> GetCurrentUser(ClaimsPrincipal user)
+        {
+            var userId = _userManager.GetUserId(user);
+            var applicationUser = await _context.Users
+                .Include(o => o.Staff)
+                .Where(o => o.Id == userId)
+                .FirstAsync();
+            
+            return applicationUser;
+        }
+        
         public async Task<IdentityResult> CreateUser(ApplicationUser applicationUser, string password)
         {
             var result = await _userManager.CreateAsync(applicationUser, password);

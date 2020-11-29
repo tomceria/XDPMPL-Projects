@@ -17,10 +17,12 @@ namespace TodoList.Controllers
     public class TodoTaskController : Controller
     {
         private readonly ITodoTaskService _todoTaskService;
+        private readonly IAccountService _accountService;
 
-        public TodoTaskController(ITodoTaskService todoTaskService)
+        public TodoTaskController(ITodoTaskService todoTaskService, IAccountService accountService)
         {
             _todoTaskService = todoTaskService;
+            _accountService = accountService;
         }
 
         public async Task<IActionResult> Index()
@@ -43,7 +45,6 @@ namespace TodoList.Controllers
             return View(viewModel);
         }
 
-        [Authorize(Roles = "Member")]
         public async Task<IActionResult> Edit(int? id)
         {
             // Get Staff
@@ -71,7 +72,9 @@ namespace TodoList.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(string name)
         {
-            var todoTask = await _todoTaskService.CreateTodoTask(name);
+            var user = await _accountService.GetCurrentUser(User);
+            
+            var todoTask = _todoTaskService.CreateTodoTask(name, user.Staff);
             _todoTaskService.AddTodoTask(todoTask);
             await _todoTaskService.Save();
 

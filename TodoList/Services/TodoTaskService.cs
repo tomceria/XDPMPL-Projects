@@ -31,7 +31,7 @@ namespace TodoList.Services
             return todoTask;
         }
 
-        public async Task<TodoTask> CreateTodoTask(string name)
+        public TodoTask CreateTodoTask(string name, Staff staff)
         {
             TodoTask todoTask = new TodoTask
             {
@@ -42,8 +42,6 @@ namespace TodoList.Services
                 Access = TaskAccess.IsPrivate,
             };
             
-            // TODO: Replacing with current user
-            var staff = await _context.Staffs.FirstOrDefaultAsync();
             todoTask.StaffId = staff.Id;
 
             return todoTask;
