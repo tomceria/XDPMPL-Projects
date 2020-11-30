@@ -95,6 +95,11 @@ namespace TodoList.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(string name)
         {
+            if (name == null || name.Trim().Equals(""))
+            {
+                return RedirectToAction("Index");
+            }
+
             var user = await _accountService.GetCurrentUser(User);
 
             var todoTask = _todoTaskService.CreateTodoTask(name, user.Staff);
@@ -135,8 +140,6 @@ namespace TodoList.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete([Bind("Id")] TodoTask todoTask)
         {
-            if (!ModelState.IsValid) return RedirectToAction("Edit", new {id = todoTask.Id});
-
             _todoTaskService.DeleteTodoTask(todoTask);
             await _todoTaskService.Save();
 

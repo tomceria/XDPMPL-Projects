@@ -54,12 +54,6 @@ namespace TodoList.Services
 
         public void AddTodoTask(TodoTask todoTask)
         {
-            /*
-             * Loại bỏ Người đảm nhiệm khỏi danh sách Người làm chung (nếu có)
-             */
-            todoTask.TodoTaskPartners = todoTask.TodoTaskPartners
-                .Where(o => o.StaffId != todoTask.StaffId).ToList();
-            
             _context.Add(todoTask);
         }
 
@@ -69,11 +63,13 @@ namespace TodoList.Services
 
             List<TodoTaskPartner> ogTodoTaskPartners = _context.TodoTaskPartners
                 .Where(o => o.TodoTaskId == todoTask.Id).ToList();
-            List<TodoTaskPartner> todoTaskPartners = todoTaskPartnerIds
-                .Select(todoTaskPartnerId => new TodoTaskPartner
-                {
-                    TodoTaskId = todoTask.Id, StaffId = todoTaskPartnerId
-                }).ToList();
+            List<TodoTaskPartner> todoTaskPartners = todoTaskPartnerIds != null
+                ? todoTaskPartnerIds
+                    .Select(todoTaskPartnerId => new TodoTaskPartner
+                    {
+                        TodoTaskId = todoTask.Id, StaffId = todoTaskPartnerId
+                    }).ToList()
+                : new List<TodoTaskPartner>();
 
             foreach (TodoTaskPartner ogTodoTaskPartner in ogTodoTaskPartners)
             {
@@ -88,6 +84,11 @@ namespace TodoList.Services
 
         public void DeleteTodoTask(TodoTask todoTask)
         {
+            var todoTaskPartners = _context.TodoTaskPartners
+                .Where(o => o.TodoTaskId == todoTask.Id)
+                .ToList();
+            _context.RemoveRange(todoTaskPartners);
+
             _context.Remove(todoTask);
         }
 

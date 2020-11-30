@@ -10,12 +10,12 @@ namespace TodoList.ViewModels
     public class FormResult
     {
         public AlertType Type;
-        public string Error;
+        public string Message;
 
-        public FormResult(AlertType type, string error)
+        public FormResult(AlertType type, string message)
         {
             Type = type;
-            Error = error;
+            Message = message;
         }
     }
 }

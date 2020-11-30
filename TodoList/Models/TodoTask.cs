@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using TodoList.Common.ValidationAttributes;
 
 namespace TodoList.Models
 {
@@ -25,12 +26,14 @@ namespace TodoList.Models
     {
         public int Id { get; set; }
         
+        [Required(ErrorMessage = "Tên công việc bắt buộc phải có.")]
         [DisplayName("Tên công việc")]
         public string Name { get; set; }
         
         [DisplayName("Ngày bắt đầu")]
         public DateTime StartDate { get; set; }
         
+        [AfterDate("StartDate", ErrorMessage = "Phải sau ngày bắt đầu.")]
         [DisplayName("Ngày kết thúc")]
         public DateTime EndDate { get; set; }
         

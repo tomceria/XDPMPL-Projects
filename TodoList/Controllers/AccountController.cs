@@ -26,6 +26,11 @@ namespace TodoList.Controllers
         [HttpPost]
         public async Task<IActionResult> Login([Bind("Username,Password")] AccountLoginVm viewModel)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(viewModel);
+            }
+
             var (username, password) = viewModel;
             SignInResult result = await _accountService.Login(username, password);
 
