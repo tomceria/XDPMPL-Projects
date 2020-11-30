@@ -28,7 +28,10 @@ namespace TodoList.Services
 
         public async Task<TodoTask> GetOneTodoTask(int id)
         {
-            var todoTask = await _context.TodoTasks.FindAsync(id);
+            var todoTask = await _context.TodoTasks
+                .Include(o => o.TodoTaskPartners)
+                .Where(o => o.Id == id)
+                .FirstOrDefaultAsync();
             return todoTask;
         }
 

@@ -67,17 +67,17 @@ namespace TodoList.Controllers
 
             // Constructs ViewModel
             var selectedStaffIds = todoTask.TodoTaskPartners != null
-                ? todoTask.TodoTaskPartners.Select(o => o.StaffId).ToList()
-                : new List<int>();
+                ? todoTask.TodoTaskPartners.Select(o => o.StaffId).ToArray()
+                : new int[]{};
             var viewModel = new TodoTaskEditVm
             {
                 TodoTask = todoTask,
                 StaffSelectList = new SelectList(
                     staffs.ToList(),
                     nameof(Staff.Id),
-                    nameof(Staff.FirstName),
-                    selectedStaffIds
-                )
+                    nameof(Staff.FirstName)
+                ),
+                TodoTaskPartnerIds = selectedStaffIds
             };
 
             return View(viewModel);
