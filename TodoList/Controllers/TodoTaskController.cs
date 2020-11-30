@@ -56,16 +56,24 @@ namespace TodoList.Controllers
                 return NotFound();
             }
 
-            // Get Staffs
-            var staffs = await _staffService.GetAllStaffs();
-
+            /*
+             * Get TodoTask by id
+             */
             var todoTask = await _todoTaskService.GetOneTodoTask((int) id);
             if (todoTask == null)
             {
                 return NotFound();
             }
+            
+            /*
+             * Get Staffs and Exclude TodoTask.Staff out of Staff list
+             */
+            var staffs = await _staffService.GetAllStaffs();
+            staffs = staffs.Where(o => o.Id != todoTask.StaffId);
 
-            // Constructs ViewModel
+            /*
+             * Constructs ViewModel
+             */
             var selectedStaffIds = todoTask.TodoTaskPartners != null
                 ? todoTask.TodoTaskPartners.Select(o => o.StaffId).ToArray()
                 : new int[]{};

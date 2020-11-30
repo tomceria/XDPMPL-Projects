@@ -54,6 +54,12 @@ namespace TodoList.Services
 
         public void AddTodoTask(TodoTask todoTask)
         {
+            /*
+             * Loại bỏ Người đảm nhiệm khỏi danh sách Người làm chung (nếu có)
+             */
+            todoTask.TodoTaskPartners = todoTask.TodoTaskPartners
+                .Where(o => o.StaffId != todoTask.StaffId).ToList();
+            
             _context.Add(todoTask);
         }
 
