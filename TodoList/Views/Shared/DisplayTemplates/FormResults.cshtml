@@ -1,0 +1,29 @@
+@using TodoList.ViewModels
+@model ICollection<TodoList.ViewModels.FormResult>
+
+@{
+    var className = "alert alert-";
+}
+
+@if (Model != null)
+{
+    @foreach (var formResult in Model)
+    {
+        @if (formResult.Type == AlertType.INFO)
+        {
+            className += "primary";
+        }
+        @if (formResult.Type == AlertType.SUCCESS)
+        {
+            className += "success";
+        }
+        @if (formResult.Type == AlertType.DANGER)
+        {
+            className += "danger";
+        }
+
+        <div class="@className" role="alert">
+            @formResult.Error
+        </div>
+    }
+}

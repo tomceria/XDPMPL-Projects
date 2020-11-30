@@ -12,12 +12,13 @@
                 <h5 class="card-title text-center">TodoList Inc.</h5>
                 <hr>
                 <form asp-action="Login">
+                    @Html.DisplayFor(model => model.FormResults, "FormResults")
                     <div class="form-group">
                         <input
                             asp-for="Username"
                             class="form-control"
                             placeholder="@Html.DisplayNameFor(model => model.Username)"/>
-                        <span asp-validation-for="Username" class="text-danger">@Html.Raw(@ViewData["msgErrorLogin"])</span>
+                        <span asp-validation-for="Username" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <input

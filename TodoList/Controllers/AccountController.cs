@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -34,8 +35,11 @@ namespace TodoList.Controllers
             }
             else if (result == SignInResult.Failed)
             {
-                ViewData["msgErrorLogin"] = "Tên tài khoản hoặc mật khẩu không đúng!";
-                return View(); 
+                viewModel.FormResults = new List<FormResult>
+                {
+                    new FormResult(AlertType.DANGER, "Tên tài khoản hoặc mật khẩu không đúng!")
+                };
+                return View(viewModel);
             }
 
             return View();

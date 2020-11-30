@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.ComponentModel;
 
 namespace TodoList.ViewModels
@@ -9,6 +10,8 @@ namespace TodoList.ViewModels
         
         [DisplayName("Mật khẩu")]
         public string Password { get; set; }
+        
+        public List<FormResult> FormResults { get; set; }
 
         public void Deconstruct(out string username, out string password)
         {
