@@ -31,12 +31,16 @@
       & > * {
         display: flex;
         flex-direction: row;
+        
+        & > * {
+          display: inline-flex;
+        }
       }
       
       &--access {
         display: inline-block;
         height: auto;
-        margin: 0 0.5rem 0 0;
+        margin: 0 0.5rem 0 0.5rem;
         padding: 0 7px;
         font-size: 0.75rem;
         line-height: 1.3125rem;

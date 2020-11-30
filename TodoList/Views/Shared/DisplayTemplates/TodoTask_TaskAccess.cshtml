@@ -1,0 +1,18 @@
+@using TodoList.Common.Utilities
+@model TaskAccess
+
+@{
+    var className = "tasklist-item--access tasklist-item--access__";
+    var classModifier = "";
+    if (Model == TaskAccess.IsPrivate)
+    {
+        classModifier = "private";
+    } else
+    {
+        classModifier = "public";
+    }
+}
+
+<span class="@className@classModifier">
+    @Model.GetDisplayName()
+</span>

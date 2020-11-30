@@ -7179,10 +7179,12 @@ a.text-dark:hover, a.text-dark:focus {
   .tasklist-item > * {
     display: flex;
     flex-direction: row; }
+    .tasklist-item > * > * {
+      display: inline-flex; }
   .tasklist-item--access {
     display: inline-block;
     height: auto;
-    margin: 0 0.5rem 0 0;
+    margin: 0 0.5rem 0 0.5rem;
     padding: 0 7px;
     font-size: 0.75rem;
     line-height: 1.3125rem;
