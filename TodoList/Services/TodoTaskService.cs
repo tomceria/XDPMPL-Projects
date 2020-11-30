@@ -23,6 +23,7 @@ namespace TodoList.Services
         {
             return await _context.TodoTasks
                 .Include(o => o.Staff)
+                .Include(o => o.TodoTaskPartners)
                 .ToListAsync();
         }
 

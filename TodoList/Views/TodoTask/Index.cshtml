@@ -40,7 +40,7 @@
                 </div>
                 <div class="row">
                     <div class="col">
-                        @Html.DisplayFor(model => todoTask.TodoTaskPartners)
+                        @Html.DisplayFor(model => todoTask.TodoTaskPartners, "TodoTask_TodoTaskPartners")
                     </div>
                     <div class="col-sm-auto">
                         <a asp-action="Edit" asp-route-id="@todoTask.Id" class="tasklist-item--edit col">

@@ -7200,6 +7200,8 @@ a.text-dark:hover, a.text-dark:focus {
   .tasklist-item--name {
     margin: 0;
     font-weight: 500; }
+  .tasklist-item--partner + .tasklist-item--partner::before {
+    content: ", "; }
 
 /* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
