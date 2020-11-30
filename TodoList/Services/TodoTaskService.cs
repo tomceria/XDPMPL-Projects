@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using TodoList.Data;
@@ -41,7 +42,7 @@ namespace TodoList.Services
                 Status = TaskStatus.InProgress,
                 Access = TaskAccess.IsPrivate,
             };
-            
+
             todoTask.StaffId = staff.Id;
 
             return todoTask;
@@ -52,9 +53,27 @@ namespace TodoList.Services
             _context.Add(todoTask);
         }
 
-        public void UpdateTodoTask(TodoTask todoTask)
+        public void UpdateTodoTask(TodoTask todoTask, int[] todoTaskPartnerIds)
         {
             _context.Entry(todoTask).State = EntityState.Modified;
+
+            List<TodoTaskPartner> ogTodoTaskPartners = _context.TodoTaskPartners
+                .Where(o => o.TodoTaskId == todoTask.Id).ToList();
+            List<TodoTaskPartner> todoTaskPartners = todoTaskPartnerIds
+                .Select(todoTaskPartnerId => new TodoTaskPartner
+                {
+                    TodoTaskId = todoTask.Id, StaffId = todoTaskPartnerId
+                }).ToList();
+
+            foreach (TodoTaskPartner ogTodoTaskPartner in ogTodoTaskPartners)
+            {
+                _context.Entry(ogTodoTaskPartner).State = EntityState.Deleted;
+            }
+
+            foreach (TodoTaskPartner todoTaskPartner in todoTaskPartners)
+            {
+                _context.Entry(todoTaskPartner).State = EntityState.Added;
+            }
         }
 
         public void DeleteTodoTask(TodoTask todoTask)

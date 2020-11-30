@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TodoList.Data;
 using TodoList.Models;
@@ -20,7 +21,8 @@ namespace TodoList.Controllers
         private readonly IStaffService _staffService;
         private readonly IAccountService _accountService;
 
-        public TodoTaskController(ITodoTaskService todoTaskService, IStaffService staffService, IAccountService accountService)
+        public TodoTaskController(ITodoTaskService todoTaskService, IStaffService staffService,
+            IAccountService accountService)
         {
             _todoTaskService = todoTaskService;
             _staffService = staffService;
@@ -31,7 +33,7 @@ namespace TodoList.Controllers
         {
             // TODO: Get 4 different lists, use IEnumerable
             var result = (await _todoTaskService.GetAllTodoTasks()).ToList();
-            
+
             var createdTodoTasks = result;
             var assignedTodoTasks = result;
             var associatedTodoTasks = result;
@@ -49,13 +51,13 @@ namespace TodoList.Controllers
 
         public async Task<IActionResult> Edit(int? id)
         {
-            // Get Staffs
-            var staffs = await _staffService.GetAllStaffs();
-            
             if (id == null)
             {
                 return NotFound();
             }
+
+            // Get Staffs
+            var staffs = await _staffService.GetAllStaffs();
 
             var todoTask = await _todoTaskService.GetOneTodoTask((int) id);
             if (todoTask == null)
@@ -64,10 +66,18 @@ namespace TodoList.Controllers
             }
 
             // Constructs ViewModel
+            var selectedStaffIds = todoTask.TodoTaskPartners != null
+                ? todoTask.TodoTaskPartners.Select(o => o.StaffId).ToList()
+                : new List<int>();
             var viewModel = new TodoTaskEditVm
             {
                 TodoTask = todoTask,
-                Staffs = staffs
+                StaffSelectList = new SelectList(
+                    staffs.ToList(),
+                    nameof(Staff.Id),
+                    nameof(Staff.FirstName),
+                    selectedStaffIds
+                )
             };
 
             return View(viewModel);
@@ -78,7 +88,7 @@ namespace TodoList.Controllers
         public async Task<IActionResult> Create(string name)
         {
             var user = await _accountService.GetCurrentUser(User);
-            
+
             var todoTask = _todoTaskService.CreateTodoTask(name, user.Staff);
             _todoTaskService.AddTodoTask(todoTask);
             await _todoTaskService.Save();
@@ -89,18 +99,25 @@ namespace TodoList.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(
-            [Bind("Id,Name,StartDate,EndDate,Status,Access,StaffId")]
-            TodoTask todoTask
+            [Bind("TodoTask,StaffSelectList,TodoTaskPartnerIds")]
+            TodoTaskEditVm viewModel
         )
         {
+            TodoTask todoTask = viewModel.TodoTask;
+            
             if (!ModelState.IsValid)
             {
                 return View(
-                    new TodoTaskEditVm {TodoTask = todoTask}
+                    new TodoTaskEditVm
+                    {
+                        TodoTask = todoTask,
+                        StaffSelectList = viewModel.StaffSelectList,
+                        TodoTaskPartnerIds = viewModel.TodoTaskPartnerIds
+                    }
                 );
             }
 
-            _todoTaskService.UpdateTodoTask(todoTask);
+            _todoTaskService.UpdateTodoTask(todoTask, viewModel.TodoTaskPartnerIds);
             await _todoTaskService.Save();
 
             return RedirectToAction("Index");

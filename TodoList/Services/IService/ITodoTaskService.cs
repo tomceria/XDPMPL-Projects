@@ -10,7 +10,7 @@ namespace TodoList.Services.IService
         Task<TodoTask> GetOneTodoTask(int id);
         TodoTask CreateTodoTask(string name, Staff staff);
         void AddTodoTask(TodoTask todoTask);
-        void UpdateTodoTask(TodoTask todoTask);
+        void UpdateTodoTask(TodoTask todoTask, int[] todoTaskPartnerIds);
         void DeleteTodoTask(TodoTask todoTask);
         Task Save();
     }

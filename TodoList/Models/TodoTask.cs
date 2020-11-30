@@ -45,7 +45,8 @@ namespace TodoList.Models
         public int StaffId { get; set; }
 
         public virtual Staff Staff { get; set; }
+        
+        [DisplayName("Những người làm chung")]
         public virtual ICollection<TodoTaskPartner> TodoTaskPartners { get; set; }
-
     }
 }
