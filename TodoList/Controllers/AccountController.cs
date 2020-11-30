@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -34,7 +34,8 @@ namespace TodoList.Controllers
             }
             else if (result == SignInResult.Failed)
             {
-                return View(); // TODO: Pass error
+                ViewData["msgErrorLogin"] = "Tên tài khoản hoặc mật khẩu không đúng!";
+                return View(); 
             }
 
             return View();
