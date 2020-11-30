@@ -6,94 +6,56 @@
     ViewData["Title"] = "Task List";
 }
 
-<div class="tasklist row-margin-t">
-    <h5 class="tasklist--title">Công việc của tôi</h5>
-    <form asp-action="Create" class="row row-margin-t">
-        <div class="col">
-            <input name="name" class="form-control" placeholder="Nhập tên công việc..."/>
-        </div>
-        <div class="col-sm-auto">
-            <input type="submit" value="Tạo mới" class="btn btn-primary"/>
-        </div>
-    </form>
-    <ul class="row-margin-t">
-        @foreach (var todoTask in Model.CreatedTodoTasks)
-        {
-            <li class="tasklist-item row-margin-t card card__padding">
-                <div class="row">
-                    <div class="col">
-                        <a class="tasklist-item--name" href="#">
-                            @Html.DisplayFor(model => todoTask.Name)
-                        </a>
-                        @Html.DisplayFor(model => todoTask.Access, "TodoTask_TaskAccess")
-                    </div>
-                    <span class="tasklist-item--enddate col-sm-auto">
-                        @Html.DisplayFor(model => todoTask.EndDate)
-                    </span>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        @Html.DisplayFor(model => todoTask.TodoTaskPartners, "TodoTask_TodoTaskPartners")
-                    </div>
-                    <div class="col-sm-auto">
-                        <a asp-action="Edit" asp-route-id="@todoTask.Id" class="tasklist-item--edit col">
-                            Chỉnh sửa
-                        </a>
-                    </div>
-                </div>
-            </li>
-        }
-    </ul>
-</div>
+<div class="row">
+    <div class="tasklist col-lg-6 col-md-12 mt-3">
+        <h5 class="tasklist--title">Công việc của tôi</h5>
+        <form asp-action="Create" class="row mt-2">
+            <div class="col">
+                <input name="name" class="form-control" placeholder="Nhập tên công việc mới..."/>
+            </div>
+            <div class="col-sm-auto">
+                <input type="submit" value="Tạo mới" class="btn btn-primary"/>
+            </div>
+        </form>
+        <ul class="mt-2">
+            @foreach (var todoTask in Model.CreatedTodoTasks)
+            {
+                @Html.DisplayFor(model => todoTask, "TodoTask__NoLead")
+            }
+        </ul>
+        <hr/>
+    </div>
 
-<div class="tasklist row-margin-t">
-    <h5 class="tasklist--title">Công việc đảm nhiệm</h5>
-    <ul class="row-margin-t">
-        @foreach (var todoTask in Model.AssignedTodoTasks)
-        {
-            <li class="tasklist-item row-margin-t card card__padding">
-                <div class="row">
-                    <div class="col">
-                        <a class="tasklist-item--name" href="#">
-                            @Html.DisplayFor(model => todoTask.Name)
-                        </a>
-                        @Html.DisplayFor(model => todoTask.Access, "TodoTask_TaskAccess")
-                    </div>
-                    <span class="tasklist-item--enddate col-sm-auto">
-                        @Html.DisplayFor(model => todoTask.EndDate)
-                    </span>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        @Html.DisplayFor(model => todoTask.TodoTaskPartners, "TodoTask_TodoTaskPartners")
-                    </div>
-                    <div class="col-sm-auto">
-                        <a asp-action="Edit" asp-route-id="@todoTask.Id" class="tasklist-item--edit col">
-                            Chỉnh sửa
-                        </a>
-                    </div>
-                </div>
-            </li>
-        }
-    </ul>
-</div>
+    <div class="tasklist col-lg-6 col-md-12 mt-3">
+        <h5 class="tasklist--title">Công việc đảm nhiệm</h5>
+        <ul class="mt-2">
+            @foreach (var todoTask in Model.AssignedTodoTasks)
+            {
+                @Html.DisplayFor(model => todoTask)
+            }
+        </ul>
+        <hr/>
+    </div>
 
-<div class="tasklist row-margin-t">
-    <h5 class="tasklist--title">Công việc làm chung</h5>
-    <ul class="row-margin-t">
-        @foreach (var todoTask in Model.AssociatedTodoTasks)
-        {
-            
-        }
-    </ul>
-</div>
+    <div class="tasklist col-lg-6 col-md-12 mt-3">
+        <h5 class="tasklist--title">Công việc làm chung</h5>
+        <ul class="mt-2">
+            @foreach (var todoTask in Model.AssociatedTodoTasks)
+            {
+                @Html.DisplayFor(model => todoTask)
+            }
+        </ul>
+        <hr/>
+    </div>
 
-<div class="tasklist row-margin-t">
-    <h5 class="tasklist--title">Công việc công khai</h5>
-    <ul class="row-margin-t">
-        @foreach (var todoTask in Model.PublicTodoTasks)
-        {
-            
-        }
-    </ul>
+    <div class="tasklist col-lg-6 col-md-12 mt-3">
+        <h5 class="tasklist--title">Công việc công khai</h5>
+        <ul class="mt-2">
+            @foreach (var todoTask in Model.PublicTodoTasks)
+            {
+                @Html.DisplayFor(model => todoTask, "TodoTask__NoAccess")
+            }
+        </ul>
+        <hr/>
+    </div>
 </div>

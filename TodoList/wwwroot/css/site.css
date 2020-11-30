@@ -7156,9 +7156,6 @@ a.text-dark:hover, a.text-dark:focus {
     color: inherit;
     border-color: #dee2e6; } }
 
-.row-margin-t + .row-margin-t {
-  margin-top: 1rem; }
-
 .card {
   border-radius: 4px;
   background-color: #fff;
@@ -7199,11 +7196,23 @@ a.text-dark:hover, a.text-dark:focus {
       color: #52c41a;
       background: #f6ffed;
       border-color: #b7eb8f; }
+  .tasklist-item--edit {
+    flex-direction: column-reverse; }
+    .tasklist-item--edit > * {
+      align-self: flex-end; }
+  .tasklist-item--enddate {
+    display: flex;
+    flex-direction: row-reverse; }
+    @media (max-width: 1200px) {
+      .tasklist-item--enddate {
+        flex-direction: row; } }
   .tasklist-item--name {
     margin: 0;
     font-weight: 500; }
   .tasklist-item--partner + .tasklist-item--partner::before {
     content: ", "; }
+  .tasklist-item--partners {
+    flex-wrap: wrap; }
 
 /* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */

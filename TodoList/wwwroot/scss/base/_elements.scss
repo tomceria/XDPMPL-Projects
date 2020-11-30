@@ -60,9 +60,22 @@
           border-color: #b7eb8f;
         }
       }
+      
+      &--edit {
+        flex-direction: column-reverse;
+        
+        & > * {
+          align-self: flex-end;
+        }
+      }
 
       &--enddate {
+        display: flex;
+        flex-direction: row-reverse;
         
+        @media (max-width: $screen-xl) {
+          flex-direction: row;
+        }
       }
 
       &--name {
@@ -74,6 +87,10 @@
         &+&::before {
           content: ", "
         }
+      }
+      
+      &--partners {
+        flex-wrap: wrap;
       }
     }
   }
