@@ -17,11 +17,13 @@ namespace TodoList.Controllers
     public class TodoTaskController : Controller
     {
         private readonly ITodoTaskService _todoTaskService;
+        private readonly IStaffService _staffService;
         private readonly IAccountService _accountService;
 
-        public TodoTaskController(ITodoTaskService todoTaskService, IAccountService accountService)
+        public TodoTaskController(ITodoTaskService todoTaskService, IStaffService staffService, IAccountService accountService)
         {
             _todoTaskService = todoTaskService;
+            _staffService = staffService;
             _accountService = accountService;
         }
 
@@ -47,7 +49,9 @@ namespace TodoList.Controllers
 
         public async Task<IActionResult> Edit(int? id)
         {
-            // Get Staff
+            // Get Staffs
+            var staffs = await _staffService.GetAllStaffs();
+            
             if (id == null)
             {
                 return NotFound();
@@ -62,7 +66,8 @@ namespace TodoList.Controllers
             // Constructs ViewModel
             var viewModel = new TodoTaskEditVm
             {
-                TodoTask = todoTask
+                TodoTask = todoTask,
+                Staffs = staffs
             };
 
             return View(viewModel);
