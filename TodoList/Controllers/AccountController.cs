@@ -18,6 +18,12 @@ namespace TodoList.Controllers
             _accountService = accountService;
         }
 
+        [Authorize(Roles = "Leader")]
+        public IActionResult Index()
+        {
+            return View();
+        }
+        
         public IActionResult Login()
         {
             return View();
