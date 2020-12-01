@@ -24,6 +24,7 @@ namespace TodoList.Services
             return await _context.TodoTasks
                 .Include(o => o.Staff)
                 .Include(o => o.TodoTaskPartners)
+                .ThenInclude(o => o.Staff)
                 .ToListAsync();
         }
 
@@ -84,11 +85,6 @@ namespace TodoList.Services
 
         public void DeleteTodoTask(TodoTask todoTask)
         {
-            var todoTaskPartners = _context.TodoTaskPartners
-                .Where(o => o.TodoTaskId == todoTask.Id)
-                .ToList();
-            _context.RemoveRange(todoTaskPartners);
-
             _context.Remove(todoTask);
         }
 
