@@ -37,8 +37,8 @@ namespace TodoList.Controllers
 
             var createdTodoTasks = (await _todoTaskService.GetTodoTasks_Created(user.Staff)).ToList();
             var assignedTodoTasks = (await _todoTaskService.GetTodoTasks_Assigned(user.Staff)).ToList();
-            var associatedTodoTasks = result;
-            var publicTodoTasks = result;
+            var associatedTodoTasks = (await _todoTaskService.GetTodoTasks_Associated(user.Staff)).ToList();
+            var publicTodoTasks = (await _todoTaskService.GetTodoTasks_Public()).ToList();
 
             var viewModel = new TodoTaskIndexVm
             {

@@ -107,6 +107,24 @@ namespace TodoList.Services
             return todoTasks;
         }
 
+        public async Task<IEnumerable<TodoTask>> GetTodoTasks_Associated(Staff staff)
+        {
+            var todoTasks = await _context.TodoTasks
+                 .Include(o => o.TodoTaskPartners)
+                 .Where(o => o.Id == staff.Id)
+                 .ToListAsync();
+            return todoTasks;
+        }
+
+        public async Task<IEnumerable<TodoTask>> GetTodoTasks_Public()
+        {
+            String isPublic = "isPublic";
+            var todoTasks = await _context.TodoTasks
+                 .Include(o => o.TodoTaskPartners)
+                 .Where(o => o.Access == TaskAccess.IsPublic)
+                 .ToListAsync();
+            return todoTasks;
+        }
         public void DeleteTodoTask(TodoTask todoTask)
         {
             _context.Remove(todoTask);
