@@ -12,6 +12,8 @@ namespace TodoList.Services.IService
         void AddTodoTask(TodoTask todoTask);
         void UpdateTodoTask(TodoTask todoTask, int[] todoTaskPartnerIds);
         void DeleteTodoTask(TodoTask todoTask);
+        // void GetTodoTasks_Created(Staff staff);
+        // void GetTodoTasks_Assigned(Staff staff);
         Task Save();
     }
 }

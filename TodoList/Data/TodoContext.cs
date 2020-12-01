@@ -24,6 +24,10 @@ namespace TodoList.Data
                 .HasOne(o => o.Staff)
                 .WithMany(o => o.TodoTaskPartners)
                 .OnDelete(DeleteBehavior.NoAction);
+            builder.Entity<TodoTask>()
+                .HasOne(o => o.CreatedBy)
+                .WithMany(o => o.CreatedTodoTasks)
+                .OnDelete(DeleteBehavior.NoAction);
         }
 
         public DbSet<Staff> Staffs { get; set; }

@@ -83,6 +83,24 @@ namespace TodoList.Services
             }
         }
 
+        public async Task<IEnumerable<TodoTask>> GetTodoTasks_Created(Staff staff)
+        {
+            var todoTasks = await _context.TodoTasks
+                .Include(o => o.TodoTaskPartners)
+                .Where(o => o.Id == staff.Id)
+                .ToListAsync();
+            return todoTasks;
+        }
+
+        public async Task<IEnumerable<TodoTask>> GetTodoTasks_Asigned(Staff staff)
+        {
+            var todoTasks = await _context.TodoTasks
+                .Include(o => o.TodoTaskPartners)
+                .Where(o => o.Id == staff.Id)
+                .ToListAsync();
+            return todoTasks;
+        }
+
         public void DeleteTodoTask(TodoTask todoTask)
         {
             _context.Remove(todoTask);

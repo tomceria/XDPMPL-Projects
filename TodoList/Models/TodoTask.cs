@@ -43,11 +43,17 @@ namespace TodoList.Models
         [DisplayName("Quyền truy cập")]
         public TaskAccess Access { get; set; }
 
-        [DisplayName("Nhân viên")]
+        [DisplayName("Nhân viên đảm nhiệm")]
         [ForeignKey("Staff")]
         public int StaffId { get; set; }
 
+        [DisplayName("Người tạo")]
+        [ForeignKey("CreatedBy")]
+        public int CreatedById { get; set; }
+
         public virtual Staff Staff { get; set; }
+
+        public virtual Staff CreatedBy { get; set; }
         
         [DisplayName("Những người làm chung")]
         public virtual ICollection<TodoTaskPartner> TodoTaskPartners { get; set; }

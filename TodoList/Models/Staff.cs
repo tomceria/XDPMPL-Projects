@@ -14,7 +14,11 @@ namespace TodoList.Models
         public string LastName { get; set; }
         public Level Level { get; set; }
 
-        public virtual ICollection<TodoTask> TodoTasks { get; set; }
+        [InverseProperty("Staff")]
+        public virtual ICollection<TodoTask> AssignedTodoTasks { get; set; }
+        
+        [InverseProperty("CreatedBy")]
+        public virtual ICollection<TodoTask> CreatedTodoTasks { get; set; }
         public virtual ICollection<TodoTaskPartner> TodoTaskPartners { get; set; }
         
         [NotMapped]
