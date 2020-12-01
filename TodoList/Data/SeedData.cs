@@ -33,15 +33,15 @@ namespace TodoList.Data
             /**/ // Seeding First Staffs
             var staff1 = new Staff
             {
-                FirstName = "Hoàng",
-                LastName = "Lưu Minh",
-                Level = Level.Member
-            };
-            var staff2 = new Staff
-            {
                 FirstName = "Bós",
                 LastName = "Nguyễn Thế",
                 Level = Level.Leader
+            };
+            var staff2 = new Staff
+            {
+                FirstName = "Hoàng",
+                LastName = "Lưu Minh",
+                Level = Level.Member
             };
             if (!context.Staffs.Any())
             {
@@ -53,26 +53,26 @@ namespace TodoList.Data
             /**/ // Seeding First ApplicationUsers
             var user1 = new ApplicationUser
             {
-                UserName = "hoangluuminh",
-                NormalizedUserName = "HOANGLUUMINH",
-                Email = "ceriagame@gmail.com",
-                NormalizedEmail = "CERIAGAME@GMAIL.COM",
+                UserName = "admin@gmail.com",
+                NormalizedUserName = "ADMIN@GMAIL.COM",
+                Email = "admin@gmail.com",
+                NormalizedEmail = "ADMIN@GMAIL.COM",
                 StaffId = staff1.Id
             };
             var password1 = new PasswordHasher<ApplicationUser>();
-            var hashed1 = password1.HashPassword(user1, "123456");
+            var hashed1 = password1.HashPassword(user1, "123123");
             user1.PasswordHash = hashed1;
             
             var user2 = new ApplicationUser
             {
-                UserName = "admin",
-                NormalizedUserName = "ADMIN",
-                Email = "iamtheboss@gmail.com",
-                NormalizedEmail = "IAMTHEBOSS@GMAIL.COM",
+                UserName = "ceriagame@gmail.com",
+                NormalizedUserName = "CERIAGAME@GMAIL.COM",
+                Email = "ceriagame@gmail.com",
+                NormalizedEmail = "CERIAGAME@GMAIL.COM",
                 StaffId = staff2.Id
             };
             var password2 = new PasswordHasher<ApplicationUser>();
-            var hashed2 = password2.HashPassword(user2, "123123");
+            var hashed2 = password2.HashPassword(user2, "123456");
             user2.PasswordHash = hashed2;
             
             context.Users.AddRange(user1, user2);
@@ -84,12 +84,12 @@ namespace TodoList.Data
                 new IdentityUserRole<string>
                 {
                     UserId = user1.Id,
-                    RoleId = applicationRoles[0].Id // Member
+                    RoleId = applicationRoles[1].Id // Leader
                 },
                 new IdentityUserRole<string>
                 {
                     UserId = user2.Id,
-                    RoleId = applicationRoles[1].Id    // Leader
+                    RoleId = applicationRoles[0].Id    // Member
                 }
             );
             

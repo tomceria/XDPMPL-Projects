@@ -56,5 +56,21 @@ namespace TodoList.Controllers
             await _accountService.Logout();
             return RedirectToAction("Index", "Home");
         }
+
+        [Authorize(Roles = "Leader")]
+        public IActionResult Register()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Register(
+            [Bind("Username,Password,Password2,Staff")]
+            AccountRegisterVm viewModel
+        )
+        {
+            return RedirectToAction("Index", "Home");
+        }
     }
 }
