@@ -8,12 +8,12 @@ namespace TodoList.Services.IService
     {
         Task<IEnumerable<TodoTask>> GetAllTodoTasks();
         Task<TodoTask> GetOneTodoTask(int id);
-        TodoTask CreateTodoTask(string name, Staff staff);
+        TodoTask CreateTodoTask(string name, Staff createdBy, Staff assigned);
         void AddTodoTask(TodoTask todoTask);
         void UpdateTodoTask(TodoTask todoTask, int[] todoTaskPartnerIds);
         void DeleteTodoTask(TodoTask todoTask);
-        // void GetTodoTasks_Created(Staff staff);
-        // void GetTodoTasks_Assigned(Staff staff);
+        Task<IEnumerable<TodoTask>> GetTodoTasks_Created(Staff staff);
+        Task<IEnumerable<TodoTask>> GetTodoTasks_Assigned(Staff staff);
         Task Save();
     }
 }

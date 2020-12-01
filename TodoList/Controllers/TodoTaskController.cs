@@ -33,9 +33,10 @@ namespace TodoList.Controllers
         {
             // TODO: Get 4 different lists, use IEnumerable
             var result = (await _todoTaskService.GetAllTodoTasks()).ToList();
+            var user = await _accountService.GetCurrentUser(User);
 
-            var createdTodoTasks = result;
-            var assignedTodoTasks = result;
+            var createdTodoTasks = (await _todoTaskService.GetTodoTasks_Created(user.Staff)).ToList();
+            var assignedTodoTasks = (await _todoTaskService.GetTodoTasks_Assigned(user.Staff)).ToList();
             var associatedTodoTasks = result;
             var publicTodoTasks = result;
 
@@ -101,8 +102,10 @@ namespace TodoList.Controllers
             }
 
             var user = await _accountService.GetCurrentUser(User);
+            // TODO to be changed 
+            var firstStaff = (await _staffService.GetAllStaffs()).First();
 
-            var todoTask = _todoTaskService.CreateTodoTask(name, user.Staff);
+            var todoTask = _todoTaskService.CreateTodoTask(name, user.Staff, firstStaff);
             _todoTaskService.AddTodoTask(todoTask);
             await _todoTaskService.Save();
 

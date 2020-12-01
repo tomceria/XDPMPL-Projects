@@ -31,13 +31,13 @@ namespace TodoList.Services
         public async Task<TodoTask> GetOneTodoTask(int id)
         {
             var todoTask = await _context.TodoTasks
-                .Include(o => o.TodoTaskPartners)
+                .Include(o => o.TodoTaskPartners).Include(o => o.CreatedBy).Include(o => o.Staff)
                 .Where(o => o.Id == id)
                 .FirstOrDefaultAsync();
             return todoTask;
         }
 
-        public TodoTask CreateTodoTask(string name, Staff staff)
+        public TodoTask CreateTodoTask(string name, Staff createdBy, Staff assigned)
         {
             TodoTask todoTask = new TodoTask
             {
@@ -48,7 +48,8 @@ namespace TodoList.Services
                 Access = TaskAccess.IsPrivate,
             };
 
-            todoTask.StaffId = staff.Id;
+            todoTask.CreatedById = createdBy.Id;
+            todoTask.StaffId = assigned.Id;
 
             return todoTask;
         }
@@ -85,19 +86,24 @@ namespace TodoList.Services
 
         public async Task<IEnumerable<TodoTask>> GetTodoTasks_Created(Staff staff)
         {
-            var todoTasks = await _context.TodoTasks
-                .Include(o => o.TodoTaskPartners)
-                .Where(o => o.Id == staff.Id)
-                .ToListAsync();
+            // var todoTasks = await _context.TodoTasks
+            //     .Include(o => o.TodoTaskPartners)
+            //     .Where(o => o.Id == staff.Id)
+            //     .ToListAsync();
+
+            var todoTasks = (await _context.Staffs
+            .Include(o => o.CreatedTodoTasks)
+            .Where(o => o.Id == staff.Id)
+            .FirstAsync()).CreatedTodoTasks;
             return todoTasks;
         }
 
-        public async Task<IEnumerable<TodoTask>> GetTodoTasks_Asigned(Staff staff)
+        public async Task<IEnumerable<TodoTask>> GetTodoTasks_Assigned(Staff staff)
         {
-            var todoTasks = await _context.TodoTasks
-                .Include(o => o.TodoTaskPartners)
-                .Where(o => o.Id == staff.Id)
-                .ToListAsync();
+            var todoTasks = (await _context.Staffs
+            .Include(o => o.AssignedTodoTasks)
+            .Where(o => o.Id == staff.Id)
+            .FirstAsync()).AssignedTodoTasks;
             return todoTasks;
         }
 
