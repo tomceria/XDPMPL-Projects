@@ -33,14 +33,14 @@ namespace TodoList.Data
             /**/ // Seeding First Staffs
             var staff1 = new Staff
             {
-                FirstName = "Luu Minh Hoàng",
-                Email = "ceriagame@gmail.com",
+                FirstName = "Hoàng",
+                LastName = "Lưu Minh",
                 Level = Level.Member
             };
             var staff2 = new Staff
             {
-                FirstName = "Nguyễn Thế Bós",
-                Email = "iamtheboss@gmail.com",
+                FirstName = "Bós",
+                LastName = "Nguyễn Thế",
                 Level = Level.Leader
             };
             if (!context.Staffs.Any())
@@ -55,6 +55,8 @@ namespace TodoList.Data
             {
                 UserName = "hoangluuminh",
                 NormalizedUserName = "HOANGLUUMINH",
+                Email = "ceriagame@gmail.com",
+                NormalizedEmail = "CERIAGAME@GMAIL.COM",
                 StaffId = staff1.Id
             };
             var password1 = new PasswordHasher<ApplicationUser>();
@@ -65,6 +67,8 @@ namespace TodoList.Data
             {
                 UserName = "admin",
                 NormalizedUserName = "ADMIN",
+                Email = "iamtheboss@gmail.com",
+                NormalizedEmail = "IAMTHEBOSS@GMAIL.COM",
                 StaffId = staff2.Id
             };
             var password2 = new PasswordHasher<ApplicationUser>();

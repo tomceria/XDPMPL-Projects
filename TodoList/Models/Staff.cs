@@ -11,10 +11,13 @@ namespace TodoList.Models
     {
         public int Id { get; set; }
         public string FirstName { get; set; }
-        public string Email { get; set; }
+        public string LastName { get; set; }
         public Level Level { get; set; }
 
         public virtual ICollection<TodoTask> TodoTasks { get; set; }
         public virtual ICollection<TodoTaskPartner> TodoTaskPartners { get; set; }
+        
+        [NotMapped]
+        public string FullName => $"{FirstName} {LastName}"; 
     }
 }

@@ -19,7 +19,7 @@ namespace TodoList.Data
             builder.Entity<TodoTaskPartner>()
                 .HasOne(o => o.TodoTask)
                 .WithMany(o => o.TodoTaskPartners)
-                .OnDelete(DeleteBehavior.NoAction);
+                .OnDelete(DeleteBehavior.Cascade);
             builder.Entity<TodoTaskPartner>()
                 .HasOne(o => o.Staff)
                 .WithMany(o => o.TodoTaskPartners)
