@@ -7,7 +7,7 @@ namespace TodoList.ViewModels
     public class AccountLoginVm
     {
         [Required(ErrorMessage = "Tên đăng nhập không được để trống.")]
-        [DisplayName("Tên đăng nhập")]
+        [DisplayName("Email")]
         public string Username { get; set; }
         
         [Required(ErrorMessage = "Mật khẩu không được để trống.")]

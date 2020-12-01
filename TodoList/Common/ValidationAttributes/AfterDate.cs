@@ -6,12 +6,12 @@ namespace TodoList.Common.ValidationAttributes
 {
     public class AfterDate : ValidationAttribute
     {
+        public String DateProperty { get; set; }
+        
         public AfterDate(String dateProperty)
         {
             DateProperty = dateProperty;
         }
-
-        public String DateProperty { get; set; }
 
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {

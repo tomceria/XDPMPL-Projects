@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TodoList.Models
@@ -10,7 +11,11 @@ namespace TodoList.Models
     public class Staff
     {
         public int Id { get; set; }
+        
+        [DisplayName("Tên")]
         public string FirstName { get; set; }
+        
+        [DisplayName("Họ")]
         public string LastName { get; set; }
         public Level Level { get; set; }
 

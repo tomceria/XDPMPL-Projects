@@ -76,6 +76,11 @@ namespace TodoList.Controllers
             AccountRegisterVm viewModel
         )
         {
+            if (!ModelState.IsValid)
+            {
+                return View(viewModel);
+            }
+            
             return RedirectToAction("Index", "Home");
         }
     }
