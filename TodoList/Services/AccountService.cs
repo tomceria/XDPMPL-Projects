@@ -48,8 +48,10 @@ namespace TodoList.Services
             return applicationUser;
         }
         
-        public async Task<IdentityResult> CreateUser(ApplicationUser applicationUser, string password)
+        public async Task<IdentityResult> CreateUser(string username, string password, Staff staff)
         {
+            var applicationUser = new ApplicationUser();
+            applicationUser.InitUser(username, staff);
             var result = await _userManager.CreateAsync(applicationUser, password);
             return result;
         }
@@ -78,6 +80,11 @@ namespace TodoList.Services
             applicationUser.PasswordHash = newPasswordHash;
             
             return await _userManager.UpdateAsync(applicationUser);
+        }
+        
+        public async Task Save()
+        {
+            await _context.SaveChangesAsync();
         }
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TodoList.Models
@@ -12,9 +13,11 @@ namespace TodoList.Models
     {
         public int Id { get; set; }
         
+        [Required(ErrorMessage = "Tên không được bỏ trống.")]
         [DisplayName("Tên")]
         public string FirstName { get; set; }
         
+        [Required(ErrorMessage = "Họ không được bỏ trống.")]
         [DisplayName("Họ")]
         public string LastName { get; set; }
         public Level Level { get; set; }

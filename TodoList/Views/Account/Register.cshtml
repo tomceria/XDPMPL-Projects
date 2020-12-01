@@ -13,6 +13,7 @@
 <h2>Tài khoản mới</h2>
 
 <form asp-action="Register">
+    @Html.DisplayFor(model => model.FormResults, "FormResults")
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     
     <div class="form-group">
@@ -48,3 +49,8 @@
     
     <input type="submit" value="Gửi" class="btn btn-primary col-1"/>
 </form>
+
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

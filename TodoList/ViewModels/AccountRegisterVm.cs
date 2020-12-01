@@ -13,11 +13,11 @@ namespace TodoList.ViewModels
         [DisplayName("Email")]
         public string Username { get; set; }
         
-        [Required(ErrorMessage = "Mật khẩu không được để trống.")]
+        [Required(ErrorMessage = "Mật khẩu không được bỏ trống.")]
         [DisplayName("Mật khẩu")]
         public string Password { get; set; }
         
-        [Required(ErrorMessage = "Mật khẩu không được để trống.")]
+        [Required(ErrorMessage = "Mật khẩu không được bỏ trống.")]
         [Equals("Password", ErrorMessage = "Mật khẩu phải giống nhau.")]
         [DisplayName("Nhập lại Mật khẩu")]
         public string Password2 { get; set; }
@@ -25,5 +25,12 @@ namespace TodoList.ViewModels
         public Staff Staff { get; set; }
         
         public List<FormResult> FormResults { get; set; }
+
+        public void Deconstruct(out string username, out string password, out Staff staff)
+        {
+            username = Username;
+            password = Password;
+            staff = Staff;
+        }
     }
 }
