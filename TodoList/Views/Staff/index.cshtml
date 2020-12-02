@@ -1,0 +1,19 @@
+﻿@model TodoList.Models.Staff;
+
+
+<div class="container">
+  <h2>Danh sách nhân viên</h2>    
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Họ</th>
+        <th>Tên</th>
+        <th>Chức vụ</th>
+
+      </tr>
+    </thead>
+    <tbody>
+    @Html.DisplayFor(model => model, "Staff_Item");
+    </tbody>
+  </table>
+</div>
