@@ -4,8 +4,7 @@
 @model TodoList.ViewModels.TodoTaskEditVm
 
 @{
-    ViewBag.Title = "Editing " + @Html.ViewData.Model.TodoTask.Name;
-    Layout = "_Layout";
+    ViewData["Title"] = "Chỉnh sửa " + @Html.ViewData.Model.TodoTask.Name;
 }
 
 <h6>
