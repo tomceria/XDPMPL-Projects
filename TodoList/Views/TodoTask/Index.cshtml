@@ -1,6 +1,7 @@
 @using TodoList.Common.Utilities
 @model TodoList.ViewModels.TodoTaskIndexVm
 @using Microsoft.AspNetCore.Authorization
+@using TodoList.ViewModels.Component
 @inject IAuthorizationService AuthorizationService
 @{
     ViewData["Title"] = "Công việc";
@@ -22,7 +23,8 @@
         <ul class="mt-2">
             @foreach (var todoTask in Model.AssignedTodoTasks)
             {
-                @Html.DisplayFor(model => todoTask, "TodoTask__NoLead")
+                var todoTaskVm = new TodoTaskComponentVm(todoTask, Model.EditableTodoTaskIds);
+                @Html.DisplayFor(model => todoTaskVm, "TodoTask")
             }
         </ul>
         <hr/>
@@ -33,7 +35,8 @@
         <ul class="mt-2">
             @foreach (var todoTask in Model.AssociatedTodoTasks)
             {
-                @Html.DisplayFor(model => todoTask)
+                var todoTaskVm = new TodoTaskComponentVm(todoTask, Model.EditableTodoTaskIds);
+                @Html.DisplayFor(model => todoTaskVm, "TodoTask")
             }
         </ul>
         <hr/>
@@ -44,7 +47,8 @@
         <ul class="mt-2">
             @foreach (var todoTask in Model.PublicTodoTasks)
             {
-                @Html.DisplayFor(model => todoTask, "TodoTask__NoAccess")
+                var todoTaskVm = new TodoTaskComponentVm(todoTask, Model.EditableTodoTaskIds);
+                @Html.DisplayFor(model => todoTaskVm, "TodoTask")
             }
         </ul>
         <hr/>

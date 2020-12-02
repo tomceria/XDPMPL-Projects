@@ -12,11 +12,9 @@ namespace TodoList.ViewModels
         public IEnumerable<TodoTask> AssociatedTodoTasks { get; set; }
         public IEnumerable<TodoTask> PublicTodoTasks { get; set; }
         
+        public List<int> EditableTodoTaskIds { get; set; }
+        
         [Required(ErrorMessage = "Tên không được bỏ trống.")]
         public string NewTaskName { get; set; }
-        /**
-         * Leader-only properties
-         */
-        public IEnumerable<Staff> Staffs { get; set; }
     }
 }

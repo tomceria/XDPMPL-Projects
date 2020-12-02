@@ -33,17 +33,37 @@ namespace TodoList.Controllers
         {
             var userStaff = (await _accountService.GetCurrentUser(User)).Staff;
 
+            var allTasks = await _todoTaskService.GetAllTodoTasks();
+
             var createdTodoTasks = await _todoTaskService.GetTodoTasks_Created(userStaff);
             var assignedTodoTasks = await _todoTaskService.GetTodoTasks_Assigned(userStaff);
             var associatedTodoTasks = await _todoTaskService.GetTodoTasks_Associated(userStaff);
             var publicTodoTasks = await _todoTaskService.GetTodoTasks_Public();
+
+            /*
+             * Construct ViewModel
+             */
+            var user = await _accountService.GetCurrentUser(User);
+            List<int> editableTodoTaskIds;
+            if (User.IsInRole("Leader"))
+            {
+                editableTodoTaskIds = allTasks.Select(o => o.Id).ToList();
+            }
+            else
+            {
+                editableTodoTaskIds = allTasks
+                    .Where(o => o.StaffId == user.StaffId || o.CreatedById == user.StaffId)
+                    .Select(o => o.Id)
+                    .ToList();
+            }
 
             var viewModel = new TodoTaskIndexVm
             {
                 CreatedTodoTasks = createdTodoTasks,
                 AssignedTodoTasks = assignedTodoTasks,
                 AssociatedTodoTasks = associatedTodoTasks,
-                PublicTodoTasks = publicTodoTasks
+                PublicTodoTasks = publicTodoTasks,
+                EditableTodoTaskIds = editableTodoTaskIds
             };
             return View(viewModel);
         }
@@ -62,6 +82,20 @@ namespace TodoList.Controllers
             if (todoTask == null)
             {
                 return NotFound();
+            }
+
+            var user = await _accountService.GetCurrentUser(User);
+
+            /*
+             * User must be either creator or assigned to edit Task
+             * User can edit all Tasks if they're a Leader
+             */
+            if (
+                !User.IsInRole("Leader") &&
+                !(user.StaffId == todoTask.StaffId || user.StaffId == todoTask.CreatedById)
+            )
+            {
+                return Forbid();
             }
 
             /*
