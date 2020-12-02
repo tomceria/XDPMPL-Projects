@@ -7,22 +7,23 @@
 
 @if (Model != null)
 {
+    var classModifier = "";
     @foreach (var formResult in Model)
     {
         @if (formResult.Type == AlertType.INFO)
         {
-            className += "primary";
+            classModifier = "primary";
         }
         @if (formResult.Type == AlertType.SUCCESS)
         {
-            className += "success";
+            classModifier = "success";
         }
         @if (formResult.Type == AlertType.DANGER)
         {
-            className += "danger";
+            classModifier = "danger";
         }
 
-        <div class="@className" role="alert">
+        <div class="@className@classModifier" role="alert">
             @formResult.Message
         </div>
     }

@@ -51,26 +51,14 @@ namespace TodoList.Data
             context.SaveChanges();
 
             /**/ // Seeding First ApplicationUsers
-            var user1 = new ApplicationUser
-            {
-                UserName = "admin@gmail.com",
-                NormalizedUserName = "ADMIN@GMAIL.COM",
-                Email = "admin@gmail.com",
-                NormalizedEmail = "ADMIN@GMAIL.COM",
-                StaffId = staff1.Id
-            };
+            var user1 = new ApplicationUser();
+            user1.InitUser("admin@gmail.com", staff1);
             var password1 = new PasswordHasher<ApplicationUser>();
             var hashed1 = password1.HashPassword(user1, "123123");
             user1.PasswordHash = hashed1;
-            
-            var user2 = new ApplicationUser
-            {
-                UserName = "ceriagame@gmail.com",
-                NormalizedUserName = "CERIAGAME@GMAIL.COM",
-                Email = "ceriagame@gmail.com",
-                NormalizedEmail = "CERIAGAME@GMAIL.COM",
-                StaffId = staff2.Id
-            };
+
+            var user2 = new ApplicationUser();
+            user2.InitUser("hoanglm@gmail.com", staff2);
             var password2 = new PasswordHasher<ApplicationUser>();
             var hashed2 = password2.HashPassword(user2, "123456");
             user2.PasswordHash = hashed2;

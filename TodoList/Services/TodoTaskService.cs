@@ -56,7 +56,7 @@ namespace TodoList.Services
 
         public void AddTodoTask(TodoTask todoTask)
         {
-            _context.Add(todoTask);
+            _context.Entry(todoTask).State = EntityState.Added;
         }
 
         public void UpdateTodoTask(TodoTask todoTask, int[] todoTaskPartnerIds)

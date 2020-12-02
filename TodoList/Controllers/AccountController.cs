@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using TodoList.Services.IService;
 using TodoList.ViewModels;
@@ -12,10 +13,12 @@ namespace TodoList.Controllers
     public class AccountController : Controller
     {
         private readonly IAccountService _accountService;
+        private readonly IStaffService _staffService;
 
-        public AccountController(IAccountService accountService)
+        public AccountController(IAccountService accountService, IStaffService staffService)
         {
             _accountService = accountService;
+            _staffService = staffService;
         }
 
         [Authorize(Roles = "Leader")]
@@ -23,7 +26,7 @@ namespace TodoList.Controllers
         {
             return View();
         }
-        
+
         public IActionResult Login()
         {
             return View();
@@ -76,7 +79,41 @@ namespace TodoList.Controllers
             AccountRegisterVm viewModel
         )
         {
-            return RedirectToAction("Index", "Home");
+            if (!ModelState.IsValid)
+            {
+                return View(viewModel);
+            }
+
+            var (username, password, staff) = viewModel;
+
+            /*
+             * Main actions
+             */
+            _staffService.AddStaff(staff);
+            await _staffService.Save();    // Must be saved to have generated ID
+            var result = await _accountService.CreateUser(username, password, staff);
+
+            if (result != IdentityResult.Success)
+            {
+                viewModel.FormResults = new List<FormResult>();
+                foreach (IdentityError error in result.Errors)
+                {
+                    viewModel.FormResults.Add(
+                        new FormResult(AlertType.DANGER, error.Description)
+                    );
+                }
+                
+                /*
+                 * Deleteing newly added Staff if Registering failed
+                 */
+                await _accountService.Save();
+                _staffService.RemoveStaff(staff);
+                await _staffService.Save();
+
+                return View(viewModel);
+            }
+            
+            return RedirectToAction("Index", "Account");
         }
     }
 }

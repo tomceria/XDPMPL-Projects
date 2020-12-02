@@ -21,5 +21,20 @@ namespace TodoList.Services
         {
             return await _context.Staffs.ToListAsync();
         }
+
+        public void AddStaff(Staff staff)
+        {
+            _context.Entry(staff).State = EntityState.Added;
+        }
+
+        public void RemoveStaff(Staff staff)
+        {
+            _context.Remove(staff);
+        }
+
+        public async Task Save()
+        {
+            await _context.SaveChangesAsync();
+        }
     }
 }

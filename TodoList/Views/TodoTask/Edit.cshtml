@@ -4,8 +4,7 @@
 @model TodoList.ViewModels.TodoTaskEditVm
 
 @{
-    ViewBag.Title = "Editing " + @Html.ViewData.Model.TodoTask.Name;
-    Layout = "_Layout";
+    ViewData["Title"] = "Chỉnh sửa " + @Html.ViewData.Model.TodoTask.Name;
 }
 
 <h6>
@@ -71,12 +70,13 @@
         </select>
         <span asp-validation-for="TodoTask.Access" class="text-danger"></span>
     </div>
-    <input type="submit" value="Lưu" class="btn btn-primary"/>
+    
+    <input type="submit" value="Lưu" class="btn btn-primary col-1"/>
 </form>
 
 <form asp-action="Delete">
     <input type="hidden" asp-for="TodoTask.Id"/>
-    <input type="submit" value="Xoá" class="btn btn-danger"/>
+    <input type="submit" value="Xoá" class="btn btn-danger col-1 mt-2"/>
 </form>
 
 

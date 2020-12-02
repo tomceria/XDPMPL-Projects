@@ -13,5 +13,10 @@ namespace TodoList.Controllers
         {
             _context = context;
         }
+
+        public IActionResult Me()
+        {
+            return View();
+        }
     }
 }
