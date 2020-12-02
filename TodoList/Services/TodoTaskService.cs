@@ -143,7 +143,7 @@ namespace TodoList.Services
             var comments =
                await (
                    from comment in _context.Comments
-                   where comment.Id == todoTask.Id
+                   where comment.TodoTaskId == todoTask.Id
                    select comment
                ).ToListAsync();
 
