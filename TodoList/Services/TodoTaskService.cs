@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 using TodoList.Data;
 using TodoList.Models;
 using TodoList.Services.IService;
@@ -21,17 +22,15 @@ namespace TodoList.Services
 
         public async Task<IEnumerable<TodoTask>> GetAllTodoTasks()
         {
-            return await _context.TodoTasks
-                .Include(o => o.Staff)
-                .Include(o => o.TodoTaskPartners)
-                .ThenInclude(o => o.Staff)
-                .ToListAsync();
+            return await TodoTaskListQuery().ToListAsync();
         }
 
         public async Task<TodoTask> GetOneTodoTask(int id)
         {
             var todoTask = await _context.TodoTasks
-                .Include(o => o.TodoTaskPartners).Include(o => o.CreatedBy).Include(o => o.Staff)
+                .Include(o => o.TodoTaskPartners)
+                .Include(o => o.CreatedBy)
+                .Include(o => o.Staff)
                 .Where(o => o.Id == id)
                 .FirstOrDefaultAsync();
             return todoTask;
@@ -88,9 +87,7 @@ namespace TodoList.Services
         {
             var todoTasks =
                 await (
-                    from todoTask in _context.TodoTasks
-                        .Include(o => o.TodoTaskPartners)
-                        .Include(o => o.Staff)
+                    from todoTask in TodoTaskListQuery()
                     where todoTask.CreatedById == staff.Id
                     select todoTask
                 ).ToListAsync();
@@ -102,9 +99,7 @@ namespace TodoList.Services
         {
             var todoTasks =
                 await (
-                    from todoTask in _context.TodoTasks
-                        .Include(o => o.TodoTaskPartners)
-                        .Include(o => o.Staff)
+                    from todoTask in TodoTaskListQuery()
                     where todoTask.StaffId == staff.Id
                     select todoTask
                 ).ToListAsync();
@@ -116,9 +111,7 @@ namespace TodoList.Services
         {
             var todoTasks =
                 await (
-                    from todoTask in _context.TodoTasks
-                        .Include(o => o.TodoTaskPartners)
-                        .Include(o => o.Staff)
+                    from todoTask in TodoTaskListQuery()
                     from todoTaskPartner in _context.TodoTaskPartners
                     where todoTask.Id == todoTaskPartner.TodoTaskId &&
                           todoTaskPartner.StaffId == staff.Id
@@ -132,9 +125,7 @@ namespace TodoList.Services
         {
             var todoTasks =
                 await (
-                    from todoTask in _context.TodoTasks
-                        .Include(o => o.TodoTaskPartners)
-                        .Include(o => o.Staff)
+                    from todoTask in TodoTaskListQuery()
                     where todoTask.Access == TaskAccess.IsPublic
                     select todoTask
                 ).ToListAsync();
@@ -151,5 +142,16 @@ namespace TodoList.Services
         {
             await _context.SaveChangesAsync();
         }
+        
+        /*
+         * PRIVATES
+         */
+        private IIncludableQueryable<TodoTask,Staff> TodoTaskListQuery()
+        {
+            return _context.TodoTasks
+                .Include(o => o.TodoTaskPartners)
+                .ThenInclude(o => o.Staff);
+        }
+
     }
 }
