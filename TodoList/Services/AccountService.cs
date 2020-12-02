@@ -47,7 +47,12 @@ namespace TodoList.Services
             
             return applicationUser;
         }
-        
+
+        public async Task<IEnumerable<ApplicationUser>> GetAllUsers()
+        {
+            return await _context.Users.Include(o => o.Staff).ToListAsync();
+        }
+
         public async Task<IdentityResult> CreateUser(string username, string password, Staff staff)
         {
             var applicationUser = new ApplicationUser();
@@ -86,5 +91,7 @@ namespace TodoList.Services
         {
             await _context.SaveChangesAsync();
         }
+
+        
     }
 }
