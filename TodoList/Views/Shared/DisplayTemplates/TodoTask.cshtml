@@ -12,6 +12,17 @@
             @Html.DisplayFor(model => model.TodoTask.EndDate)
         </span>
     </div>
+    @if (Model.TodoTask.CreatedById != Model.TodoTask.StaffId)
+    {
+        <div class="row">
+            <div class="col">
+                <small>
+                    @Html.Raw("Tạo bởi:&nbsp;")
+                    @Html.DisplayFor(model => model.TodoTask.CreatedBy.FullName)
+                </small>
+            </div>
+        </div>
+    }
     <div class="row">
         <div class="col">
             @Html.Raw("Đảm nhiệm:&nbsp;")

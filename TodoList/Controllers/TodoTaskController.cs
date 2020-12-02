@@ -52,7 +52,7 @@ namespace TodoList.Controllers
             else
             {
                 editableTodoTaskIds = allTasks
-                    .Where(o => o.StaffId == user.StaffId || o.CreatedById == user.StaffId)
+                    .Where(o => o.CreatedById == user.StaffId)
                     .Select(o => o.Id)
                     .ToList();
             }
@@ -87,13 +87,10 @@ namespace TodoList.Controllers
             var user = await _accountService.GetCurrentUser(User);
 
             /*
-             * User must be either creator or assigned to edit Task
+             * User must be the creator to edit Task
              * User can edit all Tasks if they're a Leader
              */
-            if (
-                !User.IsInRole("Leader") &&
-                !(user.StaffId == todoTask.StaffId || user.StaffId == todoTask.CreatedById)
-            )
+            if (!User.IsInRole("Leader") && user.StaffId != todoTask.CreatedById)
             {
                 return Forbid();
             }
@@ -117,6 +114,7 @@ namespace TodoList.Controllers
                     nameof(Staff.Id),
                     nameof(Staff.FullName)
                 ),
+                TodoTaskStaffId = todoTask.StaffId,
                 TodoTaskPartnerIds = selectedStaffIds
             };
 
@@ -146,11 +144,12 @@ namespace TodoList.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(
-            [Bind("TodoTask,StaffSelectList,TodoTaskPartnerIds")]
+            [Bind("TodoTask,TodoTaskStaffId,TodoTaskPartnerIds")]
             TodoTaskEditVm viewModel
         )
         {
             TodoTask todoTask = viewModel.TodoTask;
+            todoTask.StaffId = viewModel.TodoTaskStaffId;
 
             if (!ModelState.IsValid)
             {

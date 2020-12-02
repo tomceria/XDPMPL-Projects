@@ -184,6 +184,7 @@ namespace TodoList.Services
         private IIncludableQueryable<TodoTask,Staff> TodoTaskListQuery()
         {
             return _context.TodoTasks
+                .Include(o => o.Staff)
                 .Include(o => o.TodoTaskPartners)
                 .ThenInclude(o => o.Staff);
         }

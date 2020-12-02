@@ -9,6 +9,7 @@ namespace TodoList.ViewModels
     {
         public TodoTask TodoTask { get; set; }
         public SelectList StaffSelectList { get; set; }
+        public int TodoTaskStaffId { get; set; } // Temporary solution
         public int[] TodoTaskPartnerIds { get; set; }
     }
 }
