@@ -14,6 +14,8 @@ namespace TodoList.Services.IService
         void DeleteTodoTask(TodoTask todoTask);
         Task<IEnumerable<TodoTask>> GetTodoTasks_Created(Staff staff);
         Task<IEnumerable<TodoTask>> GetTodoTasks_Assigned(Staff staff);
+        Task<IEnumerable<TodoTask>> GetTodoTasks_Associated(Staff staff);
+        Task<IEnumerable<TodoTask>> GetTodoTasks_Public();
         Task Save();
     }
 }
