@@ -63,19 +63,18 @@ namespace TodoList.Controllers
             {
                 return NotFound();
             }
-            
+
             /*
              * Get Staffs and Exclude TodoTask.Staff out of Staff list
              */
             var staffs = await _staffService.GetAllStaffs();
-            // staffs = staffs.Where(o => o.Id != todoTask.StaffId);
 
             /*
              * Constructs ViewModel
              */
             var selectedStaffIds = todoTask.TodoTaskPartners != null
                 ? todoTask.TodoTaskPartners.Select(o => o.StaffId).ToArray()
-                : new int[]{};
+                : new int[] { };
             var viewModel = new TodoTaskEditVm
             {
                 TodoTask = todoTask,
@@ -92,18 +91,18 @@ namespace TodoList.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(string name)
+        public async Task<IActionResult> Create([Bind("NewTaskName")] TodoTaskIndexVm viewModel)
         {
+            var name = viewModel.NewTaskName;
+
             if (name == null || name.Trim().Equals(""))
             {
                 return RedirectToAction("Index");
             }
 
             var user = await _accountService.GetCurrentUser(User);
-            // TODO to be changed 
-            var firstStaff = (await _staffService.GetAllStaffs()).First();
 
-            var todoTask = _todoTaskService.CreateTodoTask(name, user.Staff, firstStaff);
+            var todoTask = _todoTaskService.CreateTodoTask(name, user.Staff, user.Staff);
             _todoTaskService.AddTodoTask(todoTask);
             await _todoTaskService.Save();
 
@@ -118,17 +117,10 @@ namespace TodoList.Controllers
         )
         {
             TodoTask todoTask = viewModel.TodoTask;
-            
+
             if (!ModelState.IsValid)
             {
-                return View(
-                    new TodoTaskEditVm
-                    {
-                        TodoTask = todoTask,
-                        StaffSelectList = viewModel.StaffSelectList,
-                        TodoTaskPartnerIds = viewModel.TodoTaskPartnerIds
-                    }
-                );
+                return View(viewModel);
             }
 
             _todoTaskService.UpdateTodoTask(todoTask, viewModel.TodoTaskPartnerIds);

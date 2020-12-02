@@ -79,7 +79,13 @@ namespace TodoList.Services
 
             foreach (TodoTaskPartner todoTaskPartner in todoTaskPartners)
             {
-                _context.Entry(todoTaskPartner).State = EntityState.Added;
+                /*
+                 * Only add partner if they're not the Assigned staff
+                 */
+                if (todoTaskPartner.StaffId != todoTask.StaffId)
+                {
+                    _context.Entry(todoTaskPartner).State = EntityState.Added;
+                }
             }
         }
 

@@ -6,28 +6,19 @@
     ViewData["Title"] = "Công việc";
 }
 
+<form asp-action="Create" class="row mt-2">
+    <div class="col">
+        <input asp-for="NewTaskName" class="form-control" placeholder="Nhập tên công việc mới..."/>
+        <span asp-validation-for="NewTaskName" class="text-danger"></span>
+    </div>
+    <div class="col-sm-auto">
+        <input type="submit" value="Tạo mới" class="btn btn-primary"/>
+    </div>
+</form>
+
 <div class="row">
     <div class="tasklist col-lg-6 col-md-12 mt-3">
         <h5 class="tasklist--title">Công việc của tôi</h5>
-        <form asp-action="Create" class="row mt-2">
-            <div class="col">
-                <input name="name" class="form-control" placeholder="Nhập tên công việc mới..."/>
-            </div>
-            <div class="col-sm-auto">
-                <input type="submit" value="Tạo mới" class="btn btn-primary"/>
-            </div>
-        </form>
-        <ul class="mt-2">
-            @foreach (var todoTask in Model.CreatedTodoTasks)
-            {
-                @Html.DisplayFor(model => todoTask)
-            }
-        </ul>
-        <hr/>
-    </div>
-
-    <div class="tasklist col-lg-6 col-md-12 mt-3">
-        <h5 class="tasklist--title">Công việc đảm nhiệm</h5>
         <ul class="mt-2">
             @foreach (var todoTask in Model.AssignedTodoTasks)
             {
@@ -59,3 +50,8 @@
         <hr/>
     </div>
 </div>
+
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}
