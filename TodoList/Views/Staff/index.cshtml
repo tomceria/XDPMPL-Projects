@@ -1,19 +1,24 @@
-﻿@model TodoList.Models.Staff;
-
+﻿@model TodoList.ViewModels.AccountIndexVm;
+@{
+    ViewData["Title"] = "Tài khoản";
+}
 
 <div class="container">
-  <h2>Danh sách nhân viên</h2>    
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th>Họ</th>
-        <th>Tên</th>
-        <th>Chức vụ</th>
+    <h2>Danh sách nhân viên</h2>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Họ</th>
+                <th>Tên</th>
+                <th>Chức vụ</th>
 
-      </tr>
-    </thead>
-    <tbody>
-    @Html.DisplayFor(model => model, "Staff_Item");
-    </tbody>
-  </table>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var account in Model.Accounts)
+            {
+                Html.DisplayFor(model => account, "Account_Item");
+            }
+        </tbody>
+    </table>
 </div>

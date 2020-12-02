@@ -5,6 +5,6 @@ namespace TodoList.ViewModels
 {
     public class AccountIndexVm
     {
-        public IEnumerable<Staff> CreatedTodoTasks { get; set; }
+        public IEnumerable<ApplicationUser> Accounts { get; set; }
     }
 }
