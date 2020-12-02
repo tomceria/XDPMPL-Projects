@@ -86,44 +86,62 @@ namespace TodoList.Services
 
         public async Task<IEnumerable<TodoTask>> GetTodoTasks_Created(Staff staff)
         {
-            // var todoTasks = await _context.TodoTasks
-            //     .Include(o => o.TodoTaskPartners)
-            //     .Where(o => o.Id == staff.Id)
-            //     .ToListAsync();
+            var todoTasks =
+                await (
+                    from todoTask in _context.TodoTasks
+                        .Include(o => o.TodoTaskPartners)
+                        .Include(o => o.Staff)
+                    where todoTask.CreatedById == staff.Id
+                    select todoTask
+                ).ToListAsync();
 
-            var todoTasks = (await _context.Staffs
-            .Include(o => o.CreatedTodoTasks)
-            .Where(o => o.Id == staff.Id)
-            .FirstAsync()).CreatedTodoTasks;
             return todoTasks;
         }
 
         public async Task<IEnumerable<TodoTask>> GetTodoTasks_Assigned(Staff staff)
         {
-            var todoTasks = (await _context.Staffs
-            .Include(o => o.AssignedTodoTasks)
-            .Where(o => o.Id == staff.Id)
-            .FirstAsync()).AssignedTodoTasks;
+            var todoTasks =
+                await (
+                    from todoTask in _context.TodoTasks
+                        .Include(o => o.TodoTaskPartners)
+                        .Include(o => o.Staff)
+                    where todoTask.StaffId == staff.Id
+                    select todoTask
+                ).ToListAsync();
+
             return todoTasks;
         }
 
         public async Task<IEnumerable<TodoTask>> GetTodoTasks_Associated(Staff staff)
         {
-            var todoTasks = await _context.TodoTasks
-                 .Include(o => o.TodoTaskPartners)
-                 .Where(o => o.Id == staff.Id)
-                 .ToListAsync();
+            var todoTasks =
+                await (
+                    from todoTask in _context.TodoTasks
+                        .Include(o => o.TodoTaskPartners)
+                        .Include(o => o.Staff)
+                    from todoTaskPartner in _context.TodoTaskPartners
+                    where todoTask.Id == todoTaskPartner.TodoTaskId &&
+                          todoTaskPartner.StaffId == staff.Id
+                    select todoTask
+                ).ToListAsync();
+
             return todoTasks;
         }
 
         public async Task<IEnumerable<TodoTask>> GetTodoTasks_Public()
         {
-            var todoTasks = await _context.TodoTasks
-                 .Include(o => o.TodoTaskPartners)
-                 .Where(o => o.Access == TaskAccess.IsPublic)
-                 .ToListAsync();
+            var todoTasks =
+                await (
+                    from todoTask in _context.TodoTasks
+                        .Include(o => o.TodoTaskPartners)
+                        .Include(o => o.Staff)
+                    where todoTask.Access == TaskAccess.IsPublic
+                    select todoTask
+                ).ToListAsync();
+
             return todoTasks;
         }
+
         public void DeleteTodoTask(TodoTask todoTask)
         {
             _context.Remove(todoTask);
