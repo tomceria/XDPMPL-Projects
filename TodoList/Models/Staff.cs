@@ -29,6 +29,7 @@ namespace TodoList.Models
         public virtual ICollection<TodoTask> CreatedTodoTasks { get; set; }
         public virtual ICollection<TodoTaskPartner> TodoTaskPartners { get; set; }
         
+        public virtual ICollection<Comment> Comments { get; set; }
         [NotMapped]
         public string FullName => $"{FirstName} {LastName}"; 
     }
