@@ -16,6 +16,9 @@ namespace TodoList.Services.IService
         Task<IEnumerable<TodoTask>> GetTodoTasks_Assigned(Staff staff);
         Task<IEnumerable<TodoTask>> GetTodoTasks_Associated(Staff staff);
         Task<IEnumerable<TodoTask>> GetTodoTasks_Public();
+        Task<IEnumerable<Comment>> GetComments(TodoTask todoTask);
+        Comment CreateComment(string content, TodoTask todoTask, Staff staff);
+        void AddComment(Comment comment);
         Task Save();
     }
 }

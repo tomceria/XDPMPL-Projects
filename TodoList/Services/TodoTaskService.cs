@@ -144,6 +144,35 @@ namespace TodoList.Services
             _context.Remove(todoTask);
         }
 
+        public async Task<IEnumerable<Comment>> GetComments(TodoTask todoTask)
+        {
+            var comments =
+               await (
+                   from comment in _context.Comments
+                   where comment.TodoTaskId == todoTask.Id
+                   select comment
+               ).ToListAsync();
+
+            return comments;
+        }
+
+        public Comment CreateComment(string content, TodoTask todoTask, Staff staff)
+        {
+            Comment comment = new Comment
+            {
+                Content = content,
+                TodoTaskId = todoTask.Id,
+                StaffId = staff.Id
+            };
+
+            return comment;
+        }
+
+        public void AddComment(Comment comment)
+        {
+            _context.Entry(comment).State = EntityState.Added;
+        }
+
         public async Task Save()
         {
             await _context.SaveChangesAsync();

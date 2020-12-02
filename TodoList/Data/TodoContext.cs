@@ -28,11 +28,16 @@ namespace TodoList.Data
                 .HasOne(o => o.CreatedBy)
                 .WithMany(o => o.CreatedTodoTasks)
                 .OnDelete(DeleteBehavior.NoAction);
+            builder.Entity<Comment>()
+                .HasOne(o => o.Staff)
+                .WithMany(o => o.Comments)
+                .OnDelete(DeleteBehavior.NoAction);
         }
 
         public DbSet<Staff> Staffs { get; set; }
         public DbSet<TodoTask> TodoTasks { get; set; }
         public DbSet<TodoTaskPartner> TodoTaskPartners { get; set; }
         public DbSet<Comment> Comments { get; set; }
+        public object Comment { get; internal set; }
     }
 }
