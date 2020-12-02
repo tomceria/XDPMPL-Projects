@@ -8,7 +8,7 @@
     }
     @foreach (var item in Model)
     {
-        <span class="tasklist-item--partner">
+        <span class="tasklist-item--partner" data-toggle="tooltip" title="@item.Staff.FullName">
             @item.Staff.FirstName
         </span>
     }

@@ -68,7 +68,7 @@ namespace TodoList.Controllers
              * Get Staffs and Exclude TodoTask.Staff out of Staff list
              */
             var staffs = await _staffService.GetAllStaffs();
-            staffs = staffs.Where(o => o.Id != todoTask.StaffId);
+            // staffs = staffs.Where(o => o.Id != todoTask.StaffId);
 
             /*
              * Constructs ViewModel
@@ -82,7 +82,7 @@ namespace TodoList.Controllers
                 StaffSelectList = new SelectList(
                     staffs.ToList(),
                     nameof(Staff.Id),
-                    nameof(Staff.FirstName)
+                    nameof(Staff.FullName)
                 ),
                 TodoTaskPartnerIds = selectedStaffIds
             };

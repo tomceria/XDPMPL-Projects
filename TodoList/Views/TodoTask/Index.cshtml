@@ -20,7 +20,7 @@
         <ul class="mt-2">
             @foreach (var todoTask in Model.CreatedTodoTasks)
             {
-                @Html.DisplayFor(model => todoTask, "TodoTask__NoLead")
+                @Html.DisplayFor(model => todoTask)
             }
         </ul>
         <hr/>
@@ -31,7 +31,7 @@
         <ul class="mt-2">
             @foreach (var todoTask in Model.AssignedTodoTasks)
             {
-                @Html.DisplayFor(model => todoTask)
+                @Html.DisplayFor(model => todoTask, "TodoTask__NoLead")
             }
         </ul>
         <hr/>

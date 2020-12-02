@@ -24,9 +24,18 @@
         <span asp-validation-for="TodoTask.Name" class="text-danger"></span>
     </div>
     <div class="form-group">
-        @Html.Raw("Người đảm nhiệm:&nbsp")
-        @Html.DisplayFor(model => model.TodoTask.Staff.FirstName)
+        @Html.DisplayNameFor(model => model.TodoTask.CreatedById)@Html.Raw(":&nbsp")
+        <strong>
+            @Html.DisplayFor(model => model.TodoTask.CreatedBy.FullName)
+        </strong>
     </div>
+    <div class="form-group">
+        <label asp-for="TodoTask.StaffId" class="control-label"></label>
+        <select asp-for="TodoTask.StaffId" asp-items="Model.StaffSelectList" class="form-control">
+        </select>
+        <span asp-validation-for="TodoTask.StaffId" class="text-danger"></span>
+    </div>
+
     <hr>
 
     <div class="form-row">
@@ -70,7 +79,7 @@
         </select>
         <span asp-validation-for="TodoTask.Access" class="text-danger"></span>
     </div>
-    
+
     <input type="submit" value="Lưu" class="btn btn-primary col-1"/>
 </form>
 

@@ -30,6 +30,6 @@ namespace TodoList.Models
         public virtual ICollection<TodoTaskPartner> TodoTaskPartners { get; set; }
         
         [NotMapped]
-        public string FullName => $"{FirstName} {LastName}"; 
+        public string FullName => $"{LastName} {FirstName}"; 
     }
 }

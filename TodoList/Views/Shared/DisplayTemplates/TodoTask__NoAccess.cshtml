@@ -14,7 +14,9 @@
     <div class="row">
         <div class="col">
             @Html.Raw("Đảm nhiệm:&nbsp;")
-            @Html.DisplayFor(model => model.Staff.FirstName)
+            <span data-toggle="tooltip" title="@Html.DisplayFor(model => model.Staff.FullName)">
+                @Html.DisplayFor(model => model.Staff.FirstName)
+            </span>
         </div>
     </div>
     <div class="row">
