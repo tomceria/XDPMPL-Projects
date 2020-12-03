@@ -15,37 +15,37 @@
 
 <form asp-action="Edit">
     @Html.ValidationSummary(true, null, new {@class = "alert alert-danger", role = "alert"})
-    
-    @Html.HiddenFor(model => model.TodoTask.Id)
-    @Html.HiddenFor(model => model.TodoTask.CreatedById)
+
+    @Html.HiddenFor(m => m.TodoTask.Id)
+    @Html.HiddenFor(m => m.TodoTask.CreatedById)
 
     <div class="form-group">
-        <input asp-for="TodoTask.Name" class="form-control col-form-label col-form-label-lg"/>
-        <span asp-validation-for="TodoTask.Name" class="text-danger"></span>
+        @Html.TextBoxFor(m => m.TodoTask.Name, new {@class = "form-control col-form-label col-form-label-lg"})
+        @Html.ValidationMessageFor(m => m.TodoTask.Name, null, new {@class = "text-danger"})
     </div>
     <div class="form-group">
-        @Html.DisplayNameFor(model => model.TodoTask.CreatedById)@Html.Raw(":&nbsp")
+        @Html.DisplayNameFor(m => m.TodoTask.CreatedById)@Html.Raw(":&nbsp")
         <strong>
-            @Html.DisplayFor(model => model.TodoTask.CreatedBy.FullName)
+            @Html.DisplayFor(m => m.TodoTask.CreatedBy.FullName)
         </strong>
     </div>
     <div class="form-group">
         @if (User.IsInRole("Leader"))
         {
-            <label asp-for="TodoTask.StaffId" class="control-label"></label>
+            @Html.LabelFor(m => m.TodoTask.StaffId, new {@class = "control-label"})
             @Html.DropDownListFor(
-                model => model.TodoTask.StaffId,
+                m => m.TodoTask.StaffId,
                 new SelectList(Model.Staffs, nameof(Staff.Id), nameof(Staff.FullName)),
                 null,
                 new {@class = "form-control"})
-            <span asp-validation-for="TodoTask.StaffId" class="text-danger"></span>
+            @Html.ValidationMessageFor(m => m.TodoTask.StaffId, null, new {@class = "text-danger"})
         }
         else
         {
-            @Html.HiddenFor(model => model.TodoTask.StaffId)
-            @Html.DisplayNameFor(model => model.TodoTask.StaffId)@Html.Raw(":&nbsp")
+            @Html.HiddenFor(m => m.TodoTask.StaffId)
+            @Html.DisplayNameFor(m => m.TodoTask.StaffId)@Html.Raw(":&nbsp")
             <strong>
-                @Html.DisplayFor(model => model.TodoTask.CreatedBy.FullName)
+                @Html.DisplayFor(m => m.TodoTask.CreatedBy.FullName)
             </strong>
         }
     </div>
@@ -54,53 +54,47 @@
 
     <div class="form-row">
         <div class="form-group col">
-            <label asp-for="TodoTask.StartDate" class="control-label"></label>
-            <input asp-for="TodoTask.StartDate" class="form-control"/>
-            <span asp-validation-for="TodoTask.StartDate" class="text-danger"></span>
+            @Html.LabelFor(m => m.TodoTask.StartDate, new {@class = "control-label"})
+            @Html.EditorFor(m => m.TodoTask.StartDate, new {htmlAttributes = new {@class = "form-control"}})
+            @Html.ValidationMessageFor(m => m.TodoTask.StartDate, null, new {@class = "text-danger"})
         </div>
         <div class="form-group col">
-            <label asp-for="TodoTask.EndDate" class="control-label"></label>
-            <input asp-for="TodoTask.EndDate" class="form-control"/>
-            <span asp-validation-for="TodoTask.EndDate" class="text-danger"></span>
+            @Html.LabelFor(m => m.TodoTask.EndDate, new {@class = "control-label"})
+            @Html.EditorFor(m => m.TodoTask.EndDate, new {htmlAttributes = new {@class = "form-control"}})
+            @Html.ValidationMessageFor(m => m.TodoTask.EndDate, null, new {@class = "text-danger"})
         </div>
     </div>
     <div class="form-group">
-        <label asp-for="TodoTask.TodoTaskPartners" class="control-label"></label>
+        @Html.LabelFor(m => m.TodoTask.TodoTaskPartners, new {@class = "control-label"})
         @Html.ListBoxFor(
-            model => model.TodoTaskPartnerIds,
+            m => m.TodoTaskPartnerIds,
             new SelectList(Model.Staffs, nameof(Staff.Id), nameof(Staff.FullName)),
             new {@class = "form-control"})
     </div>
     <div class="form-group">
-        <label asp-for="TodoTask.Status" class="control-label"></label>
-        <select asp-for="TodoTask.Status" class="form-control">
-            @foreach (var item in Enum.GetValues(typeof(TaskStatus)).Cast<TaskStatus>())
-            {
-                <option value="@item">
-                    @Html.DisplayFor(model => item)
-                </option>
-            }
-        </select>
-        <span asp-validation-for="TodoTask.Status" class="text-danger"></span>
+        @Html.LabelFor(m => m.TodoTask.Status, new {@class = "control-label"})
+        @Html.DropDownListFor(
+            m => m.TodoTask.Status,
+            Html.GetEnumSelectList(typeof (TaskStatus)),
+            new {@class = "form-control"}
+            )
+        @Html.ValidationMessageFor(m => m.TodoTask.Status, null, new {@class = "text-danger"})
     </div>
     <div class="form-group">
-        <label asp-for="TodoTask.Access" class="control-label"></label>
-        <select asp-for="TodoTask.Access" class="form-control">
-            @foreach (var item in Enum.GetValues(typeof(TaskAccess)).Cast<TaskAccess>())
-            {
-                <option value="@item">
-                    @Html.DisplayFor(model => item)
-                </option>
-            }
-        </select>
-        <span asp-validation-for="TodoTask.Access" class="text-danger"></span>
+        @Html.LabelFor(m => m.TodoTask.Access, new {@class = "control-label"})
+        @Html.DropDownListFor(
+            m => m.TodoTask.Access,
+            Html.GetEnumSelectList(typeof (TaskAccess)),
+            new {@class = "form-control"}
+            )
+        @Html.ValidationMessageFor(m => m.TodoTask.Access, null, new {@class = "text-danger"})
     </div>
 
     <input type="submit" value="Lưu" class="btn btn-primary col-1"/>
 </form>
 
 <form asp-action="Delete">
-    <input type="hidden" asp-for="TodoTask.Id"/>
+    @Html.HiddenFor(m => m.TodoTask.Id)
     <input type="submit" value="Xoá" class="btn btn-danger col-1 mt-2"/>
 </form>
 
