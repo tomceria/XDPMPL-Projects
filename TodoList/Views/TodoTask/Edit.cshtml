@@ -14,9 +14,10 @@
 </h6>
 
 <form asp-action="Edit">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <input type="hidden" asp-for="TodoTask.Id"/>
-    <input type="hidden" asp-for="TodoTask.CreatedById"/>
+    @Html.ValidationSummary(true, null, new {@class = "alert alert-danger", role = "alert"})
+    
+    @Html.HiddenFor(model => model.TodoTask.Id)
+    @Html.HiddenFor(model => model.TodoTask.CreatedById)
 
     <div class="form-group">
         <input asp-for="TodoTask.Name" class="form-control col-form-label col-form-label-lg"/>
@@ -41,7 +42,7 @@
         }
         else
         {
-            <input type="hidden" asp-for="TodoTask.StaffId"/>
+            @Html.HiddenFor(model => model.TodoTask.StaffId)
             @Html.DisplayNameFor(model => model.TodoTask.StaffId)@Html.Raw(":&nbsp")
             <strong>
                 @Html.DisplayFor(model => model.TodoTask.CreatedBy.FullName)

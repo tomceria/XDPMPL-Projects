@@ -12,7 +12,7 @@
                 <h5 class="card-title text-center">TodoList Inc.</h5>
                 <hr>
                 <form asp-action="Login">
-                    @Html.DisplayFor(model => model.FormResults, "FormResults")
+                    @Html.ValidationSummary(true, null, new {@class = "alert alert-danger", role="alert"})
                     <div class="form-group">
                         <input
                             asp-for="Username"
@@ -34,3 +34,8 @@
         </div>
     </div>
 </div>
+
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

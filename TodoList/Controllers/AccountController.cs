@@ -49,10 +49,7 @@ namespace TodoList.Controllers
             }
             else if (result == SignInResult.Failed)
             {
-                viewModel.FormResults = new List<FormResult>
-                {
-                    new FormResult(AlertType.DANGER, "Tên tài khoản hoặc mật khẩu không đúng!")
-                };
+                ModelState.AddModelError("", "Tên tài khoản hoặc mật khẩu không đúng!");
                 return View(viewModel);
             }
 
@@ -95,16 +92,13 @@ namespace TodoList.Controllers
 
             if (result != IdentityResult.Success)
             {
-                viewModel.FormResults = new List<FormResult>();
                 foreach (IdentityError error in result.Errors)
                 {
-                    viewModel.FormResults.Add(
-                        new FormResult(AlertType.DANGER, error.Description)
-                    );
+                    ModelState.AddModelError("", error.Description);
                 }
                 
                 /*
-                 * Deleteing newly added Staff if Registering failed
+                 * Deleting newly added Staff if Registering failed
                  */
                 await _accountService.Save();
                 _staffService.RemoveStaff(staff);

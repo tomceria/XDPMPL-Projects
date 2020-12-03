@@ -24,8 +24,6 @@ namespace TodoList.ViewModels
         
         public Staff Staff { get; set; }
         
-        public List<FormResult> FormResults { get; set; }
-
         public void Deconstruct(out string username, out string password, out Staff staff)
         {
             username = Username;
