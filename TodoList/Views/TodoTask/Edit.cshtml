@@ -16,7 +16,6 @@
 <form asp-action="Edit">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <input type="hidden" asp-for="TodoTask.Id"/>
-    <input type="hidden" asp-for="TodoTask.StaffId"/>
     <input type="hidden" asp-for="TodoTask.CreatedById"/>
 
     <div class="form-group">
@@ -33,17 +32,21 @@
         @if (User.IsInRole("Leader"))
         {
             <label asp-for="TodoTask.StaffId" class="control-label"></label>
-            <select asp-for="TodoTaskStaffId" asp-items="Model.StaffSelectList" class="form-control"></select>
+            @Html.DropDownListFor(
+                model => model.TodoTask.StaffId,
+                new SelectList(Model.Staffs, nameof(Staff.Id), nameof(Staff.FullName)),
+                null,
+                new {@class = "form-control"})
+            <span asp-validation-for="TodoTask.StaffId" class="text-danger"></span>
         }
         else
         {
-            <input type="hidden" asp-for="TodoTaskStaffId"/>
+            <input type="hidden" asp-for="TodoTask.StaffId"/>
             @Html.DisplayNameFor(model => model.TodoTask.StaffId)@Html.Raw(":&nbsp")
             <strong>
                 @Html.DisplayFor(model => model.TodoTask.CreatedBy.FullName)
             </strong>
         }
-        <span asp-validation-for="TodoTask.StaffId" class="text-danger"></span>
     </div>
 
     <hr>
@@ -62,8 +65,10 @@
     </div>
     <div class="form-group">
         <label asp-for="TodoTask.TodoTaskPartners" class="control-label"></label>
-        <select asp-for="TodoTaskPartnerIds" asp-items="Model.StaffSelectList" class="form-control" multiple="multiple">
-        </select>
+        @Html.ListBoxFor(
+            model => model.TodoTaskPartnerIds,
+            new SelectList(Model.Staffs, nameof(Staff.Id), nameof(Staff.FullName)),
+            new {@class = "form-control"})
     </div>
     <div class="form-group">
         <label asp-for="TodoTask.Status" class="control-label"></label>

@@ -8,8 +8,7 @@ namespace TodoList.ViewModels
     public class TodoTaskEditVm
     {
         public TodoTask TodoTask { get; set; }
-        public SelectList StaffSelectList { get; set; }
-        public int TodoTaskStaffId { get; set; } // Temporary solution
+        public List<Staff> Staffs { get; set; }
         public int[] TodoTaskPartnerIds { get; set; }
     }
 }

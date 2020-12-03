@@ -109,12 +109,7 @@ namespace TodoList.Controllers
             var viewModel = new TodoTaskEditVm
             {
                 TodoTask = todoTask,
-                StaffSelectList = new SelectList(
-                    staffs.ToList(),
-                    nameof(Staff.Id),
-                    nameof(Staff.FullName)
-                ),
-                TodoTaskStaffId = todoTask.StaffId,
+                Staffs = staffs.ToList(),
                 TodoTaskPartnerIds = selectedStaffIds
             };
 
@@ -149,7 +144,6 @@ namespace TodoList.Controllers
         )
         {
             TodoTask todoTask = viewModel.TodoTask;
-            todoTask.StaffId = viewModel.TodoTaskStaffId;
 
             if (!ModelState.IsValid)
             {
