@@ -8,14 +8,11 @@ namespace TodoList.Services.IService
     {
         Task<IEnumerable<TodoTask>> GetAllTodoTasks();
         Task<TodoTask> GetOneTodoTask(int id);
+        Task<Dictionary<string, IEnumerable<TodoTask>>> GetTodoTasks(Staff staff);
         TodoTask CreateTodoTask(string name, Staff createdBy, Staff assigned);
         void AddTodoTask(TodoTask todoTask);
         void UpdateTodoTask(TodoTask todoTask, int[] todoTaskPartnerIds);
         void DeleteTodoTask(TodoTask todoTask);
-        Task<IEnumerable<TodoTask>> GetTodoTasks_Created(Staff staff);
-        Task<IEnumerable<TodoTask>> GetTodoTasks_Assigned(Staff staff);
-        Task<IEnumerable<TodoTask>> GetTodoTasks_Associated(Staff staff);
-        Task<IEnumerable<TodoTask>> GetTodoTasks_Public();
         Task<IEnumerable<Comment>> GetComments(TodoTask todoTask);
         Comment CreateComment(string content, TodoTask todoTask, Staff staff);
         void AddComment(Comment comment);

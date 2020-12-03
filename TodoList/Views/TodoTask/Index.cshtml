@@ -42,17 +42,34 @@
         <hr/>
     </div>
 
-    <div class="tasklist col-lg-6 col-md-12 mt-3">
-        <h5 class="tasklist--title">Công việc công khai</h5>
-        <ul class="mt-2">
-            @foreach (var todoTask in Model.PublicTodoTasks)
-            {
-                var todoTaskVm = new TodoTaskComponentVm(todoTask, Model.EditableTodoTaskIds);
-                @Html.DisplayFor(model => todoTaskVm, "TodoTask")
-            }
-        </ul>
-        <hr/>
-    </div>
+    @if (User.IsInRole("Leader"))
+    {
+        <div class="tasklist col-lg-6 col-md-12 mt-3">
+            <h5 class="tasklist--title">Các công việc khác</h5>
+            <ul class="mt-2">
+                @foreach (var todoTask in Model.OtherTodoTasks)
+                {
+                    var todoTaskVm = new TodoTaskComponentVm(todoTask, Model.EditableTodoTaskIds);
+                    @Html.DisplayFor(model => todoTaskVm, "TodoTask")
+                }
+            </ul>
+            <hr/>
+        </div>
+    }
+    else
+    {
+        <div class="tasklist col-lg-6 col-md-12 mt-3">
+            <h5 class="tasklist--title">Công việc công khai</h5>
+            <ul class="mt-2">
+                @foreach (var todoTask in Model.PublicTodoTasks)
+                {
+                    var todoTaskVm = new TodoTaskComponentVm(todoTask, Model.EditableTodoTaskIds);
+                    @Html.DisplayFor(model => todoTaskVm, "TodoTask")
+                }
+            </ul>
+            <hr/>
+        </div>
+    }
 </div>
 
 

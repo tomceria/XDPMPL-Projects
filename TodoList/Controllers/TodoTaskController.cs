@@ -1,13 +1,8 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using TodoList.Data;
 using TodoList.Models;
 using TodoList.Services.IService;
 using TodoList.ViewModels;
@@ -31,19 +26,24 @@ namespace TodoList.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var userStaff = (await _accountService.GetCurrentUser(User)).Staff;
+            var user = await _accountService.GetCurrentUser(User);
+            var userStaff = user.Staff;
 
-            var allTasks = await _todoTaskService.GetAllTodoTasks();
+            var todoTasks = await _todoTaskService.GetTodoTasks(userStaff);
 
-            var createdTodoTasks = await _todoTaskService.GetTodoTasks_Created(userStaff);
-            var assignedTodoTasks = await _todoTaskService.GetTodoTasks_Assigned(userStaff);
-            var associatedTodoTasks = await _todoTaskService.GetTodoTasks_Associated(userStaff);
-            var publicTodoTasks = await _todoTaskService.GetTodoTasks_Public();
+            var assignedTodoTasks = todoTasks["assigned"].ToList();
+            var associatedTodoTasks = todoTasks["associated"].ToList();
+            var publicTodoTasks = todoTasks["public"].ToList();
+            var otherTodoTasks = todoTasks["other"].ToList();
 
             /*
-             * Construct ViewModel
+             * EditableTodoTaskIds, for show/hide Edit link
              */
-            var user = await _accountService.GetCurrentUser(User);
+            var allTasks = assignedTodoTasks
+                .Concat(associatedTodoTasks)
+                .Concat(publicTodoTasks)
+                .Concat(otherTodoTasks);
+            
             List<int> editableTodoTaskIds;
             if (User.IsInRole("Leader"))
             {
@@ -57,12 +57,16 @@ namespace TodoList.Controllers
                     .ToList();
             }
 
+            /*
+             * Construct ViewModel
+             */
+
             var viewModel = new TodoTaskIndexVm
             {
-                CreatedTodoTasks = createdTodoTasks,
                 AssignedTodoTasks = assignedTodoTasks,
                 AssociatedTodoTasks = associatedTodoTasks,
                 PublicTodoTasks = publicTodoTasks,
+                OtherTodoTasks = otherTodoTasks,
                 EditableTodoTaskIds = editableTodoTaskIds
             };
             return View(viewModel);
