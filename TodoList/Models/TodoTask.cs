@@ -30,12 +30,17 @@ namespace TodoList.Models
         [DisplayName("Tên công việc")]
         public string Name { get; set; }
         
-        [DisplayName("Ngày bắt đầu")]
+        [Required(ErrorMessage = "Phải có Ngày bắt đầu.")]
+        [DisplayName("Thời gian bắt đầu")]
         public DateTime StartDate { get; set; }
         
+        [Required(ErrorMessage = "Phải có Ngày kết thúc.")]
         [AfterDate("StartDate", ErrorMessage = "Phải sau ngày bắt đầu.")]
-        [DisplayName("Ngày kết thúc")]
+        [DisplayName("Thời gian kết thúc")]
         public DateTime EndDate { get; set; }
+        
+        [DisplayName("Thời gian hoàn tất")]
+        public DateTime? CompleteDate { get; set; }
         
         [DisplayName("Trạng thái")]
         public TaskStatus Status { get; set; }
