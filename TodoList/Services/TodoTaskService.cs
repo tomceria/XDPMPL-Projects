@@ -177,6 +177,13 @@ namespace TodoList.Services
             }
         }
 
+        public void CompleteTodoTask(TodoTask todoTask)
+        {
+            todoTask.Status = TaskStatus.Completed;
+            todoTask.CompleteDate = DateTime.Now;
+            _context.Entry(todoTask).State = EntityState.Modified;
+        }
+
         public void DeleteTodoTask(TodoTask todoTask)
         {
             _context.Remove(todoTask);

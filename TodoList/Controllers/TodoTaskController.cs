@@ -43,7 +43,7 @@ namespace TodoList.Controllers
                 .Concat(associatedTodoTasks)
                 .Concat(publicTodoTasks)
                 .Concat(otherTodoTasks);
-            
+
             List<int> editableTodoTaskIds;
             if (User.IsInRole("Leader"))
             {
@@ -82,18 +82,25 @@ namespace TodoList.Controllers
             {
                 return NotFound();
             }
-            
+
+            /*
+             * Check if this task is assigned to Current User
+             */
+            var user = await _accountService.GetCurrentUser(User);
+            bool isAssigned = user.Staff.Id == todoTask.StaffId;
+
             /*
              * Constructs ViewModel
              */
             var viewModel = new TodoTaskViewVm
             {
-                TodoTask = todoTask
+                TodoTask = todoTask,
+                IsAssigned = isAssigned
             };
-            
+
             return View(viewModel);
         }
-        
+
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -164,8 +171,7 @@ namespace TodoList.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(
-            [Bind("TodoTask,TodoTaskStaffId,TodoTaskPartnerIds")]
+        public async Task<IActionResult> Edit([Bind("TodoTask,TodoTaskStaffId,TodoTaskPartnerIds")]
             TodoTaskEditVm viewModel
         )
         {
@@ -179,6 +185,24 @@ namespace TodoList.Controllers
             _todoTaskService.UpdateTodoTask(todoTask, viewModel.TodoTaskPartnerIds);
             await _todoTaskService.Save();
 
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Complete([Bind("TodoTaskId,WillComplete")] TodoTaskCompleteVm viewModel)
+        {
+            var todoTaskId = viewModel.TodoTaskId;
+            
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("View", new {id = todoTaskId});
+            }
+            
+            var todoTask = await _todoTaskService.GetOneTodoTask(todoTaskId);
+            _todoTaskService.CompleteTodoTask(todoTask);
+            await _todoTaskService.Save();
+            
             return RedirectToAction("Index");
         }
 

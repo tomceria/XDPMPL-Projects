@@ -11,7 +11,7 @@ namespace TodoList.Models
     {
         [Display(Name = "Đang làm")] 
         InProgress,
-        [Display(Name = "Hoàn tất")] 
+        [Display(Name = "Đã Hoàn tất")] 
         Completed
     }
     public enum TaskAccess

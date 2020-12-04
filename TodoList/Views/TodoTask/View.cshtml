@@ -40,11 +40,20 @@
             </div>
         </div>
 
-        <hr />
-        
-        @await Html.PartialAsync("_View_Status", Model)
+        <hr/>
 
-        <hr />
+        @{
+            var completeViewModel = new TodoTaskCompleteVm
+            {
+                TodoTaskId = Model.TodoTask.Id,
+                TodoTaskStatus = Model.TodoTask.Status,
+                TodoTaskCompleteDate = Model.TodoTask.CompleteDate,
+                IsAssigned = Model.IsAssigned
+            };
+        }
+        @await Html.PartialAsync("_View_Status", completeViewModel)
+
+        <hr/>
     </div>
     <div class="col-lg-4">
         <div class="form-group">
