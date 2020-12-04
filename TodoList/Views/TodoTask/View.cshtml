@@ -1,0 +1,61 @@
+@model TodoTaskViewVm
+
+@{
+    ViewData["Title"] = @Html.ViewData.Model.TodoTask.Name;
+}
+
+<h6>
+    <a asp-controller="TodoTask" asp-action="Index">
+        Trở về Danh sách Công việc
+    </a>
+</h6>
+
+<h2>
+    @Html.DisplayFor(m => m.TodoTask.Name)
+    @Html.DisplayFor(model => model.TodoTask.Access, "TodoTask_TaskAccess")
+</h2>
+
+<div class="form-group">
+    @Html.DisplayNameFor(m => m.TodoTask.CreatedById)@Html.Raw(":&nbsp")
+    <strong>
+        @Html.DisplayFor(m => m.TodoTask.CreatedBy.FullName)
+    </strong>
+</div>
+<div class="form-group">
+    @Html.DisplayNameFor(m => m.TodoTask.StaffId)@Html.Raw(":&nbsp")
+    <strong>
+        @Html.DisplayFor(m => m.TodoTask.Staff.FullName)
+    </strong>
+</div>
+<div class="form-row">
+    <div class="form-group col">
+        @Html.LabelFor(m => m.TodoTask.StartDate, new {@class = "control-label"})
+        @Html.EditorFor(m => m.TodoTask.StartDate, new {htmlAttributes = new {@class = "form-control", disabled = "disabled"}})
+        @Html.ValidationMessageFor(m => m.TodoTask.StartDate, null, new {@class = "text-danger"})
+    </div>
+    <div class="form-group col">
+        @Html.LabelFor(m => m.TodoTask.EndDate, new {@class = "control-label"})
+        @Html.EditorFor(m => m.TodoTask.EndDate, new {htmlAttributes = new {@class = "form-control", disabled = "disabled"}})
+        @Html.ValidationMessageFor(m => m.TodoTask.EndDate, null, new {@class = "text-danger"})
+    </div>
+</div>
+<div class="form-group">
+    @Html.LabelFor(m => m.TodoTask.TodoTaskPartners, new {@class = "control-label"})
+    <table class="table table-hover">
+        <tr>
+            <th>@Html.DisplayNameFor(m => m.TodoTask.Staff.FullName)</th>
+            <th>@Html.DisplayNameFor(m => m.TodoTask.Staff.Level)</th>
+        </tr>
+        @foreach (var todoTaskPartner in Model.TodoTask.TodoTaskPartners)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(m => todoTaskPartner.Staff.FullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(m => todoTaskPartner.Staff.Level)
+                </td>
+            </tr>
+        }
+    </table>
+</div>

@@ -7169,6 +7169,25 @@ a.text-dark:hover, a.text-dark:focus {
   .card__padding {
     padding: 1rem; }
 
+.taskaccess {
+  display: inline-block;
+  height: auto;
+  margin: 0 0.5rem 0 0.5rem;
+  padding: 0 7px;
+  font-size: 0.75rem;
+  line-height: 1.3125rem;
+  white-space: nowrap;
+  border: 1px solid #d9d9d9;
+  border-radius: 2px; }
+  .taskaccess__private {
+    color: #f5222d;
+    background: #fff1f0;
+    border-color: #ffa39e; }
+  .taskaccess__public {
+    color: #52c41a;
+    background: #f6ffed;
+    border-color: #b7eb8f; }
+
 .tasklist ul {
   list-style-type: none;
   margin: 0;
@@ -7182,24 +7201,6 @@ a.text-dark:hover, a.text-dark:focus {
     flex-direction: row; }
     .tasklist-item > * > * {
       display: inline-flex; }
-  .tasklist-item--access {
-    display: inline-block;
-    height: auto;
-    margin: 0 0.5rem 0 0.5rem;
-    padding: 0 7px;
-    font-size: 0.75rem;
-    line-height: 1.3125rem;
-    white-space: nowrap;
-    border: 1px solid #d9d9d9;
-    border-radius: 2px; }
-    .tasklist-item--access__private {
-      color: #f5222d;
-      background: #fff1f0;
-      border-color: #ffa39e; }
-    .tasklist-item--access__public {
-      color: #52c41a;
-      background: #f6ffed;
-      border-color: #b7eb8f; }
   .tasklist-item--edit {
     flex-direction: column-reverse; }
     .tasklist-item--edit > * {

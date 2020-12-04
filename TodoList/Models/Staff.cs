@@ -7,7 +7,10 @@ namespace TodoList.Models
 {
     public enum Level
     {
-        Member = 0, Leader = 1
+        [Display(Name = "Nhân viên")] 
+        Member = 0,
+        [Display(Name = "Lãnh đạo")] 
+        Leader = 1
     }
     public class Staff
     {
@@ -20,6 +23,8 @@ namespace TodoList.Models
         [Required(ErrorMessage = "Họ không được bỏ trống.")]
         [DisplayName("Họ")]
         public string LastName { get; set; }
+        
+        [DisplayName("Chức vụ")]
         public Level Level { get; set; }
 
         [InverseProperty("Staff")]
@@ -30,7 +35,9 @@ namespace TodoList.Models
         public virtual ICollection<TodoTaskPartner> TodoTaskPartners { get; set; }
         
         public virtual ICollection<Comment> Comments { get; set; }
+        
         [NotMapped]
+        [DisplayName("Tên")]
         public string FullName => $"{LastName} {FirstName}"; 
     }
 }

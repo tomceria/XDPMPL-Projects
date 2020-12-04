@@ -29,6 +29,7 @@ namespace TodoList.Services
         {
             var todoTask = await _context.TodoTasks
                 .Include(o => o.TodoTaskPartners)
+                .ThenInclude(o => o.Staff)
                 .Include(o => o.CreatedBy)
                 .Include(o => o.Staff)
                 .Where(o => o.Id == id)

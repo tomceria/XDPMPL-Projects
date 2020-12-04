@@ -1,9 +1,9 @@
-@model TodoList.ViewModels.Component.TodoTaskComponentVm
+@model TodoTaskComponentVm
 
 <li class="tasklist-item mt-2 card card__padding">
     <div class="row">
         <div class="col-xl-7 col-lg-12">
-            <a class="tasklist-item--name" href="#">
+            <a asp-action="View" asp-route-id="@Model.TodoTask.Id" class="tasklist-item--name">
                 @Html.DisplayFor(model => model.TodoTask.Name)
             </a>
             @Html.DisplayFor(model => model.TodoTask.Access, "TodoTask_TaskAccess")

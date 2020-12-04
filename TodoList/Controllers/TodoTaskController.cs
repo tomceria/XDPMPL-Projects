@@ -72,6 +72,28 @@ namespace TodoList.Controllers
             return View(viewModel);
         }
 
+        public async Task<IActionResult> View(int id)
+        {
+            /*
+             * Get TodoTask by id
+             */
+            var todoTask = await _todoTaskService.GetOneTodoTask(id);
+            if (todoTask == null)
+            {
+                return NotFound();
+            }
+            
+            /*
+             * Constructs ViewModel
+             */
+            var viewModel = new TodoTaskViewVm
+            {
+                TodoTask = todoTask
+            };
+            
+            return View(viewModel);
+        }
+        
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
