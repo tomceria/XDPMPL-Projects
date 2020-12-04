@@ -26,10 +26,14 @@ namespace TodoList.Controllers
         {   
             var accounts = await _accountService.GetAllUsers();
 
+            /*
+             * Constructs ViewModel
+             */
             var viewModel = new AccountIndexVm
             {
                 Accounts = accounts
             };
+            
             return View(viewModel);
         }
 

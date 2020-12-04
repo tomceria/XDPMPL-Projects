@@ -14,29 +14,35 @@
 <a asp-controller="Account" asp-action="Register">
     <button class="btn btn-primary">Thêm mới</button>
 </a>
-<div class="container">
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th>STT</th>
-                <th>Họ và tên</th>
-                <th>Email</th>
-                <th>Chức vụ</th>
-                <th>Thao tác</th>
-            </tr>
-        </thead>
-        <tbody>
-            @{int i = 0;}
-            @foreach (var account in Model.Accounts)
-            {
-                ++@i;
-            <tr>
-                <td>@i</td>
-                @Html.DisplayFor(model => account)
-            </tr>
-            }
 
-        </tbody>
-    </table>
-</div>
+<table class="table table-hover mt-3">
+    <thead>
+    <tr>
+        @{
+            var emptyAccount = new ApplicationUser();
+        }
+        <th>@Html.DisplayNameFor(model => emptyAccount.Staff.Id)</th>
+        <th>@Html.DisplayNameFor(model => emptyAccount.Staff.LastName)</th>
+        <th>@Html.DisplayNameFor(model => emptyAccount.Staff.FirstName)</th>
+        <th>@Html.DisplayNameFor(model => emptyAccount.Email)</th>
+        <th>@Html.DisplayNameFor(model => emptyAccount.Staff.Level)</th>
+        <th>Hành động</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var account in Model.Accounts)
+    {
+        <tr>
+            <td>@Html.DisplayFor(model => account.Staff.Id)</td>
+            <td>@Html.DisplayFor(model => account.Staff.LastName)</td>
+            <td>@Html.DisplayFor(model => account.Staff.FirstName)</td>
+            <td>@Html.DisplayFor(model => account.Email)</td>
+            <td>@Html.DisplayFor(model => account.Staff.Level)</td>
+            <td>
+                <button type="button" class="btn btn-outline-primary">Sửa</button>
+            </td>
+        </tr>
+    }
 
+    </tbody>
+</table>

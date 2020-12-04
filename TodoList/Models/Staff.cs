@@ -14,6 +14,7 @@ namespace TodoList.Models
     }
     public class Staff
     {
+        [DisplayName("Mã NV")]
         public int Id { get; set; }
         
         [Required(ErrorMessage = "Tên không được bỏ trống.")]

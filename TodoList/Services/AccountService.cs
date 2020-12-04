@@ -50,7 +50,10 @@ namespace TodoList.Services
 
         public async Task<IEnumerable<ApplicationUser>> GetAllUsers()
         {
-            return await _context.Users.Include(o => o.Staff).ToListAsync();
+            return await _context.Users
+                .Include(o => o.Staff)
+                .OrderBy(o => o.Staff.Id)
+                .ToListAsync();
         }
 
         public async Task<IdentityResult> CreateUser(string username, string password, Staff staff)

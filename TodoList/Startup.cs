@@ -35,7 +35,7 @@ namespace TodoList
             /**/ // Registering Database Connection
             services.AddDbContext<TodoContext>(options =>
                 options.UseSqlServer(
-                    Configuration.GetConnectionString("HieuTodoContext")
+                    Configuration.GetConnectionString("HoangTodoContext")
                 )
             );
             
