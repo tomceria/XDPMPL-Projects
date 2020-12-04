@@ -1,0 +1,21 @@
+@using TaskStatus = TodoList.Models.TaskStatus
+@model TodoTaskViewVm
+
+@if (Model.TodoTask.Status == TaskStatus.InProgress)
+{
+    @Html.LabelFor(m => m.TodoTask.Status, new {@class = "control-label"})
+    <div class="custom-control custom-checkbox form-check--xl font-weight-bold">
+        @Html.CheckBoxFor(o => o.WillComplete, new {@class = "custom-control-input"})
+        @Html.LabelFor(o => o.WillComplete, new {@class = "custom-control-label"})
+    </div>
+    <input type="submit" value="Xác nhận Hoàn tất" class="btn btn-primary"/>
+}
+else if (Model.TodoTask.Status == TaskStatus.Completed)
+{
+    <div class="form-group">
+        <h3 class="text-success d-flex justify-content-center">
+            @Html.Raw("Đã")
+            @Html.DisplayNameFor(o => o.WillComplete)
+        </h3>
+    </div>
+}

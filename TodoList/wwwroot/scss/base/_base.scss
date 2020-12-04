@@ -4,3 +4,33 @@
     margin-bottom: 0;
   }
 }
+
+.form {
+  &-check {
+    &--lg {
+      .custom-control-label {
+        padding-top: 13px;
+        padding-left: 6px;
+
+        &::before, &::after {
+          top: .8rem;
+          width: 1.55rem;
+          height: 1.55rem;
+        }
+      }
+    }
+
+    &--xl {
+      .custom-control-label {
+        padding-top: 0.4rem;
+        padding-left: 1rem;
+        margin-bottom: 1rem;
+
+        &::before, &::after {
+          width: 1.85rem;
+          height: 1.85rem;
+        }
+      }
+    }
+  }
+}

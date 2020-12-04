@@ -7160,6 +7160,22 @@ a.text-dark:hover, a.text-dark:focus {
   padding-inline-start: 1rem;
   margin-bottom: 0; }
 
+.form-check--lg .custom-control-label {
+  padding-top: 13px;
+  padding-left: 6px; }
+  .form-check--lg .custom-control-label::before, .form-check--lg .custom-control-label::after {
+    top: .8rem;
+    width: 1.55rem;
+    height: 1.55rem; }
+
+.form-check--xl .custom-control-label {
+  padding-top: 0.4rem;
+  padding-left: 1rem;
+  margin-bottom: 1rem; }
+  .form-check--xl .custom-control-label::before, .form-check--xl .custom-control-label::after {
+    width: 1.85rem;
+    height: 1.85rem; }
+
 .card {
   border-radius: 4px;
   background-color: #fff;

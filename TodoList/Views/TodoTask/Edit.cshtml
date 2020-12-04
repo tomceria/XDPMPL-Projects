@@ -21,7 +21,7 @@
         @Html.TextBoxFor(m => m.TodoTask.Name, new {@class = "form-control col-form-label col-form-label-lg"})
         @Html.ValidationMessageFor(m => m.TodoTask.Name, null, new {@class = "text-danger"})
     </div>
-    <div class="form-group">
+    <div class="form-group small">
         @Html.DisplayNameFor(m => m.TodoTask.CreatedById)@Html.Raw(":&nbsp")
         <strong>
             @Html.DisplayFor(m => m.TodoTask.CreatedBy.FullName)
