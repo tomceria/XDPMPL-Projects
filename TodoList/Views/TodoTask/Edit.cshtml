@@ -70,15 +70,6 @@
             new {@class = "form-control"})
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.TodoTask.Status, new {@class = "control-label"})
-        @Html.DropDownListFor(
-            m => m.TodoTask.Status,
-            Html.GetEnumSelectList(typeof (TaskStatus)),
-            new {@class = "form-control"}
-            )
-        @Html.ValidationMessageFor(m => m.TodoTask.Status, null, new {@class = "text-danger"})
-    </div>
-    <div class="form-group">
         @Html.LabelFor(m => m.TodoTask.Access, new {@class = "control-label"})
         @Html.DropDownListFor(
             m => m.TodoTask.Access,
