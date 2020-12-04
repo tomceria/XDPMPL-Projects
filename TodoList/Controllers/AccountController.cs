@@ -22,9 +22,15 @@ namespace TodoList.Controllers
         }
 
         [Authorize(Roles = "Leader")]
-        public IActionResult Index()
-        {
-            return View();
+        public async Task<IActionResult> Index()
+        {   
+            var accounts = await _accountService.GetAllUsers();
+
+            var viewModel = new AccountIndexVm
+            {
+                Accounts = accounts
+            };
+            return View(viewModel);
         }
 
         public IActionResult Login()

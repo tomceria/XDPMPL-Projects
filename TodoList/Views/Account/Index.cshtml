@@ -1,3 +1,4 @@
+@model TodoList.ViewModels.AccountIndexVm;
 @{
     ViewData["Title"] = "Tài khoản";
 }
@@ -13,3 +14,29 @@
 <a asp-controller="Account" asp-action="Register">
     <button class="btn btn-primary">Thêm mới</button>
 </a>
+<div class="container">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>STT</th>
+                <th>Họ và tên</th>
+                <th>Email</th>
+                <th>Chức vụ</th>
+                <th>Thao tác</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{int i = 0;}
+            @foreach (var account in Model.Accounts)
+            {
+                ++@i;
+            <tr>
+                <td>@i</td>
+                @Html.DisplayFor(model => account)
+            </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
+
