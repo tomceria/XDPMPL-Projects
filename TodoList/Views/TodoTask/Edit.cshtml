@@ -87,6 +87,8 @@
     <input type="submit" value="Xoá" class="btn btn-danger col-1 mt-2"/>
 </form>
 
+<hr>
+
 @await Component.InvokeAsync("CommentList", new { todoTask = Model.TodoTask, staff = Model.CurrentStaff })
 
 

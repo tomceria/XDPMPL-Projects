@@ -2,3 +2,35 @@
 
 hello,
 @Html.DisplayFor(m => m.CurrentStaff.FullName)
+<div class="form-group">
+    <h4>Bình luận</h4>
+    <form asp-action="AddComment">
+        @Html.HiddenFor(m => m.TodoTaskId)
+        @Html.TextBoxFor(m => m.NewCommentContent, new
+        {
+            @class = "form-control",
+            placeholder = Html.DisplayNameFor(m => m.NewCommentContent)
+        })
+        @Html.ValidationMessageFor(
+            m => m.NewCommentContent,
+            null,
+            new {@class = "text-danger"})
+    </form>
+    <ul>
+        @foreach (var comment in Model.Comments)
+        {
+            <li>
+                <strong>
+                    @comment.Staff.FullName
+                </strong>
+                @Html.Raw(":&nbsp")
+                @comment.Content
+            </li>
+        }
+    </ul>
+</div>
+
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

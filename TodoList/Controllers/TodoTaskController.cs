@@ -195,16 +195,16 @@ namespace TodoList.Controllers
         public async Task<IActionResult> Complete([Bind("TodoTaskId,WillComplete")] TodoTaskCompleteVm viewModel)
         {
             var todoTaskId = viewModel.TodoTaskId;
-            
+
             if (!ModelState.IsValid)
             {
                 return RedirectToAction("View", new {id = todoTaskId});
             }
-            
+
             var todoTask = await _todoTaskService.GetOneTodoTask(todoTaskId);
             _todoTaskService.CompleteTodoTask(todoTask);
             await _todoTaskService.Save();
-            
+
             return RedirectToAction("Index");
         }
 
@@ -216,6 +216,34 @@ namespace TodoList.Controllers
             await _todoTaskService.Save();
 
             return RedirectToAction("Index");
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddComment(
+            [Bind("NewCommentContent,TodoTaskId")] TodoTaskCommentListVm viewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                /*
+                 * Redirect to the same page
+                 */
+                return Redirect(Request.Headers["Referer"].ToString());
+            }
+
+            var (content, todoTaskId) = viewModel;
+            var todoTask = await _todoTaskService.GetOneTodoTask(todoTaskId);
+            var user = await _accountService.GetCurrentUser(User);
+            
+            Comment comment = _todoTaskService.CreateComment(content, todoTask, user.Staff);
+            _todoTaskService.AddComment(comment);
+            await _todoTaskService.Save();
+
+            /*
+             * Redirect to the same page
+             */
+            return Redirect(Request.Headers["Referer"].ToString());
         }
     }
 }

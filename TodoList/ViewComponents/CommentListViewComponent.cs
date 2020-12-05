@@ -27,6 +27,7 @@ namespace TodoList.ViewComponents
              */
             var viewModel = new TodoTaskCommentListVm
             {
+                TodoTaskId = todoTask.Id,
                 Comments = comments,
                 CurrentStaff = staff
             };
