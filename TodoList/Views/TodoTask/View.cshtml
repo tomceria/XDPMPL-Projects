@@ -10,9 +10,11 @@
     </a>
 </h6>
 
-<h2 class="d-flex flex-row">
-    <div>
-        @Html.DisplayFor(m => m.TodoTask.Name)
+<div class="d-flex flex-row">
+    <div class="d-flex">
+        <h2>
+            @Html.DisplayFor(m => m.TodoTask.Name)
+        </h2>
         @Html.DisplayFor(model => model.TodoTask.Access, "TodoTask_TaskAccess")
     </div>
     @if (Model.IsCreatedByMe)
@@ -21,7 +23,7 @@
             <button type="button" class="btn btn-outline-primary">Sửa thông tin</button>
         </a>
     }
-</h2>
+</div>
 <div class="form-group small">
     @Html.DisplayNameFor(m => m.TodoTask.CreatedById)@Html.Raw(":&nbsp")
     <strong>

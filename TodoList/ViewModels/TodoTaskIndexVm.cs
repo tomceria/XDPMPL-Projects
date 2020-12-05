@@ -11,6 +11,7 @@ namespace TodoList.ViewModels
         public IEnumerable<TodoTask> AssociatedTodoTasks { get; set; }
         public IEnumerable<TodoTask> PublicTodoTasks { get; set; }
         public IEnumerable<TodoTask> OtherTodoTasks { get; set; }
+        public IEnumerable<TodoTask> CompletedTodoTasks { get; set; }
         
         public List<int> EditableTodoTaskIds { get; set; }
         

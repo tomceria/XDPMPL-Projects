@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using TodoList.Models;
 using TodoList.Services.IService;
 using TodoList.ViewModels;
+using TaskStatus = TodoList.Models.TaskStatus;
 
 namespace TodoList.Controllers
 {
@@ -31,10 +32,23 @@ namespace TodoList.Controllers
 
             var todoTasks = await _todoTaskService.GetTodoTasks(userStaff);
 
-            var assignedTodoTasks = todoTasks["assigned"].ToList();
-            var associatedTodoTasks = todoTasks["associated"].ToList();
-            var publicTodoTasks = todoTasks["public"].ToList();
-            var otherTodoTasks = todoTasks["other"].ToList();
+            var assignedTodoTasks = todoTasks["assigned"]
+                .Where(o => o.Status != TaskStatus.Completed).ToList();
+            var associatedTodoTasks = todoTasks["associated"]
+                .Where(o => o.Status != TaskStatus.Completed).ToList();
+            var publicTodoTasks = todoTasks["public"]
+                .Where(o => o.Status != TaskStatus.Completed).ToList();
+            var otherTodoTasks = todoTasks["other"]
+                .Where(o => o.Status != TaskStatus.Completed).ToList();
+            var completedTodoTasks = todoTasks.Values.Aggregate(
+                new List<TodoTask>(),
+                (arr, next) =>
+                {
+                    var todos = next.Where(o => o.Status == TaskStatus.Completed);
+                    var newArr = arr.Concat(todos).ToList();
+                    return newArr;
+                }
+            );
 
             /*
              * EditableTodoTaskIds, for show/hide Edit link
@@ -60,13 +74,13 @@ namespace TodoList.Controllers
             /*
              * Construct ViewModel
              */
-
             var viewModel = new TodoTaskIndexVm
             {
                 AssignedTodoTasks = assignedTodoTasks,
                 AssociatedTodoTasks = associatedTodoTasks,
                 PublicTodoTasks = publicTodoTasks,
                 OtherTodoTasks = otherTodoTasks,
+                CompletedTodoTasks = completedTodoTasks,
                 EditableTodoTaskIds = editableTodoTaskIds
             };
             return View(viewModel);
@@ -237,7 +251,7 @@ namespace TodoList.Controllers
             var (content, todoTaskId) = viewModel;
             var todoTask = await _todoTaskService.GetOneTodoTask(todoTaskId);
             var user = await _accountService.GetCurrentUser(User);
-            
+
             Comment comment = _todoTaskService.CreateComment(content, todoTask, user.Staff);
             _todoTaskService.AddComment(comment);
             await _todoTaskService.Save();

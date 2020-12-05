@@ -62,12 +62,22 @@
                 }
             </ul>
         }
-        <hr/>
+
+        <hr>
     </div>
 
     <div class="tasklist col-lg-5 col-md-12 mt-3">
-    </div>
+        <h6 class="tasklist--title">Công việc đã hoàn tất</h6>
+        <ul class="small mt-2">
+            @foreach (var todoTask in Model.CompletedTodoTasks)
+            {
+                var todoTaskVm = new TodoTaskComponentVm(todoTask, Model.EditableTodoTaskIds);
+                @Html.DisplayFor(model => todoTaskVm, "TodoTask")
+            }
+        </ul>
 
+        <hr>
+    </div>
 </div>
 
 

@@ -11821,8 +11821,7 @@ readers do not read off random characters that represent icons */
   height: auto;
   margin: 0 0.5rem 0 0.5rem;
   padding: 0 7px;
-  font-size: 0.75rem;
-  line-height: 1.3125rem;
+  font-size: 80%;
   white-space: nowrap;
   border: 1px solid #d9d9d9;
   border-radius: 2px; }
