@@ -10,5 +10,7 @@ namespace TodoList.ViewModels
         public TodoTask TodoTask { get; set; }
         public List<Staff> Staffs { get; set; }
         public int[] TodoTaskPartnerIds { get; set; }
+        
+        public Staff CurrentStaff { get; set; }
     }
 }

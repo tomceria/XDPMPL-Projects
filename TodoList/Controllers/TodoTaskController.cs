@@ -95,7 +95,8 @@ namespace TodoList.Controllers
             var viewModel = new TodoTaskViewVm
             {
                 TodoTask = todoTask,
-                IsAssigned = isAssigned
+                IsAssigned = isAssigned,
+                CurrentStaff = user.Staff
             };
 
             return View(viewModel);
@@ -143,7 +144,8 @@ namespace TodoList.Controllers
             {
                 TodoTask = todoTask,
                 Staffs = staffs.ToList(),
-                TodoTaskPartnerIds = selectedStaffIds
+                TodoTaskPartnerIds = selectedStaffIds,
+                CurrentStaff = user.Staff
             };
 
             return View(viewModel);
