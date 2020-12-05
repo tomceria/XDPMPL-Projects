@@ -203,7 +203,7 @@ namespace TodoList.Services
 
         public Comment CreateComment(string content, TodoTask todoTask, Staff staff)
         {
-            Comment comment = new Comment
+            Comment comment = new Comment()
             {
                 Content = content,
                 TodoTaskId = todoTask.Id,
