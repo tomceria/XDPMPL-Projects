@@ -54,7 +54,7 @@
 }
 
 .taskaccess {
-  display: inline-block;
+  display: inline-table;
   height: auto;
   margin: 0 0.5rem 0 0.5rem;
   padding: 0 7px;
@@ -105,20 +105,9 @@
       }
       
       &--edit {
-        flex-direction: column-reverse;
-        
-        & > * {
-          align-self: flex-end;
-        }
       }
 
       &--enddate {
-        display: flex;
-        flex-direction: row-reverse;
-        
-        @media (max-width: $screen-xl) {
-          flex-direction: row;
-        }
       }
 
       &--name {

@@ -5,12 +5,31 @@
 @if (Model.TodoTaskStatus == TaskStatus.InProgress)
 {
     <div class="form-group">
-        <h4 class="text-warning d-flex justify-content-center">
-            @Model.TodoTaskStatus.GetDisplayName()
-        </h4>
-        <span class="small text-secondary d-flex justify-content-center">
-            Đã hoàn tất công việc? Đánh dấu ở bên dưới
-        </span>
+        @if (Model.TodoTaskIsOverdue)
+        {
+            <h4 class="text-danger d-flex justify-content-center">
+                Đã trễ hạn!
+            </h4>
+        }
+        else
+        {
+            <h4 class="text-warning d-flex justify-content-center">
+                @Model.TodoTaskStatus.GetDisplayName()
+            </h4>
+        }
+
+        @if (Model.IsAssigned)
+        {
+            <span class="small text-secondary d-flex justify-content-center">
+                Đã hoàn tất công việc? Đánh dấu ở bên dưới.
+            </span>
+        }
+        else
+        {
+            <span class="small text-secondary d-flex justify-content-center">
+                Chỉ có Nhân viên đảm nhiệm mới có thể Đánh dấu Hoàn tất.
+            </span>
+        }
     </div>
     if (Model.IsAssigned)
     {

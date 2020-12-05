@@ -11,6 +11,7 @@ namespace TodoList.ViewModels
         public int TodoTaskId { get; set; }
         public TaskStatus TodoTaskStatus { get; set; }
         public DateTime? TodoTaskCompleteDate { get; set; }
+        public bool TodoTaskIsOverdue { get; set; }
         
         public bool IsAssigned { get; set; }
         

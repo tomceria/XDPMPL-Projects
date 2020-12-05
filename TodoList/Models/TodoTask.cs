@@ -62,5 +62,10 @@ namespace TodoList.Models
         
         [DisplayName("Những người làm chung")]
         public virtual ICollection<TodoTaskPartner> TodoTaskPartners { get; set; }
+        
+        /*
+         * Transients
+         */
+        [NotMapped] public bool IsOverdue => DateTime.Now > this.EndDate;
     }
 }

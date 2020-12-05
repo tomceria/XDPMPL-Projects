@@ -7217,7 +7217,7 @@ a.text-dark:hover, a.text-dark:focus {
     font-size: 80%; }
 
 .taskaccess {
-  display: inline-block;
+  display: inline-table;
   height: auto;
   margin: 0 0.5rem 0 0.5rem;
   padding: 0 7px;
@@ -7248,16 +7248,6 @@ a.text-dark:hover, a.text-dark:focus {
     flex-direction: row; }
     .tasklist-item > * > * {
       display: inline-flex; }
-  .tasklist-item--edit {
-    flex-direction: column-reverse; }
-    .tasklist-item--edit > * {
-      align-self: flex-end; }
-  .tasklist-item--enddate {
-    display: flex;
-    flex-direction: row-reverse; }
-    @media (max-width: 1200px) {
-      .tasklist-item--enddate {
-        flex-direction: row; } }
   .tasklist-item--name {
     margin: 0;
     font-weight: 500; }

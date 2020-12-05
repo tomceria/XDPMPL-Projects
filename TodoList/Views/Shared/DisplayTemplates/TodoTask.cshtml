@@ -2,15 +2,17 @@
 
 <li class="tasklist-item mt-2 card card__padding">
     <div class="row">
-        <div class="col-xl-7 col-lg-12">
+        <div class="col-xl-8 col-lg-12">
             <a asp-action="View" asp-route-id="@Model.TodoTask.Id" class="tasklist-item--name">
                 @Html.DisplayFor(model => model.TodoTask.Name)
             </a>
             @Html.DisplayFor(model => model.TodoTask.Access, "TodoTask_TaskAccess")
         </div>
-        <span class="tasklist-item--enddate col-xl-5 col-lg-12">
-            @Html.DisplayFor(model => model.TodoTask.EndDate)
-        </span>
+        <div class="col-xl-4 col-lg-12 d-flex flex-xl-row-reverse flex-lg-row">
+            <span class="tasklist-item--enddate">
+                @Html.DisplayFor(model => model.TodoTask.EndDate)
+            </span>
+        </div>
     </div>
     @if (Model.TodoTask.CreatedById != Model.TodoTask.StaffId)
     {
@@ -35,13 +37,18 @@
         <div class="tasklist-item--partners col-xl-9 col-lg-12">
             @Html.DisplayFor(model => model.TodoTask.TodoTaskPartners, "TodoTask_TodoTaskPartners")
         </div>
-        @if (Model.EditableTodoTaskIds.Contains(Model.TodoTask.Id))
-        {
-            <div class="tasklist-item--edit col-xl-3 col-lg-12">
-                <a asp-action="Edit" asp-route-id="@Model.TodoTask.Id">
-                    Chỉnh sửa
-                </a>
-            </div>
-        }
+        <div class="tasklist-item--edit col-xl-3 col-lg-12 flex-column-reverse">
+            <a asp-action="Edit" asp-route-id="@Model.TodoTask.Id" class="align-self-end">
+                Chỉnh sửa
+            </a>
+        </div>
+        @*         @if (Model.EditableTodoTaskIds.Contains(Model.TodoTask.Id)) *@
+        @*         { *@
+        @*             <div class="tasklist-item--edit col-xl-3 col-lg-12"> *@
+        @*                 <a asp-action="Edit" asp-route-id="@Model.TodoTask.Id"> *@
+        @*                     Chỉnh sửa *@
+        @*                 </a> *@
+        @*             </div> *@
+        @*         } *@
     </div>
 </li>

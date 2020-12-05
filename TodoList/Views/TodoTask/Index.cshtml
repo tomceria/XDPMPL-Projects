@@ -16,8 +16,9 @@
 </form>
 
 <div class="row">
-    <div class="tasklist col-lg-6 col-md-12 mt-3">
-        <h5 class="tasklist--title">Công việc của tôi</h5>
+    <div class="tasklist col-lg-7 col-md-12 mt-3">
+        @* AssignedTodoTasks *@
+        <h6 class="tasklist--title">Công việc của tôi</h6>
         <ul class="mt-2">
             @foreach (var todoTask in Model.AssignedTodoTasks)
             {
@@ -26,10 +27,9 @@
             }
         </ul>
         <hr/>
-    </div>
 
-    <div class="tasklist col-lg-6 col-md-12 mt-3">
-        <h5 class="tasklist--title">Công việc làm chung</h5>
+        @* AssociatedTodoTasks *@
+        <h6 class="tasklist--title">Công việc làm chung</h6>
         <ul class="mt-2">
             @foreach (var todoTask in Model.AssociatedTodoTasks)
             {
@@ -38,12 +38,11 @@
             }
         </ul>
         <hr/>
-    </div>
 
-    @if (User.IsInRole("Leader"))
-    {
-        <div class="tasklist col-lg-6 col-md-12 mt-3">
-            <h5 class="tasklist--title">Các công việc khác</h5>
+        @* PublicTodoTasks / OtherTodoTasks *@
+        @if (User.IsInRole("Leader"))
+        {
+            <h6 class="tasklist--title">Các công việc khác</h6>
             <ul class="mt-2">
                 @foreach (var todoTask in Model.OtherTodoTasks)
                 {
@@ -51,13 +50,10 @@
                     @Html.DisplayFor(model => todoTaskVm, "TodoTask")
                 }
             </ul>
-            <hr/>
-        </div>
-    }
-    else
-    {
-        <div class="tasklist col-lg-6 col-md-12 mt-3">
-            <h5 class="tasklist--title">Công việc công khai</h5>
+        }
+        else
+        {
+            <h6 class="tasklist--title">Công việc công khai</h6>
             <ul class="mt-2">
                 @foreach (var todoTask in Model.PublicTodoTasks)
                 {
@@ -65,9 +61,13 @@
                     @Html.DisplayFor(model => todoTaskVm, "TodoTask")
                 }
             </ul>
-            <hr/>
-        </div>
-    }
+        }
+        <hr/>
+    </div>
+
+    <div class="tasklist col-lg-5 col-md-12 mt-3">
+    </div>
+
 </div>
 
 
