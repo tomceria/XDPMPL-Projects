@@ -11846,8 +11846,6 @@ readers do not read off random characters that represent icons */
   .tasklist-item > * {
     display: flex;
     flex-direction: row; }
-    .tasklist-item > * > * {
-      display: inline-flex; }
   .tasklist-item--name {
     margin: 0;
     font-weight: 500; }

@@ -1,15 +1,19 @@
 @model ICollection<TodoTaskPartner>
 
-@if (Model != null)
+@if (Model != null && Model.Count > 0)
 {
-    @if (Model.Count > 0)
-    {
-        @Html.Raw("Làm cùng với:&nbsp")
-    }
-    @foreach (var item in Model)
-    {
-        <span class="tasklist-item--partner" data-toggle="tooltip" title="@item.Staff.FullName">
-            @item.Staff.FirstName
+    <small>
+        @{
+            var emptyTodoTask = new TodoTask();
+        }
+        <span data-toggle="tooltip" title="@Html.DisplayNameFor(model => emptyTodoTask.TodoTaskPartners)">
+            <i class="fa fa-user-friends"></i>
         </span>
-    }
+        @foreach (var item in Model)
+        {
+            <span class="tasklist-item--partner" data-toggle="tooltip" title="@item.Staff.FullName">
+                @item.Staff.FirstName
+            </span>
+        }
+    </small>
 }

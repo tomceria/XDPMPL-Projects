@@ -98,10 +98,6 @@
       & > * {
         display: flex;
         flex-direction: row;
-        
-        & > * {
-          display: inline-flex;
-        }
       }
       
       &--edit {
