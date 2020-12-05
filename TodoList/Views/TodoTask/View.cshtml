@@ -10,9 +10,17 @@
     </a>
 </h6>
 
-<h2>
-    @Html.DisplayFor(m => m.TodoTask.Name)
-    @Html.DisplayFor(model => model.TodoTask.Access, "TodoTask_TaskAccess")
+<h2 class="d-flex flex-row">
+    <div>
+        @Html.DisplayFor(m => m.TodoTask.Name)
+        @Html.DisplayFor(model => model.TodoTask.Access, "TodoTask_TaskAccess")
+    </div>
+    @if (Model.IsCreatedByMe)
+    {
+        <a asp-action="Edit" asp-route-id="@Model.TodoTask.Id" class="d-flex text-decoration-none">
+            <button type="button" class="btn btn-outline-primary">Sửa thông tin</button>
+        </a>
+    }
 </h2>
 <div class="form-group small">
     @Html.DisplayNameFor(m => m.TodoTask.CreatedById)@Html.Raw(":&nbsp")
@@ -48,15 +56,15 @@
                 TodoTaskId = Model.TodoTask.Id,
                 TodoTaskStatus = Model.TodoTask.Status,
                 TodoTaskCompleteDate = Model.TodoTask.CompleteDate,
-                IsAssigned = Model.IsAssigned
+                IsAssigned = Model.IsAssignedToMe
             };
         }
         @await Html.PartialAsync("_View_Status", completeViewModel)
 
         <hr>
-        
+
         @await Component.InvokeAsync("CommentList", new {todoTask = Model.TodoTask, staff = Model.CurrentStaff})
-        
+
         <hr>
     </div>
     <div class="col-lg-4">

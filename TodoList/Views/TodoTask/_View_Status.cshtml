@@ -4,6 +4,14 @@
 
 @if (Model.TodoTaskStatus == TaskStatus.InProgress)
 {
+    <div class="form-group">
+        <h4 class="text-warning d-flex justify-content-center">
+            @Model.TodoTaskStatus.GetDisplayName()
+        </h4>
+        <span class="small text-secondary d-flex justify-content-center">
+            Đã hoàn tất công việc? Đánh dấu ở bên dưới
+        </span>
+    </div>
     if (Model.IsAssigned)
     {
         <form asp-action="Complete">
@@ -16,14 +24,6 @@
             @Html.ValidationMessageFor(m => m.WillComplete, null, new {@class = "text-danger"})
             <input type="submit" value="Xác nhận Hoàn tất" class="btn btn-primary"/>
         </form>
-    }
-    else
-    {
-        <div class="form-group">
-            <h4 class="text-warning d-flex justify-content-center">
-                @Model.TodoTaskStatus.GetDisplayName()
-            </h4>
-        </div>
     }
 }
 else if (Model.TodoTaskStatus == TaskStatus.Completed)

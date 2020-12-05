@@ -87,7 +87,8 @@ namespace TodoList.Controllers
              * Check if this task is assigned to Current User
              */
             var user = await _accountService.GetCurrentUser(User);
-            bool isAssigned = user.Staff.Id == todoTask.StaffId;
+            bool isAssignedToMe = user.Staff.Id == todoTask.StaffId;
+            bool isCreatedByMe = user.Staff.Id == todoTask.CreatedById;
 
             /*
              * Constructs ViewModel
@@ -95,7 +96,8 @@ namespace TodoList.Controllers
             var viewModel = new TodoTaskViewVm
             {
                 TodoTask = todoTask,
-                IsAssigned = isAssigned,
+                IsAssignedToMe = isAssignedToMe,
+                IsCreatedByMe = isCreatedByMe,
                 CurrentStaff = user.Staff
             };
 
