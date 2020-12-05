@@ -195,6 +195,7 @@ namespace TodoList.Services
                 await (
                     from comment in _context.Comments
                     where comment.TodoTaskId == todoTask.Id
+                    orderby comment.CreatedAt descending 
                     select comment
                 ).ToListAsync();
 

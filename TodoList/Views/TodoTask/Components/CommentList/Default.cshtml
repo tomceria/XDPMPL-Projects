@@ -1,29 +1,36 @@
 @model TodoTaskCommentListVm
 
-hello,
-@Html.DisplayFor(m => m.CurrentStaff.FullName)
-<div class="form-group">
-    <h4>Bình luận</h4>
+<div class="form-group comments">
+    <p>Bình luận</p>
     <form asp-action="AddComment">
         @Html.HiddenFor(m => m.TodoTaskId)
-        @Html.TextBoxFor(m => m.NewCommentContent, new
-        {
-            @class = "form-control",
-            placeholder = Html.DisplayNameFor(m => m.NewCommentContent)
-        })
+        <div class="d-flex flex-row">
+            <span class="avatar mr-2" data-toggle="tooltip" title="@Model.CurrentStaff.FullName">
+                @Model.CurrentStaff.FirstName[0]
+            </span>
+            @Html.TextBoxFor(m => m.NewCommentContent, new
+            {
+                @class = "form-control comments-input",
+                placeholder = Html.DisplayNameFor(m => m.NewCommentContent)
+            })
+        </div>
         @Html.ValidationMessageFor(
             m => m.NewCommentContent,
             null,
             new {@class = "text-danger"})
     </form>
-    <ul>
+    <ul class="comments-list mt-3">
         @foreach (var comment in Model.Comments)
         {
-            <li>
-                <strong>
-                    @comment.Staff.FullName
-                </strong>
-                @Html.Raw(":&nbsp")
+            <li class="comments-item">
+                <div class="comments-item--header">
+                    <strong>
+                        @comment.Staff.FullName
+                    </strong>
+                    <span class="comments-item--time ml-2">
+                        @Html.DisplayFor(m => comment.CreatedAt)
+                    </span>
+                </div>
                 @comment.Content
             </li>
         }

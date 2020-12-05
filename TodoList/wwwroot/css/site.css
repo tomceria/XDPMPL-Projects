@@ -7176,6 +7176,17 @@ a.text-dark:hover, a.text-dark:focus {
     width: 1.85rem;
     height: 1.85rem; }
 
+.avatar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  width: 38px;
+  background-color: #007bff;
+  color: #fff; }
+  .avatar:hover {
+    cursor: default; }
+
 .card {
   border-radius: 4px;
   background-color: #fff;
@@ -7184,6 +7195,26 @@ a.text-dark:hover, a.text-dark:focus {
   flex-direction: column; }
   .card__padding {
     padding: 1rem; }
+
+.comments-input {
+  width: initial;
+  flex-grow: 1; }
+
+.comments-list {
+  display: flex;
+  flex-direction: column;
+  list-style-type: none;
+  padding-inline-start: 0; }
+
+.comments-item {
+  margin-bottom: 1rem; }
+  .comments-item--header {
+    display: flex;
+    flex-direction: row; }
+  .comments-item--time {
+    display: flex;
+    align-self: center;
+    font-size: 80%; }
 
 .taskaccess {
   display: inline-block;

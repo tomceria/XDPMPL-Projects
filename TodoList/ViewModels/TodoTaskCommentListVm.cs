@@ -14,7 +14,7 @@ namespace TodoList.ViewModels
         public Staff CurrentStaff { get; set; }
         
         [Required]
-        [DisplayName("Nội dung")]
+        [DisplayName("Thêm bình luận...")]
         public string NewCommentContent { get; set; }
 
         public void Deconstruct(out string content, out int todoTaskId)
