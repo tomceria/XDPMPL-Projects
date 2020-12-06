@@ -13,6 +13,9 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using TodoList.Data;
 using TodoList.Models;
+using TodoList.Persistence;
+using TodoList.Persistence.Interfaces;
+using TodoList.Persistence.Repositories;
 using TodoList.Services;
 using TodoList.Services.IService;
 
@@ -61,7 +64,13 @@ namespace TodoList
                 options.Password.RequiredUniqueChars = 1;
             }); 
 
-            /**/ // Registering Business Services
+            /**/ // Injecting Business Repositories
+            services.AddScoped<IAccountRepository, AccountRepository>();
+            services.AddScoped<ITodoTaskRepository, TodoTaskRepository>();
+            services.AddScoped<IStaffRepository, StaffRepository>();
+            /**/ // Injecting Unit of Work
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            /**/ // Injecting Business Services
             services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<ITodoTaskService, TodoTaskService>();
             services.AddScoped<IStaffService, StaffService>();

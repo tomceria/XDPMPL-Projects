@@ -228,7 +228,7 @@ namespace TodoList.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete([Bind("Id")] TodoTask todoTask)
         {
-            _todoTaskService.DeleteTodoTask(todoTask);
+            _todoTaskService.RemoveTodoTask(todoTask);
             await _todoTaskService.Save();
 
             return RedirectToAction("Index");

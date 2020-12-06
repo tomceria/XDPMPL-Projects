@@ -13,8 +13,7 @@ namespace TodoList.Models
         [DefaultValue("getdate()")]
         public DateTime CreatedAt { get; set; }
 
-        [ForeignKey("TodoTask")]
-        public int TodoTaskId { get; set; }
+        [ForeignKey("TodoTask")] public int TodoTaskId { get; set; }
         public virtual TodoTask TodoTask { get; set; }
         public int StaffId { get; set; }
         public virtual Staff Staff { get; set; }
@@ -22,6 +21,13 @@ namespace TodoList.Models
         public Comment()
         {
             this.CreatedAt = DateTime.Now;
+        }
+
+        public Comment(string content, TodoTask todoTask, Staff staff) : this()
+        {
+            Content = content;
+            TodoTaskId = todoTask.Id;
+            StaffId = staff.Id;
         }
     }
 }

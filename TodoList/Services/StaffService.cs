@@ -1,40 +1,37 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using TodoList.Data;
 using TodoList.Models;
+using TodoList.Persistence;
 using TodoList.Services.IService;
 
 namespace TodoList.Services
 {
     public class StaffService : IStaffService
     {
-        private readonly TodoContext _context;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public StaffService(TodoContext context)
+        public StaffService(IUnitOfWork unitOfWork)
         {
-            _context = context;
+            _unitOfWork = unitOfWork;
         }
 
-        public async Task<IEnumerable<Staff>> GetAllStaffs()
+        public IEnumerable<Staff> GetAllStaffs()
         {
-            return await _context.Staffs.ToListAsync();
+            return _unitOfWork.Staff.GetAll();
         }
 
         public void AddStaff(Staff staff)
         {
-            _context.Entry(staff).State = EntityState.Added;
+            _unitOfWork.Staff.Add(staff);
         }
 
         public void RemoveStaff(Staff staff)
         {
-            _context.Remove(staff);
-        }
-
-        public async Task Save()
-        {
-            await _context.SaveChangesAsync();
+            _unitOfWork.Staff.Remove(staff);
         }
     }
 }

@@ -2,16 +2,17 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using TodoList.Data;
 using TodoList.Models;
+using TodoList.Services.IService;
 
 namespace TodoList.Controllers
 {
     public class StaffController : Controller
     {
-        private readonly TodoContext _context;
+        private readonly IStaffService _staffService;
 
-        public StaffController(TodoContext context)
+        public StaffController(IStaffService staffService)
         {
-            _context = context;
+            _staffService = staffService;
         }
 
         public IActionResult Me()

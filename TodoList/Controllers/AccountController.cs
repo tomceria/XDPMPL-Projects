@@ -98,7 +98,7 @@ namespace TodoList.Controllers
              */
             _staffService.AddStaff(staff);
             await _staffService.Save();    // Must be saved to have generated ID
-            var result = await _accountService.CreateUser(username, password, staff);
+            var result = await _accountService.CreateAndAddUser(username, password, staff);
 
             if (result != IdentityResult.Success)
             {
@@ -110,7 +110,6 @@ namespace TodoList.Controllers
                 /*
                  * Deleting newly added Staff if Registering failed
                  */
-                await _accountService.Save();
                 _staffService.RemoveStaff(staff);
                 await _staffService.Save();
 
