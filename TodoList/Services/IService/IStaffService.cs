@@ -9,6 +9,8 @@ namespace TodoList.Services.IService
     public interface IStaffService
     {
         IEnumerable<Staff> GetAllStaffs();
+        IEnumerable<ApplicationUser> GetAllUsers();
+        ApplicationUser GetCurrentUser(ClaimsPrincipal user);
         void AddStaff(Staff staff);
         void RemoveStaff(Staff staff);
     }

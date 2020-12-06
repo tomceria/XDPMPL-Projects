@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TodoList.Models;
@@ -15,22 +14,19 @@ namespace TodoList.Controllers
     {
         private readonly ITodoTaskService _todoTaskService;
         private readonly IStaffService _staffService;
-        private readonly IAccountService _accountService;
 
-        public TodoTaskController(ITodoTaskService todoTaskService, IStaffService staffService,
-            IAccountService accountService)
+        public TodoTaskController(ITodoTaskService todoTaskService, IStaffService staffService)
         {
             _todoTaskService = todoTaskService;
             _staffService = staffService;
-            _accountService = accountService;
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var user = await _accountService.GetCurrentUser(User);
+            var user = _staffService.GetCurrentUser(User);
             var userStaff = user.Staff;
 
-            var todoTasks = await _todoTaskService.GetTodoTasks(userStaff);
+            var todoTasks = _todoTaskService.GetTodoTasks(userStaff);
 
             var assignedTodoTasks = todoTasks["assigned"]
                 .Where(o => o.Status != TaskStatus.Completed).ToList();
@@ -86,12 +82,12 @@ namespace TodoList.Controllers
             return View(viewModel);
         }
 
-        public async Task<IActionResult> View(int id)
+        public IActionResult View(int id)
         {
             /*
              * Get TodoTask by id
              */
-            var todoTask = await _todoTaskService.GetOneTodoTask(id);
+            var todoTask = _todoTaskService.GetOneTodoTask(id);
             if (todoTask == null)
             {
                 return NotFound();
@@ -100,7 +96,7 @@ namespace TodoList.Controllers
             /*
              * Check if this task is assigned to Current User
              */
-            var user = await _accountService.GetCurrentUser(User);
+            var user = _staffService.GetCurrentUser(User);
             bool isAssignedToMe = user.Staff.Id == todoTask.StaffId;
             bool isCreatedByMe = user.Staff.Id == todoTask.CreatedById;
 
@@ -118,7 +114,7 @@ namespace TodoList.Controllers
             return View(viewModel);
         }
 
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Edit(int? id)
         {
             if (id == null)
             {
@@ -128,13 +124,13 @@ namespace TodoList.Controllers
             /*
              * Get TodoTask by id
              */
-            var todoTask = await _todoTaskService.GetOneTodoTask((int) id);
+            var todoTask = _todoTaskService.GetOneTodoTask((int) id);
             if (todoTask == null)
             {
                 return NotFound();
             }
 
-            var user = await _accountService.GetCurrentUser(User);
+            var user = _staffService.GetCurrentUser(User);
 
             /*
              * User must be the creator to edit Task
@@ -148,7 +144,7 @@ namespace TodoList.Controllers
             /*
              * Get Staffs and Exclude TodoTask.Staff out of Staff list
              */
-            var staffs = await _staffService.GetAllStaffs();
+            var staffs = _staffService.GetAllStaffs();
 
             /*
              * Constructs ViewModel
@@ -169,7 +165,7 @@ namespace TodoList.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("NewTaskName")] TodoTaskIndexVm viewModel)
+        public IActionResult Create([Bind("NewTaskName")] TodoTaskIndexVm viewModel)
         {
             var name = viewModel.NewTaskName;
 
@@ -178,18 +174,16 @@ namespace TodoList.Controllers
                 return RedirectToAction("Index");
             }
 
-            var user = await _accountService.GetCurrentUser(User);
+            var user = _staffService.GetCurrentUser(User);
 
-            var todoTask = _todoTaskService.CreateTodoTask(name, user.Staff, user.Staff);
-            _todoTaskService.AddTodoTask(todoTask);
-            await _todoTaskService.Save();
+            var todoTask = _todoTaskService.AddTodoTask(name, user.Staff, user.Staff);
 
             return RedirectToAction("Edit", new {id = todoTask.Id});
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit([Bind("TodoTask,TodoTaskStaffId,TodoTaskPartnerIds")]
+        public IActionResult Edit([Bind("TodoTask,TodoTaskStaffId,TodoTaskPartnerIds")]
             TodoTaskEditVm viewModel
         )
         {
@@ -201,14 +195,13 @@ namespace TodoList.Controllers
             }
 
             _todoTaskService.UpdateTodoTask(todoTask, viewModel.TodoTaskPartnerIds);
-            await _todoTaskService.Save();
 
             return RedirectToAction("Index");
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Complete([Bind("TodoTaskId,WillComplete")] TodoTaskCompleteVm viewModel)
+        public IActionResult Complete([Bind("TodoTaskId,WillComplete")] TodoTaskCompleteVm viewModel)
         {
             var todoTaskId = viewModel.TodoTaskId;
 
@@ -217,19 +210,17 @@ namespace TodoList.Controllers
                 return RedirectToAction("View", new {id = todoTaskId});
             }
 
-            var todoTask = await _todoTaskService.GetOneTodoTask(todoTaskId);
+            var todoTask = _todoTaskService.GetOneTodoTask(todoTaskId);
             _todoTaskService.CompleteTodoTask(todoTask);
-            await _todoTaskService.Save();
 
             return RedirectToAction("Index");
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Delete([Bind("Id")] TodoTask todoTask)
+        public IActionResult Delete([Bind("Id")] TodoTask todoTask)
         {
             _todoTaskService.RemoveTodoTask(todoTask);
-            await _todoTaskService.Save();
 
             return RedirectToAction("Index");
         }
@@ -237,7 +228,7 @@ namespace TodoList.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddComment(
+        public IActionResult AddComment(
             [Bind("NewCommentContent,TodoTaskId")] TodoTaskCommentListVm viewModel)
         {
             if (!ModelState.IsValid)
@@ -249,12 +240,11 @@ namespace TodoList.Controllers
             }
 
             var (content, todoTaskId) = viewModel;
-            var todoTask = await _todoTaskService.GetOneTodoTask(todoTaskId);
-            var user = await _accountService.GetCurrentUser(User);
+            var todoTask = _todoTaskService.GetOneTodoTask(todoTaskId);
+            var user = _staffService.GetCurrentUser(User);
 
-            Comment comment = _todoTaskService.CreateComment(content, todoTask, user.Staff);
+            Comment comment = new Comment(content, todoTask, user.Staff);
             _todoTaskService.AddComment(comment);
-            await _todoTaskService.Save();
 
             /*
              * Redirect to the same page

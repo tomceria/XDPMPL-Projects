@@ -9,7 +9,7 @@ namespace TodoList.Services.IService
         IEnumerable<TodoTask> GetAllTodoTasks();
         TodoTask GetOneTodoTask(int id);
         Dictionary<string, IEnumerable<TodoTask>> GetTodoTasks(Staff staff);
-        void AddTodoTask(string name, Staff createdBy, Staff assigned);
+        TodoTask AddTodoTask(string name, Staff createdBy, Staff assigned);
         void UpdateTodoTask(TodoTask todoTask, int[] todoTaskPartnerIds);
         void CompleteTodoTask(TodoTask todoTask);
         void RemoveTodoTask(TodoTask todoTask);

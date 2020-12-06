@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -22,9 +20,9 @@ namespace TodoList.Controllers
         }
 
         [Authorize(Roles = "Leader")]
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {   
-            var accounts = await _accountService.GetAllUsers();
+            var accounts = _staffService.GetAllUsers();
 
             /*
              * Constructs ViewModel
@@ -93,11 +91,7 @@ namespace TodoList.Controllers
 
             var (username, password, staff) = viewModel;
 
-            /*
-             * Main actions
-             */
-            _staffService.AddStaff(staff);
-            await _staffService.Save();    // Must be saved to have generated ID
+            _staffService.AddStaff(staff); // Must be saved to have generated ID
             var result = await _accountService.CreateAndAddUser(username, password, staff);
 
             if (result != IdentityResult.Success)
@@ -107,11 +101,7 @@ namespace TodoList.Controllers
                     ModelState.AddModelError("", error.Description);
                 }
                 
-                /*
-                 * Deleting newly added Staff if Registering failed
-                 */
-                _staffService.RemoveStaff(staff);
-                await _staffService.Save();
+                _staffService.RemoveStaff(staff); // Deleting newly added Staff if Registering failed
 
                 return View(viewModel);
             }

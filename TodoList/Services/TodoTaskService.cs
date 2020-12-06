@@ -1,10 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Query;
-using TodoList.Data;
 using TodoList.Models;
 using TodoList.Persistence;
 using TodoList.Services.IService;
@@ -61,18 +57,25 @@ namespace TodoList.Services
             return result;
         }
 
-        public void AddTodoTask(string name, Staff createdBy, Staff assigned)
+        public TodoTask AddTodoTask(string name, Staff createdBy, Staff assigned)
         {
             TodoTask todoTask = new TodoTask(name, createdBy, assigned);
 
             _unitOfWork.TodoTask.Add(todoTask);
             _unitOfWork.Complete();
+
+            return todoTask;
         }
 
         public void UpdateTodoTask(TodoTask todoTask, int[] todoTaskPartnerIds)
         {
-            // TODO: todoTaskPartnerIds returns list of Staffs
-            todoTask.TodoTaskPartners = ;
+            todoTask.TodoTaskPartners = todoTaskPartnerIds
+                .Select(todoTaskPartnerId => new TodoTaskPartner
+                {
+                    StaffId = todoTaskPartnerId,
+                    TodoTaskId = todoTask.Id
+                }).ToList();
+            
             _unitOfWork.TodoTask.Update(todoTask);
             _unitOfWork.Complete();
         }
@@ -101,6 +104,5 @@ namespace TodoList.Services
             _unitOfWork.TodoTask.AddComment(comment);
             _unitOfWork.Complete();
         }
-
     }
 }
