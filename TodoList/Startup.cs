@@ -74,6 +74,7 @@ namespace TodoList
             services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<ITodoTaskService, TodoTaskService>();
             services.AddScoped<IStaffService, StaffService>();
+            services.AddScoped<IReportService, ReportService>();
         }
 
         /**/ // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

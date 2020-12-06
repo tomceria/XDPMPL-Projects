@@ -1,0 +1,37 @@
+@using TodoList.Common.Utilities
+@model ReportIndexVm
+
+<form asp-action="ShowTaskOnStaffReport">
+    @Html.LabelFor(m => m.TaskOnStaffStaffId, new {@class = "control-label"})
+    @Html.DropDownListFor(
+        m => m.TaskOnStaffStaffId,
+        new SelectList(Model.Staffs, nameof(Staff.Id), nameof(Staff.FullName)),
+        null,
+        new {@class = "form-control"})
+
+    @Html.LabelFor(m => m.TaskOnStaffStartDate, new {@class = "control-label"})
+    @Html.EditorFor(m => m.TaskOnStaffStartDate, new {htmlAttributes = new {@class = "form-control"}})
+
+    @Html.LabelFor(m => m.TaskOnStaffEndDate, new {@class = "control-label"})
+    @Html.EditorFor(m => m.TaskOnStaffEndDate, new {htmlAttributes = new {@class = "form-control"}})
+
+    <input type="submit" value="Xuất báo cáo" class="btn btn-primary"/>
+    
+    <table>
+        <thead>
+        <tr>
+            <th>Tên công việc</th>
+            <th>Trạng thái</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model.TaskOnStaffReport)
+        {
+            <tr>
+                <td>@item.TodoTask.Name</td>
+                <td>@item.Status.GetDisplayName()</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</form>
