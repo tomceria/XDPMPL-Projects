@@ -11,7 +11,7 @@ namespace TodoList.Persistence
         private readonly TodoContext _context;
 
         public UnitOfWork(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager,
-            RoleManager<IdentityRole> roleManager, TodoContext context)
+            RoleManager<ApplicationRole> roleManager, TodoContext context)
         {
             Account = new AccountRepository(userManager, signInManager, roleManager);
             TodoTask = new TodoTaskRepository(context);

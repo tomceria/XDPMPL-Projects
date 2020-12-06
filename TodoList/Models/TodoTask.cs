@@ -62,6 +62,10 @@ namespace TodoList.Models
          */
         [NotMapped] public bool IsOverdue => DateTime.Now > this.EndDate;
 
+        public TodoTask()
+        {
+            
+        }
         public TodoTask(string name, Staff createdBy, Staff assigned)
         {
             Name = name;

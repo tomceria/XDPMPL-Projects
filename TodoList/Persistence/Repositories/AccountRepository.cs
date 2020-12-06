@@ -11,9 +11,9 @@ namespace TodoList.Persistence.Repositories
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
-        private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly RoleManager<ApplicationRole> _roleManager;
 
-        public AccountRepository(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, RoleManager<IdentityRole> roleManager)
+        public AccountRepository(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, RoleManager<ApplicationRole> roleManager)
         {
             this._signInManager = signInManager;
             this._userManager = userManager;
@@ -65,7 +65,7 @@ namespace TodoList.Persistence.Repositories
             return _roleManager.Roles;
         }
 
-        public async Task<IdentityResult> CreateRoleAsync(IdentityRole role)
+        public async Task<IdentityResult> CreateRoleAsync(ApplicationRole role)
         {
             return await _roleManager.CreateAsync(role);
         }

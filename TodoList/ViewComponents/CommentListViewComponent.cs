@@ -20,7 +20,7 @@ namespace TodoList.ViewComponents
 
         public async Task<IViewComponentResult> InvokeAsync(TodoTask todoTask, Staff staff)
         {
-            var comments = await _todoTaskService.GetComments(todoTask);
+            var comments = _todoTaskService.GetComments(todoTask);
             
             /*
              * Construct ViewModel

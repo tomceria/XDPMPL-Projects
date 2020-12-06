@@ -16,7 +16,7 @@ namespace TodoList.Persistence.Interfaces
         Task<IEnumerable<string>> GetUserRolesAsync(string userName);
         Task<IdentityRole> GetRoleAsync(string name);
         IEnumerable<IdentityRole> GetAllRoles();
-        Task<IdentityResult> CreateRoleAsync(IdentityRole role);
+        Task<IdentityResult> CreateRoleAsync(ApplicationRole role);
         Task<bool> IsInRoleAsync(ApplicationUser user, string role);
         Task<IdentityResult> RemoveFromRoleAsync(ApplicationUser user, string role);
         Task<IdentityResult> RemoveFromRolesAsync(ApplicationUser user, IEnumerable<string> roles);

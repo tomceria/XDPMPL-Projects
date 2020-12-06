@@ -87,6 +87,32 @@ namespace TodoList.Persistence.Repositories
             );
         }
 
+        public void UpdateTodoTaskPartners(TodoTask todoTask, int[] todoTaskPartnerIds)
+        {
+            var ogTodoTaskPartners = (
+                from ttp in Context.TodoTaskPartners
+                where ttp.TodoTaskId == todoTask.Id
+                select ttp
+            ).ToList();
+            var todoTaskPartners = todoTaskPartnerIds.Length > 0
+                ? todoTaskPartnerIds
+                    .Select(todoTaskPartnerId => new TodoTaskPartner
+                    {
+                        StaffId = todoTaskPartnerId,
+                        TodoTaskId = todoTask.Id
+                    }).ToList()
+                : new List<TodoTaskPartner>();
+
+            foreach (var ogTodoTaskPartner in ogTodoTaskPartners)
+            {
+                Context.Entry(ogTodoTaskPartner).State = EntityState.Deleted;
+            }
+            foreach (var todoTaskPartner in todoTaskPartners)
+            {
+                Context.Entry(todoTaskPartner).State = EntityState.Added;
+            }
+        }
+
         public void AddComment(Comment comment)
         {
             Context.Add(comment);
@@ -103,48 +129,6 @@ namespace TodoList.Persistence.Repositories
                 .Include(o => o.CreatedBy)
                 .Include(o => o.Staff)
                 .FirstOrDefault(o => o.Id == id);
-        }
-
-        public override void Update(TodoTask entity)
-        {
-            Context.Update(entity);
-
-            foreach (var todoTaskPartner in entity.TodoTaskPartners)
-            {
-                /*
-                 * Remove todoTaskPartner if they are the Assigned Staff
-                 */
-                if (todoTaskPartner.StaffId == entity.StaffId)
-                {
-                    Context.Entry(todoTaskPartner).State = EntityState.Deleted;
-                }
-            }
-
-            // List<TodoTaskPartner> ogTodoTaskPartners = Context.TodoTaskPartners
-            //     .Where(o => o.TodoTaskId == entity.Id).ToList();
-            // List<TodoTaskPartner> todoTaskPartners = todoTaskPartnerIds != null
-            //     ? todoTaskPartnerIds
-            //         .Select(todoTaskPartnerId => new TodoTaskPartner
-            //         {
-            //             TodoTaskId = entity.Id, StaffId = todoTaskPartnerId
-            //         }).ToList()
-            //     : new List<TodoTaskPartner>();
-            //
-            // foreach (TodoTaskPartner ogTodoTaskPartner in ogTodoTaskPartners)
-            // {
-            //     Context.Entry(ogTodoTaskPartner).State = EntityState.Deleted;
-            // }
-            //
-            // foreach (TodoTaskPartner todoTaskPartner in todoTaskPartners)
-            // {
-            //     /*
-            //      * Only add partner if they're not the Assigned staff
-            //      */
-            //     if (todoTaskPartner.StaffId != entity.StaffId)
-            //     {
-            //         Context.Entry(todoTaskPartner).State = EntityState.Added;
-            //     }
-            // }
         }
 
         /*

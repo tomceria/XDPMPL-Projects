@@ -29,9 +29,10 @@ namespace TodoList.Persistence.Repositories
                 from user in Context.Users
                 join staff in Context.Staffs
                     on user.StaffId equals staff.Id
-                where user.UserName == username
+                where user.UserName.Equals(username)
                 select user
-            ).First();
+            ).Include(o => o.Staff)
+            .First();
         }
     }
 }
