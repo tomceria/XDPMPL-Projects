@@ -6,7 +6,8 @@ namespace TodoList.Models.Transient
     {
         [Display(Name = "Đang làm")] InProgress,
         [Display(Name = "Đã hoàn tất")] Completed,
-        [Display(Name = "Trễ hạn")] Overdue
+        [Display(Name = "Đang làm, trễ hạn")] Overdue,
+        [Display(Name = "Đã hoàn tất, trễ hạn")] CompletedLate
     }
     
     public class TaskOnStaffReportData

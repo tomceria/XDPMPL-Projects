@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using TodoList.Models;
 using TodoList.Models.Transient;
 using TodoList.Persistence;
@@ -17,16 +18,62 @@ namespace TodoList.Services
         }
 
         public IEnumerable<TaskOnStaffReportData> GetTaskOnStaffReport(
-            int staffId, DateTime startDate, DateTime endDate)
+            Staff staff, DateTime startDate, DateTime endDate)
         {
-            // TODO: Cài đặt chức năng thống kê
-            return new List<TaskOnStaffReportData>
+            IEnumerable<TodoTask> assignedTodoTasks;
+            IEnumerable<TodoTask> associatedTodoTasks;
+
+            assignedTodoTasks = _unitOfWork.TodoTask.GetAssignedTodoTasks(staff);
+            associatedTodoTasks = _unitOfWork.TodoTask.GetAssociatedTodoTasks(staff);
+            IEnumerable<TodoTask> staffTodoTasks = assignedTodoTasks.Concat(associatedTodoTasks).OrderByDescending(o => o.StartDate);
+
+            List<TaskOnStaffReportData> result = new List<TaskOnStaffReportData>();
+
+            foreach (TodoTask todotask in staffTodoTasks)
             {
-                new TaskOnStaffReportData {
-                    Status = ReportStatus.InProgress,
-                    TodoTask = new TodoTask { Name = "Hello" }
+                if (todotask.StartDate < startDate)
+                {
+                    continue;
                 }
-            };
+
+                TaskOnStaffReportData a = new TaskOnStaffReportData
+                {
+                    Status = ReportStatus.InProgress,
+                    TodoTask = todotask
+                };
+
+                if (todotask.Status == TaskStatus.Completed)
+                {
+                    if (todotask.EndDate < todotask.CompleteDate)
+                    {
+                        a.Status = ReportStatus.CompletedLate;
+                    }
+                    else 
+                    {
+                        a.Status = ReportStatus.Completed;
+                    }
+                }
+                else
+                {
+                    if (endDate > todotask.EndDate)
+                    {
+                        a.Status = ReportStatus.Overdue;
+                    }
+                    else
+                    {
+                        a.Status = ReportStatus.InProgress;
+                    }
+                }
+
+                result.Add(a);
+
+            }
+
+            return result;
+        }
+
+            // TODO: Cài đặt chức năng thống kê
+            
 
             /*
              * UnitOfWork chứa các Repository (như .TodoTask, .Staff), là đơn vị DUY NHẤT tương tác DB của chương trình
@@ -36,7 +83,8 @@ namespace TodoList.Services
              * VD: _unitOfWork.TodoTask.Find(o => o.StartDate >= startDate);
              * Nếu các hàm có sẵn không đủ đáp ứng, có thể thêm method tại ITodoTaskRepository và TodoTaskRepository
              * (vì Report ko có repo riêng, dùng chung với TodoTask)
+             * 
+             * chỉ cần thông tin Công việc với lại Trạng thái thôi à, lọc theo nhân viên, start date, end date
              */
-        }
     }
 }

@@ -64,9 +64,10 @@ namespace TodoList.Controllers
             };
             
             var user = _staffService.GetCurrentUser(User);
+            var staff = _staffService.GetOneStaff(viewModel.TaskOnStaffStaffId);
 
             formData.Report = _reportService.GetTaskOnStaffReport(
-                user.StaffId,
+                staff,
                 viewModel.TaskOnStaffStartDate,
                 viewModel.TaskOnStaffEndDate
             ).ToList();

@@ -20,6 +20,11 @@ namespace TodoList.Services
             return _unitOfWork.Staff.GetAll();
         }
 
+        public Staff GetOneStaff(int id)
+        {
+            return _unitOfWork.Staff.GetBy(id);
+        }
+
         public IEnumerable<ApplicationUser> GetAllUsers()
         {
             return _unitOfWork.Staff.GetAllUsers();

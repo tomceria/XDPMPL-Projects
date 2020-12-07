@@ -34,5 +34,11 @@ namespace TodoList.Persistence.Repositories
             ).Include(o => o.Staff)
             .First();
         }
+
+        public override Staff GetBy(int id)
+        {
+            return Context.Staffs
+                .FirstOrDefault(o => o.Id == id);
+        }
     }
 }
