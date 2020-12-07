@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using TodoList.Models;
 using TodoList.Models.Transient;
 using TodoList.Persistence;
@@ -46,6 +47,7 @@ namespace TodoList.Services
                 .Find(o =>
                     o.IsHidden == false
                     && startDate <= o.StartDate)
+                .Include(o => o.Staff)
                 .ToList();
 
             var result = todoTasks

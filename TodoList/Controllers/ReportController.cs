@@ -44,13 +44,36 @@ namespace TodoList.Controllers
                 viewModel.StaffId = taskOnStaffData.StaffId;
                 viewModel.StartDate = taskOnStaffData.StartDate;
                 viewModel.EndDate = taskOnStaffData.EndDate;
-                viewModel.TaskOnStaffReport = taskOnStaffData.Report;
+                viewModel.Report = taskOnStaffData.Report;
             }
             else
             {
                 viewModel.StartDate = DateTime.Now.AddMonths(-1);
                 viewModel.EndDate = DateTime.Now;
-                viewModel.TaskOnStaffReport = new List<TaskOnStaffReportData>();
+                viewModel.Report = new List<TaskOnStaffReportData>();
+            }
+
+            return View(viewModel);
+        }
+
+        public IActionResult TaskOnStatus()
+        {
+            var viewModel = new ReportTaskOnStatusVm();
+            
+            var taskOnStaffData = TempData.Get<ReportShowTaskOnStatusReportVm>("TaskOnStatus");
+
+            if (taskOnStaffData != null)
+            {
+                viewModel.ReportStatus = taskOnStaffData.ReportStatus;
+                viewModel.StartDate = taskOnStaffData.StartDate;
+                viewModel.EndDate = taskOnStaffData.EndDate;
+                viewModel.Report = taskOnStaffData.Report;
+            }
+            else
+            {
+                viewModel.StartDate = DateTime.Now.AddMonths(-1);
+                viewModel.EndDate = DateTime.Now;
+                viewModel.Report = new List<TaskOnStatusReportData>();
             }
 
             return View(viewModel);
@@ -59,7 +82,7 @@ namespace TodoList.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult ShowTaskOnStaffReport(
-            [Bind("TaskOnStaffStaffId,TaskOnStaffStartDate,TaskOnStaffEndDate")]
+            [Bind("StaffId,StartDate,EndDate")]
             ReportTaskOnStaffVm viewModel)
         {
             var formData = new ReportShowTaskOnStaffReportVm
@@ -96,6 +119,45 @@ namespace TodoList.Controllers
             TempData.Put("TaskOnStaff", formData);
 
             return RedirectToAction("TaskOnStaff");
+        }
+        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult ShowTaskOnStatusReport(
+            [Bind("ReportStatus,StartDate,EndDate")]
+            ReportTaskOnStatusVm viewModel)
+        {
+            var formData = new ReportShowTaskOnStatusReportVm
+            {
+                ReportStatus = viewModel.ReportStatus,
+                StartDate = viewModel.StartDate,
+                EndDate = viewModel.EndDate
+            };
+            
+            formData.Report = _reportService.GetTaskOnStatusReport(
+                viewModel.ReportStatus,
+                viewModel.StartDate,
+                viewModel.EndDate
+            ).ToList();
+            
+            /*
+             * Remove Navigational Properties before converting into JSON
+             * Preserve properties that are necessary for View
+             */
+            foreach (var reportData in formData.Report)
+            {
+                reportData.TodoTask.Staff = new Staff
+                {
+                    LastName = reportData.TodoTask.Staff.LastName,
+                    FirstName = reportData.TodoTask.Staff.FirstName
+                };
+                reportData.TodoTask.CreatedBy = null;
+                reportData.TodoTask.TodoTaskPartners = null;
+            }
+            
+            TempData.Put("TaskOnStatus", formData);
+
+            return RedirectToAction("TaskOnStatus");
         }
     }
 }
