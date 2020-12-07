@@ -35,6 +35,7 @@ namespace TodoList.Controllers
             updatedApplicationUser.Email = viewModel.Email;
             updatedApplicationUser.Staff.FirstName = viewModel.Staff.FirstName;
             updatedApplicationUser.Staff.LastName = viewModel.Staff.LastName;
+            updatedApplicationUser.Staff.Level = viewModel.Staff.Level;
 
             await _accountService.Update(updatedApplicationUser);
 
