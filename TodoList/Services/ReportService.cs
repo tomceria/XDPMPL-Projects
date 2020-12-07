@@ -20,71 +20,91 @@ namespace TodoList.Services
         public IEnumerable<TaskOnStaffReportData> GetTaskOnStaffReport(
             Staff staff, DateTime startDate, DateTime endDate)
         {
-            IEnumerable<TodoTask> assignedTodoTasks;
-            IEnumerable<TodoTask> associatedTodoTasks;
+            var assignedTodoTasks = _unitOfWork.TodoTask.GetAssignedTodoTasks(staff);
+            var associatedTodoTasks = _unitOfWork.TodoTask.GetAssociatedTodoTasks(staff);
+            
+            var todoTasks =
+                assignedTodoTasks
+                    .Concat(associatedTodoTasks)
+                    .Where(o => o.StartDate >= startDate)
+                    .OrderByDescending(o => o.StartDate)
+                    .ToList();
 
-            assignedTodoTasks = _unitOfWork.TodoTask.GetAssignedTodoTasks(staff);
-            associatedTodoTasks = _unitOfWork.TodoTask.GetAssociatedTodoTasks(staff);
-            IEnumerable<TodoTask> staffTodoTasks = assignedTodoTasks.Concat(associatedTodoTasks).OrderByDescending(o => o.StartDate);
+            var result = new List<TaskOnStaffReportData>();
 
-            List<TaskOnStaffReportData> result = new List<TaskOnStaffReportData>();
-
-            foreach (TodoTask todotask in staffTodoTasks)
+            foreach (var todoTask in todoTasks)
             {
-                if (todotask.StartDate < startDate)
+                TaskOnStaffReportData reportData = new TaskOnStaffReportData
                 {
-                    continue;
-                }
-
-                TaskOnStaffReportData a = new TaskOnStaffReportData
-                {
-                    Status = ReportStatus.InProgress,
-                    TodoTask = todotask
+                    Status = DetermineReportStatus(todoTask, endDate),
+                    TodoTask = todoTask
                 };
 
-                if (todotask.Status == TaskStatus.Completed)
-                {
-                    if (todotask.EndDate < todotask.CompleteDate)
-                    {
-                        a.Status = ReportStatus.CompletedLate;
-                    }
-                    else 
-                    {
-                        a.Status = ReportStatus.Completed;
-                    }
-                }
-                else
-                {
-                    if (endDate > todotask.EndDate)
-                    {
-                        a.Status = ReportStatus.Overdue;
-                    }
-                    else
-                    {
-                        a.Status = ReportStatus.InProgress;
-                    }
-                }
-
-                result.Add(a);
-
+                result.Add(reportData);
             }
 
             return result;
         }
 
-            // TODO: Cài đặt chức năng thống kê
-            
+        public IEnumerable<TaskOnStatusReportData> GetTaskOnStatusReport(ReportStatus reportStatus, DateTime startDate,
+            DateTime endDate)
+        {
+            var todoTasks = _unitOfWork.TodoTask
+                .Find(o =>
+                    o.IsHidden == false
+                    && startDate <= o.StartDate)
+                .ToList();
 
-            /*
-             * UnitOfWork chứa các Repository (như .TodoTask, .Staff), là đơn vị DUY NHẤT tương tác DB của chương trình
-             * Repository thực hiện các lệnh tương tác với DB (như là lớp DAL)
-             * Các ???Repository kế thừa Repository và I???Repository
-             * Tham khảo các hàm có sẵn của 1 Repo ở file Repository.cs 
-             * VD: _unitOfWork.TodoTask.Find(o => o.StartDate >= startDate);
-             * Nếu các hàm có sẵn không đủ đáp ứng, có thể thêm method tại ITodoTaskRepository và TodoTaskRepository
-             * (vì Report ko có repo riêng, dùng chung với TodoTask)
-             * 
-             * chỉ cần thông tin Công việc với lại Trạng thái thôi à, lọc theo nhân viên, start date, end date
-             */
+            var result = new List<TaskOnStatusReportData>();
+
+            foreach (var todoTask in todoTasks)
+            {
+                var reportData = new TaskOnStatusReportData
+                {
+                    Status = DetermineReportStatus(todoTask, endDate),
+                    TodoTask = todoTask
+                };
+                
+                result.Add(reportData);
+            }
+            
+            result = result.Where(o => o.Status == reportStatus).ToList();
+
+            return result;
+        }
+
+        /*
+         * PRIVATES
+         */
+
+        private ReportStatus DetermineReportStatus(TodoTask todoTask, DateTime endDate)
+        {
+            ReportStatus status;
+            
+            if (todoTask.Status == TaskStatus.Completed)
+            {
+                if (todoTask.EndDate < todoTask.CompleteDate)
+                {
+                    status = ReportStatus.CompletedLate;
+                }
+                else
+                {
+                    status = ReportStatus.Completed;
+                }
+            }
+            else
+            {
+                if (endDate > todoTask.EndDate)
+                {
+                    status = ReportStatus.Overdue;
+                }
+                else
+                {
+                    status = ReportStatus.InProgress;
+                }
+            }
+            
+            return status;
+        }
     }
 }

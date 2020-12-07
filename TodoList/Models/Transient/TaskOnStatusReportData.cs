@@ -2,7 +2,7 @@ using System.ComponentModel;
 
 namespace TodoList.Models.Transient
 {
-    public class TaskOnStaffReportData
+    public class TaskOnStatusReportData
     {
         [DisplayName("Công việc")]
         public TodoTask TodoTask { get; set; }
