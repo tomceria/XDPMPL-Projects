@@ -23,6 +23,12 @@
                     @if (User.IsInRole("Leader"))
                     {
                         <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Report" asp-action="Index">Thống kê</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="ActivityLog" asp-action="Index">Nhật ký</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Index">Tài khoản</a>
                         </li>
                     }
@@ -57,6 +63,6 @@
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src="~/js/site.js" asp-append-version="true"></script>
 @RenderSection("Scripts", required: false)
-<partial name="_PostRenderScript" />
+<partial name="_PostRenderScript"/>
 </body>
 </html>

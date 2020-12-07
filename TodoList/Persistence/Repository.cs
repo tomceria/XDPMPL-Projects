@@ -10,7 +10,7 @@ namespace TodoList.Persistence
 {
     public class Repository<T> : IRepository<T> where T : class
     {
-        protected DbContext DbContext;
+        protected readonly DbContext DbContext;
 
         public Repository(DbContext context)
         {

@@ -16,6 +16,7 @@ namespace TodoList.Persistence
             Account = new AccountRepository(userManager, signInManager, roleManager);
             TodoTask = new TodoTaskRepository(context);
             Staff = new StaffRepository(context);
+            ActivityLog = new ActivityLogRepository(context);
             
             _context = context;
         }
@@ -23,6 +24,7 @@ namespace TodoList.Persistence
         public IAccountRepository Account { get; }
         public ITodoTaskRepository TodoTask { get; }
         public IStaffRepository Staff { get; }
+        public IActivityLogRepository ActivityLog { get; }
 
         public int Complete()
         {

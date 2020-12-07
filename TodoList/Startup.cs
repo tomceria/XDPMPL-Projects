@@ -68,12 +68,14 @@ namespace TodoList
             services.AddScoped<IAccountRepository, AccountRepository>();
             services.AddScoped<ITodoTaskRepository, TodoTaskRepository>();
             services.AddScoped<IStaffRepository, StaffRepository>();
+            services.AddScoped<IActivityLogRepository, ActivityLogRepository>();
             /**/ // Injecting Unit of Work
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             /**/ // Injecting Business Services
             services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<ITodoTaskService, TodoTaskService>();
             services.AddScoped<IStaffService, StaffService>();
+            services.AddScoped<IActivityLogService, ActivityLogService>();
             services.AddScoped<IReportService, ReportService>();
         }
 
