@@ -67,6 +67,12 @@
         <hr>
 
         @await Component.InvokeAsync("CommentList", new {todoTask = Model.TodoTask, staff = Model.CurrentStaff})
+        
+        @if (User.IsInRole("Leader"))
+        {
+            <hr>
+            @await Component.InvokeAsync("ActivityLogs", new {todoTaskId = Model.TodoTask.Id})
+        }
 
         <hr>
     </div>

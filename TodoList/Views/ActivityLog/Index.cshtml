@@ -11,23 +11,34 @@
 
 <h2>Nhật ký hoạt động</h2>
 
-<table class="table table-hover mt-3">
+<table class="table table-bordered table-hover table-sm mt-3">
     <thead>
     <tr>
         @{
             var emptyLog = new ActivityLog();
         }
-        <th>@Html.DisplayNameFor(m => emptyLog.TodoTask.Name)</th>
-        <th>@Html.DisplayNameFor(m => emptyLog.Staff.FullName)</th>
+        <th style="width: 16%">@Html.DisplayNameFor(m => emptyLog.TodoTask.Name)</th>
+        <th style="width: 16%">@Html.DisplayNameFor(m => emptyLog.StaffId)</th>
         <th>@Html.DisplayNameFor(m => emptyLog.Content)</th>
-        <th>@Html.DisplayNameFor(m => emptyLog.CreatedAt)</th>
+        <th style="width: 16%">@Html.DisplayNameFor(m => emptyLog.CreatedAt)</th>
     </tr>
     </thead>
     <tbody>
     @foreach (var item in Model.ActivityLogs)
     {
         <tr>
-            <td>@Html.DisplayFor(m => item.TodoTask.Name)</td>
+            <td>
+                @if (item.TodoTask.IsHidden == false)
+                {
+                    <a asp-controller="TodoTask" asp-action="View" asp-route-id="@item.TodoTaskId">
+                        @Html.DisplayFor(m => item.TodoTask.Name)
+                    </a>
+                }
+                else
+                {
+                    @Html.DisplayFor(m => item.TodoTask.Name)
+                }
+            </td>
             <td>@Html.DisplayFor(m => item.Staff.FullName)</td>
             <td>@Html.DisplayFor(m => item.Content)</td>
             <td>@Html.DisplayFor(m => item.CreatedAt)</td>

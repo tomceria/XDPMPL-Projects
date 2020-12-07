@@ -25,7 +25,8 @@ namespace TodoList.Services
 
         public IEnumerable<ActivityLog> GetActivityLogsByTodoTask(int todoTaskId)
         {
-            return _unitOfWork.ActivityLog.GetActivityLogsByTodoTask(todoTaskId);
+            return _unitOfWork.ActivityLog.GetActivityLogsByTodoTask(todoTaskId)
+                .OrderByDescending(o => o.CreatedAt);
         }
 
         /// <summary>

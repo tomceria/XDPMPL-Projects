@@ -1,0 +1,22 @@
+@model List<ActivityLog>
+
+
+<div class="form-group">
+    <p>Nhật ký thay đổi</p>
+    <ul class="list-unstyled">
+        @foreach (var item in Model)
+        {
+            <li class="mb-2">
+                <span class="small d-flex flex-grow-1">
+                    @Html.DisplayFor(m => item.CreatedAt)
+                </span>
+                <strong>
+                    @Html.DisplayFor(m => item.Staff.FullName)
+                </strong>
+                <span>
+                    @Html.DisplayFor(m => item.Content)
+                </span>
+            </li>
+        }
+    </ul>
+</div>
