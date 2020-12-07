@@ -38,6 +38,6 @@ namespace TodoList.Data
         public DbSet<TodoTask> TodoTasks { get; set; }
         public DbSet<TodoTaskPartner> TodoTaskPartners { get; set; }
         public DbSet<Comment> Comments { get; set; }
-        public object Comment { get; internal set; }
+        public DbSet<ActivityLog> ActivityLogs { get; set; }
     }
 }

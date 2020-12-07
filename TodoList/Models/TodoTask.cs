@@ -42,6 +42,8 @@ namespace TodoList.Models
 
         [DisplayName("Quyền truy cập")] public TaskAccess Access { get; set; }
 
+        [DisplayName("Đã xoá?")] public bool IsHidden { get; set; }
+        
         [DisplayName("Nhân viên đảm nhiệm")]
         [ForeignKey("Staff")]
         public int StaffId { get; set; }
@@ -64,9 +66,9 @@ namespace TodoList.Models
 
         public TodoTask()
         {
-            
+            IsHidden = false;
         }
-        public TodoTask(string name, Staff createdBy, Staff assigned)
+        public TodoTask(string name, Staff createdBy, Staff assigned) : this()
         {
             Name = name;
             StartDate = DateTime.Now;
