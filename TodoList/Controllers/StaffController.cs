@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using TodoList.Data;
 using TodoList.Models;
 using TodoList.Services.IService;
+using TodoList.ViewModels;
 
 namespace TodoList.Controllers
 {
@@ -20,24 +21,34 @@ namespace TodoList.Controllers
 
         public IActionResult Me()
         {
-            Console.WriteLine("Da chuyen ");
-            var viewModel = _staffService.GetCurrentUser(User);
+            ApplicationUser applicationUser = _staffService.GetCurrentUser(User);
+            var viewModel = new AccountInfoVm
+            {
+                ApplicationUser = applicationUser,
+                Password = ""
+            };
             return View(viewModel);
         }
 
         public async Task<IActionResult> Update(
-            [Bind("UserName,Email,StaffId,Staff")]
-            ApplicationUser viewModel
+            [Bind("ApplicationUser,Password")]
+            AccountInfoVm viewModel
         )
         {
+            var (applicationUser, password) = viewModel;
             ApplicationUser updatedApplicationUser = _staffService.GetCurrentUser(User);
             //update staff info
-            updatedApplicationUser.Email = viewModel.Email;
-            updatedApplicationUser.Staff.FirstName = viewModel.Staff.FirstName;
-            updatedApplicationUser.Staff.LastName = viewModel.Staff.LastName;
-            updatedApplicationUser.Staff.Level = viewModel.Staff.Level;
+            updatedApplicationUser.Email = applicationUser.Email;
+            updatedApplicationUser.Staff.FirstName = applicationUser.Staff.FirstName;
+            updatedApplicationUser.Staff.LastName = applicationUser.Staff.LastName;
+            updatedApplicationUser.Staff.Level = applicationUser.Staff.Level;
 
             await _accountService.Update(updatedApplicationUser);
+            //Change password
+            if (password != null)
+            {
+                await _accountService.ChangePassword(applicationUser, password);// Not save
+            }    
 
            return RedirectToAction("Me","Staff");
         }
