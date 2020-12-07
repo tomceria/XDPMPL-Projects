@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using TodoList.Models;
 using TodoList.Services.IService;
 using TodoList.ViewModels;
+#pragma warning disable 1998
 
 namespace TodoList.ViewComponents
 {
@@ -31,6 +32,11 @@ namespace TodoList.ViewComponents
                 Comments = comments,
                 CurrentStaff = staff
             };
+            
+            /*
+             * Disable this line for ReSharper since it couldnt detect Views/TodoTask/Components/CommentList/Default
+             */
+            // ReSharper disable once Mvc.ViewComponentViewNotResolved
             return View(viewModel);
         }
     }

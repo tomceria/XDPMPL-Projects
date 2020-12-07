@@ -44,7 +44,7 @@ namespace TodoList.Controllers
                     var newArr = arr.Concat(todos).ToList();
                     return newArr;
                 }
-            );
+            ).OrderByDescending(o => o.CompleteDate);
 
             /*
              * EditableTodoTaskIds, for show/hide Edit link
