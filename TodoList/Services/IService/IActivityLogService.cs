@@ -7,5 +7,6 @@ namespace TodoList.Services.IService
     {
         IEnumerable<ActivityLog> GetAllActivityLogs();
         IEnumerable<ActivityLog> GetActivityLogsByTodoTask(int todoTaskId);
+        void AddActivityLog(TodoTask todoTask, int staffId, ActivityType activityType);
     }
 }

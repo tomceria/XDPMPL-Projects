@@ -10,7 +10,7 @@ namespace TodoList.Persistence.Interfaces
         IEnumerable<TodoTask> GetPublicTodoTasks(Staff staff);
         IEnumerable<TodoTask> GetOtherTodoTasks(Staff staff);
         IEnumerable<Comment> GetComments(TodoTask todoTask);
-        void UpdateTodoTaskPartners(TodoTask todoTask, int[] todoTaskPartnerIds);
         void AddComment(Comment comment);
+        void UpdateTodoTaskPartners(TodoTask todoTask, int[] todoTaskPartnerIds);
     }
 }

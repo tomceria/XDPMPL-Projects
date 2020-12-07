@@ -81,10 +81,15 @@ namespace TodoList.Persistence.Repositories
         {
             return (
                 from comment in Context.Comments
+                    .Include(o => o.Staff)
                 where comment.TodoTaskId == todoTask.Id
-                orderby comment.CreatedAt descending
                 select comment
             );
+        }
+        
+        public void AddComment(Comment comment)
+        {
+            Context.Add(comment);
         }
 
         public void UpdateTodoTaskPartners(TodoTask todoTask, int[] todoTaskPartnerIds)
@@ -113,11 +118,6 @@ namespace TodoList.Persistence.Repositories
             }
         }
 
-        public void AddComment(Comment comment)
-        {
-            Context.Add(comment);
-        }
-
         /*
          * OVERRIDES
          */
@@ -137,6 +137,7 @@ namespace TodoList.Persistence.Repositories
         private IIncludableQueryable<TodoTask, Staff> TodoTaskListQuery()
         {
             return Context.TodoTasks
+                .Where(o => o.IsHidden == false)
                 .Include(o => o.Staff)
                 .Include(o => o.TodoTaskPartners)
                 .ThenInclude(o => o.Staff);

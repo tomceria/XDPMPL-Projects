@@ -18,5 +18,6 @@ namespace TodoList.Persistence
 
         void Remove(T entity);
         void RemoveRange(IEnumerable<T> entities);
+        void Detach(T entity);
     }
 }

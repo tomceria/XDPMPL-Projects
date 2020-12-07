@@ -56,5 +56,10 @@ namespace TodoList.Persistence
         {
             DbContext.Set<T>().RemoveRange(entities);
         }
+
+        public virtual void Detach(T entity)
+        {
+            DbContext.Entry(entity).State = EntityState.Detached;
+        }
     }
 }

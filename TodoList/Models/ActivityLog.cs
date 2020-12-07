@@ -11,7 +11,7 @@ namespace TodoList.Models
         [Display(Name = "Chỉnh sửa")] Edit,
         [Display(Name = "Đánh dấu hoàn tất")] Complete,
         [Display(Name = "Bình luận")] AddComment,
-        [Display(Name = "Xoá")] Delete,
+        [Display(Name = "Xoá")] Delete
     }
     
     public class ActivityLog
@@ -25,8 +25,6 @@ namespace TodoList.Models
         public ActivityType ActivityType { get; set; }
         
         [DisplayName("Thời gian")]
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        [DefaultValue("getdate()")]
         public DateTime CreatedAt { get; set; }
         
         [DisplayName("Người thực hiện")]
@@ -39,10 +37,5 @@ namespace TodoList.Models
         
         public virtual Staff Staff { get; set; }
         public virtual TodoTask TodoTask { get; set; }
-
-        public ActivityLog()
-        {
-            CreatedAt = DateTime.Now;
-        }
     }
 }

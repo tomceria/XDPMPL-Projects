@@ -94,13 +94,16 @@ namespace TodoList.Services
 
         public void RemoveTodoTask(TodoTask todoTask)
         {
-            _unitOfWork.TodoTask.Remove(todoTask);
+            todoTask = _unitOfWork.TodoTask.GetBy(todoTask.Id);
+            todoTask.IsHidden = true;
+            _unitOfWork.TodoTask.Update(todoTask);
             _unitOfWork.Complete();
         }
 
         public IEnumerable<Comment> GetComments(TodoTask todoTask)
         {
-            return _unitOfWork.TodoTask.GetComments(todoTask);
+            return _unitOfWork.TodoTask.GetComments(todoTask)
+                .OrderByDescending(o => o.CreatedAt);
         }
 
         public void AddComment(Comment comment)

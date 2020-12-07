@@ -14,11 +14,13 @@ namespace TodoList.Controllers
     {
         private readonly ITodoTaskService _todoTaskService;
         private readonly IStaffService _staffService;
+        private readonly IActivityLogService _activityLogService;
 
-        public TodoTaskController(ITodoTaskService todoTaskService, IStaffService staffService)
+        public TodoTaskController(ITodoTaskService todoTaskService, IStaffService staffService, IActivityLogService activityLogService)
         {
             _todoTaskService = todoTaskService;
             _staffService = staffService;
+            _activityLogService = activityLogService;
         }
 
         public IActionResult Index()
@@ -177,6 +179,9 @@ namespace TodoList.Controllers
             var user = _staffService.GetCurrentUser(User);
 
             var todoTask = _todoTaskService.AddTodoTask(name, user.Staff, user.Staff);
+            
+            // Must be called AFTER the main action
+            _activityLogService.AddActivityLog(todoTask, user.StaffId, ActivityType.Create);
 
             return RedirectToAction("Edit", new {id = todoTask.Id});
         }
@@ -193,7 +198,10 @@ namespace TodoList.Controllers
             {
                 return View(viewModel);
             }
-
+            
+            var user = _staffService.GetCurrentUser(User);
+            _activityLogService.AddActivityLog(todoTask, user.StaffId, ActivityType.Edit);
+            
             _todoTaskService.UpdateTodoTask(todoTask, viewModel.TodoTaskPartnerIds);
 
             return RedirectToAction("Index");
@@ -211,6 +219,9 @@ namespace TodoList.Controllers
             }
 
             var todoTask = _todoTaskService.GetOneTodoTask(todoTaskId);
+            var user = _staffService.GetCurrentUser(User);
+            _activityLogService.AddActivityLog(todoTask, user.StaffId, ActivityType.Complete);
+            
             _todoTaskService.CompleteTodoTask(todoTask);
 
             return RedirectToAction("Index");
@@ -220,6 +231,9 @@ namespace TodoList.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Delete([Bind("Id")] TodoTask todoTask)
         {
+            var user = _staffService.GetCurrentUser(User);
+            _activityLogService.AddActivityLog(todoTask, user.StaffId, ActivityType.Delete);
+            
             _todoTaskService.RemoveTodoTask(todoTask);
 
             return RedirectToAction("Index");
@@ -245,6 +259,9 @@ namespace TodoList.Controllers
 
             Comment comment = new Comment(content, todoTask, user.Staff);
             _todoTaskService.AddComment(comment);
+            
+            // Must be called AFTER the main action
+            _activityLogService.AddActivityLog(todoTask, user.StaffId, ActivityType.AddComment);
 
             /*
              * Redirect to the same page

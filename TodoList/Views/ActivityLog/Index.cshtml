@@ -27,10 +27,10 @@
     @foreach (var item in Model.ActivityLogs)
     {
         <tr>
-            <td>@Html.DisplayFor(m => emptyLog.TodoTask.Name)</td>
-            <td>@Html.DisplayFor(m => emptyLog.Staff.FullName)</td>
-            <td>@Html.DisplayFor(m => emptyLog.Content)</td>
-            <td>@Html.DisplayFor(m => emptyLog.CreatedAt)</td>
+            <td>@Html.DisplayFor(m => item.TodoTask.Name)</td>
+            <td>@Html.DisplayFor(m => item.Staff.FullName)</td>
+            <td>@Html.DisplayFor(m => item.Content)</td>
+            <td>@Html.DisplayFor(m => item.CreatedAt)</td>
         </tr>
     }
     </tbody>
