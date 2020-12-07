@@ -6,8 +6,8 @@
 }
 
 <h6>
-    <a asp-controller="TodoTask" asp-action="Index">
-        Trở về Danh sách Công việc
+    <a asp-controller="TodoTask" asp-action="View" asp-route-id="@Model.TodoTask.Id">
+        Trở về '@Model.TodoTask.Name'
     </a>
 </h6>
 

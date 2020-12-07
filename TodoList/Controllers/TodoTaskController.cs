@@ -204,7 +204,7 @@ namespace TodoList.Controllers
             
             _todoTaskService.UpdateTodoTask(todoTask, viewModel.TodoTaskPartnerIds);
 
-            return RedirectToAction("Index");
+            return RedirectToAction("View", new {id = todoTask.Id});
         }
 
         [HttpPost]
