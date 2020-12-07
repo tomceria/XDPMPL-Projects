@@ -1,31 +1,55 @@
-@using TodoList.Common.Utilities
 @using TodoList.Models.Transient
 @model ReportIndexVm
 
+@{
+    ViewData["Title"] = "Thống kê";
+}
+
+<h6>
+    <a asp-controller="TodoTask" asp-action="Index">
+        Trở về Danh sách Công việc
+    </a>
+</h6>
+
+<h2>Thống kê</h2>
+
 <form asp-action="ShowTaskOnStaffReport">
-    @Html.LabelFor(m => m.TaskOnStaffStaffId, new {@class = "control-label"})
-    @Html.DropDownListFor(
-        m => m.TaskOnStaffStaffId,
-        new SelectList(Model.Staffs, nameof(Staff.Id), nameof(Staff.FullName)),
-        null,
-        new {@class = "form-control"})
+    <div class="form-group">
+        @Html.LabelFor(m => m.TaskOnStaffStaffId, new {@class = "control-label"})
+        @Html.DropDownListFor(
+            m => m.TaskOnStaffStaffId,
+            new SelectList(Model.Staffs, nameof(Staff.Id), nameof(Staff.FullName)),
+            null,
+            new {@class = "form-control"})
+    </div>
 
-    @Html.LabelFor(m => m.TaskOnStaffStartDate, new {@class = "control-label"})
-    @Html.EditorFor(m => m.TaskOnStaffStartDate, new {htmlAttributes = new {@class = "form-control"}})
+    <div class="form-row">
+        <div class="form-group col">
+            @Html.LabelFor(m => m.TaskOnStaffStartDate, new {@class = "control-label"})
+            @Html.EditorFor(m => m.TaskOnStaffStartDate, new {htmlAttributes = new {@class = "form-control"}})
+            @Html.ValidationMessageFor(m => m.TaskOnStaffStartDate)
+        </div>
+        <div class="form-group col">
+            @Html.LabelFor(m => m.TaskOnStaffEndDate, new {@class = "control-label"})
+            @Html.EditorFor(m => m.TaskOnStaffEndDate, new {htmlAttributes = new {@class = "form-control"}})
+            @Html.ValidationMessageFor(m => m.TaskOnStaffEndDate)
+        </div>
+    </div>
 
-    @Html.LabelFor(m => m.TaskOnStaffEndDate, new {@class = "control-label"})
-    @Html.EditorFor(m => m.TaskOnStaffEndDate, new {htmlAttributes = new {@class = "form-control"}})
 
     <input type="submit" value="Xuất báo cáo" class="btn btn-primary"/>
 
-    <table>
+    <table class="table table-bordered table-hover mt-3">
         <thead>
         <tr>
             @{
                 var emptyReportData = new TaskOnStaffReportData();
             }
-            <th>@Html.DisplayNameFor(m => emptyReportData.TodoTask.Name)</th>
+            <th style="width: 18%">@Html.DisplayNameFor(m => emptyReportData.TodoTask)</th>
             <th>@Html.DisplayNameFor(m => emptyReportData.TodoTask.StaffId)</th>
+            <th>@Html.DisplayNameFor(m => emptyReportData.TodoTask.StartDate)</th>
+            <th>@Html.DisplayNameFor(m => emptyReportData.TodoTask.EndDate)</th>
+            <th>@Html.DisplayNameFor(m => emptyReportData.TodoTask.CompleteDate)</th>
             <th>@Html.DisplayNameFor(m => emptyReportData.Status)</th>
         </tr>
         </thead>
@@ -33,8 +57,20 @@
         @foreach (var item in Model.TaskOnStaffReport)
         {
             <tr>
-                <td>@Html.DisplayFor(m => item.TodoTask.Name)</td>
+                <td>
+                    <a asp-controller="TodoTask" asp-action="View" asp-route-id="@item.TodoTask.Id">
+                        @Html.DisplayFor(m => item.TodoTask.Name)
+                    </a>
+                </td>
                 <td>@Html.DisplayFor(m => item.TodoTask.Staff.FullName)</td>
+                <td>@Html.DisplayFor(m => item.TodoTask.StartDate)</td>
+                <td>@Html.DisplayFor(m => item.TodoTask.EndDate)</td>
+                <td>
+                    @if (item.TodoTask.CompleteDate != null)
+                    {
+                        @Html.DisplayFor(m => item.TodoTask.CompleteDate)
+                    }
+                </td>
                 <td>@Html.DisplayFor(m => item.Status)</td>
             </tr>
         }

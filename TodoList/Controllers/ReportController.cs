@@ -43,8 +43,8 @@ namespace TodoList.Controllers
             }
             else
             {
-                viewModel.TaskOnStaffStartDate = DateTime.Now;
-                viewModel.TaskOnStaffEndDate = DateTime.Now.AddMonths(1);
+                viewModel.TaskOnStaffStartDate = DateTime.Now.AddMonths(-1);
+                viewModel.TaskOnStaffEndDate = DateTime.Now;
                 viewModel.TaskOnStaffReport = new List<TaskOnStaffReportData>();
             }
 
