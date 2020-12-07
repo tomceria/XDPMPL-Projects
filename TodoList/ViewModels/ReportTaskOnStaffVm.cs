@@ -6,7 +6,7 @@ using TodoList.Models.Transient;
 
 namespace TodoList.ViewModels
 {
-    public class ReportIndexVm
+    public class ReportTaskOnStaffVm
     {
         public IEnumerable<Staff> Staffs { get; set; }
         public IEnumerable<TaskOnStaffReportData> TaskOnStaffReport { get; set; }
@@ -16,12 +16,12 @@ namespace TodoList.ViewModels
          */
         
         [DisplayName("Nhân viên")]
-        public int TaskOnStaffStaffId { get; set; }
+        public int StaffId { get; set; }
         
         [DisplayName("Từ lúc")]
-        public DateTime TaskOnStaffStartDate { get; set; }
+        public DateTime StartDate { get; set; }
         
         [DisplayName("Đến lúc")]
-        public DateTime TaskOnStaffEndDate { get; set; }
+        public DateTime EndDate { get; set; }
     }
 }

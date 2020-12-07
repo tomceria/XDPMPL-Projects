@@ -25,9 +25,14 @@ namespace TodoList.Controllers
 
         public IActionResult Index()
         {
+            return View();
+        }
+        
+        public IActionResult TaskOnStaff()
+        {
             var staffs = _staffService.GetAllStaffs().ToList();
 
-            var viewModel = new ReportIndexVm
+            var viewModel = new ReportTaskOnStaffVm
             {
                 Staffs = staffs
             };
@@ -36,15 +41,15 @@ namespace TodoList.Controllers
 
             if (taskOnStaffData != null)
             {
-                viewModel.TaskOnStaffStaffId = taskOnStaffData.StaffId;
-                viewModel.TaskOnStaffStartDate = taskOnStaffData.StartDate;
-                viewModel.TaskOnStaffEndDate = taskOnStaffData.EndDate;
+                viewModel.StaffId = taskOnStaffData.StaffId;
+                viewModel.StartDate = taskOnStaffData.StartDate;
+                viewModel.EndDate = taskOnStaffData.EndDate;
                 viewModel.TaskOnStaffReport = taskOnStaffData.Report;
             }
             else
             {
-                viewModel.TaskOnStaffStartDate = DateTime.Now.AddMonths(-1);
-                viewModel.TaskOnStaffEndDate = DateTime.Now;
+                viewModel.StartDate = DateTime.Now.AddMonths(-1);
+                viewModel.EndDate = DateTime.Now;
                 viewModel.TaskOnStaffReport = new List<TaskOnStaffReportData>();
             }
 
@@ -55,22 +60,22 @@ namespace TodoList.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult ShowTaskOnStaffReport(
             [Bind("TaskOnStaffStaffId,TaskOnStaffStartDate,TaskOnStaffEndDate")]
-            ReportIndexVm viewModel)
+            ReportTaskOnStaffVm viewModel)
         {
             var formData = new ReportShowTaskOnStaffReportVm
             {
-                StaffId = viewModel.TaskOnStaffStaffId,
-                StartDate = viewModel.TaskOnStaffStartDate,
-                EndDate = viewModel.TaskOnStaffEndDate
+                StaffId = viewModel.StaffId,
+                StartDate = viewModel.StartDate,
+                EndDate = viewModel.EndDate
             };
             
             var user = _staffService.GetCurrentUser(User);
-            var staff = _staffService.GetOneStaff(viewModel.TaskOnStaffStaffId);
+            var staff = _staffService.GetOneStaff(viewModel.StaffId);
 
             formData.Report = _reportService.GetTaskOnStaffReport(
                 staff,
-                viewModel.TaskOnStaffStartDate,
-                viewModel.TaskOnStaffEndDate
+                viewModel.StartDate,
+                viewModel.EndDate
             ).ToList();
             
             /*
@@ -90,7 +95,7 @@ namespace TodoList.Controllers
             
             TempData.Put("TaskOnStaff", formData);
 
-            return RedirectToAction("Index");
+            return RedirectToAction("TaskOnStaff");
         }
     }
 }

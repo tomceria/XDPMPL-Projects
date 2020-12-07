@@ -22,7 +22,7 @@ namespace TodoList.Services
         {
             var assignedTodoTasks = _unitOfWork.TodoTask.GetAssignedTodoTasks(staff);
             var associatedTodoTasks = _unitOfWork.TodoTask.GetAssociatedTodoTasks(staff);
-            
+
             var todoTasks =
                 assignedTodoTasks
                     .Concat(associatedTodoTasks)
@@ -30,18 +30,11 @@ namespace TodoList.Services
                     .OrderByDescending(o => o.StartDate)
                     .ToList();
 
-            var result = new List<TaskOnStaffReportData>();
-
-            foreach (var todoTask in todoTasks)
+            var result = todoTasks.Select(todoTask => new TaskOnStaffReportData
             {
-                TaskOnStaffReportData reportData = new TaskOnStaffReportData
-                {
-                    Status = DetermineReportStatus(todoTask, endDate),
-                    TodoTask = todoTask
-                };
-
-                result.Add(reportData);
-            }
+                Status = DetermineReportStatus(todoTask, endDate),
+                TodoTask = todoTask
+            }).ToList();
 
             return result;
         }
@@ -55,19 +48,13 @@ namespace TodoList.Services
                     && startDate <= o.StartDate)
                 .ToList();
 
-            var result = new List<TaskOnStatusReportData>();
-
-            foreach (var todoTask in todoTasks)
-            {
-                var reportData = new TaskOnStatusReportData
+            var result = todoTasks
+                .Select(todoTask => new TaskOnStatusReportData
                 {
                     Status = DetermineReportStatus(todoTask, endDate),
                     TodoTask = todoTask
-                };
-                
-                result.Add(reportData);
-            }
-            
+                }).ToList();
+
             result = result.Where(o => o.Status == reportStatus).ToList();
 
             return result;
@@ -80,7 +67,7 @@ namespace TodoList.Services
         private ReportStatus DetermineReportStatus(TodoTask todoTask, DateTime endDate)
         {
             ReportStatus status;
-            
+
             if (todoTask.Status == TaskStatus.Completed)
             {
                 if (todoTask.EndDate < todoTask.CompleteDate)
@@ -103,7 +90,7 @@ namespace TodoList.Services
                     status = ReportStatus.InProgress;
                 }
             }
-            
+
             return status;
         }
     }
