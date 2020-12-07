@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace TodoList.Models.Transient
@@ -6,13 +7,15 @@ namespace TodoList.Models.Transient
     {
         [Display(Name = "Đang làm")] InProgress,
         [Display(Name = "Đã hoàn tất")] Completed,
-        [Display(Name = "Đang làm, trễ hạn")] Overdue,
-        [Display(Name = "Đã hoàn tất, trễ hạn")] CompletedLate
+        [Display(Name = "Đang làm (Trễ hạn)")] Overdue,
+        [Display(Name = "Đã hoàn tất (Trễ hạn)")] CompletedLate
     }
     
     public class TaskOnStaffReportData
     {
         public TodoTask TodoTask { get; set; }
+        
+        [DisplayName("Trạng thái")]
         public ReportStatus Status { get; set; }
     }
 }

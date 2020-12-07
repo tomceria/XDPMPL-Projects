@@ -70,14 +70,16 @@ namespace TodoList.Services
         public void UpdateTodoTask(TodoTask todoTask, int[] todoTaskPartnerIds)
         {
             _unitOfWork.TodoTask.Update(todoTask);
-            
+
             /*
              * Update TodoTaskPartners
              * Exclude Assigned Staff (todoTask.StaffId)
              */
-            todoTaskPartnerIds = todoTaskPartnerIds
-                .Where(todoTaskPartnerId => todoTaskPartnerId != todoTask.StaffId).ToArray();
-            
+            todoTaskPartnerIds = todoTaskPartnerIds != null
+                ? todoTaskPartnerIds
+                    .Where(todoTaskPartnerId => todoTaskPartnerId != todoTask.StaffId).ToArray()
+                : new int[]{};
+
             _unitOfWork.TodoTask.UpdateTodoTaskPartners(todoTask, todoTaskPartnerIds);
             _unitOfWork.Complete();
         }

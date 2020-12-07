@@ -1,4 +1,5 @@
 @using TodoList.Common.Utilities
+@using TodoList.Models.Transient
 @model ReportIndexVm
 
 <form asp-action="ShowTaskOnStaffReport">
@@ -16,20 +17,25 @@
     @Html.EditorFor(m => m.TaskOnStaffEndDate, new {htmlAttributes = new {@class = "form-control"}})
 
     <input type="submit" value="Xuất báo cáo" class="btn btn-primary"/>
-    
+
     <table>
         <thead>
         <tr>
-            <th>Tên công việc</th>
-            <th>Trạng thái</th>
+            @{
+                var emptyReportData = new TaskOnStaffReportData();
+            }
+            <th>@Html.DisplayNameFor(m => emptyReportData.TodoTask.Name)</th>
+            <th>@Html.DisplayNameFor(m => emptyReportData.TodoTask.StaffId)</th>
+            <th>@Html.DisplayNameFor(m => emptyReportData.Status)</th>
         </tr>
         </thead>
         <tbody>
         @foreach (var item in Model.TaskOnStaffReport)
         {
             <tr>
-                <td>@item.TodoTask.Name</td>
-                <td>@item.Status.GetDisplayName()</td>
+                <td>@Html.DisplayFor(m => item.TodoTask.Name)</td>
+                <td>@Html.DisplayFor(m => item.TodoTask.Staff.FullName)</td>
+                <td>@Html.DisplayFor(m => item.Status)</td>
             </tr>
         }
         </tbody>

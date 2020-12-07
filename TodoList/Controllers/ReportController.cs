@@ -4,13 +4,14 @@ using System.Linq;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TodoList.Common.Utilities;
+using TodoList.Models;
 using TodoList.Models.Transient;
 using TodoList.Services.IService;
 using TodoList.ViewModels;
 
 namespace TodoList.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Leader")]
     public class ReportController : Controller
     {
         private readonly IReportService _reportService;
@@ -71,6 +72,21 @@ namespace TodoList.Controllers
                 viewModel.TaskOnStaffStartDate,
                 viewModel.TaskOnStaffEndDate
             ).ToList();
+            
+            /*
+             * Remove Navigational Properties before converting into JSON
+             * Preserve properties that are necessary for View
+             */
+            foreach (var reportData in formData.Report)
+            {
+                reportData.TodoTask.Staff = new Staff
+                {
+                    LastName = reportData.TodoTask.Staff.LastName,
+                    FirstName = reportData.TodoTask.Staff.FirstName
+                };
+                reportData.TodoTask.CreatedBy = null;
+                reportData.TodoTask.TodoTaskPartners = null;
+            }
             
             TempData.Put("TaskOnStaff", formData);
 
