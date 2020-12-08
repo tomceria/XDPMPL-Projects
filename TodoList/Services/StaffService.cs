@@ -41,6 +41,19 @@ namespace TodoList.Services
             _unitOfWork.Complete();
         }
 
+        public void UpdateStaff(Staff staff)
+        {
+            /*
+             * Preserve Level
+             */
+            var originalStaff = _unitOfWork.Staff.GetBy(staff.Id);
+            _unitOfWork.Staff.Detach(originalStaff);
+            staff.Level = originalStaff.Level;
+            
+            _unitOfWork.Staff.Update(staff);
+            _unitOfWork.Complete();
+        }
+
         public void RemoveStaff(Staff staff)
         {
             _unitOfWork.Staff.Remove(staff);

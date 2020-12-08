@@ -21,36 +21,34 @@ namespace TodoList.Controllers
 
         public IActionResult Me()
         {
-            ApplicationUser applicationUser = _staffService.GetCurrentUser(User);
-            var viewModel = new AccountInfoVm
+            var staff = _staffService.GetCurrentUser(User).Staff;
+            var viewModel = new AccountMeVm
             {
-                ApplicationUser = applicationUser,
-                Password = ""
+                Staff = staff
             };
             return View(viewModel);
         }
 
-        public async Task<IActionResult> Update(
-            [Bind("ApplicationUser,Password")]
-            AccountInfoVm viewModel
-        )
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Me([Bind("Staff,Password")] AccountMeVm viewModel)
         {
-            var (applicationUser, password) = viewModel;
-            ApplicationUser updatedApplicationUser = _staffService.GetCurrentUser(User);
-            //update staff info
-            updatedApplicationUser.Email = applicationUser.Email;
-            updatedApplicationUser.Staff.FirstName = applicationUser.Staff.FirstName;
-            updatedApplicationUser.Staff.LastName = applicationUser.Staff.LastName;
-            updatedApplicationUser.Staff.Level = applicationUser.Staff.Level;
-
-            await _accountService.Update(updatedApplicationUser);
-            //Change password
-            if (password != null)
+            var staff = viewModel.Staff;
+            
+            if (!ModelState.IsValid)
             {
-                await _accountService.ChangePassword(applicationUser, password);// Not save
-            }    
+                return View(viewModel);
+            }
 
-           return RedirectToAction("Me","Staff");
+            _staffService.UpdateStaff(staff);
+
+            // //Change password
+            // if (password != null)
+            // {
+            //     await _accountService.ChangePassword(applicationUser, password);// Not save
+            // }    
+
+            return RedirectToAction("Me");
         }
     }
 }

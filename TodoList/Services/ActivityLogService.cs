@@ -46,7 +46,7 @@ namespace TodoList.Services
                 ActivityType = activityType
             };
 
-            TodoTask originalTodoTask = _unitOfWork.TodoTask.GetBy(todoTask.Id);
+            var originalTodoTask = _unitOfWork.TodoTask.GetBy(todoTask.Id);
             _unitOfWork.TodoTask.Detach(originalTodoTask);
 
             /*

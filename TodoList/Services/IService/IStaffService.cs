@@ -13,6 +13,7 @@ namespace TodoList.Services.IService
         IEnumerable<ApplicationUser> GetAllUsers();
         ApplicationUser GetCurrentUser(ClaimsPrincipal user);
         void AddStaff(Staff staff);
+        void UpdateStaff(Staff staff);
         void RemoveStaff(Staff staff);
     }
 }
