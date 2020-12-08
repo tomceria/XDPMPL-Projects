@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>@ViewData["Title"] - TodoList</title>
     <link rel="stylesheet" href="~/css/site.css"/>
+    <link rel="stylesheet" href="~/lib/chosen-js/chosen.min.css"> 
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/chosen-js/chosen.jquery.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
 </head>
 <body>
 <header>
@@ -59,9 +64,6 @@
         &copy; 2020 - TodoList
     </div>
 </footer>
-<script src="~/lib/jquery/dist/jquery.min.js"></script>
-<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-<script src="~/js/site.js" asp-append-version="true"></script>
 @RenderSection("Scripts", required: false)
 <partial name="_PostRenderScript"/>
 </body>

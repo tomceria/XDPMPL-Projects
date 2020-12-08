@@ -69,7 +69,7 @@
                 @Html.ListBoxFor(
                     m => m.TodoTaskPartnerIds,
                     new SelectList(Model.Staffs, nameof(Staff.Id), nameof(Staff.FullName)),
-                    new {@class = "form-control"})
+                    new {@class = "form-control chosen-select", data_placeholder="Chọn..."})
             </div>
             <div class="form-group">
                 @Html.LabelFor(m => m.TodoTask.Access, new {@class = "control-label"})
