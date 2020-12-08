@@ -7,5 +7,6 @@ namespace TodoList.Persistence.Interfaces
     {
         public IEnumerable<ApplicationUser> GetAllUsers();
         public ApplicationUser GetUserWithStaff(string username);
+        public ApplicationUser GetUserWithStaff(int staffId);
     }
 }

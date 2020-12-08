@@ -30,6 +30,11 @@ namespace TodoList.Services
             return _unitOfWork.Staff.GetAllUsers();
         }
 
+        public ApplicationUser GetUser(int staffId)
+        {
+            return _unitOfWork.Staff.GetUserWithStaff(staffId);
+        }
+
         public ApplicationUser GetCurrentUser(ClaimsPrincipal user)
         {
             return _unitOfWork.Staff.GetUserWithStaff(user.Identity.Name);

@@ -39,7 +39,9 @@
             <td>@Html.DisplayFor(model => account.Email)</td>
             <td>@Html.DisplayFor(model => account.Staff.Level)</td>
             <td>
-                <button type="button" class="btn btn-outline-primary">Sửa</button>
+                <a asp-action="Edit" asp-route-id="@account.StaffId" class="d-flex text-decoration-none">
+                    <button type="button" class="btn btn-outline-primary">Sửa</button>
+                </a>
             </td>
         </tr>
     }

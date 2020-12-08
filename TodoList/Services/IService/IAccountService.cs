@@ -15,7 +15,7 @@ namespace TodoList.Services.IService
         public Task<IdentityResult> CreateAndAddUser(string username, string password, Staff staff);
         public Task<IEnumerable<string>> GetUserRoles(string username);
         public Task<bool> IsInRole(ApplicationUser applicationUser, ApplicationRole applicationRole);
-        public Task<IdentityResult> UpdateUserRole(ApplicationUser applicationUser, ApplicationRole applicationRole);
+        public Task<IdentityResult> UpdateUserRole(ApplicationUser applicationUser, string roleName);
         public Task Update(ApplicationUser applicationUser);
         public Task<IdentityResult> ChangePassword(ApplicationUser applicationUser, string password);
     }

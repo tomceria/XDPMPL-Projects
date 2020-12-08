@@ -11,6 +11,7 @@ namespace TodoList.Services.IService
         IEnumerable<Staff> GetAllStaffs();
         Staff GetOneStaff(int id);
         IEnumerable<ApplicationUser> GetAllUsers();
+        ApplicationUser GetUser(int staffId);
         ApplicationUser GetCurrentUser(ClaimsPrincipal user);
         void AddStaff(Staff staff);
         void UpdateStaff(Staff staff);

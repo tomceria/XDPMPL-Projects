@@ -62,13 +62,12 @@ namespace TodoList.Services
             return await _unitOfWork.Account.IsInRoleAsync(applicationUser, applicationRole.Name);
         }
 
-        public async Task<IdentityResult> UpdateUserRole(ApplicationUser applicationUser,
-            ApplicationRole applicationRole)
+        public async Task<IdentityResult> UpdateUserRole(ApplicationUser applicationUser, string roleName)
         {
             await _unitOfWork.Account.RemoveFromRolesAsync(
                 applicationUser, await _unitOfWork.Account.GetUserRolesAsync(applicationUser.UserName)
             );
-            return await _unitOfWork.Account.AddUserToRoleAsync(applicationUser, applicationRole.Name);
+            return await _unitOfWork.Account.AddUserToRoleAsync(applicationUser, roleName);
         }
 
         public async Task<IdentityResult> ChangePassword(ApplicationUser applicationUser, string newPassword)

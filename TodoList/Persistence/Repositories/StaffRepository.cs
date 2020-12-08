@@ -35,6 +35,18 @@ namespace TodoList.Persistence.Repositories
             .First();
         }
 
+        public ApplicationUser GetUserWithStaff(int staffId)
+        {
+            return (
+                from user in Context.Users
+                join staff in Context.Staffs
+                    on user.StaffId equals staff.Id
+                where staff.Id == staffId
+                select user
+            ).Include(o => o.Staff)
+            .First();
+        }
+
         public override Staff GetBy(int id)
         {
             return Context.Staffs

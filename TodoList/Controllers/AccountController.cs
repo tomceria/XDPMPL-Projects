@@ -1,7 +1,11 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using TodoList.Common.Utilities;
+using TodoList.Models;
 using TodoList.Services.IService;
 using TodoList.ViewModels;
 using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
@@ -21,7 +25,7 @@ namespace TodoList.Controllers
 
         [Authorize(Roles = "Leader")]
         public IActionResult Index()
-        {   
+        {
             var accounts = _staffService.GetAllUsers();
 
             /*
@@ -31,7 +35,7 @@ namespace TodoList.Controllers
             {
                 Accounts = accounts
             };
-            
+
             return View(viewModel);
         }
 
@@ -100,13 +104,62 @@ namespace TodoList.Controllers
                 {
                     ModelState.AddModelError("", error.Description);
                 }
-                
+
                 _staffService.RemoveStaff(staff); // Deleting newly added Staff if Registering failed
 
                 return View(viewModel);
             }
-            
+
             return RedirectToAction("Index", "Account");
+        }
+
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var user = _staffService.GetUser((int) id); // StaffId
+            var roleName = (await _accountService.GetUserRoles(user.UserName)).FirstOrDefault();
+            var roleId = roleName != null
+                ? (int) EnumExtensions.ToDictionary<Level>()
+                    .First(o => o.Value.Equals(roleName))
+                    .Key
+                : 0;
+
+            /*
+             * Constructs ViewModel
+             */
+            var viewModel = new AccountEditVm
+            {
+                StaffId = user.StaffId,
+                RoleId = roleId
+            };
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit([Bind("StaffId,RoleId")] AccountEditVm viewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(viewModel);
+            }
+
+            var roleId = viewModel.RoleId;
+            var user = _staffService.GetUser(viewModel.StaffId);
+            
+            var levelKeyPair = EnumExtensions.ToDictionary<Level>()
+                .First(o => ((int) o.Key) == roleId);
+            user.Staff.Level = levelKeyPair.Key;
+            var roleName = levelKeyPair.Value;
+            
+            await _accountService.UpdateUserRole(user, roleName);
+            _staffService.UpdateStaff(user.Staff);
+
+            return RedirectToAction("Index");
         }
     }
 }
