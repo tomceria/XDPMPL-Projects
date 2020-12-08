@@ -1,3 +1,6 @@
+@using applicationRole = TodoList.Models.ApplicationRole
+@model AccountInfoVm
+
 <h6>
     <a asp-controller="Home" asp-action="Index">
         Trở về Trang chủ
@@ -5,3 +8,75 @@
 </h6>
 
 <h2>Thông tin Nhân viên</h2>
+
+<form asp-action="Update">
+    @Html.ValidationSummary(true, null, new { @class = "alert alert-danger", role = "alert" })
+    <div class="form-group">
+        @Html.LabelFor(m => m.ApplicationUser.UserName, new { @class = "control-label" })
+        @Html.TextBoxFor(m => m.ApplicationUser.UserName, new { @readonly = "readonly", @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.ApplicationUser.UserName, null, new { @class = "text-danger" })
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col">
+            @Html.LabelFor(m => m.ApplicationUser.Staff.LastName, new { @class = "control-label" })
+            @Html.TextBoxFor(m => m.ApplicationUser.Staff.LastName, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.ApplicationUser.Staff.LastName, null, new { @class = "text-danger" })
+        </div>
+        <div class="form-group col">
+            @Html.LabelFor(m => m.ApplicationUser.Staff.FirstName, new { @class = "control-label" })
+            @Html.TextBoxFor(m => m.ApplicationUser.Staff.FirstName, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.ApplicationUser.Staff.FirstName, null, new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.ApplicationUser.Email, new { @class = "control-label" })
+        @Html.TextBoxFor(m => m.ApplicationUser.Email, new { @readonly = "readonly", @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.ApplicationUser.Email, null, new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.ApplicationUser.Staff.Level, new { @class = "control-label" })
+        <br />
+        @if (Model.ApplicationUser.Staff.Level.ToString().Equals("Leader"))
+        {
+            <select class="form-control" asp-for=@Model.ApplicationUser.Staff.Level>
+                @foreach (var item in applicationRole.Roles)
+                {
+                    <option value="@item">@item </option>
+                }
+            </select>
+        }
+        else
+        {
+            @Html.TextBoxFor(m => m.ApplicationUser.Staff.Level, new { @readonly = "readonly", @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.ApplicationUser.Staff.Level, null, new { @class = "text-danger" })
+        }
+
+    </div>
+
+    @*    Change Password component*@
+    <a data-toggle="collapse" data-target="#changePassword" href="#">Thay đổi mật khẩu</a>
+    <br />
+    <div id="changePassword" class="collapse">
+        <div class="form-group">
+            @Html.LabelFor(m => m.Password, new { @class = "control-label" })
+            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Password, null, new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Password2, new { @class = "control-label" })
+            @Html.PasswordFor(m => m.Password2, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Password2, null, new { @class = "text-danger" })
+        </div>
+    </div>
+    <hr />
+    <input type="submit" value="Lưu" class="btn btn-primary col-1" />
+</form>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}
+
+
+

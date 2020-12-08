@@ -71,6 +71,14 @@ namespace TodoList.Services
             
             return await _unitOfWork.Account.UpdateAsync(applicationUser);
         }
-        
+
+        public async Task Update(ApplicationUser applicationUser)
+        {
+            await _unitOfWork.Account.UpdateAsync(applicationUser);
+            _unitOfWork.Complete();
+        }
+
+
+
     }
 }
