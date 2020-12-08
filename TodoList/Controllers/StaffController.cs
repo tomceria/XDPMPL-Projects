@@ -31,7 +31,7 @@ namespace TodoList.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Me([Bind("Staff,Password")] AccountMeVm viewModel)
+        public IActionResult Me([Bind("Staff")] AccountMeVm viewModel)
         {
             var staff = viewModel.Staff;
             
@@ -41,12 +41,6 @@ namespace TodoList.Controllers
             }
 
             _staffService.UpdateStaff(staff);
-
-            // //Change password
-            // if (password != null)
-            // {
-            //     await _accountService.ChangePassword(applicationUser, password);// Not save
-            // }    
 
             return RedirectToAction("Me");
         }

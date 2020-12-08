@@ -30,6 +30,15 @@
         @Html.PasswordFor(m => m.Password2, new {@class = "form-control"})
         @Html.ValidationMessageFor(m => m.Password2, null, new {@class = "text-danger"})
     </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Staff.Level, new {@class = "control-label"})
+        @Html.DropDownListFor(
+            m => m.Staff.Level,
+            Html.GetEnumSelectList(typeof(Level)),
+            new {@class = "form-control"}
+            )
+        @Html.ValidationMessageFor(m => m.Staff.Level, null, new {@class = "text-danger"})
+    </div>
 
     <hr/>
 

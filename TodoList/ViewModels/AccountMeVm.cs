@@ -1,7 +1,4 @@
-﻿using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using TodoList.Common.ValidationAttributes;
-using TodoList.Models;
+﻿using TodoList.Models;
 
 namespace TodoList.ViewModels
 {

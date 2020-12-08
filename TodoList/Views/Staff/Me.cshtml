@@ -35,22 +35,22 @@
 </form>
 
     @*    Change Password component*@
-    <a data-toggle="collapse" data-target="#changePassword" href="#">Thay đổi mật khẩu</a>
-    <br />
-    <div id="changePassword" class="collapse">
-        <div class="form-group">
-            @* @Html.LabelFor(m => m.Password, new { @class = "control-label" }) *@
-            @* @Html.PasswordFor(m => m.Password, new { @class = "form-control" }) *@
-            @* @Html.ValidationMessageFor(m => m.Password, null, new { @class = "text-danger" }) *@
-        </div>
-        <div class="form-group">
-            @* @Html.LabelFor(m => m.Password2, new { @class = "control-label" }) *@
-            @* @Html.PasswordFor(m => m.Password2, new { @class = "form-control" }) *@
-            @* @Html.ValidationMessageFor(m => m.Password2, null, new { @class = "text-danger" }) *@
-        </div>
-    </div>
-    <hr />
-    <input type="submit" value="Lưu" class="btn btn-primary col-1" />
+    @* <a data-toggle="collapse" data-target="#changePassword" href="#">Thay đổi mật khẩu</a> *@
+    @* <br /> *@
+    @* <div id="changePassword" class="collapse"> *@
+    @*     <div class="form-group"> *@
+    @*         @Html.LabelFor(m => m.Password, new { @class = "control-label" }) *@
+    @*         @Html.PasswordFor(m => m.Password, new { @class = "form-control" }) *@
+    @*         @Html.ValidationMessageFor(m => m.Password, null, new { @class = "text-danger" }) *@
+    @*     </div> *@
+    @*     <div class="form-group"> *@
+    @*         @Html.LabelFor(m => m.Password2, new { @class = "control-label" }) *@
+    @*         @Html.PasswordFor(m => m.Password2, new { @class = "form-control" }) *@
+    @*         @Html.ValidationMessageFor(m => m.Password2, null, new { @class = "text-danger" }) *@
+    @*     </div> *@
+    @* </div> *@
+    @* <hr /> *@
+    @* <input type="submit" value="Lưu" class="btn btn-primary col-1" /> *@
 
 @section Scripts {
     @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
@@ -16,7 +17,7 @@ namespace TodoList.Services
         {
             _unitOfWork = unitOfWork;
         }
-        
+
         public async Task<SignInResult> Login(string username, string password)
         {
             var result = await _unitOfWork.Account.LoginAsync(username, password, false, false);
@@ -37,13 +38,16 @@ namespace TodoList.Services
         {
             var applicationUser = new ApplicationUser();
             applicationUser.InitUser(username, staff);
+            var applicationRole = ApplicationRole.Roles[(int) staff.Level];
+
             var result = await _unitOfWork.Account.CreateUserAsync(applicationUser, password);
-            
+            await _unitOfWork.Account.AddUserToRoleAsync(applicationUser, applicationRole);
+
             if (result == IdentityResult.Success)
             {
                 _unitOfWork.Complete();
             }
-            
+
             return result;
         }
 
@@ -58,8 +62,12 @@ namespace TodoList.Services
             return await _unitOfWork.Account.IsInRoleAsync(applicationUser, applicationRole.Name);
         }
 
-        public async Task<IdentityResult> AddUserToRole(ApplicationUser applicationUser, ApplicationRole applicationRole)
+        public async Task<IdentityResult> UpdateUserRole(ApplicationUser applicationUser,
+            ApplicationRole applicationRole)
         {
+            await _unitOfWork.Account.RemoveFromRolesAsync(
+                applicationUser, await _unitOfWork.Account.GetUserRolesAsync(applicationUser.UserName)
+            );
             return await _unitOfWork.Account.AddUserToRoleAsync(applicationUser, applicationRole.Name);
         }
 
@@ -68,7 +76,7 @@ namespace TodoList.Services
             var hasher = new PasswordHasher<ApplicationUser>();
             var newPasswordHash = hasher.HashPassword(applicationUser, newPassword);
             applicationUser.PasswordHash = newPasswordHash;
-            
+
             return await _unitOfWork.Account.UpdateAsync(applicationUser);
         }
 
@@ -77,8 +85,5 @@ namespace TodoList.Services
             await _unitOfWork.Account.UpdateAsync(applicationUser);
             _unitOfWork.Complete();
         }
-
-
-
     }
 }
