@@ -1,5 +1,9 @@
 @model AccountEditVm
 
+@{
+    ViewData["Title"] = "Chỉnh sửa " + @Html.ViewData.Model.ApplicationUser.Staff.FullName;
+}
+
 <h6>
     <a asp-action="Index">
         Trở về Tài khoản
@@ -10,7 +14,13 @@
     @Html.HiddenFor(m => m.StaffId)
 
     <div class="form-group">
-        <input type="text" readonly="readonly" value="@User.Identity.Name" class="form-control col-form-label col-form-label-lg">
+        @Html.DisplayNameFor(m => m.StaffId)@Html.Raw(":&nbsp")
+        <strong>
+            @Html.DisplayFor(m => m.ApplicationUser.Staff.FullName)
+            @Html.Raw("(")
+            @Html.DisplayFor(m => m.ApplicationUser.UserName)
+            @Html.Raw(")")
+        </strong>
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.RoleId, new {@class = "control-label"})

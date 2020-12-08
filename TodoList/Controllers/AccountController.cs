@@ -133,6 +133,7 @@ namespace TodoList.Controllers
              */
             var viewModel = new AccountEditVm
             {
+                ApplicationUser = user,
                 StaffId = user.StaffId,
                 RoleId = roleId
             };
@@ -143,6 +144,7 @@ namespace TodoList.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit([Bind("StaffId,RoleId")] AccountEditVm viewModel)
         {
+            ModelState.Remove("ApplicationUser");
             if (!ModelState.IsValid)
             {
                 return View(viewModel);
