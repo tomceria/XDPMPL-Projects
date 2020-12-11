@@ -8,23 +8,19 @@ namespace TechShop_Web.Persistence
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly TodoContext _context;
+        private readonly ShopContext _context;
 
         public UnitOfWork(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager,
-            RoleManager<ApplicationRole> roleManager, TodoContext context)
+            RoleManager<ApplicationRole> roleManager, ShopContext context)
         {
             Account = new AccountRepository(userManager, signInManager, roleManager);
-            TodoTask = new TodoTaskRepository(context);
-            Staff = new StaffRepository(context);
-            ActivityLog = new ActivityLogRepository(context);
+            Customer = new CustomerRepository(context);
             
             _context = context;
         }
 
         public IAccountRepository Account { get; }
-        public ITodoTaskRepository TodoTask { get; }
-        public IStaffRepository Staff { get; }
-        public IActivityLogRepository ActivityLog { get; }
+        public ICustomerRepository Customer { get; }
 
         public int Complete()
         {

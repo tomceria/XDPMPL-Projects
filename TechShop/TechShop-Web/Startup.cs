@@ -31,16 +31,16 @@ namespace TechShop_Web
             services.AddControllersWithViews();
 
             /**/ // Registering Database Connection
-            services.AddDbContext<TodoContext>(options =>
+            services.AddDbContext<ShopContext>(options =>
                 options.UseSqlServer(
-                    Configuration.GetConnectionString("HoangTodoContext")
+                    Configuration.GetConnectionString("HoangShopContext")
                 )
             );
             
             /**/ // Registering Identity Service
             services.AddIdentity<ApplicationUser, ApplicationRole>()
                 .AddRoleManager<RoleManager<ApplicationRole>>()
-                .AddEntityFrameworkStores<TodoContext>()
+                .AddEntityFrameworkStores<ShopContext>()
                 .AddDefaultTokenProviders(); 
             services.ConfigureApplicationCookie(options =>
             {
@@ -61,17 +61,12 @@ namespace TechShop_Web
 
             /**/ // Injecting Business Repositories
             services.AddScoped<IAccountRepository, AccountRepository>();
-            services.AddScoped<ITodoTaskRepository, TodoTaskRepository>();
-            services.AddScoped<IStaffRepository, StaffRepository>();
-            services.AddScoped<IActivityLogRepository, ActivityLogRepository>();
+            services.AddScoped<ICustomerRepository, CustomerRepository>();
             /**/ // Injecting Unit of Work
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             /**/ // Injecting Business Services
             services.AddScoped<IAccountService, AccountService>();
-            services.AddScoped<ITodoTaskService, TodoTaskService>();
-            services.AddScoped<IStaffService, StaffService>();
-            services.AddScoped<IActivityLogService, ActivityLogService>();
-            services.AddScoped<IReportService, ReportService>();
+            services.AddScoped<ICustomerService, CustomerService>();
         }
 
         /**/ // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

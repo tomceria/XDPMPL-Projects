@@ -7,7 +7,7 @@ namespace TechShop_Web.Models
     {
         public static readonly List<string> Roles = new List<string>
         {
-            "Member", "Leader"
+            "Customer"
         };
         
         public ApplicationRole() {

@@ -33,11 +33,11 @@ namespace TechShop_Web.Services
             return await _unitOfWork.Account.GetUserAsync(username);
         }
 
-        public async Task<IdentityResult> CreateAndAddUser(string username, string password, Staff staff)
+        public async Task<IdentityResult> CreateAndAddUser(string username, string password, Customer customer)
         {
             var applicationUser = new ApplicationUser();
-            applicationUser.InitUser(username, staff);
-            var applicationRole = ApplicationRole.Roles[(int) staff.Level];
+            applicationUser.InitUser(username, customer);
+            var applicationRole = ApplicationRole.Roles[0];
 
             var result = await _unitOfWork.Account.CreateUserAsync(applicationUser, password);
             await _unitOfWork.Account.AddUserToRoleAsync(applicationUser, applicationRole);

@@ -9,9 +9,7 @@ namespace TechShop_Web.Persistence
          * Repositories
          */
         IAccountRepository Account { get; }
-        ITodoTaskRepository TodoTask { get; }
-        IStaffRepository Staff { get; }
-        IActivityLogRepository ActivityLog { get; }
+        ICustomerRepository Customer { get; }
         
         int Complete();
     }

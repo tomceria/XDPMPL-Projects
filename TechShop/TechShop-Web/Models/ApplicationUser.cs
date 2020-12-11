@@ -8,16 +8,16 @@ namespace TechShop_Web.Models
         [ForeignKey("Staff")]
         public int StaffId { get; set; }
         
-        public Staff Staff { get; set; }
+        public Customer Customer { get; set; }
 
-        public void InitUser(string username, Staff staff)
+        public void InitUser(string username, Customer customer)
         {
             UserName = username;
             NormalizedUserName = username.ToUpper();
             Email = username;
             NormalizedEmail = username.ToUpper();
-            StaffId = staff.Id;
-            Staff = staff;
+            StaffId = customer.Id;
+            Customer = customer;
         }
     }
 }
