@@ -1,0 +1,124 @@
+.avatar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  width: 38px;
+  background-color: $blue;
+  color: $white;
+  
+  &:hover {
+    cursor: default;
+  }
+}
+
+.card {
+  border-radius: 4px;
+  background-color: $white;
+  box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0,0,0,.12);
+  display: flex;
+  flex-direction: column; 
+  
+  &__padding {
+    padding: 1rem;
+  }
+}
+
+.comments {
+  &-input {
+    width: initial;
+    flex-grow: 1;
+  }
+  
+  &-list {
+    display: flex;
+    flex-direction: column;
+    list-style-type: none;
+    padding-inline-start: 0; 
+  }
+  
+  &-item {
+    margin-bottom: 1rem;
+    
+    &--header {
+      display: flex;
+      flex-direction: row;
+    }
+    
+    &--time {
+      display: flex;
+      align-self: center;
+      font-size: 80%;
+    }
+  }
+}
+
+.taskaccess {
+  display: inline-table;
+  height: auto;
+  margin: 0 0.5rem 0 0.5rem;
+  padding: 0 7px;
+  font-size: 80%;
+  white-space: nowrap;
+  border: 1px solid #d9d9d9;
+  border-radius: 2px;
+
+  &__private {
+    color: #f5222d;
+    background: #fff1f0;
+    border-color: #ffa39e;
+  }
+
+  &__public {
+    color: #52c41a;
+    background: #f6ffed;
+    border-color: #b7eb8f;
+  }
+}
+
+.tasklist {
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  &-- {
+    &title {
+
+    }
+  }
+
+  &- {
+    &item {
+      display: flex;
+      flex-direction: column;
+      
+      & > * {
+        display: flex;
+        flex-direction: row;
+      }
+      
+      &--edit {
+      }
+
+      &--enddate {
+      }
+
+      &--name {
+        margin: 0;
+        font-weight: 500;
+      }
+      
+      &--partner {
+        &+&::before {
+          content: ", "
+        }
+      }
+      
+      &--partners {
+        flex-wrap: wrap;
+      }
+    }
+  }
+}

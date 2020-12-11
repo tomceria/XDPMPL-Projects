@@ -1,0 +1,78 @@
+@model ReportTaskOnStaffVm
+
+@{
+    ViewData["Title"] = "Thống kê Công việc theo Nhân viên";
+}
+
+<h6>
+    <a asp-action="Index">
+        Trở về Thống kê
+    </a>
+</h6>
+
+<h2>@ViewData["Title"]</h2>
+
+<form asp-action="ShowTaskOnStaffReport">
+    <div class="form-group">
+        @Html.LabelFor(m => m.StaffId, new {@class = "control-label"})
+        @Html.DropDownListFor(
+            m => m.StaffId,
+            new SelectList(Model.Staffs, nameof(Staff.Id), nameof(Staff.FullName)),
+            null,
+            new {@class = "form-control"})
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col">
+            @Html.LabelFor(m => m.StartDate, new {@class = "control-label"})
+            @Html.EditorFor(m => m.StartDate, new {htmlAttributes = new {@class = "form-control"}})
+            @Html.ValidationMessageFor(m => m.StartDate)
+        </div>
+        <div class="form-group col">
+            @Html.LabelFor(m => m.EndDate, new {@class = "control-label"})
+            @Html.EditorFor(m => m.EndDate, new {htmlAttributes = new {@class = "form-control"}})
+            @Html.ValidationMessageFor(m => m.EndDate)
+        </div>
+    </div>
+
+
+    <input type="submit" value="Xuất báo cáo" class="btn btn-primary"/>
+
+    <table class="table table-bordered table-hover mt-3">
+        <thead>
+        <tr>
+            @{
+                var emptyReportData = new TaskOnStaffReportData();
+            }
+            <th style="width: 18%">@Html.DisplayNameFor(m => emptyReportData.TodoTask)</th>
+            <th>@Html.DisplayNameFor(m => emptyReportData.TodoTask.StaffId)</th>
+            <th>@Html.DisplayNameFor(m => emptyReportData.TodoTask.StartDate)</th>
+            <th>@Html.DisplayNameFor(m => emptyReportData.TodoTask.EndDate)</th>
+            <th>@Html.DisplayNameFor(m => emptyReportData.TodoTask.CompleteDate)</th>
+            <th>@Html.DisplayNameFor(m => emptyReportData.Status)</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model.Report)
+        {
+            <tr>
+                <td>
+                    <a asp-controller="TodoTask" asp-action="View" asp-route-id="@item.TodoTask.Id">
+                        @Html.DisplayFor(m => item.TodoTask.Name)
+                    </a>
+                </td>
+                <td>@Html.DisplayFor(m => item.TodoTask.Staff.FullName)</td>
+                <td>@Html.DisplayFor(m => item.TodoTask.StartDate)</td>
+                <td>@Html.DisplayFor(m => item.TodoTask.EndDate)</td>
+                <td>
+                    @if (item.TodoTask.CompleteDate != null)
+                    {
+                        @Html.DisplayFor(m => item.TodoTask.CompleteDate)
+                    }
+                </td>
+                <td>@Html.DisplayFor(m => item.Status)</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</form>

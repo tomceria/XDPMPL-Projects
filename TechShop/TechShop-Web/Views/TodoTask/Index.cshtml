@@ -1,0 +1,86 @@
+@model TodoTaskIndexVm
+@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
+@{
+    ViewData["Title"] = "Công việc";
+}
+
+<form asp-action="Create" class="row mt-2">
+    <div class="col">
+        <input asp-for="NewTaskName" class="form-control" placeholder="Nhập tên công việc mới..."/>
+        <span asp-validation-for="NewTaskName" class="text-danger"></span>
+    </div>
+    <div class="col-sm-auto">
+        <input type="submit" value="Tạo mới" class="btn btn-primary"/>
+    </div>
+</form>
+
+<div class="row">
+    <div class="tasklist col-lg-7 col-md-12 mt-3">
+        @* AssignedTodoTasks *@
+        <h6 class="tasklist--title">Công việc của tôi</h6>
+        <ul class="mt-2">
+            @foreach (var todoTask in Model.AssignedTodoTasks)
+            {
+                var todoTaskVm = new TodoTaskComponentVm(todoTask, Model.EditableTodoTaskIds);
+                @Html.DisplayFor(model => todoTaskVm, "TodoTask")
+            }
+        </ul>
+        <hr/>
+
+        @* AssociatedTodoTasks *@
+        <h6 class="tasklist--title">Công việc làm chung</h6>
+        <ul class="mt-2">
+            @foreach (var todoTask in Model.AssociatedTodoTasks)
+            {
+                var todoTaskVm = new TodoTaskComponentVm(todoTask, Model.EditableTodoTaskIds);
+                @Html.DisplayFor(model => todoTaskVm, "TodoTask")
+            }
+        </ul>
+        <hr/>
+
+        @* PublicTodoTasks / OtherTodoTasks *@
+        @if (User.IsInRole("Leader"))
+        {
+            <h6 class="tasklist--title">Các công việc khác</h6>
+            <ul class="mt-2">
+                @foreach (var todoTask in Model.OtherTodoTasks)
+                {
+                    var todoTaskVm = new TodoTaskComponentVm(todoTask, Model.EditableTodoTaskIds);
+                    @Html.DisplayFor(model => todoTaskVm, "TodoTask")
+                }
+            </ul>
+        }
+        else
+        {
+            <h6 class="tasklist--title">Công việc công khai</h6>
+            <ul class="mt-2">
+                @foreach (var todoTask in Model.PublicTodoTasks)
+                {
+                    var todoTaskVm = new TodoTaskComponentVm(todoTask, Model.EditableTodoTaskIds);
+                    @Html.DisplayFor(model => todoTaskVm, "TodoTask")
+                }
+            </ul>
+        }
+
+        <hr>
+    </div>
+
+    <div class="tasklist col-lg-5 col-md-12 mt-3">
+        <h6 class="tasklist--title">Công việc đã hoàn tất</h6>
+        <ul class="small mt-2">
+            @foreach (var todoTask in Model.CompletedTodoTasks)
+            {
+                var todoTaskVm = new TodoTaskComponentVm(todoTask, Model.EditableTodoTaskIds);
+                @Html.DisplayFor(model => todoTaskVm, "TodoTask")
+            }
+        </ul>
+
+        <hr>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

@@ -1,0 +1,64 @@
+@using TaskStatus = TechShop_Web.Models.TaskStatus
+@using TechShop_Web.Common.Utilities
+@model TodoTaskCompleteVm
+
+@if (Model.TodoTaskStatus == TaskStatus.InProgress)
+{
+    <div class="form-group">
+        @if (Model.TodoTaskIsOverdue)
+        {
+            <h4 class="text-danger d-flex justify-content-center">
+                Đã trễ hạn!
+            </h4>
+        }
+        else
+        {
+            <h4 class="text-warning d-flex justify-content-center">
+                @Model.TodoTaskStatus.GetDisplayName()
+            </h4>
+        }
+
+        @if (Model.IsAssigned)
+        {
+            <span class="small text-secondary d-flex justify-content-center">
+                Đã hoàn tất công việc? Đánh dấu ở bên dưới.
+            </span>
+        }
+        else
+        {
+            <span class="small text-secondary d-flex justify-content-center">
+                Chỉ có Nhân viên đảm nhiệm mới có thể Đánh dấu Hoàn tất.
+            </span>
+        }
+    </div>
+    if (Model.IsAssigned)
+    {
+        <form asp-action="Complete">
+            @Html.ValidationSummary(true, null, new {@class = "alert alert-danger", role = "alert"})
+            @Html.HiddenFor(m => m.TodoTaskId)
+            <div class="custom-control custom-checkbox form-check--xl font-weight-bold">
+                @Html.CheckBoxFor(m => m.WillComplete, new {@class = "custom-control-input"})
+                @Html.LabelFor(m => m.WillComplete, new {@class = "custom-control-label"})
+            </div>
+            @Html.ValidationMessageFor(m => m.WillComplete, null, new {@class = "text-danger"})
+            <input type="submit" value="Xác nhận Hoàn tất" class="btn btn-primary"/>
+        </form>
+    }
+}
+else if (Model.TodoTaskStatus == TaskStatus.Completed)
+{
+    <div class="form-group">
+        <h3 class="text-success d-flex justify-content-center">
+            @Model.TodoTaskStatus.GetDisplayName()
+        </h3>
+        <span class="text-secondary d-flex justify-content-center">
+            Vào lúc
+            @Model.TodoTaskCompleteDate
+        </span>
+    </div>
+}
+
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}
