@@ -18,6 +18,8 @@ namespace TechShop_Web.Models
         [Column(TypeName="bigint")] 
         public int Price { get; set; }
         
+        public bool IsHidden { get; set; } = false;
+        
         public virtual ICollection<ComboDetail> ComboDetails { get; set; }
     }
 }
