@@ -1,5 +1,6 @@
 #nullable enable
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -28,5 +29,6 @@ namespace TechShop_Web.Models
         public int CustomerId { get; set; }
         
         public virtual Customer Customer { get; set; }
+        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
     }
 }

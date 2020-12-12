@@ -19,6 +19,8 @@ namespace TechShop_Web.Data
                 .HasKey(a => new {a.ProductId, a.ComboId});
             builder.Entity<OrderDetail>()
                 .HasKey(a => new {a.ProductId, a.OrderId});
+            builder.Entity<ImportDetail>()
+                .HasKey(a => new {a.ProductId, a.ImportId});
             builder.Entity<ProductType>()
                 .HasOne(o => o.ParentType)
                 .WithMany(o => o.ProductTypes)
@@ -32,5 +34,7 @@ namespace TechShop_Web.Data
         public DbSet<ComboDetail> ComboDetails { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderDetail> OrderDetails { get; set; }
+        public DbSet<Import> Imports { get; set; }
+        public DbSet<ImportDetail> ImportDetails { get; set; }
     }
 }
