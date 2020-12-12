@@ -1,0 +1,18 @@
+@using TechShop_Web.Common.Utilities
+@model TaskAccess
+
+@{
+    var className = "taskaccess taskaccess__";
+    var classModifier = "";
+    if (Model == TaskAccess.IsPrivate)
+    {
+        classModifier = "private";
+    } else
+    {
+        classModifier = "public";
+    }
+}
+
+<span class="@className@classModifier mt-auto mb-auto">
+    @Model.GetDisplayName()
+</span>

@@ -1,0 +1,19 @@
+@model ICollection<TodoTaskPartner>
+
+@if (Model != null && Model.Count > 0)
+{
+    <small>
+        @{
+            var emptyTodoTask = new TodoTask();
+        }
+        <span data-toggle="tooltip" title="@Html.DisplayNameFor(model => emptyTodoTask.TodoTaskPartners)">
+            <i class="fa fa-user-friends"></i>
+        </span>
+        @foreach (var item in Model)
+        {
+            <span class="tasklist-item--partner" data-toggle="tooltip" title="@item.Staff.FullName">
+                @item.Staff.FirstName
+            </span>
+        }
+    </small>
+}
