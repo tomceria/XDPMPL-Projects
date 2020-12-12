@@ -11,6 +11,9 @@ namespace TechShop_Web.Models
         [DisplayName("Tên Combo")]
         public string Name { get; set; }
         
+        [DisplayName("Mã hiển thị")]
+        public string Slug { get; set; }
+        
         [DisplayName("Giá")]
         [Column(TypeName="bigint")] 
         public int Price { get; set; }

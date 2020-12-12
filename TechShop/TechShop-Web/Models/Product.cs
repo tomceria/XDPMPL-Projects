@@ -14,6 +14,9 @@ namespace TechShop_Web.Models
         [DisplayName("Mã hiển thị")]
         public string Slug { get; set; }
         
+        [DisplayName("SKU")]
+        public string Sku { get; set; }
+        
         [DisplayName("Giá")]
         [Column(TypeName="bigint")] 
         public int Price { get; set; }

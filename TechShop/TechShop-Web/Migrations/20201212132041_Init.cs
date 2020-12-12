@@ -28,6 +28,7 @@ namespace TechShopWeb.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(nullable: true),
+                    Slug = table.Column<string>(nullable: true),
                     Price = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
@@ -159,6 +160,7 @@ namespace TechShopWeb.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(nullable: true),
                     Slug = table.Column<string>(nullable: true),
+                    Sku = table.Column<string>(nullable: true),
                     Price = table.Column<long>(type: "bigint", nullable: false),
                     Manufacturer = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
