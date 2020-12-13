@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using TechShop_Manager.BUS;
 
@@ -21,7 +22,6 @@ namespace TechShop_Manager.DAL
         }
         public static Customer GetOne(int id)
         {
-            // if found => return customer, else return null
             return _ctx.Customers.Find(id);
         }
 
@@ -33,23 +33,11 @@ namespace TechShop_Manager.DAL
 
         public static Customer UpdateOne(Customer customer)
         {
-            // get by id
-            var customerToUpdate = _ctx.Customers.Find(customer.ID);
+            _ctx.Entry(customer).State = EntityState.Modified;    
 
-            // update entity
-            customerToUpdate.Name = customer.Name;
-
-            // save change to db
             _ctx.SaveChanges();
 
-            return customerToUpdate;
-        }
-
-        public static void DeleteOne(int id)
-        {
-            var customer = _ctx.Customers.Find(id);
-            _ctx.Customers.Remove(customer);
-            _ctx.SaveChanges();
+            return customer;
         }
     }
 }

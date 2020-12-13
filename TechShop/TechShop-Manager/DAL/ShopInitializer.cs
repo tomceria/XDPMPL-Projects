@@ -2,7 +2,7 @@
 
 namespace TechShop_Manager.DAL
 {
-    class TourInitializer : DropCreateDatabaseIfModelChanges<ShopContext>
+    class ShopInitializer : DropCreateDatabaseIfModelChanges<ShopContext>
     {
         protected override void Seed(ShopContext context)
         {

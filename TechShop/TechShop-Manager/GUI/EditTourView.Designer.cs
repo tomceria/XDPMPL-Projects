@@ -123,7 +123,6 @@ namespace TechShop_Manager.GUI
             this.dataLayoutControl_Tour.Controls.Add(this.listBoxControl_TourDetail);
             this.dataLayoutControl_Tour.Controls.Add(this.GridControl_TourPrices);
             this.dataLayoutControl_Tour.Controls.Add(this.LookUpEdit_TourTypeID);
-            this.dataLayoutControl_Tour.DataSource = typeof(TechShop_Manager.BUS.Tour);
             this.dataLayoutControl_Tour.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataLayoutControl_Tour.HiddenItems.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlItem4});
@@ -208,7 +207,6 @@ namespace TechShop_Manager.GUI
             // 
             // NameTextEdit
             // 
-            this.NameTextEdit.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", typeof(TechShop_Manager.BUS.Tour), "Name", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.NameTextEdit.Location = new System.Drawing.Point(83, 12);
             this.NameTextEdit.MenuManager = this.mainRibbonControl;
             this.NameTextEdit.Name = "NameTextEdit";
@@ -270,7 +268,6 @@ namespace TechShop_Manager.GUI
             // 
             // DescriptionTextEdit
             // 
-            this.DescriptionTextEdit.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", typeof(TechShop_Manager.BUS.Tour), "Description", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.DescriptionTextEdit.Location = new System.Drawing.Point(83, 36);
             this.DescriptionTextEdit.MenuManager = this.mainRibbonControl;
             this.DescriptionTextEdit.Name = "DescriptionTextEdit";
@@ -281,7 +278,6 @@ namespace TechShop_Manager.GUI
             // 
             // PriceRefTextEdit
             // 
-            this.PriceRefTextEdit.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", typeof(TechShop_Manager.BUS.Tour), "PriceRef", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.PriceRefTextEdit.Location = new System.Drawing.Point(83, 60);
             this.PriceRefTextEdit.MenuManager = this.mainRibbonControl;
             this.PriceRefTextEdit.Name = "PriceRefTextEdit";
@@ -297,7 +293,6 @@ namespace TechShop_Manager.GUI
             // 
             // LookUpEdit_TourType
             // 
-            this.LookUpEdit_TourType.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", typeof(TechShop_Manager.BUS.Tour), "TourType", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.LookUpEdit_TourType.Location = new System.Drawing.Point(472, 12);
             this.LookUpEdit_TourType.MenuManager = this.mainRibbonControl;
             this.LookUpEdit_TourType.Name = "LookUpEdit_TourType";
@@ -312,7 +307,6 @@ namespace TechShop_Manager.GUI
             // 
             // listBoxControl_TourDetail
             // 
-            this.listBoxControl_TourDetail.DataBindings.Add(new System.Windows.Forms.Binding("DataSource", typeof(TechShop_Manager.BUS.Tour), "TourDetails", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.listBoxControl_TourDetail.Location = new System.Drawing.Point(508, 119);
             this.listBoxControl_TourDetail.Name = "listBoxControl_TourDetail";
             this.listBoxControl_TourDetail.Size = new System.Drawing.Size(230, 298);
@@ -323,7 +317,6 @@ namespace TechShop_Manager.GUI
             // 
             // GridControl_TourPrices
             // 
-            this.GridControl_TourPrices.DataBindings.Add(new System.Windows.Forms.Binding("DataSource", typeof(TechShop_Manager.BUS.Tour), "TourPrices", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.GridControl_TourPrices.Location = new System.Drawing.Point(24, 119);
             this.GridControl_TourPrices.MainView = this.gridView_TourPrice;
             this.GridControl_TourPrices.MenuManager = this.mainRibbonControl;
@@ -366,7 +359,6 @@ namespace TechShop_Manager.GUI
             // 
             // LookUpEdit_TourTypeID
             // 
-            this.LookUpEdit_TourTypeID.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", typeof(TechShop_Manager.BUS.Tour), "TourTypeID", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.LookUpEdit_TourTypeID.Location = new System.Drawing.Point(600, 12);
             this.LookUpEdit_TourTypeID.MenuManager = this.mainRibbonControl;
             this.LookUpEdit_TourTypeID.Name = "LookUpEdit_TourTypeID";

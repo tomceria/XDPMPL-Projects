@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -6,26 +8,26 @@ namespace TechShop_Manager.BUS
 {
     public partial class Customer
     {
-        [Key, Display(AutoGenerateField = false)]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int ID { get; set; }
+        [DisplayName("Mã KH")] public int Id { get; set; }
 
-        [Required, Display(Name = "Tên khách")]
-        public string Name { get; set; }
+        [Required(ErrorMessage = "Tên không được bỏ trống.")]
+        [DisplayName("Tên")]
+        public string FirstName { get; set; }
 
-        [Display(Name = "Số CMND")]
-        public string CMND { get; set; }
+        [Required(ErrorMessage = "Họ không được bỏ trống.")]
+        [DisplayName("Họ")]
+        public string LastName { get; set; }
 
-        [Display(Name = "Địa chỉ")]
-        public string Address { get; set; }
+        public string Email { get; set; }
 
-        [Display(Name = "Giới tính")]
-        public string Gender { get; set; }
+        [DisplayName("Số điện thoại")] public string PhoneNumber { get; set; }
 
-        [Display(Name = "Số điện thoại")]
-        public string PhoneNumber { get; set; }
+        [Column(TypeName = "date")] public DateTime DOB { get; set; }
 
-        public virtual ICollection<TourGroupDetail> TourGroupDetails { get; set; }
+        [Column(TypeName = "text")] public string Address { get; set; }
 
+        public virtual ICollection<Order> Orders { get; set; }
+
+        [NotMapped] [DisplayName("Tên")] public string FullName => $"{LastName} {FirstName}";
     }
 }

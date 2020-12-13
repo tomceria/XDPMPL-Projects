@@ -80,23 +80,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BUS\CostTypeBUS.cs" />
     <Compile Include="BUS\CustomerBUS.cs" />
-    <Compile Include="BUS\DestinationBUS.cs" />
     <Compile Include="BUS\Report\StaffActivitiesReportBUS.cs" />
     <Compile Include="BUS\Report\TourBusinessReportBUS.cs" />
-    <Compile Include="BUS\StaffBUS.cs" />
-    <Compile Include="BUS\TourBUS.cs" />
-    <Compile Include="BUS\TourGroupBUS.cs" />
-    <Compile Include="BUS\TourTypeBUS.cs" />
-    <Compile Include="DAL\CostTypeDAL.cs" />
     <Compile Include="DAL\CustomerDAL.cs" />
-    <Compile Include="DAL\DestinationDAL.cs" />
-    <Compile Include="DAL\StaffDAL.cs" />
-    <Compile Include="DAL\TourDAL.cs" />
-    <Compile Include="DAL\TourGroupDAL.cs" />
-    <Compile Include="DAL\TourTypeDAL.cs" />
-    <Compile Include="DAL\TourInitializer.cs" />
+    <Compile Include="DAL\ShopInitializer.cs" />
     <Compile Include="GUI\EditTourGroupView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -117,30 +105,16 @@
     </Compile>
     <Compile Include="MainViewModel.cs" />
     <Compile Include="DAL\ShopContext.cs" />
-    <Compile Include="Migrations\202010190138050_TourDB-v1.cs" />
-    <Compile Include="Migrations\202010190138050_TourDB-v1.designer.cs">
-      <DependentUpon>202010190138050_TourDB-v1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202011100746252_TourGroup-TourPrice.cs" />
-    <Compile Include="Migrations\202011100746252_TourGroup-TourPrice.designer.cs">
-      <DependentUpon>202011100746252_TourGroup-TourPrice.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\CostType.cs" />
-    <Compile Include="Models\Staff.cs" />
-    <Compile Include="Models\TourGroupCost.cs" />
+    <Compile Include="Models\Combo.cs" />
+    <Compile Include="Models\ComboDetail.cs" />
     <Compile Include="Models\Customer.cs" />
-    <Compile Include="Models\TourGroupDetail.cs" />
-    <Compile Include="Models\TourGroup.cs" />
-    <Compile Include="Models\Destination.cs" />
-    <Compile Include="Models\Tour.cs" />
-    <Compile Include="Models\TourDetail.cs" />
-    <Compile Include="Models\TourGroupStaff.cs" />
-    <Compile Include="Models\TourPrice.cs" />
-    <Compile Include="Models\TourType.cs" />
-    <Compile Include="Models\Transient\StaffActivitiesReport.cs" />
-    <Compile Include="Models\Transient\TourBusinessReport.cs" />
-    <Compile Include="Models\Transient\TourBusinessReportResource.cs" />
+    <Compile Include="Models\Import.cs" />
+    <Compile Include="Models\ImportDetail.cs" />
+    <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\OrderDetail.cs" />
+    <Compile Include="Models\ProductType.cs" />
+    <Compile Include="Models\Product.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GUI\ManageView.cs">
@@ -169,12 +143,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\ReportView.resx">
       <DependentUpon>ReportView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202010190138050_TourDB-v1.resx">
-      <DependentUpon>202010190138050_TourDB-v1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202011100746252_TourGroup-TourPrice.resx">
-      <DependentUpon>202011100746252_TourGroup-TourPrice.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -209,7 +177,6 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

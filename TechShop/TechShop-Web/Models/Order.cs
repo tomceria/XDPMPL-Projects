@@ -8,7 +8,6 @@ namespace TechShop_Web.Models
 {
     public class Order
     {
-        
         public int Id { get; set; }
         
         [DisplayName("Ngày giờ đặt hàng")]
