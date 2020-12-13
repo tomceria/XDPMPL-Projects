@@ -59,12 +59,11 @@ namespace TechShop_Manager.GUI
             // 
             // gridControl_Imports
             // 
-            this.gridControl_Imports.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl_Imports.Location = new System.Drawing.Point(0, 0);
+            this.gridControl_Imports.Location = new System.Drawing.Point(53, 73);
             this.gridControl_Imports.MainView = this.gridView_Imports;
             this.gridControl_Imports.MenuManager = this.ribbonControl;
             this.gridControl_Imports.Name = "gridControl_Imports";
-            this.gridControl_Imports.Size = new System.Drawing.Size(788, 447);
+            this.gridControl_Imports.Size = new System.Drawing.Size(537, 270);
             this.gridControl_Imports.TabIndex = 2;
             this.gridControl_Imports.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView_Imports});
@@ -188,12 +187,11 @@ namespace TechShop_Manager.GUI
             // 
             // gridControl_Orders
             // 
-            this.gridControl_Orders.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl_Orders.Location = new System.Drawing.Point(0, 0);
+            this.gridControl_Orders.Location = new System.Drawing.Point(48, 28);
             this.gridControl_Orders.MainView = this.gridView_Orders;
             this.gridControl_Orders.MenuManager = this.ribbonControl;
             this.gridControl_Orders.Name = "gridControl_Orders";
-            this.gridControl_Orders.Size = new System.Drawing.Size(788, 447);
+            this.gridControl_Orders.Size = new System.Drawing.Size(490, 343);
             this.gridControl_Orders.TabIndex = 0;
             this.gridControl_Orders.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView_Orders});
