@@ -16,7 +16,7 @@ namespace TechShop_Web.Controllers
 
         public IActionResult Index()
         {
-            return RedirectToAction("Index");
+            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
