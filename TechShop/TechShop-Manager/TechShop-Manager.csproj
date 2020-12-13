@@ -81,27 +81,25 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BUS\CustomerBUS.cs" />
-    <Compile Include="BUS\Report\StaffActivitiesReportBUS.cs" />
-    <Compile Include="BUS\Report\TourBusinessReportBUS.cs" />
     <Compile Include="DAL\CustomerDAL.cs" />
     <Compile Include="DAL\ShopInitializer.cs" />
-    <Compile Include="GUI\EditTourGroupView.cs">
+    <Compile Include="GUI\EditViewTemplate.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\EditTourGroupView.Designer.cs">
-      <DependentUpon>EditTourGroupView.cs</DependentUpon>
+    <Compile Include="GUI\EditViewTemplate.Designer.cs">
+      <DependentUpon>EditViewTemplate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\InventoryView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\InventoryView.Designer.cs">
+      <DependentUpon>InventoryView.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\MainView.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="GUI\MainView.Designer.cs">
       <DependentUpon>MainView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="GUI\ReportView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="GUI\ReportView.Designer.cs">
-      <DependentUpon>ReportView.cs</DependentUpon>
     </Compile>
     <Compile Include="MainViewModel.cs" />
     <Compile Include="DAL\ShopContext.cs" />
@@ -123,26 +121,17 @@
     <Compile Include="GUI\ManageView.Designer.cs">
       <DependentUpon>ManageView.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\EditTourView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="GUI\EditTourView.Designer.cs">
-      <DependentUpon>EditTourView.cs</DependentUpon>
-    </Compile>
-    <EmbeddedResource Include="GUI\EditTourGroupView.resx">
-      <DependentUpon>EditTourGroupView.cs</DependentUpon>
+    <EmbeddedResource Include="GUI\EditViewTemplate.resx">
+      <DependentUpon>EditViewTemplate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\EditTourView.resx">
-      <DependentUpon>EditTourView.cs</DependentUpon>
+    <EmbeddedResource Include="GUI\InventoryView.resx">
+      <DependentUpon>InventoryView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\MainView.resx">
       <DependentUpon>MainView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\ManageView.resx">
       <DependentUpon>ManageView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="GUI\ReportView.resx">
-      <DependentUpon>ReportView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">

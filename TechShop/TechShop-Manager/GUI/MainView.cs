@@ -5,7 +5,7 @@ namespace TechShop_Manager.GUI
     public partial class MainView : DevExpress.XtraBars.FluentDesignSystem.FluentDesignForm
     {
         private ManageView _manageView;
-        private ReportView _reportView;
+        private InventoryView _inventoryView;
 
         public MainView()
         {
@@ -39,9 +39,9 @@ namespace TechShop_Manager.GUI
                 {
                     this.documentManager_MainView.View.Controller.Activate(manageViewDocument);
                 }
-                else if (selected == accordionControlElement_ReportView)
+                else if (selected == accordionControlElement_InventoryView)
                 {
-                    this.documentManager_MainView.View.Controller.Activate(reportViewDocument);
+                    this.documentManager_MainView.View.Controller.Activate(inventoryViewDocument);
                 }
             }
             catch (DevExpress.XtraBars.Docking2010.Views.DeferredLoadingException)
@@ -62,13 +62,13 @@ namespace TechShop_Manager.GUI
                 }
                 e.Control = _manageView;
             }
-            if (e.Document == reportViewDocument)
+            if (e.Document == inventoryViewDocument)
             {
-                if (_reportView == null)
+                if (_inventoryView == null)
                 {
-                    _reportView = new ReportView();
+                    _inventoryView = new InventoryView();
                 }
-                e.Control = _reportView;
+                e.Control = _inventoryView;
             }
             if (e.Control == null)
                 e.Control = new System.Windows.Forms.Control();

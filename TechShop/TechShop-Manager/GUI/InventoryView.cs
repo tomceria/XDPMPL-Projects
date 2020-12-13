@@ -6,16 +6,15 @@ using TechShop_Manager.BUS;
 
 namespace TechShop_Manager.GUI
 {
-    public partial class ManageView : DevExpress.XtraEditors.XtraUserControl
+    public partial class InventoryView : DevExpress.XtraEditors.XtraUserControl
     {
         enum Page
         {
-            Products,
-            Combos,
-            Customers
+            Imports,
+            Orders,
         }
 
-        public ManageView()
+        public InventoryView()
         {
             InitializeComponent();
             ConfigureControls();
@@ -24,29 +23,23 @@ namespace TechShop_Manager.GUI
 
         private void ConfigureControls()
         {
-            gridView_Products.OptionsBehavior.Editable = false;
-            gridView_Combos.OptionsBehavior.Editable = false;
-            gridView_Customers.OptionsBehavior.Editable = false;
-            gridView_Customers.PopulateColumns();
+            gridView_Imports.OptionsBehavior.Editable = false;
+            gridView_Orders.OptionsBehavior.Editable = false;
         }
 
         private Page getCurrentPage()
         {
-            Page curPage = Page.Products;
-            int tabIndex = xtraTabControl_Products.SelectedTabPageIndex;
+            Page curPage = Page.Imports;
+            int tabIndex = xtraTabControl_Imports.SelectedTabPageIndex;
             switch (tabIndex)
             {
                 case 0:
                     {
-                        curPage = Page.Products; break;
+                        curPage = Page.Imports; break;
                     }
                 case 1:
                     {
-                        curPage = Page.Combos; break;
-                    }
-                case 2:
-                    {
-                        curPage = Page.Customers; break;
+                        curPage = Page.Orders; break;
                     }
             }
 
@@ -57,123 +50,105 @@ namespace TechShop_Manager.GUI
         {   
             switch (getCurrentPage())
             {
-                case Page.Products:
+                case Page.Imports:
                     {
-                        InitializeDataSources_Products();
+                        InitializeDataSources_Imports();
                         break;
                     }
-                case Page.Combos:
+                case Page.Orders:
                     {
-                        InitializeDataSources_Combos();
-                        break;
-                    }
-                case Page.Customers:
-                    {
-                        InitializeDataSources_Customers();
+                        InitializeDataSources_Orders();
                         break;
                     }
             }
         }
 
-        private void InitializeDataSources_Products()
+        private void InitializeDataSources_Imports()
         {
             // Data fetch
-            BindingList<Product> list = new BindingList<Product>(
-                // Product.GetAll()
+            BindingList<Import> list = new BindingList<Import>(
+                // Import.GetAll()
             );
 
             // UI changes
-            gridControl_Products.DataSource = list;
-            gridControl_Products.RefreshDataSource();
+            gridControl_Imports.DataSource = list;
+            gridControl_Imports.RefreshDataSource();
             bsiListCount.Caption = $"{list.Count} items";
         }
 
-        private void InitializeDataSources_Combos()
+        private void InitializeDataSources_Orders()
         {
             // Data fetch
-            BindingList<Combo> list = new BindingList<Combo>(
-                // Combo.GetAll()
+            BindingList<Order> list = new BindingList<Order>(
+                // Order.GetAll()
             );
 
             // UI changes
-            gridControl_Combos.DataSource = list;
-            gridControl_Combos.RefreshDataSource();
+            gridControl_Orders.DataSource = list;
+            gridControl_Orders.RefreshDataSource();
             bsiListCount.Caption = $"{list.Count} items";
         }
         
-        private void InitializeDataSources_Customers()
-        {
-            // Data fetch
-            BindingList<Customer> list = new BindingList<Customer>(
-                // Customer.GetAll()
-            );
-
-            // UI changes
-            gridControl_Customers.DataSource = list;
-            gridControl_Customers.RefreshDataSource();
-            bsiListCount.Caption = $"{list.Count} items";
-        }
-
         // Event Handlers
 
-        private void handleNewProduct()
+        private void handleNewImport()
         {
-            // EditProductView editProductView = new EditProductView();
-            // editProductView.ShowDialog(this);
+            // EditImportView editImportView = new EditImportView();
+            // editImportView.ShowDialog(this);
         }
 
-        private void handleEditProduct()
+        private void handleEditImport()
         {
-            Product selectedProduct = (Product)gridView_Products.GetFocusedRow();
+            Import selectedImport = (Import)gridView_Imports.GetFocusedRow();
 
-            if (selectedProduct == null)
+            if (selectedImport == null)
             {
                 return;
             }
 
-            // EditProductView editProductView = new EditProductView(selectedProduct);
-            // editProductView.ShowDialog(this);
+            // EditImportView editImportView = new EditImportView(selectedImport);
+            // editImportView.ShowDialog(this);
         }
 
-        private void handleDeleteProduct()
+        private void handleDeleteImport()
         {
-            Product selectedProduct = (Product)gridView_Products.GetFocusedRow();
+            Import selectedImport = (Import)gridView_Imports.GetFocusedRow();
 
-            if (selectedProduct == null)
+            if (selectedImport == null)
             {
                 return;
             }
 
-            // Product.DeleteOne(selectedProduct.ID);
+            // Import.DeleteOne(selectedImport.ID);
         }
 
-        private void handleNewCombo()
+        private void handleNewOrder()
         {
-            // EditComboView editComboView = new EditComboView();
-            // editComboView.ShowDialog(this);
+            // EditOrderView editOrderView = new EditOrderView();
+            // editOrderView.ShowDialog(this);
         }
 
-        private void handleEditCombo()
+        private void handleEditOrder()
         {
-            Combo selectedCombo = (Combo)gridView_Combos.GetFocusedRow();
+            Order selectedOrder = (Order)gridView_Orders.GetFocusedRow();
 
-            if (selectedCombo == null)
+            if (selectedOrder == null)
             {
                 return;
             }
 
-            // EditComboView editComboView = new EditComboView(selectedCombo);
-            // editComboView.ShowDialog(this);
+            // EditOrderView editOrderView = new EditOrderView(selectedOrder);
+            // editOrderView.ShowDialog(this);
         }
 
-        private void handleDeleteCombo() { 
-            Combo selectedCombo = (Combo)gridView_Combos.GetFocusedRow();
+        private void handleDeleteOrder() { 
+            Order selectedOrder = (Order)gridView_Orders.GetFocusedRow();
 
-            if (selectedCombo == null) {
+            if (selectedOrder == null) {
                 return;
             }
 
-            // Combo.DeleteOne(selectedCombo.ID);
+            // Order.DeleteOne(selectedOrder.ID);
         }
 
         private void handleUpdateSelected()
@@ -181,28 +156,20 @@ namespace TechShop_Manager.GUI
             object selectedItem = null;
             switch (getCurrentPage())
             {
-                case Page.Products:
+                case Page.Imports:
                     {
-                        selectedItem = gridView_Products.GetFocusedRow();
+                        selectedItem = gridView_Imports.GetFocusedRow();
                         bbiNew.Enabled = true;
                         bbiEdit.Enabled = selectedItem != null;
                         bbiDelete.Enabled = selectedItem != null;
                         break;
                     }
-                case Page.Combos:
+                case Page.Orders:
                     {
-                        selectedItem = gridView_Combos.GetFocusedRow();
+                        selectedItem = gridView_Orders.GetFocusedRow();
                         bbiNew.Enabled = true;
                         bbiEdit.Enabled = selectedItem != null;
                         bbiDelete.Enabled = selectedItem != null;
-                        break;
-                    }
-                case Page.Customers:
-                    {
-                        selectedItem = null;    // Customers are uneditable
-                        bbiNew.Enabled = false;
-                        bbiEdit.Enabled = false;
-                        bbiDelete.Enabled = false;
                         break;
                     }
             }
@@ -214,14 +181,14 @@ namespace TechShop_Manager.GUI
         {
             switch (getCurrentPage())
             {
-                case Page.Products:
+                case Page.Imports:
                     {
-                        handleNewProduct();
+                        handleNewImport();
                         break;
                     }
-                case Page.Combos:
+                case Page.Orders:
                     {
-                        handleNewCombo();
+                        handleNewOrder();
                         break;
                     }
             }
@@ -235,14 +202,14 @@ namespace TechShop_Manager.GUI
         {
             switch (getCurrentPage())
             {
-                case Page.Products:
+                case Page.Imports:
                     {
-                        handleEditProduct();
+                        handleEditImport();
                         break;
                     }
-                case Page.Combos:
+                case Page.Orders:
                     {
-                        handleEditCombo();
+                        handleEditOrder();
                         break;
                     }
             }
@@ -255,20 +222,20 @@ namespace TechShop_Manager.GUI
         private void bbiDelete_ItemClick(object sender, ItemClickEventArgs e)
         {
             switch (getCurrentPage()) {
-                case Page.Products: {
+                case Page.Imports: {
                         DialogResult res = MessageBox.Show("Bạn chắc chắn muốn xóa tour du lịch này?", "Xác nhận", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
                         if (res == DialogResult.OK)
                         {
-                            handleDeleteProduct();
+                            handleDeleteImport();
                             MessageBox.Show("Xóa thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                         break;
                     }
-                case Page.Combos: {
+                case Page.Orders: {
                         DialogResult res = MessageBox.Show("Bạn chắc chắn muốn xóa đoàn tour du lịch này?", "Xác nhận", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
                         if (res == DialogResult.OK)
                         {
-                            handleDeleteCombo();
+                            handleDeleteOrder();
                             MessageBox.Show("Xóa thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                         break;
@@ -285,7 +252,7 @@ namespace TechShop_Manager.GUI
             handleUpdateSelected();
         }
 
-        private void xtraTabControl_Products_SelectedPageChanged(object sender, DevExpress.XtraTab.TabPageChangedEventArgs e)
+        private void xtraTabControl_Imports_SelectedPageChanged(object sender, DevExpress.XtraTab.TabPageChangedEventArgs e)
         {
             InitializeDataSources();
             handleUpdateSelected();

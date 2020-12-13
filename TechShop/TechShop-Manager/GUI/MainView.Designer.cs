@@ -29,20 +29,20 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraBars.Docking2010.Views.Tabbed.DockingContainer dockingContainer2 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.DockingContainer();
+            DevExpress.XtraBars.Docking2010.Views.Tabbed.DockingContainer dockingContainer1 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.DockingContainer();
             this.documentGroup1 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.DocumentGroup(this.components);
             this.manageViewDocument = new DevExpress.XtraBars.Docking2010.Views.Tabbed.Document(this.components);
-            this.reportViewDocument = new DevExpress.XtraBars.Docking2010.Views.Tabbed.Document(this.components);
+            this.inventoryViewDocument = new DevExpress.XtraBars.Docking2010.Views.Tabbed.Document(this.components);
             this.fluentDesignFormContainer1 = new DevExpress.XtraBars.FluentDesignSystem.FluentDesignFormContainer();
             this.accordionControl_Main = new DevExpress.XtraBars.Navigation.AccordionControl();
             this.accordionControlElement_ManageView = new DevExpress.XtraBars.Navigation.AccordionControlElement();
-            this.accordionControlElement_ReportView = new DevExpress.XtraBars.Navigation.AccordionControlElement();
+            this.accordionControlElement_InventoryView = new DevExpress.XtraBars.Navigation.AccordionControlElement();
             this.fluentDesignFormControl1 = new DevExpress.XtraBars.FluentDesignSystem.FluentDesignFormControl();
             this.documentManager_MainView = new DevExpress.XtraBars.Docking2010.DocumentManager(this.components);
             this.tabbedView1 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.TabbedView(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.documentGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.manageViewDocument)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.reportViewDocument)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.inventoryViewDocument)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.accordionControl_Main)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fluentDesignFormControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.documentManager_MainView)).BeginInit();
@@ -53,7 +53,7 @@
             // 
             this.documentGroup1.Items.AddRange(new DevExpress.XtraBars.Docking2010.Views.Tabbed.Document[] {
             this.manageViewDocument,
-            this.reportViewDocument});
+            this.inventoryViewDocument});
             // 
             // manageViewDocument
             // 
@@ -63,13 +63,13 @@
             this.manageViewDocument.FloatLocation = new System.Drawing.Point(145, 139);
             this.manageViewDocument.FloatSize = new System.Drawing.Size(590, 413);
             // 
-            // reportViewDocument
+            // inventoryViewDocument
             // 
-            this.reportViewDocument.Caption = "Thống kê";
-            this.reportViewDocument.ControlName = "ReportView";
-            this.reportViewDocument.ControlTypeName = "TechShop_Manager.GUI.ReportView";
-            this.reportViewDocument.FloatLocation = new System.Drawing.Point(250, 139);
-            this.reportViewDocument.FloatSize = new System.Drawing.Size(590, 413);
+            this.inventoryViewDocument.Caption = "Thống kê";
+            this.inventoryViewDocument.ControlName = "InventoryView";
+            this.inventoryViewDocument.ControlTypeName = "TechShop_Manager.GUI.InventoryView";
+            this.inventoryViewDocument.FloatLocation = new System.Drawing.Point(250, 139);
+            this.inventoryViewDocument.FloatSize = new System.Drawing.Size(590, 413);
             // 
             // fluentDesignFormContainer1
             // 
@@ -85,7 +85,7 @@
             this.accordionControl_Main.Dock = System.Windows.Forms.DockStyle.Left;
             this.accordionControl_Main.Elements.AddRange(new DevExpress.XtraBars.Navigation.AccordionControlElement[] {
             this.accordionControlElement_ManageView,
-            this.accordionControlElement_ReportView});
+            this.accordionControlElement_InventoryView});
             this.accordionControl_Main.Location = new System.Drawing.Point(0, 31);
             this.accordionControl_Main.Name = "accordionControl_Main";
             this.accordionControl_Main.OptionsMinimizing.AllowMinimizeMode = DevExpress.Utils.DefaultBoolean.False;
@@ -101,11 +101,11 @@
             this.accordionControlElement_ManageView.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
             this.accordionControlElement_ManageView.Text = "Quản lý";
             // 
-            // accordionControlElement_ReportView
+            // accordionControlElement_InventoryView
             // 
-            this.accordionControlElement_ReportView.Name = "accordionControlElement_ReportView";
-            this.accordionControlElement_ReportView.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
-            this.accordionControlElement_ReportView.Text = "Thống kê";
+            this.accordionControlElement_InventoryView.Name = "accordionControlElement_InventoryView";
+            this.accordionControlElement_InventoryView.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
+            this.accordionControlElement_InventoryView.Text = "Nhập xuất";
             // 
             // fluentDesignFormControl1
             // 
@@ -130,11 +130,11 @@
             this.documentGroup1});
             this.tabbedView1.DocumentProperties.AllowClose = false;
             this.tabbedView1.Documents.AddRange(new DevExpress.XtraBars.Docking2010.Views.BaseDocument[] {
-            this.reportViewDocument,
+            this.inventoryViewDocument,
             this.manageViewDocument});
-            dockingContainer2.Element = this.documentGroup1;
+            dockingContainer1.Element = this.documentGroup1;
             this.tabbedView1.RootContainer.Nodes.AddRange(new DevExpress.XtraBars.Docking2010.Views.Tabbed.DockingContainer[] {
-            dockingContainer2});
+            dockingContainer1});
             this.tabbedView1.Style = DevExpress.XtraBars.Docking2010.Views.DockingViewStyle.Light;
             // 
             // MainView
@@ -149,10 +149,10 @@
             this.FluentDesignFormControl = this.fluentDesignFormControl1;
             this.Name = "MainView";
             this.NavigationControl = this.accordionControl_Main;
-            this.Text = "Tour Du Lịch";
+            this.Text = "TechShop";
             ((System.ComponentModel.ISupportInitialize)(this.documentGroup1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.manageViewDocument)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.reportViewDocument)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.inventoryViewDocument)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.accordionControl_Main)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fluentDesignFormControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.documentManager_MainView)).EndInit();
@@ -166,11 +166,11 @@
         private DevExpress.XtraBars.Navigation.AccordionControl accordionControl_Main;
         private DevExpress.XtraBars.Navigation.AccordionControlElement accordionControlElement_ManageView;
         private DevExpress.XtraBars.FluentDesignSystem.FluentDesignFormControl fluentDesignFormControl1;
-        private DevExpress.XtraBars.Navigation.AccordionControlElement accordionControlElement_ReportView;
+        private DevExpress.XtraBars.Navigation.AccordionControlElement accordionControlElement_InventoryView;
         private DevExpress.XtraBars.Docking2010.DocumentManager documentManager_MainView;
         private DevExpress.XtraBars.Docking2010.Views.Tabbed.TabbedView tabbedView1;
         private DevExpress.XtraBars.Docking2010.Views.Tabbed.DocumentGroup documentGroup1;
         private DevExpress.XtraBars.Docking2010.Views.Tabbed.Document manageViewDocument;
-        private DevExpress.XtraBars.Docking2010.Views.Tabbed.Document reportViewDocument;
+        private DevExpress.XtraBars.Docking2010.Views.Tabbed.Document inventoryViewDocument;
     }
 }
