@@ -101,7 +101,7 @@ namespace TechShop_Manager.GUI
             this.gridView_Imports.OptionsBehavior.Editable = false;
             this.gridView_Imports.OptionsBehavior.ReadOnly = true;
             this.gridView_Imports.OptionsCustomization.AllowQuickHideColumns = false;
-            this.gridView_Imports.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.gridView_FocusedRowChanged);
+            this.gridView_Imports.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.gridView_Imports_FocusedRowChanged);
             // 
             // ribbonControl
             // 
@@ -309,7 +309,8 @@ namespace TechShop_Manager.GUI
             // 
             this.gridView_Orders.GridControl = this.gridControl_Orders;
             this.gridView_Orders.Name = "gridView_Orders";
-            this.gridView_Orders.OptionsBehavior.ReadOnly = true;
+            this.gridView_Orders.OptionsBehavior.Editable = false;
+            this.gridView_Orders.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.gridView_Orders_FocusedRowChanged);
             // 
             // layoutControlGroup1
             // 

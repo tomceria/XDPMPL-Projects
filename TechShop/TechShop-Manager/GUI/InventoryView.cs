@@ -25,6 +25,7 @@ namespace TechShop_Manager.GUI
             InitializeComponent();
             ConfigureControls();
             InitializeDataSources();
+            handleUpdateSelected();
         }
 
         private void ConfigureControls()
@@ -75,9 +76,6 @@ namespace TechShop_Manager.GUI
             BindingList<Import> list = new BindingList<Import>(
                 Import.GetAll()
             );
-            BindingList<ImportDetail> importDetailsBL = new BindingList<ImportDetail>(
-                (selectedImport.ImportDetails != null) ? selectedImport.ImportDetails.ToList() : new List<ImportDetail>()
-            );
 
             // UI changes
             gridControl_Imports.DataSource = list;
@@ -85,14 +83,6 @@ namespace TechShop_Manager.GUI
             gridView_Imports.Columns["Id"].Visible = false;
             gridView_Imports.Columns["ImportDetails"].Visible = false;
             gridView_Imports.Columns["Date"].DisplayFormat.FormatString = "dd/MM/yyyy hh:mm:ss";
-            gridView_ImportDetails.GridControl.DataSource = importDetailsBL;
-            gridView_ImportDetails.Columns["ProductId"].Visible = false;
-            gridView_ImportDetails.Columns["ImportId"].Visible = false;
-            gridView_ImportDetails.Columns["Import"].Visible = false;
-            gridView_ImportDetails.Columns["Product"].VisibleIndex = 0;
-            gridView_ImportDetails.Columns["Price"].VisibleIndex = 1;
-            gridView_ImportDetails.Columns["Quantity"].VisibleIndex = 2;
-            // gridView_ImportDetails.ClearSorting();
             
             bsiListCount.Caption = $"{list.Count} items";
         }
@@ -102,9 +92,6 @@ namespace TechShop_Manager.GUI
             // Data fetch
             BindingList<Order> list = new BindingList<Order>(
                 Order.GetAll()
-            );
-            BindingList<OrderDetail> orderDetailsBL = new BindingList<OrderDetail>(
-                (selectedOrder.OrderDetails != null) ? selectedOrder.OrderDetails.ToList() : new List<OrderDetail>()
             );
 
             // UI changes
@@ -117,6 +104,31 @@ namespace TechShop_Manager.GUI
             gridView_Orders.Columns["PaidPrice"].DisplayFormat.FormatType = FormatType.Numeric;
             gridView_Orders.Columns["PaidPrice"].DisplayFormat.FormatString = "N0";
             gridView_Orders.OptionsView.ColumnAutoWidth = false;
+            
+            bsiListCount.Caption = $"{list.Count} items";
+        }
+
+        private void InitializeDataSources_ImportDetails()
+        {
+            BindingList<ImportDetail> importDetailsBL = new BindingList<ImportDetail>(
+                (selectedImport.ImportDetails != null) ? selectedImport.ImportDetails.ToList() : new List<ImportDetail>()
+            );
+            
+            gridView_ImportDetails.GridControl.DataSource = importDetailsBL;
+            gridView_ImportDetails.Columns["ProductId"].Visible = false;
+            gridView_ImportDetails.Columns["ImportId"].Visible = false;
+            gridView_ImportDetails.Columns["Import"].Visible = false;
+            gridView_ImportDetails.Columns["Product"].VisibleIndex = 0;
+            gridView_ImportDetails.Columns["Price"].VisibleIndex = 1;
+            gridView_ImportDetails.Columns["Quantity"].VisibleIndex = 2;
+        }
+
+        private void InitializeDataSources_OrderDetails()
+        {
+            BindingList<OrderDetail> orderDetailsBL = new BindingList<OrderDetail>(
+                (selectedOrder.OrderDetails != null) ? selectedOrder.OrderDetails.ToList() : new List<OrderDetail>()
+            );
+            
             gridView_OrderDetails.GridControl.DataSource = orderDetailsBL;
             gridView_OrderDetails.Columns["ProductId"].Visible = false;
             gridView_OrderDetails.Columns["OrderId"].Visible = false;
@@ -126,9 +138,6 @@ namespace TechShop_Manager.GUI
             gridView_OrderDetails.Columns["Product"].VisibleIndex = 0;
             gridView_OrderDetails.Columns["Price"].VisibleIndex = 1;
             gridView_OrderDetails.Columns["Quantity"].VisibleIndex = 2;
-            // gridView_OrderDetails.ClearSorting();
-            
-            bsiListCount.Caption = $"{list.Count} items";
         }
         
         // Event Handlers
@@ -204,6 +213,9 @@ namespace TechShop_Manager.GUI
                         bbiNew.Enabled = true;
                         bbiEdit.Enabled = selectedItem != null;
                         bbiDelete.Enabled = selectedItem != null;
+
+                        selectedImport = (Import) selectedItem;
+                        InitializeDataSources_ImportDetails();
                         break;
                     }
                 case Page.Orders:
@@ -212,6 +224,9 @@ namespace TechShop_Manager.GUI
                         bbiNew.Enabled = false;
                         bbiEdit.Enabled = false;
                         bbiDelete.Enabled = false;
+                        
+                        selectedOrder = (Order) selectedItem;
+                        InitializeDataSources_OrderDetails();
                         break;
                     }
             }
@@ -289,7 +304,12 @@ namespace TechShop_Manager.GUI
             handleUpdateSelected();
         }
 
-        private void gridView_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
+        private void gridView_Imports_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
+        {
+            handleUpdateSelected();
+        }
+
+        private void gridView_Orders_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
             handleUpdateSelected();
         }
