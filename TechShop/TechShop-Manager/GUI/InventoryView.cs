@@ -93,8 +93,8 @@ namespace TechShop_Manager.GUI
 
         private void handleNewImport()
         {
-            // EditImportView editImportView = new EditImportView();
-            // editImportView.ShowDialog(this);
+            EditImportView editImportView = new EditImportView();
+            editImportView.ShowDialog(this);
         }
 
         private void handleEditImport()

@@ -27,6 +27,7 @@ namespace TechShop_Manager.BUS
         [DisplayName("Mô tả")]
         public string Description { get; set; }
         
+        [DisplayName("Loại Sản phẩm")]
         [ForeignKey("ProductType")]
         public int ProductTypeId { get; set; }
         
