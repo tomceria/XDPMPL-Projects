@@ -1,0 +1,46 @@
+@model AccountLoginVm
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "_Layout";
+}
+
+<div class="row">
+    <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+        <div class="card card-signin my-5">
+            <div class="card-body">
+                <h5 class="card-title text-center">TechShop Inc.</h5>
+                <hr>
+                <form asp-action="Login">
+                    @Html.ValidationSummary(true, null, new {@class = "alert alert-danger", role = "alert"})
+                    <div class="form-group">
+                        @Html.TextBoxFor(
+                            m => m.Username,
+                            new
+                            {
+                                placeholder = Html.DisplayNameFor(model => model.Username),
+                                @class = "form-control"
+                            })
+                        @Html.ValidationMessageFor(m => m.Username, null, new {@class = "text-danger"})
+                    </div>
+                    <div class="form-group">
+                        @Html.PasswordFor(
+                            m => m.Password,
+                            new
+                            {
+                                placeholder = Html.DisplayNameFor(model => model.Password),
+                                @class = "form-control"
+                            })
+                        @Html.ValidationMessageFor(m => m.Password, null, new {@class = "text-danger"})
+                    </div>
+                    <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Đăng nhập</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

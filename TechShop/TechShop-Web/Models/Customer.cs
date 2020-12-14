@@ -11,22 +11,29 @@ namespace TechShop_Web.Models
         [DisplayName("Mã KH")]
         public int Id { get; set; }
         
-        [Required(ErrorMessage = "Tên không được bỏ trống.")]
         [DisplayName("Tên")]
+        [Required(ErrorMessage = "Tên không được bỏ trống.")]
         public string FirstName { get; set; }
         
-        [Required(ErrorMessage = "Họ không được bỏ trống.")]
         [DisplayName("Họ")]
+        [Required(ErrorMessage = "Họ không được bỏ trống.")]
         public string LastName { get; set; }
 
+        [EmailAddress]
+        [Required(ErrorMessage = "Email không được bỏ trống.")]
         public string Email { get; set; }
         
         [DisplayName("Số điện thoại")]
+        [Required(ErrorMessage = "Số điện thoại không được bỏ trống.")]
         public string PhoneNumber { get; set; }
         
+        [DisplayName("Ngày sinh")]
+        [Required(ErrorMessage = "Ngày sinh không được bỏ trống.")]
         [Column(TypeName="date")] 
         public DateTime DOB { get; set; }
         
+        [DisplayName("Địa chỉ")]
+        [Required(ErrorMessage = "Địa chỉ không được bỏ trống.")]
         [Column(TypeName="text")] 
         public string Address { get; set; }
         
