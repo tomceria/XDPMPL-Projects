@@ -40,10 +40,10 @@ namespace TechShop_Web.Services
             var applicationRole = ApplicationRole.Roles[0];
 
             var result = await _unitOfWork.Account.CreateUserAsync(applicationUser, password);
-            await _unitOfWork.Account.AddUserToRoleAsync(applicationUser, applicationRole);
 
             if (result == IdentityResult.Success)
             {
+                await _unitOfWork.Account.AddUserToRoleAsync(applicationUser, applicationRole);
                 _unitOfWork.Complete();
             }
 
