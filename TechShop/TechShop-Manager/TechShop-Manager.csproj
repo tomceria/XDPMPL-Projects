@@ -81,7 +81,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BUS\CustomerBUS.cs" />
+    <Compile Include="BUS\ImportBUS.cs" />
     <Compile Include="DAL\CustomerDAL.cs" />
+    <Compile Include="DAL\ImportDAL.cs" />
     <Compile Include="DAL\ShopInitializer.cs" />
     <Compile Include="GUI\EditViewTemplate.cs">
       <SubType>Form</SubType>

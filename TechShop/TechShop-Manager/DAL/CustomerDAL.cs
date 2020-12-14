@@ -25,7 +25,7 @@ namespace TechShop_Manager.DAL
             return _ctx.Customers.Find(id);
         }
 
-        public static void CreateOne(Customer customer)
+        public static void AddOne(Customer customer)
         {
             _ctx.Customers.Add(customer);
             _ctx.SaveChanges();

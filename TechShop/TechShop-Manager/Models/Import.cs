@@ -4,7 +4,7 @@ using System.ComponentModel;
 
 namespace TechShop_Manager.BUS
 {
-    public class Import
+    public partial class Import
     {
         public int Id { get; set; }
         

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TechShop_Manager.BUS
 {
-    public class ImportDetail
+    public partial class ImportDetail
     {
         [ForeignKey("Product")]
         public int ProductId { get; set; }

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TechShop_Manager.BUS
 {
-    public class Product
+    public partial class Product
     {
         public int Id { get; set; }
         

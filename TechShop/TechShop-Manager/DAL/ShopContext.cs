@@ -13,7 +13,8 @@ namespace TechShop_Manager.DAL {
         // connection string in the application configuration file.
         public ShopContext() : base("HoangShopContext")
         {
-            Database.SetInitializer(new ShopInitializer());
+            // Database.SetInitializer(new ShopInitializer());
+            Database.SetInitializer<ShopContext>(null);
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
