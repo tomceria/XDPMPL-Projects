@@ -5,8 +5,8 @@ namespace TechShop_Web.Models
 {
     public class ApplicationUser : IdentityUser
     {
-        [ForeignKey("Staff")]
-        public int StaffId { get; set; }
+        [ForeignKey("Customer")]
+        public int CustomerId { get; set; }
         
         public Customer Customer { get; set; }
 
@@ -16,7 +16,7 @@ namespace TechShop_Web.Models
             NormalizedUserName = username.ToUpper();
             Email = username;
             NormalizedEmail = username.ToUpper();
-            StaffId = customer.Id;
+            CustomerId = customer.Id;
             Customer = customer;
         }
     }

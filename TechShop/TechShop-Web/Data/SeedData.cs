@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -86,6 +87,56 @@ namespace TechShop_Web.Data
                 }
             );
             
+            context.SaveChanges();
+            
+            /**/ // Seeding ProductTypes
+            var productTypes = new List<ProductType>()
+            {
+                new ProductType()
+                {
+                    Name = "Laptop",
+                    Slug = "laptop",
+                    Description = "Laptop",
+
+                },
+                new ProductType()
+                {
+                    Name = "Máy bộ",
+                    Slug = "prebuilt",
+                    Description = "Máy bộ",
+
+                },
+                new ProductType()
+                {
+                    Name = "Linh kiện máy tính",
+                    Slug = "link-kien",
+                    Description = "Linh kiện máy tính",
+                },
+                new ProductType()
+                {
+                    Name = "CPU",
+                    Slug = "cpu",
+                    Description = "CPU"
+                },
+                new ProductType()
+                {
+                    Name = "RAM",
+                    Slug = "ram",
+                    Description = "RAM"
+                }
+            };
+            context.ProductTypes.AddRange(productTypes);
+            context.SaveChanges();
+            List<string> slugList = new List<string>() {"cpu", "ram"};
+            foreach (var productType in productTypes)
+            {
+                var linkKienId = productTypes.First(o => o.Slug.Equals("link-kien")).Id;
+                if (slugList.Contains(productType.Slug))
+                {
+                    productType.ParentTypeId = linkKienId;
+                    context.Entry(productType).State = EntityState.Modified;
+                }
+            }
             context.SaveChanges();
         }
     }

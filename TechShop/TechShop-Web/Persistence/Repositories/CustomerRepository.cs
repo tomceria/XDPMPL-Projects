@@ -28,7 +28,7 @@ namespace TechShop_Web.Persistence.Repositories
             return (
                 from user in Context.Users
                 join staff in Context.Customers
-                    on user.StaffId equals staff.Id
+                    on user.CustomerId equals staff.Id
                 where user.UserName.Equals(username)
                 select user
             ).Include(o => o.Customer)
@@ -40,7 +40,7 @@ namespace TechShop_Web.Persistence.Repositories
             return (
                 from user in Context.Users
                 join staff in Context.Customers
-                    on user.StaffId equals staff.Id
+                    on user.CustomerId equals staff.Id
                 where staff.Id == staffId
                 select user
             ).Include(o => o.Customer)
