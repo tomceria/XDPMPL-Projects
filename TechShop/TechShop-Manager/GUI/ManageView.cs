@@ -93,9 +93,9 @@ namespace TechShop_Manager.GUI
         {
             // Data fetch
             BindingList<Combo> list = new BindingList<Combo>(
-                // Combo.GetAll()
+                Combo.GetAll()
             );
-
+            
             // UI changes
             gridControl_Combos.DataSource = list;
             gridControl_Combos.RefreshDataSource();
@@ -106,7 +106,7 @@ namespace TechShop_Manager.GUI
         {
             // Data fetch
             BindingList<Customer> list = new BindingList<Customer>(
-                // Customer.GetAll()
+                 Customer.GetAll()
             );
 
             // UI changes
@@ -173,8 +173,8 @@ namespace TechShop_Manager.GUI
             if (selectedCombo == null) {
                 return;
             }
-
-            // Combo.DeleteOne(selectedCombo.ID);
+            Combo.DeleteOne(selectedCombo.Id);
+            gridView_Combos.RefreshData();
         }
 
         private void handleUpdateSelected()
@@ -257,7 +257,7 @@ namespace TechShop_Manager.GUI
         {
             switch (getCurrentPage()) {
                 case Page.Products: {
-                        DialogResult res = MessageBox.Show("Bạn chắc chắn muốn xóa tour du lịch này?", "Xác nhận", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                        DialogResult res = MessageBox.Show("Bạn chắc chắn muốn xóa sản phẩm này?", "Xác nhận", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
                         if (res == DialogResult.OK)
                         {
                             handleDeleteProduct();
@@ -266,7 +266,7 @@ namespace TechShop_Manager.GUI
                         break;
                     }
                 case Page.Combos: {
-                        DialogResult res = MessageBox.Show("Bạn chắc chắn muốn xóa đoàn tour du lịch này?", "Xác nhận", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                        DialogResult res = MessageBox.Show("Bạn chắc chắn muốn xóa Combo này?", "Xác nhận", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
                         if (res == DialogResult.OK)
                         {
                             handleDeleteCombo();
