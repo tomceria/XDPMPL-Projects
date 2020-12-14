@@ -5,6 +5,7 @@ namespace TechShop_Manager.BUS
 {
     public partial class OrderDetail
     {
+        [DisplayName("Sản phẩm")]
         [ForeignKey("Product")]
         public int ProductId { get; set; }
         
@@ -18,6 +19,7 @@ namespace TechShop_Manager.BUS
         [DisplayName("Số lượng")]
         public int Quantity { get; set; }
         
+        [DisplayName("Sản phẩm")]
         public virtual Product Product { get; set; }
         public virtual Order Order { get; set; }
     }

@@ -29,5 +29,10 @@ namespace TechShop_Manager.BUS
         public virtual ICollection<Order> Orders { get; set; }
 
         [NotMapped] [DisplayName("Tên")] public string FullName => $"{LastName} {FirstName}";
+
+        public override string ToString()
+        {
+            return $"{this.FullName}";
+        }
     }
 }

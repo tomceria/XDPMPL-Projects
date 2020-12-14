@@ -25,5 +25,10 @@ namespace TechShop_Manager.BUS
         
         public virtual ICollection<Product> Products { get; set; }
         public virtual ICollection<ProductType> ProductTypes { get; set; }
+        
+        public override string ToString()
+        {
+            return $"{this.Name}";
+        }
     }
 }

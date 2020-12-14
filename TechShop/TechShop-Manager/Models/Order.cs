@@ -12,7 +12,7 @@ namespace TechShop_Manager.BUS
         [DisplayName("Ngày giờ đặt hàng")]
         public DateTime Date { get; set; }
         
-        [DisplayName("Giá")]
+        [DisplayName("Thành tiền")]
         [Column(TypeName="bigint")] 
         public int PaidPrice { get; set; }
         
@@ -23,9 +23,11 @@ namespace TechShop_Manager.BUS
         [Column(TypeName="text")] 
         public string DeliveryAddress { get; set; }
         
+        [DisplayName("Khách hàng")]
         [ForeignKey("Customer")]
         public int CustomerId { get; set; }
         
+        [DisplayName("Khách hàng")]
         public virtual Customer Customer { get; set; }
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
     }

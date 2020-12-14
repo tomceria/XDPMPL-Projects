@@ -1,6 +1,9 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows.Forms;
+using DevExpress.Utils;
 using DevExpress.XtraBars;
 using TechShop_Manager.BUS;
 
@@ -13,6 +16,9 @@ namespace TechShop_Manager.GUI
             Imports,
             Orders
         }
+
+        private Import selectedImport = new Import();
+        private Order selectedOrder = new Order();
 
         public InventoryView()
         {
@@ -69,10 +75,21 @@ namespace TechShop_Manager.GUI
             BindingList<Import> list = new BindingList<Import>(
                 Import.GetAll()
             );
+            BindingList<ImportDetail> importDetailsBL = new BindingList<ImportDetail>(
+                (selectedImport.ImportDetails != null) ? selectedImport.ImportDetails.ToList() : new List<ImportDetail>()
+            );
 
             // UI changes
             gridControl_Imports.DataSource = list;
             gridControl_Imports.RefreshDataSource();
+            gridView_Imports.Columns["Id"].Visible = false;
+            gridView_Imports.Columns["ImportDetails"].Visible = false;
+            gridView_Imports.Columns["Date"].DisplayFormat.FormatString = "dd/MM/yyyy hh:mm:ss";
+            gridView_ImportDetails.GridControl.DataSource = importDetailsBL;
+            gridView_ImportDetails.Columns["ProductId"].Visible = false;
+            gridView_ImportDetails.Columns["ImportId"].Visible = false;
+            gridView_ImportDetails.Columns["Import"].Visible = false;
+            
             bsiListCount.Caption = $"{list.Count} items";
         }
 
@@ -82,10 +99,26 @@ namespace TechShop_Manager.GUI
             BindingList<Order> list = new BindingList<Order>(
                 Order.GetAll()
             );
+            BindingList<OrderDetail> orderDetailsBL = new BindingList<OrderDetail>(
+                (selectedOrder.OrderDetails != null) ? selectedOrder.OrderDetails.ToList() : new List<OrderDetail>()
+            );
 
             // UI changes
             gridControl_Orders.DataSource = list;
             gridControl_Orders.RefreshDataSource();
+            gridView_Orders.Columns["Id"].Visible = false;
+            gridView_Orders.Columns["CustomerId"].Visible = false;
+            gridView_Orders.Columns["OrderDetails"].Visible = false;
+            gridView_Orders.Columns["Date"].DisplayFormat.FormatString = "dd/MM/yyyy hh:mm:ss";
+            gridView_Orders.Columns["PaidPrice"].DisplayFormat.FormatType = FormatType.Numeric;
+            gridView_Orders.Columns["PaidPrice"].DisplayFormat.FormatString = "N0";
+            gridView_OrderDetails.GridControl.DataSource = orderDetailsBL;
+            gridView_OrderDetails.Columns["ProductId"].Visible = false;
+            gridView_OrderDetails.Columns["OrderId"].Visible = false;
+            gridView_OrderDetails.Columns["Order"].Visible = false;
+            gridView_OrderDetails.Columns["Price"].DisplayFormat.FormatType = FormatType.Numeric;
+            gridView_OrderDetails.Columns["Price"].DisplayFormat.FormatString = "N0";
+            
             bsiListCount.Caption = $"{list.Count} items";
         }
         

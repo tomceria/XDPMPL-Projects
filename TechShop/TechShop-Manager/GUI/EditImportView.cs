@@ -78,7 +78,7 @@ namespace TechShop_Manager.GUI
             gridView_Products.Columns["Slug"].Visible = false;
             gridView_Products.Columns["Description"].Visible = false;
             gridView_Products.Columns["IsHidden"].Visible = false;
-            gridView_Products.Columns["ProductType"].Visible = false;
+            gridView_Products.Columns["ProductTypeId"].Visible = false;
             gridView_Products.Columns["OrderDetails"].Visible = false;
             gridView_Products.Columns["ComboDetails"].Visible = false;
         }
