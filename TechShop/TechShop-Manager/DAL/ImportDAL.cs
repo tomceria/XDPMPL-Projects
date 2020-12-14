@@ -16,7 +16,9 @@ namespace TechShop_Manager.DAL
         
         public static List<Import> GetAll()
         {
-            var imports = _ctx.Imports.ToList();
+            var imports = _ctx.Imports
+                .Include(o => o.ImportDetails.Select(o => o.Product))
+                .ToList();
 
             return imports;
         }

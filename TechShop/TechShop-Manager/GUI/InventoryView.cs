@@ -89,6 +89,10 @@ namespace TechShop_Manager.GUI
             gridView_ImportDetails.Columns["ProductId"].Visible = false;
             gridView_ImportDetails.Columns["ImportId"].Visible = false;
             gridView_ImportDetails.Columns["Import"].Visible = false;
+            gridView_ImportDetails.Columns["Product"].VisibleIndex = 0;
+            gridView_ImportDetails.Columns["Price"].VisibleIndex = 1;
+            gridView_ImportDetails.Columns["Quantity"].VisibleIndex = 2;
+            // gridView_ImportDetails.ClearSorting();
             
             bsiListCount.Caption = $"{list.Count} items";
         }
@@ -112,12 +116,17 @@ namespace TechShop_Manager.GUI
             gridView_Orders.Columns["Date"].DisplayFormat.FormatString = "dd/MM/yyyy hh:mm:ss";
             gridView_Orders.Columns["PaidPrice"].DisplayFormat.FormatType = FormatType.Numeric;
             gridView_Orders.Columns["PaidPrice"].DisplayFormat.FormatString = "N0";
+            gridView_Orders.OptionsView.ColumnAutoWidth = false;
             gridView_OrderDetails.GridControl.DataSource = orderDetailsBL;
             gridView_OrderDetails.Columns["ProductId"].Visible = false;
             gridView_OrderDetails.Columns["OrderId"].Visible = false;
             gridView_OrderDetails.Columns["Order"].Visible = false;
             gridView_OrderDetails.Columns["Price"].DisplayFormat.FormatType = FormatType.Numeric;
             gridView_OrderDetails.Columns["Price"].DisplayFormat.FormatString = "N0";
+            gridView_OrderDetails.Columns["Product"].VisibleIndex = 0;
+            gridView_OrderDetails.Columns["Price"].VisibleIndex = 1;
+            gridView_OrderDetails.Columns["Quantity"].VisibleIndex = 2;
+            // gridView_OrderDetails.ClearSorting();
             
             bsiListCount.Caption = $"{list.Count} items";
         }

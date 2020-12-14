@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using TechShop_Manager.BUS;
 
@@ -15,7 +16,9 @@ namespace TechShop_Manager.DAL
         
         public static List<Order> GetAll()
         {
-            var imports = _ctx.Orders.ToList();
+            var imports = _ctx.Orders
+                .Include(o => o.OrderDetails.Select(o => o.Product))
+                .ToList();
 
             return imports;
         }

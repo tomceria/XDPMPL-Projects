@@ -1,5 +1,6 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
+using DevExpress.Data;
 
 namespace TechShop_Manager.BUS
 {
@@ -16,7 +17,6 @@ namespace TechShop_Manager.BUS
         [Column(TypeName="bigint")] 
         public int Price { get; set; }
         
-        [DisplayName("Số lượng")]
         public int Quantity { get; set; }
         
         [DisplayName("Sản phẩm")]
