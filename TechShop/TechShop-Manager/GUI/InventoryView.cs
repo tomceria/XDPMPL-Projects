@@ -11,7 +11,7 @@ namespace TechShop_Manager.GUI
         enum Page
         {
             Imports,
-            Orders,
+            Orders
         }
 
         public InventoryView()
@@ -67,7 +67,7 @@ namespace TechShop_Manager.GUI
         {
             // Data fetch
             BindingList<Import> list = new BindingList<Import>(
-                // Import.GetAll()
+                Import.GetAll()
             );
 
             // UI changes
@@ -80,7 +80,7 @@ namespace TechShop_Manager.GUI
         {
             // Data fetch
             BindingList<Order> list = new BindingList<Order>(
-                // Order.GetAll()
+                Order.GetAll()
             );
 
             // UI changes
@@ -106,8 +106,8 @@ namespace TechShop_Manager.GUI
                 return;
             }
 
-            // EditImportView editImportView = new EditImportView(selectedImport);
-            // editImportView.ShowDialog(this);
+            EditImportView editImportView = new EditImportView(selectedImport);
+            editImportView.ShowDialog(this);
         }
 
         private void handleDeleteImport()
@@ -167,9 +167,9 @@ namespace TechShop_Manager.GUI
                 case Page.Orders:
                     {
                         selectedItem = gridView_Orders.GetFocusedRow();
-                        bbiNew.Enabled = true;
-                        bbiEdit.Enabled = selectedItem != null;
-                        bbiDelete.Enabled = selectedItem != null;
+                        bbiNew.Enabled = false;
+                        bbiEdit.Enabled = false;
+                        bbiDelete.Enabled = false;
                         break;
                     }
             }

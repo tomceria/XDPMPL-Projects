@@ -46,6 +46,12 @@ namespace TechShop_Manager.GUI
             this.xtraTabPage_Orders = new DevExpress.XtraTab.XtraTabPage();
             this.gridControl_Orders = new DevExpress.XtraGrid.GridControl();
             this.gridView_Orders = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.dataLayoutControl1 = new DevExpress.XtraDataLayout.DataLayoutControl();
+            this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.dataLayoutControl2 = new DevExpress.XtraDataLayout.DataLayoutControl();
+            this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl_Imports)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView_Imports)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl)).BeginInit();
@@ -55,16 +61,23 @@ namespace TechShop_Manager.GUI
             this.xtraTabPage_Orders.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl_Orders)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView_Orders)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl1)).BeginInit();
+            this.dataLayoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl2)).BeginInit();
+            this.dataLayoutControl2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             this.SuspendLayout();
             // 
             // gridControl_Imports
             // 
-            this.gridControl_Imports.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl_Imports.Location = new System.Drawing.Point(0, 0);
+            this.gridControl_Imports.Location = new System.Drawing.Point(12, 12);
             this.gridControl_Imports.MainView = this.gridView_Imports;
             this.gridControl_Imports.MenuManager = this.ribbonControl;
             this.gridControl_Imports.Name = "gridControl_Imports";
-            this.gridControl_Imports.Size = new System.Drawing.Size(788, 447);
+            this.gridControl_Imports.Size = new System.Drawing.Size(764, 423);
             this.gridControl_Imports.TabIndex = 2;
             this.gridControl_Imports.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView_Imports});
@@ -174,26 +187,25 @@ namespace TechShop_Manager.GUI
             // 
             // xtraTabPage_Imports
             // 
-            this.xtraTabPage_Imports.Controls.Add(this.gridControl_Imports);
+            this.xtraTabPage_Imports.Controls.Add(this.dataLayoutControl1);
             this.xtraTabPage_Imports.Name = "xtraTabPage_Imports";
             this.xtraTabPage_Imports.Size = new System.Drawing.Size(788, 447);
             this.xtraTabPage_Imports.Text = "Phiếu nhập";
             // 
             // xtraTabPage_Orders
             // 
-            this.xtraTabPage_Orders.Controls.Add(this.gridControl_Orders);
+            this.xtraTabPage_Orders.Controls.Add(this.dataLayoutControl2);
             this.xtraTabPage_Orders.Name = "xtraTabPage_Orders";
             this.xtraTabPage_Orders.Size = new System.Drawing.Size(788, 447);
             this.xtraTabPage_Orders.Text = "Hoá đơn mua hàng";
             // 
             // gridControl_Orders
             // 
-            this.gridControl_Orders.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl_Orders.Location = new System.Drawing.Point(0, 0);
+            this.gridControl_Orders.Location = new System.Drawing.Point(12, 12);
             this.gridControl_Orders.MainView = this.gridView_Orders;
             this.gridControl_Orders.MenuManager = this.ribbonControl;
             this.gridControl_Orders.Name = "gridControl_Orders";
-            this.gridControl_Orders.Size = new System.Drawing.Size(788, 447);
+            this.gridControl_Orders.Size = new System.Drawing.Size(764, 423);
             this.gridControl_Orders.TabIndex = 0;
             this.gridControl_Orders.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView_Orders});
@@ -203,6 +215,66 @@ namespace TechShop_Manager.GUI
             this.gridView_Orders.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.gridView_Orders.GridControl = this.gridControl_Orders;
             this.gridView_Orders.Name = "gridView_Orders";
+            // 
+            // dataLayoutControl1
+            // 
+            this.dataLayoutControl1.Controls.Add(this.gridControl_Imports);
+            this.dataLayoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataLayoutControl1.Location = new System.Drawing.Point(0, 0);
+            this.dataLayoutControl1.Name = "dataLayoutControl1";
+            this.dataLayoutControl1.Root = this.Root;
+            this.dataLayoutControl1.Size = new System.Drawing.Size(788, 447);
+            this.dataLayoutControl1.TabIndex = 3;
+            this.dataLayoutControl1.Text = "dataLayoutControl1";
+            // 
+            // Root
+            // 
+            this.Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
+            this.Root.GroupBordersVisible = false;
+            this.Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItem1});
+            this.Root.Name = "Root";
+            this.Root.Size = new System.Drawing.Size(788, 447);
+            this.Root.TextVisible = false;
+            // 
+            // layoutControlItem1
+            // 
+            this.layoutControlItem1.Control = this.gridControl_Imports;
+            this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlItem1.Name = "layoutControlItem1";
+            this.layoutControlItem1.Size = new System.Drawing.Size(768, 427);
+            this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem1.TextVisible = false;
+            // 
+            // dataLayoutControl2
+            // 
+            this.dataLayoutControl2.Controls.Add(this.gridControl_Orders);
+            this.dataLayoutControl2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataLayoutControl2.Location = new System.Drawing.Point(0, 0);
+            this.dataLayoutControl2.Name = "dataLayoutControl2";
+            this.dataLayoutControl2.Root = this.layoutControlGroup1;
+            this.dataLayoutControl2.Size = new System.Drawing.Size(788, 447);
+            this.dataLayoutControl2.TabIndex = 1;
+            this.dataLayoutControl2.Text = "dataLayoutControl2";
+            // 
+            // layoutControlGroup1
+            // 
+            this.layoutControlGroup1.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
+            this.layoutControlGroup1.GroupBordersVisible = false;
+            this.layoutControlGroup1.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItem2});
+            this.layoutControlGroup1.Name = "layoutControlGroup1";
+            this.layoutControlGroup1.Size = new System.Drawing.Size(788, 447);
+            this.layoutControlGroup1.TextVisible = false;
+            // 
+            // layoutControlItem2
+            // 
+            this.layoutControlItem2.Control = this.gridControl_Orders;
+            this.layoutControlItem2.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlItem2.Name = "layoutControlItem2";
+            this.layoutControlItem2.Size = new System.Drawing.Size(768, 427);
+            this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem2.TextVisible = false;
             // 
             // InventoryView
             // 
@@ -222,6 +294,14 @@ namespace TechShop_Manager.GUI
             this.xtraTabPage_Orders.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridControl_Orders)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView_Orders)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl1)).EndInit();
+            this.dataLayoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl2)).EndInit();
+            this.dataLayoutControl2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -243,5 +323,11 @@ namespace TechShop_Manager.GUI
         private DevExpress.XtraGrid.GridControl gridControl_Orders;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView_Orders;
         private DevExpress.XtraTab.XtraTabPage xtraTabPage_Imports;
+        private DevExpress.XtraDataLayout.DataLayoutControl dataLayoutControl1;
+        private DevExpress.XtraLayout.LayoutControlGroup Root;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
+        private DevExpress.XtraDataLayout.DataLayoutControl dataLayoutControl2;
+        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup1;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
     }
 }
