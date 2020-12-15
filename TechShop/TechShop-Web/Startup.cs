@@ -33,7 +33,7 @@ namespace TechShop_Web
             /**/ // Registering Database Connection
             services.AddDbContext<ShopContext>(options =>
                 options.UseSqlServer(
-                    Configuration.GetConnectionString("HoangShopContext")
+                    Configuration.GetConnectionString("HuyShopContext")
                 )
             );
             
