@@ -30,9 +30,13 @@ namespace TechShop_Manager.GUI
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InventoryView));
             this.gridControl_Imports = new DevExpress.XtraGrid.GridControl();
             this.gridView_Imports = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.id = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.Date = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.supplier = new DevExpress.XtraGrid.Columns.GridColumn();
             this.ribbonControl = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.bbiNew = new DevExpress.XtraBars.BarButtonItem();
             this.bbiEdit = new DevExpress.XtraBars.BarButtonItem();
@@ -46,6 +50,8 @@ namespace TechShop_Manager.GUI
             this.xtraTabPage_Orders = new DevExpress.XtraTab.XtraTabPage();
             this.gridControl_Orders = new DevExpress.XtraGrid.GridControl();
             this.gridView_Orders = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.behaviorManager1 = new DevExpress.Utils.Behaviors.BehaviorManager(this.components);
+            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl_Imports)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView_Imports)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl)).BeginInit();
@@ -55,29 +61,55 @@ namespace TechShop_Manager.GUI
             this.xtraTabPage_Orders.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl_Orders)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView_Orders)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.behaviorManager1)).BeginInit();
             this.SuspendLayout();
             // 
             // gridControl_Imports
             // 
-            this.gridControl_Imports.Location = new System.Drawing.Point(53, 73);
+            this.gridControl_Imports.Location = new System.Drawing.Point(-10, 0);
             this.gridControl_Imports.MainView = this.gridView_Imports;
             this.gridControl_Imports.MenuManager = this.ribbonControl;
             this.gridControl_Imports.Name = "gridControl_Imports";
-            this.gridControl_Imports.Size = new System.Drawing.Size(537, 270);
+            this.gridControl_Imports.Size = new System.Drawing.Size(436, 351);
             this.gridControl_Imports.TabIndex = 2;
             this.gridControl_Imports.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView_Imports});
+            this.gridControl_Imports.Click += new System.EventHandler(this.gridControl_Imports_Click);
             // 
             // gridView_Imports
             // 
             this.gridView_Imports.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.gridView_Imports.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.id,
+            this.Date,
+            this.supplier});
             this.gridView_Imports.GridControl = this.gridControl_Imports;
             this.gridView_Imports.Name = "gridView_Imports";
             this.gridView_Imports.OptionsBehavior.Editable = false;
             this.gridView_Imports.OptionsBehavior.ReadOnly = true;
             this.gridView_Imports.OptionsCustomization.AllowQuickHideColumns = false;
             this.gridView_Imports.OptionsView.ShowFooter = true;
-            this.gridView_Imports.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.gridView_FocusedRowChanged);
+            // 
+            // id
+            // 
+            this.id.FieldName = "Mã Phiếu";
+            this.id.Name = "id";
+            this.id.Visible = true;
+            this.id.VisibleIndex = 0;
+            // 
+            // Date
+            // 
+            this.Date.FieldName = "Ngày giờ";
+            this.Date.Name = "Date";
+            this.Date.Visible = true;
+            this.Date.VisibleIndex = 1;
+            // 
+            // supplier
+            // 
+            this.supplier.FieldName = "Nhà cung cấp";
+            this.supplier.Name = "supplier";
+            this.supplier.Visible = true;
+            this.supplier.VisibleIndex = 2;
             // 
             // ribbonControl
             // 
@@ -107,7 +139,6 @@ namespace TechShop_Manager.GUI
             this.bbiNew.Id = 16;
             this.bbiNew.ImageOptions.ImageUri.Uri = "New";
             this.bbiNew.Name = "bbiNew";
-            this.bbiNew.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.bbiNew_ItemClick);
             // 
             // bbiEdit
             // 
@@ -116,7 +147,6 @@ namespace TechShop_Manager.GUI
             this.bbiEdit.ImageOptions.ImageUri.Uri = "Edit";
             this.bbiEdit.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("bbiEdit.ImageOptions.SvgImage")));
             this.bbiEdit.Name = "bbiEdit";
-            this.bbiEdit.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.bbiEdit_ItemClick);
             // 
             // bbiDelete
             // 
@@ -124,7 +154,6 @@ namespace TechShop_Manager.GUI
             this.bbiDelete.Id = 18;
             this.bbiDelete.ImageOptions.ImageUri.Uri = "Delete";
             this.bbiDelete.Name = "bbiDelete";
-            this.bbiDelete.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.bbiDelete_ItemClick);
             // 
             // bsiListCount
             // 
@@ -169,7 +198,6 @@ namespace TechShop_Manager.GUI
             this.xtraTabControl_Imports.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.xtraTabPage_Imports,
             this.xtraTabPage_Orders});
-            this.xtraTabControl_Imports.SelectedPageChanged += new DevExpress.XtraTab.TabPageChangedEventHandler(this.xtraTabControl_Imports_SelectedPageChanged);
             // 
             // xtraTabPage_Imports
             // 
@@ -183,7 +211,7 @@ namespace TechShop_Manager.GUI
             this.xtraTabPage_Orders.Controls.Add(this.gridControl_Orders);
             this.xtraTabPage_Orders.Name = "xtraTabPage_Orders";
             this.xtraTabPage_Orders.Size = new System.Drawing.Size(788, 447);
-            this.xtraTabPage_Orders.Text = "Hoá đơn mua hàng";
+            this.xtraTabPage_Orders.Text = "Phiếu xuất";
             // 
             // gridControl_Orders
             // 
@@ -201,6 +229,10 @@ namespace TechShop_Manager.GUI
             this.gridView_Orders.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.gridView_Orders.GridControl = this.gridControl_Orders;
             this.gridView_Orders.Name = "gridView_Orders";
+            // 
+            // gridColumn1
+            // 
+            this.gridColumn1.Name = "gridColumn1";
             // 
             // InventoryView
             // 
@@ -220,6 +252,7 @@ namespace TechShop_Manager.GUI
             this.xtraTabPage_Orders.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridControl_Orders)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView_Orders)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.behaviorManager1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -241,5 +274,10 @@ namespace TechShop_Manager.GUI
         private DevExpress.XtraGrid.GridControl gridControl_Orders;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView_Orders;
         private DevExpress.XtraTab.XtraTabPage xtraTabPage_Imports;
+        private DevExpress.XtraGrid.Columns.GridColumn id;
+        private DevExpress.XtraGrid.Columns.GridColumn Date;
+        private DevExpress.Utils.Behaviors.BehaviorManager behaviorManager1;
+        private DevExpress.XtraGrid.Columns.GridColumn supplier;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
     }
 }

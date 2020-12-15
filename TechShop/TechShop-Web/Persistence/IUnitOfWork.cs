@@ -10,7 +10,7 @@ namespace TechShop_Web.Persistence
          */
         IAccountRepository Account { get; }
         ICustomerRepository Customer { get; }
-        
+        IOrderRepository Order { get; }
         int Complete();
     }
 }

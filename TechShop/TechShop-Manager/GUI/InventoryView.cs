@@ -25,9 +25,16 @@ namespace TechShop_Manager.GUI
         {
             gridView_Imports.OptionsBehavior.Editable = false;
             gridView_Orders.OptionsBehavior.Editable = false;
+            gridView_Imports.Columns["ImportDetail"].Visible = false;
         }
 
-        private Page getCurrentPage()
+        private void gridControl_Imports_Click(object sender, EventArgs e)
+        {
+
+        }
+    }
+
+    private Page getCurrentPage()
         {
             Page curPage = Page.Imports;
             int tabIndex = xtraTabControl_Imports.SelectedTabPageIndex;
@@ -80,7 +87,7 @@ namespace TechShop_Manager.GUI
         {
             // Data fetch
             BindingList<Order> list = new BindingList<Order>(
-                // Order.GetAll()
+                 Order.GetAll()
             );
 
             // UI changes
@@ -256,6 +263,11 @@ namespace TechShop_Manager.GUI
         {
             InitializeDataSources();
             handleUpdateSelected();
+        }
+
+        private void gridControl_Imports_Click(object sender, EventArgs e)
+        {
+             
         }
     }
 }
