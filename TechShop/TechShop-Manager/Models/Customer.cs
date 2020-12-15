@@ -22,7 +22,9 @@ namespace TechShop_Manager.BUS
 
         [DisplayName("Số điện thoại")] public string PhoneNumber { get; set; }
 
-        [Column(TypeName = "date")] public DateTime DOB { get; set; }
+        [DisplayName("Ngày sinh")]
+        [Column(TypeName = "date")]
+        public DateTime DOB { get; set; }
 
         [Column(TypeName = "text")] public string Address { get; set; }
 

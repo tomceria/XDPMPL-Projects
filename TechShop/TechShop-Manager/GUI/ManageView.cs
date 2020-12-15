@@ -1,8 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows.Forms;
+using DevExpress.Data;
 using DevExpress.XtraBars;
+using DevExpress.XtraGrid.Columns;
 using TechShop_Manager.BUS;
 
 namespace TechShop_Manager.GUI
@@ -80,12 +83,20 @@ namespace TechShop_Manager.GUI
         {
             // Data fetch
             BindingList<Product> list = new BindingList<Product>(
-                // Product.GetAll()
+                Product.GetAll()
             );
 
             // UI changes
             gridControl_Products.DataSource = list;
             gridControl_Products.RefreshDataSource();
+            gridView_Products.Columns["Id"].Visible = false;
+            gridView_Products.Columns["Slug"].Visible = false;
+            gridView_Products.Columns["Description"].Visible = false;
+            gridView_Products.Columns["ProductTypeId"].Visible = false;
+            gridView_Products.Columns["IsHidden"].Visible = false;
+            gridView_Products.Columns["OrderDetails"].Visible = false;
+            gridView_Products.Columns["ComboDetails"].Visible = false;
+            
             bsiListCount.Caption = $"{list.Count} items";
         }
 
@@ -93,12 +104,17 @@ namespace TechShop_Manager.GUI
         {
             // Data fetch
             BindingList<Combo> list = new BindingList<Combo>(
-                // Combo.GetAll()
+                Combo.GetAll()
             );
 
             // UI changes
             gridControl_Combos.DataSource = list;
             gridControl_Combos.RefreshDataSource();
+            gridView_Combos.Columns["Id"].Visible = false;
+            gridView_Combos.Columns["Slug"].Visible = false;
+            gridView_Combos.Columns["IsHidden"].Visible = false;
+            gridView_Combos.Columns["ComboDetails"].Visible = false;
+            
             bsiListCount.Caption = $"{list.Count} items";
         }
         
@@ -106,12 +122,15 @@ namespace TechShop_Manager.GUI
         {
             // Data fetch
             BindingList<Customer> list = new BindingList<Customer>(
-                // Customer.GetAll()
+                Customer.GetAll()
             );
 
             // UI changes
             gridControl_Customers.DataSource = list;
             gridControl_Customers.RefreshDataSource();
+            gridView_Customers.Columns["Orders"].Visible = false;
+            gridView_Customers.Columns["FullName"].Visible = false;
+            
             bsiListCount.Caption = $"{list.Count} items";
         }
 

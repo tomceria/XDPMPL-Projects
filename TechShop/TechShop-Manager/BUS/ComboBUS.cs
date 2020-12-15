@@ -23,7 +23,11 @@ namespace TechShop_Manager.BUS
 
         public Combo Add()
         {
+            this.Slug = string.Join("-", StringUtil.ConvertToUnsign(this.Name).ToLower()); 
             ComboDAL.AddOne(this);
+            
+            this.Slug = $"{this.Slug}-{this.Id}"; 
+            ComboDAL.UpdateOne(this);
 
             return this;
         }

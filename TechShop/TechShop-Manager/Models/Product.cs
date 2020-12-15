@@ -33,6 +33,7 @@ namespace TechShop_Manager.BUS
         
         public bool IsHidden { get; set; } = false;
         
+        [DisplayName("Loại Sản phẩm")]
         public virtual ProductType ProductType { get; set; }
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
         public virtual ICollection<ComboDetail> ComboDetails { get; set; }

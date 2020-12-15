@@ -17,6 +17,7 @@ namespace TechShop_Manager.BUS
         [Column(TypeName="bigint")] 
         public int Price { get; set; }
         
+        [DisplayName("Số lượng")]
         public int Quantity { get; set; }
         
         [DisplayName("Sản phẩm")]
