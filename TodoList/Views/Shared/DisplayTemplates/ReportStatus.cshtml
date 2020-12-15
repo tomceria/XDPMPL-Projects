@@ -1,0 +1,17 @@
+@using TodoList.Common.Utilities
+@model ReportStatus
+
+@{
+    var className = "text-";
+    className += Model switch
+    {
+        ReportStatus.InProgress => "warning",
+        ReportStatus.Completed => "success",
+        ReportStatus.Overdue => "danger",
+        ReportStatus.CompletedLate => "info",
+        _ => "muted"
+        };
+}
+<span class="@className">
+    @Model.GetDisplayName()
+</span>

@@ -1,0 +1,59 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.9">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.9" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Folder Include="Migrations" />
+    <Folder Include="Models\Transient" />
+    <Folder Include="ViewComponents" />
+    <Folder Include="ViewModels\Component" />
+    <Folder Include="wwwroot\css" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Views\Report\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Report\TaskOnStaff.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Report\TaskOnStatus.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Shared\DisplayTemplates\DateTime.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Shared\DisplayTemplates\ReportStatus.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Shared\DisplayTemplates\SystemEnum.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Shared\DisplayTemplates\TodoTask.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Shared\DisplayTemplates\TodoTask_TaskAccess.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Shared\DisplayTemplates\TodoTask_TodoTaskPartners.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Shared\Error.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Shared\_Layout.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Shared\_LayoutEmpty.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Shared\_PostRenderScript.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Shared\_ValidationScriptsPartial.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Staff\index.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Staff\Me.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\TodoTask\Components\ActivityLogs\Default.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\TodoTask\Components\CommentList\Default.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\TodoTask\Edit.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\TodoTask\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\TodoTask\View.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\TodoTask\_View_Status.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Account\Edit.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Account\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Account\Login.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Account\Register.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\ActivityLog\Index.cshtml" />
+  </ItemGroup>
+
+</Project>

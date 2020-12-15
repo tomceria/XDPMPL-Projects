@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Root Type="DevExpress.CodeRush.Foundation.Markers.SolutionBookmarksContainer">
+  <Options Language="Neutral">
+    <Items>
+      <Item Id="{5f807bc5-8915-46ee-9e77-a41461954a2b}">
+        <Id>1</Id>
+        <File>TourDuLich\TourDuLich-GUI\Models\Customer.cs</File>
+        <Line>9</Line>
+        <Character>47</Character>
+        <ViewportTop>48</ViewportTop>
+        <ViewportTopMax>309</ViewportTopMax>
+        <TopLine>2</TopLine>
+      </Item>
+    </Items>
+  </Options>
+</Root>

@@ -1,0 +1,103 @@
+@using TaskStatus = TodoList.Models.TaskStatus
+@model TodoTaskEditVm
+
+@{
+    ViewData["Title"] = "Chỉnh sửa " + @Html.ViewData.Model.TodoTask.Name;
+}
+
+<h6>
+    <a asp-controller="TodoTask" asp-action="View" asp-route-id="@Model.TodoTask.Id">
+        Trở về '@Model.TodoTask.Name'
+    </a>
+</h6>
+
+<div class="row">
+    <div class="col-lg-8">
+        <form asp-action="Edit">
+            @Html.ValidationSummary(true, null, new {@class = "alert alert-danger", role = "alert"})
+
+            @Html.HiddenFor(m => m.TodoTask.Id)
+            @Html.HiddenFor(m => m.TodoTask.CreatedById)
+
+            <div class="form-group">
+                @Html.TextBoxFor(m => m.TodoTask.Name, new {@class = "form-control col-form-label col-form-label-lg"})
+                @Html.ValidationMessageFor(m => m.TodoTask.Name, null, new {@class = "text-danger"})
+            </div>
+            <div class="form-group small">
+                @Html.DisplayNameFor(m => m.TodoTask.CreatedById)@Html.Raw(":&nbsp")
+                <strong>
+                    @Html.DisplayFor(m => m.TodoTask.CreatedBy.FullName)
+                </strong>
+            </div>
+            <div class="form-group">
+                @if (User.IsInRole("Leader"))
+                {
+                    @Html.LabelFor(m => m.TodoTask.StaffId, new {@class = "control-label"})
+                    @Html.DropDownListFor(
+                        m => m.TodoTask.StaffId,
+                        new SelectList(Model.Staffs, nameof(Staff.Id), nameof(Staff.FullName)),
+                        null,
+                        new {@class = "form-control"})
+                    @Html.ValidationMessageFor(m => m.TodoTask.StaffId, null, new {@class = "text-danger"})
+                }
+                else
+                {
+                    @Html.HiddenFor(m => m.TodoTask.StaffId)
+                    @Html.DisplayNameFor(m => m.TodoTask.StaffId)@Html.Raw(":&nbsp")
+                    <strong>
+                        @Html.DisplayFor(m => m.TodoTask.CreatedBy.FullName)
+                    </strong>
+                }
+            </div>
+
+            <hr>
+
+            <div class="form-row">
+                <div class="form-group col">
+                    @Html.LabelFor(m => m.TodoTask.StartDate, new {@class = "control-label"})
+                    @Html.EditorFor(m => m.TodoTask.StartDate, new {htmlAttributes = new {@class = "form-control"}})
+                    @Html.ValidationMessageFor(m => m.TodoTask.StartDate, null, new {@class = "text-danger"})
+                </div>
+                <div class="form-group col">
+                    @Html.LabelFor(m => m.TodoTask.EndDate, new {@class = "control-label"})
+                    @Html.EditorFor(m => m.TodoTask.EndDate, new {htmlAttributes = new {@class = "form-control"}})
+                    @Html.ValidationMessageFor(m => m.TodoTask.EndDate, null, new {@class = "text-danger"})
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.TodoTask.TodoTaskPartners, new {@class = "control-label"})
+                @Html.ListBoxFor(
+                    m => m.TodoTaskPartnerIds,
+                    new SelectList(Model.Staffs, nameof(Staff.Id), nameof(Staff.FullName)),
+                    new {@class = "form-control chosen-select", data_placeholder="Chọn..."})
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.TodoTask.Access, new {@class = "control-label"})
+                @Html.DropDownListFor(
+                    m => m.TodoTask.Access,
+                    Html.GetEnumSelectList(typeof(TaskAccess)),
+                    new {@class = "form-control"}
+                    )
+                @Html.ValidationMessageFor(m => m.TodoTask.Access, null, new {@class = "text-danger"})
+            </div>
+
+            <input type="submit" value="Lưu" class="btn btn-primary col-1"/>
+        </form>
+
+        <form asp-action="Delete">
+            @Html.HiddenFor(m => m.TodoTask.Id)
+            <input type="submit" value="Xoá" class="btn btn-danger col-1 mt-2"/>
+        </form>
+
+        <hr>
+
+    </div>
+    <div class="col-lg-4">
+        @await Component.InvokeAsync("CommentList", new {todoTask = Model.TodoTask, staff = Model.CurrentStaff})
+    </div>
+</div>
+
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}
