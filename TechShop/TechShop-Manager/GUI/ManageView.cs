@@ -138,8 +138,8 @@ namespace TechShop_Manager.GUI
 
         private void handleNewProduct()
         {
-            // EditProductView editProductView = new EditProductView();
-            // editProductView.ShowDialog(this);
+            EditProductView editProductView = new EditProductView();
+            editProductView.ShowDialog(this);
         }
 
         private void handleEditProduct()
@@ -151,8 +151,8 @@ namespace TechShop_Manager.GUI
                 return;
             }
 
-            // EditProductView editProductView = new EditProductView(selectedProduct);
-            // editProductView.ShowDialog(this);
+            EditProductView editProductView = new EditProductView(selectedProduct);
+            editProductView.ShowDialog(this);
         }
 
         private void handleDeleteProduct()
@@ -164,7 +164,7 @@ namespace TechShop_Manager.GUI
                 return;
             }
 
-            // Product.DeleteOne(selectedProduct.ID);
+            Product.DeleteOne(selectedProduct.Id);
         }
 
         private void handleNewCombo()

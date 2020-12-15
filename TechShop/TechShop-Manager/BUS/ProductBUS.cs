@@ -37,5 +37,17 @@ namespace TechShop_Manager.BUS
         {
             ProductDAL.UpdateOne(this);
         }
+
+        public static void RevertChanges()
+        {
+            ProductDAL.Reload();
+        }
+        
+        // ProductType
+
+        public static List<ProductType> GetProductTypes()
+        {
+            return ProductDAL.GetProductTypes();
+        }
     }
 }

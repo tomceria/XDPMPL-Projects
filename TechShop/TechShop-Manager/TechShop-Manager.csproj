@@ -98,6 +98,12 @@
     <Compile Include="GUI\EditImportView.Designer.cs">
       <DependentUpon>EditImportView.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\EditProductView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\EditProductView.Designer.cs">
+      <DependentUpon>EditProductView.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\EditViewTemplate.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -139,6 +145,9 @@
     <EmbeddedResource Include="GUI\EditImportView.resx">
       <DependentUpon>EditImportView.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="GUI\EditProductView.resx">
+      <DependentUpon>EditProductView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GUI\EditViewTemplate.resx">
       <DependentUpon>EditViewTemplate.cs</DependentUpon>
     </EmbeddedResource>
@@ -165,6 +174,7 @@
     <None Include="packages.config" />
     <None Include="Properties\DataSources\TechShop_Manager.BUS.Customer.datasource" />
     <None Include="Properties\DataSources\TechShop_Manager.BUS.Import.datasource" />
+    <None Include="Properties\DataSources\TechShop_Manager.BUS.Product.datasource" />
     <None Include="Properties\DataSources\TechShop_Manager.Models.Destination.datasource" />
     <None Include="Properties\DataSources\TechShop_Manager.Models.Tour.datasource" />
     <None Include="Properties\DataSources\TechShop_Manager.Models.TourGroup.datasource" />

@@ -58,5 +58,10 @@ namespace TechShop_Manager.DAL
 
             _ctx.SaveChanges();
         }
+
+        public static void Reload()
+        {
+            _ctx = new ShopContext();
+        }
     }
 }

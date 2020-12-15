@@ -36,5 +36,10 @@ namespace TechShop_Manager.BUS
         {
             ComboDAL.UpdateOne(this);
         }
+        
+        public static void RevertChanges()
+        {
+            ComboDAL.Reload();
+        }
     }
 }
