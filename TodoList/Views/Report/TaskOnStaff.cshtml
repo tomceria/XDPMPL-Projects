@@ -39,18 +39,19 @@
 
     <input type="submit" value="Xuất báo cáo" class="btn btn-primary"/>
 
-    <table class="table table-bordered table-hover mt-3">
+    <table class="table table-sm table-bordered table-hover mt-3">
         <thead>
         <tr>
             @{
                 var emptyReportData = new TaskOnStaffReportData();
             }
-            <th style="width: 18%">@Html.DisplayNameFor(m => emptyReportData.TodoTask)</th>
+            <th>@Html.DisplayNameFor(m => emptyReportData.TodoTask)</th>
             <th>@Html.DisplayNameFor(m => emptyReportData.TodoTask.StaffId)</th>
             <th>@Html.DisplayNameFor(m => emptyReportData.TodoTask.StartDate)</th>
             <th>@Html.DisplayNameFor(m => emptyReportData.TodoTask.EndDate)</th>
             <th>@Html.DisplayNameFor(m => emptyReportData.TodoTask.CompleteDate)</th>
             <th>@Html.DisplayNameFor(m => emptyReportData.Status)</th>
+            <th>@Html.DisplayNameFor(m => emptyReportData.StatusNow)</th>
         </tr>
         </thead>
         <tbody>
@@ -72,6 +73,7 @@
                     }
                 </td>
                 <td>@Html.DisplayFor(m => item.Status)</td>
+                <td>@Html.DisplayFor(m => item.StatusNow)</td>
             </tr>
         }
         </tbody>

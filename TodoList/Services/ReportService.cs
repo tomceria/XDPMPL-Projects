@@ -27,13 +27,14 @@ namespace TodoList.Services
             var todoTasks =
                 assignedTodoTasks
                     .Concat(associatedTodoTasks)
-                    .Where(o => o.StartDate >= startDate)
+                    .Where(o => o.StartDate >= startDate && o.StartDate <= endDate)
                     .OrderByDescending(o => o.StartDate)
                     .ToList();
 
             var result = todoTasks.Select(todoTask => new TaskOnStaffReportData
             {
                 Status = DetermineReportStatus(todoTask, endDate),
+                StatusNow = DetermineReportStatusNow(todoTask),
                 TodoTask = todoTask
             }).ToList();
 
@@ -46,7 +47,7 @@ namespace TodoList.Services
             var todoTasks = _unitOfWork.TodoTask
                 .Find(o =>
                     o.IsHidden == false
-                    && startDate <= o.StartDate)
+                    && o.StartDate >= startDate && o.StartDate <= endDate)
                 .Include(o => o.Staff)
                 .ToList();
 
@@ -54,6 +55,7 @@ namespace TodoList.Services
                 .Select(todoTask => new TaskOnStatusReportData
                 {
                     Status = DetermineReportStatus(todoTask, endDate),
+                    StatusNow = DetermineReportStatusNow(todoTask),
                     TodoTask = todoTask
                 }).ToList();
 
@@ -70,6 +72,55 @@ namespace TodoList.Services
         {
             ReportStatus status;
 
+            if (todoTask.CompleteDate != null && todoTask.EndDate < todoTask.CompleteDate)
+            {
+                if (endDate < todoTask.EndDate)
+                {
+                    status = ReportStatus.InProgress;
+                }
+                else if (endDate < todoTask.CompleteDate)
+                {
+                    status = ReportStatus.Overdue;
+                }
+                else
+                {
+                    status = ReportStatus.CompletedLate;
+                }
+            }
+            else if (todoTask.CompleteDate != null && todoTask.CompleteDate <= todoTask.EndDate)
+            {
+                if (endDate < todoTask.CompleteDate)
+                {
+                    status = ReportStatus.InProgress;
+                }
+                else if (endDate < todoTask.EndDate)
+                {
+                    status = ReportStatus.Completed;
+                }
+                else
+                {
+                    status = ReportStatus.Completed;
+                }
+            }
+            else // todoTask.CompleteDate == null
+            {
+                if (endDate < todoTask.EndDate)
+                {
+                    status = ReportStatus.InProgress;
+                }
+                else
+                {
+                    status = ReportStatus.Overdue;
+                }
+            }
+
+
+            return status;
+        }
+        
+        private ReportStatus DetermineReportStatusNow(TodoTask todoTask) {
+            ReportStatus status;
+
             if (todoTask.Status == TaskStatus.Completed)
             {
                 if (todoTask.EndDate < todoTask.CompleteDate)
@@ -83,7 +134,7 @@ namespace TodoList.Services
             }
             else
             {
-                if (endDate > todoTask.EndDate)
+                if (todoTask.IsOverdue)
                 {
                     status = ReportStatus.Overdue;
                 }
@@ -92,7 +143,7 @@ namespace TodoList.Services
                     status = ReportStatus.InProgress;
                 }
             }
-
+            
             return status;
         }
     }
