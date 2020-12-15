@@ -92,6 +92,12 @@
     <Compile Include="DAL\OrderDAL.cs" />
     <Compile Include="DAL\ProductDAL.cs" />
     <Compile Include="DAL\ShopInitializer.cs" />
+    <Compile Include="GUI\EditComboView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\EditComboView.Designer.cs">
+      <DependentUpon>EditComboView.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\EditImportView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -142,6 +148,9 @@
     <Compile Include="GUI\ManageView.Designer.cs">
       <DependentUpon>ManageView.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="GUI\EditComboView.resx">
+      <DependentUpon>EditComboView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GUI\EditImportView.resx">
       <DependentUpon>EditImportView.cs</DependentUpon>
     </EmbeddedResource>
@@ -172,6 +181,7 @@
     </Compile>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\TechShop_Manager.BUS.Combo.datasource" />
     <None Include="Properties\DataSources\TechShop_Manager.BUS.Customer.datasource" />
     <None Include="Properties\DataSources\TechShop_Manager.BUS.Import.datasource" />
     <None Include="Properties\DataSources\TechShop_Manager.BUS.Product.datasource" />

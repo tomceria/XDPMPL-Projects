@@ -23,10 +23,10 @@ namespace TechShop_Manager.GUI
             InitializeDataSources();
         }
 
-        public EditProductView(Product tour) // Edit Product
+        public EditProductView(Product combo) // Edit Product
         {
             InitializeComponent();
-            _item = tour;
+            _item = combo;
             isUpdate = true;
             ConfigureControls();
             InitializeDataSources();
@@ -41,7 +41,7 @@ namespace TechShop_Manager.GUI
             Product item = Product.GetOne(_item.Id);
 
             if (item == null) {
-                item = _item; // this "_item" would be INITIALIZED before running this method, meaning it has no reference to ANY BindingList, unlike EditViewTemplate(Product tour)
+                item = _item; // this "_item" would be INITIALIZED before running this method, meaning it has no reference to ANY BindingList, unlike EditViewTemplate(Product combo)
             } else {
                 _item = item;
             }
@@ -105,7 +105,7 @@ namespace TechShop_Manager.GUI
             } else {
                 var temp = _item.Add();
 
-                if (temp.Id != 0)   // tourGroup added to Database => ID changed from 0
+                if (temp.Id != 0)   // comboGroup added to Database => ID changed from 0
                 {
                     isUpdate = true;
                 }

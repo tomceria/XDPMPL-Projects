@@ -14,6 +14,7 @@ namespace TechShop_Manager.BUS
         [DisplayName("Số lượng")]
         public int Quantity { get; set; }
         
+        [DisplayName("Sản phẩm")]
         public virtual Product Product { get; set; }
         public virtual Combo Combo { get; set; }
     }

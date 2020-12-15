@@ -169,8 +169,8 @@ namespace TechShop_Manager.GUI
 
         private void handleNewCombo()
         {
-            // EditComboView editComboView = new EditComboView();
-            // editComboView.ShowDialog(this);
+            EditComboView editComboView = new EditComboView();
+            editComboView.ShowDialog(this);
         }
 
         private void handleEditCombo()
@@ -182,8 +182,8 @@ namespace TechShop_Manager.GUI
                 return;
             }
 
-            // EditComboView editComboView = new EditComboView(selectedCombo);
-            // editComboView.ShowDialog(this);
+            EditComboView editComboView = new EditComboView(selectedCombo);
+            editComboView.ShowDialog(this);
         }
 
         private void handleDeleteCombo() { 
@@ -193,7 +193,7 @@ namespace TechShop_Manager.GUI
                 return;
             }
 
-            // Combo.DeleteOne(selectedCombo.ID);
+            Combo.DeleteOne(selectedCombo.Id);
         }
 
         private void handleUpdateSelected()
