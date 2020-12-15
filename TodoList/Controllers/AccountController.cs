@@ -163,5 +163,10 @@ namespace TodoList.Controllers
 
             return RedirectToAction("Index");
         }
+
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
     }
 }
