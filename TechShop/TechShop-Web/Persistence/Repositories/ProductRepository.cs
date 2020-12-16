@@ -17,7 +17,7 @@ namespace TechShop_Web.Persistence.Repositories
 
         public IEnumerable<Product> GetAllProducts()
         {
-            return Context.Products.OrderBy(p => p.Id);
+            return Context.Products.Include(p => p.ProductType).OrderBy(p => p.Id);
         }
 
         public Product GetOneProduct(int id)
