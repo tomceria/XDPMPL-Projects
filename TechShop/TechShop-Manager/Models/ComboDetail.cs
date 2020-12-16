@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TechShop_Manager.BUS
 {
+    [Table("ComboDetails")]
     public partial class ComboDetail
     {
         [ForeignKey("Product")]

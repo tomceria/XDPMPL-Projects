@@ -32,6 +32,16 @@ namespace TechShop_Manager.BUS
             return this;
         }
 
+        public void AddComboDetail(ComboDetail comboDetail)
+        {
+            ComboDAL.AddComboDetail(comboDetail);
+        }
+
+        public void DeleteComboDetail(ComboDetail comboDetail)
+        {
+            ComboDAL.DeleteComboDetail(comboDetail);
+        }
+
         public void Update()
         {
             ComboDAL.UpdateOne(this);
