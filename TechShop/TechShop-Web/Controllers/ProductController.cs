@@ -20,10 +20,27 @@ namespace TechShop_Web.Controllers
 
         public IActionResult Index()
         {
-            var viewModel = new ProductIndexVM {
+            var viewModel = new ProductIndexVM
+            {
                 Products = _productService.GetAllProducts()
             };
             return View(viewModel);
+        }
+
+        public IActionResult Show(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var product = _productService.GetOneProduct((int)id);
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            return View(product);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

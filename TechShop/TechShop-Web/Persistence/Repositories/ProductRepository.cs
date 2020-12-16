@@ -22,7 +22,7 @@ namespace TechShop_Web.Persistence.Repositories
 
         public Product GetOneProduct(int id)
         {
-            return Context.Products.Find(id);
+            return Context.Products.Include(p => p.ProductType).FirstOrDefault(p => p.Id == id);
         }
 
         public IEnumerable<ProductType> GetProductTypes()
