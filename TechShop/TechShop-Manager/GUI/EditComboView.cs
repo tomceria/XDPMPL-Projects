@@ -168,6 +168,7 @@ namespace TechShop_Manager.GUI
             };
             getItemState().AddComboDetail(selectedComboDetail);
             InitializeDataSources();
+            gridView_ComboDetails.RefreshData();
         }        
         
         private void handleDeleteComboDetail()
@@ -175,6 +176,7 @@ namespace TechShop_Manager.GUI
             ComboDetail selectedComboDetail = getItemState().ComboDetails.ElementAt(gridView_ComboDetails.FocusedRowHandle);
             getItemState().DeleteComboDetail(selectedComboDetail);
             InitializeDataSources();
+            gridView_ComboDetails.RefreshData();
         }
 
         private void handleCloseEdit()
@@ -212,7 +214,6 @@ namespace TechShop_Manager.GUI
 
         private void btnAddComboDetail_ItemClick(object sender, EventArgs e)
         {
-            Console.WriteLine("HEREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
             handleAddComboDetail();
 
         }
