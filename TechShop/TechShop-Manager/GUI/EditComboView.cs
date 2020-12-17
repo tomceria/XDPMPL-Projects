@@ -159,6 +159,10 @@ namespace TechShop_Manager.GUI
         {
 
             Product selectedProduct = _products.ElementAt(gridView_Products.FocusedRowHandle);
+            if(getItemState().ComboDetails.First(o => o.ProductId == selectedProduct.Id) != null)
+            {
+                return;
+            }
             ComboDetail selectedComboDetail = new ComboDetail
             {
                 ProductId = selectedProduct.Id,
