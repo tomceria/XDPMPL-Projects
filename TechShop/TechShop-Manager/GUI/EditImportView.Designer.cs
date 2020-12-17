@@ -61,31 +61,31 @@ namespace TechShop_Manager.GUI
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
-            ((System.ComponentModel.ISupportInitialize) (this.dataLayoutControl_Import)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl_Import)).BeginInit();
             this.dataLayoutControl_Import.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize) (this.GridControl_Products)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize) (this.gridView_Products)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize) (this.mainRibbonControl)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize) (this.GridControl_ImportDetails)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize) (this.importBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize) (this.gridView_ImportDetails)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize) (this.LookUpEdit_ImportType.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize) (this.IdTextEdit.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize) (this.DateDateEdit.Properties.CalendarTimeProperties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize) (this.DateDateEdit.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize) (this.SupplierTextEdit.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize) (this.layoutControlItem4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize) (this.ItemForId)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize) (this.layoutControlGroup1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize) (this.layoutControlGroup2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize) (this.ItemForDate)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize) (this.ItemForSupplier)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize) (this.layoutControlItem5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize) (this.layoutControlItem3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize) (this.layoutControlItem1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize) (this.layoutControlItem2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize) (this.layoutControlItem6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize) (this.Root)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.GridControl_Products)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView_Products)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.mainRibbonControl)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.GridControl_ImportDetails)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.importBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView_ImportDetails)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.LookUpEdit_ImportType.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.IdTextEdit.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DateDateEdit.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DateDateEdit.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SupplierTextEdit.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForId)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForDate)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForSupplier)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             this.SuspendLayout();
             // 
             // dataLayoutControl_Import
@@ -102,7 +102,9 @@ namespace TechShop_Manager.GUI
             this.dataLayoutControl_Import.Controls.Add(this.SupplierTextEdit);
             this.dataLayoutControl_Import.DataSource = this.importBindingSource;
             this.dataLayoutControl_Import.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataLayoutControl_Import.HiddenItems.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {this.layoutControlItem4, this.ItemForId});
+            this.dataLayoutControl_Import.HiddenItems.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItem4,
+            this.ItemForId});
             this.dataLayoutControl_Import.Location = new System.Drawing.Point(0, 158);
             this.dataLayoutControl_Import.Name = "dataLayoutControl_Import";
             this.dataLayoutControl_Import.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(830, 324, 650, 400);
@@ -127,6 +129,7 @@ namespace TechShop_Manager.GUI
             this.btn_AddImportDetail.StyleController = this.dataLayoutControl_Import;
             this.btn_AddImportDetail.TabIndex = 23;
             this.btn_AddImportDetail.Text = "<";
+            this.btn_AddImportDetail.Click += new System.EventHandler(this.btnAddImportDetail_ItemClick);
             // 
             // btn_RemoveImportDetail
             // 
@@ -136,6 +139,7 @@ namespace TechShop_Manager.GUI
             this.btn_RemoveImportDetail.StyleController = this.dataLayoutControl_Import;
             this.btn_RemoveImportDetail.TabIndex = 22;
             this.btn_RemoveImportDetail.Text = ">";
+            this.btn_RemoveImportDetail.Click += new System.EventHandler(this.btnRemoveImportDetail_ItemClick);
             // 
             // GridControl_Products
             // 
@@ -145,7 +149,8 @@ namespace TechShop_Manager.GUI
             this.GridControl_Products.Name = "GridControl_Products";
             this.GridControl_Products.Size = new System.Drawing.Size(232, 352);
             this.GridControl_Products.TabIndex = 20;
-            this.GridControl_Products.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {this.gridView_Products});
+            this.GridControl_Products.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridView_Products});
             // 
             // gridView_Products
             // 
@@ -155,11 +160,16 @@ namespace TechShop_Manager.GUI
             // mainRibbonControl
             // 
             this.mainRibbonControl.ExpandCollapseItem.Id = 0;
-            this.mainRibbonControl.Items.AddRange(new DevExpress.XtraBars.BarItem[] {this.mainRibbonControl.ExpandCollapseItem, this.mainRibbonControl.SearchEditItem, this.bbiSave, this.bbiDelete});
+            this.mainRibbonControl.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
+            this.mainRibbonControl.ExpandCollapseItem,
+            this.mainRibbonControl.SearchEditItem,
+            this.bbiSave,
+            this.bbiDelete});
             this.mainRibbonControl.Location = new System.Drawing.Point(0, 0);
             this.mainRibbonControl.MaxItemId = 10;
             this.mainRibbonControl.Name = "mainRibbonControl";
-            this.mainRibbonControl.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {this.mainRibbonPage});
+            this.mainRibbonControl.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
+            this.mainRibbonPage});
             this.mainRibbonControl.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonControlStyle.Office2013;
             this.mainRibbonControl.ShowApplicationButton = DevExpress.Utils.DefaultBoolean.False;
             this.mainRibbonControl.Size = new System.Drawing.Size(798, 158);
@@ -183,7 +193,8 @@ namespace TechShop_Manager.GUI
             // 
             // mainRibbonPage
             // 
-            this.mainRibbonPage.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {this.mainRibbonPageGroup});
+            this.mainRibbonPage.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
+            this.mainRibbonPageGroup});
             this.mainRibbonPage.MergeOrder = 0;
             this.mainRibbonPage.Name = "mainRibbonPage";
             this.mainRibbonPage.Text = "Phiếu nhập";
@@ -206,7 +217,8 @@ namespace TechShop_Manager.GUI
             this.GridControl_ImportDetails.Name = "GridControl_ImportDetails";
             this.GridControl_ImportDetails.Size = new System.Drawing.Size(499, 352);
             this.GridControl_ImportDetails.TabIndex = 18;
-            this.GridControl_ImportDetails.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {this.gridView_ImportDetails});
+            this.GridControl_ImportDetails.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridView_ImportDetails});
             // 
             // importBindingSource
             // 
@@ -223,7 +235,8 @@ namespace TechShop_Manager.GUI
             this.LookUpEdit_ImportType.MenuManager = this.mainRibbonControl;
             this.LookUpEdit_ImportType.Name = "LookUpEdit_ImportType";
             this.LookUpEdit_ImportType.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
-            this.LookUpEdit_ImportType.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.LookUpEdit_ImportType.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.LookUpEdit_ImportType.Properties.NullText = "";
             this.LookUpEdit_ImportType.Properties.PopupSizeable = false;
             this.LookUpEdit_ImportType.Size = new System.Drawing.Size(314, 20);
@@ -252,8 +265,10 @@ namespace TechShop_Manager.GUI
             this.DateDateEdit.Location = new System.Drawing.Point(80, 12);
             this.DateDateEdit.MenuManager = this.mainRibbonControl;
             this.DateDateEdit.Name = "DateDateEdit";
-            this.DateDateEdit.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.DateDateEdit.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.DateDateEdit.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.DateDateEdit.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.DateDateEdit.Size = new System.Drawing.Size(706, 20);
             this.DateDateEdit.StyleController = this.dataLayoutControl_Import;
             this.DateDateEdit.TabIndex = 16;
@@ -289,7 +304,8 @@ namespace TechShop_Manager.GUI
             // 
             this.layoutControlGroup1.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
             this.layoutControlGroup1.GroupBordersVisible = false;
-            this.layoutControlGroup1.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {this.layoutControlGroup2});
+            this.layoutControlGroup1.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlGroup2});
             this.layoutControlGroup1.Name = "Root";
             this.layoutControlGroup1.Size = new System.Drawing.Size(798, 441);
             this.layoutControlGroup1.TextVisible = false;
@@ -298,7 +314,14 @@ namespace TechShop_Manager.GUI
             // 
             this.layoutControlGroup2.AllowDrawBackground = false;
             this.layoutControlGroup2.GroupBordersVisible = false;
-            this.layoutControlGroup2.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {this.ItemForDate, this.ItemForSupplier, this.layoutControlItem5, this.layoutControlItem3, this.layoutControlItem1, this.layoutControlItem2, this.layoutControlItem6});
+            this.layoutControlGroup2.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.ItemForDate,
+            this.ItemForSupplier,
+            this.layoutControlItem5,
+            this.layoutControlItem3,
+            this.layoutControlItem1,
+            this.layoutControlItem2,
+            this.layoutControlItem6});
             this.layoutControlGroup2.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup2.Name = "autoGeneratedGroup0";
             this.layoutControlGroup2.Size = new System.Drawing.Size(778, 421);
@@ -387,33 +410,34 @@ namespace TechShop_Manager.GUI
             this.Name = "EditImportView";
             this.Ribbon = this.mainRibbonControl;
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.EditViewTemplate_FormClosed);
-            ((System.ComponentModel.ISupportInitialize) (this.dataLayoutControl_Import)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl_Import)).EndInit();
             this.dataLayoutControl_Import.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize) (this.GridControl_Products)).EndInit();
-            ((System.ComponentModel.ISupportInitialize) (this.gridView_Products)).EndInit();
-            ((System.ComponentModel.ISupportInitialize) (this.mainRibbonControl)).EndInit();
-            ((System.ComponentModel.ISupportInitialize) (this.GridControl_ImportDetails)).EndInit();
-            ((System.ComponentModel.ISupportInitialize) (this.importBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize) (this.gridView_ImportDetails)).EndInit();
-            ((System.ComponentModel.ISupportInitialize) (this.LookUpEdit_ImportType.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize) (this.IdTextEdit.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize) (this.DateDateEdit.Properties.CalendarTimeProperties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize) (this.DateDateEdit.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize) (this.SupplierTextEdit.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize) (this.layoutControlItem4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize) (this.ItemForId)).EndInit();
-            ((System.ComponentModel.ISupportInitialize) (this.layoutControlGroup1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize) (this.layoutControlGroup2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize) (this.ItemForDate)).EndInit();
-            ((System.ComponentModel.ISupportInitialize) (this.ItemForSupplier)).EndInit();
-            ((System.ComponentModel.ISupportInitialize) (this.layoutControlItem5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize) (this.layoutControlItem3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize) (this.layoutControlItem1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize) (this.layoutControlItem2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize) (this.layoutControlItem6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize) (this.Root)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.GridControl_Products)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView_Products)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.mainRibbonControl)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.GridControl_ImportDetails)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.importBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView_ImportDetails)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.LookUpEdit_ImportType.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.IdTextEdit.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DateDateEdit.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DateDateEdit.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SupplierTextEdit.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForId)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForDate)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForSupplier)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
 
         #endregion

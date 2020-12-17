@@ -13,7 +13,7 @@ namespace TechShop_Manager.GUI
     {
         private Import _item;
         private bool isUpdate = false;
-
+        private List<Product> _products = Product.GetAll();
         public EditImportView() // New Import
         {
             InitializeComponent();
@@ -40,7 +40,7 @@ namespace TechShop_Manager.GUI
         {
             // Data fetch
             Import item = Import.GetOne(_item.Id);
-
+            
             if (item == null)
             {
                 item = _item; // this "_item" would be INITIALIZED before running this method, meaning it has no reference to ANY BindingList, unlike EditImportView(Import tour)
@@ -51,10 +51,11 @@ namespace TechShop_Manager.GUI
             }
 
             // Data binding
+            
             BindingList<Import> itemBL = new BindingList<Import>(new List<Import>() {item});
 
             BindingList<Product> productsBL = new BindingList<Product>(
-                // Product.GetAll()
+                _products
             );
 
             BindingList<ImportDetail> importDetailsBL = new BindingList<ImportDetail>(
@@ -148,6 +149,33 @@ namespace TechShop_Manager.GUI
             // close window
             Dispose();
         }
+        
+        private void handleAddImportDetail()
+        {
+            Product selectedProduct = _products.ElementAt(gridView_Products.FocusedRowHandle);
+
+            if(getItemState().ImportDetails.FirstOrDefault(o => o.ProductId == selectedProduct.Id) != null) { return; }
+            ImportDetail selectedImportDetail = new ImportDetail
+            {
+                ProductId = selectedProduct.Id,
+                ImportId = getItemState().Id,
+                Price = 0,
+                Quantity = 0
+            };
+
+            getItemState().ImportDetails.Add(selectedImportDetail);
+            InitializeDataSources();
+            gridView_ImportDetails.RefreshData();
+
+        }
+
+        private void handleDeleteImportDetail()
+        {
+            ImportDetail selectedImportDetail = getItemState().ImportDetails.ElementAt(gridView_ImportDetails.FocusedRowHandle);
+            getItemState().ImportDetails.Remove(selectedImportDetail);
+            InitializeDataSources();
+            gridView_ImportDetails.RefreshData();
+        }
 
         private void handleCloseEdit()
         {
@@ -181,6 +209,17 @@ namespace TechShop_Manager.GUI
         private void EditViewTemplate_FormClosed(object sender, FormClosedEventArgs e)
         {
             handleCloseEdit();
+        }
+
+        private void btnAddImportDetail_ItemClick(object sender, EventArgs e)
+        {
+            handleAddImportDetail();
+        }
+
+        private void btnRemoveImportDetail_ItemClick(object sender, EventArgs e)
+        {
+            handleDeleteImportDetail();
+            
         }
     }
 }
