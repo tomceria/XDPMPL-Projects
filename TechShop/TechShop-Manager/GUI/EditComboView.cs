@@ -13,6 +13,7 @@ namespace TechShop_Manager.GUI
     {
         private Combo _item;
         private List<ComboDetail> _comboDetails;
+        private List<Product> _products;
         private bool isUpdate = false;
 
         public EditComboView() // New Combo
@@ -52,12 +53,13 @@ namespace TechShop_Manager.GUI
             }
 
             // Data binding
+            _products = Product.GetAll();
             BindingList<Combo> itemBL = new BindingList<Combo>(new List<Combo>() {item});
             BindingList<ComboDetail> comboDetailsBL = new BindingList<ComboDetail>(
                 item.ComboDetails != null ? item.ComboDetails.ToList() : new List<ComboDetail>()
             );
             BindingList<Product> productsBL = new BindingList<Product>(
-                Product.GetAll()
+                _products
             );
 
             dataLayoutControl_Combo.DataSource = itemBL;
@@ -109,6 +111,11 @@ namespace TechShop_Manager.GUI
 
             return true;
         }
+        //Refresh
+        private void RefreshData()
+        {
+
+        }
 
         // Event Handlers
 
@@ -148,6 +155,34 @@ namespace TechShop_Manager.GUI
             Dispose();
         }
 
+        private void handleAddComboDetail()
+        {
+
+            Product selectedProduct = _products.ElementAt(gridView_Products.FocusedRowHandle);
+            if(getItemState().ComboDetails.First(o => o.ProductId == selectedProduct.Id) != null)
+            {
+                return;
+            }
+            ComboDetail selectedComboDetail = new ComboDetail
+            {
+                ProductId = selectedProduct.Id,
+                ComboId = _item.Id,
+                Quantity = 1
+
+            };
+            getItemState().AddComboDetail(selectedComboDetail);
+            InitializeDataSources();
+            gridView_ComboDetails.RefreshData();
+        }        
+        
+        private void handleDeleteComboDetail()
+        {
+            ComboDetail selectedComboDetail = getItemState().ComboDetails.ElementAt(gridView_ComboDetails.FocusedRowHandle);
+            getItemState().DeleteComboDetail(selectedComboDetail);
+            InitializeDataSources();
+            gridView_ComboDetails.RefreshData();
+        }
+
         private void handleCloseEdit()
         {
             //Revert changes when click close button
@@ -179,6 +214,17 @@ namespace TechShop_Manager.GUI
         private void EditViewTemplate_FormClosed(object sender, FormClosedEventArgs e)
         {
             handleCloseEdit();
+        }
+
+        private void btnAddComboDetail_ItemClick(object sender, EventArgs e)
+        {
+            handleAddComboDetail();
+
+        }
+
+        private void btnDeleteComboDetail_ItemClick(object sender, EventArgs e)
+        {
+            handleDeleteComboDetail();
         }
     }
 }

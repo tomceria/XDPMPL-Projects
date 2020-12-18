@@ -111,6 +111,7 @@ namespace TechShop_Manager.GUI
             this.btn_RemoveComboDetail.StyleController = this.dataLayoutControl_Combo;
             this.btn_RemoveComboDetail.TabIndex = 21;
             this.btn_RemoveComboDetail.Text = ">";
+            this.btn_RemoveComboDetail.Click += new System.EventHandler(this.btnDeleteComboDetail_ItemClick);
             // 
             // btn_AddComboDetail
             // 
@@ -120,6 +121,7 @@ namespace TechShop_Manager.GUI
             this.btn_AddComboDetail.StyleController = this.dataLayoutControl_Combo;
             this.btn_AddComboDetail.TabIndex = 20;
             this.btn_AddComboDetail.Text = "<";
+            this.btn_AddComboDetail.Click += new System.EventHandler(this.btnAddComboDetail_ItemClick);
             // 
             // gridControl_Products
             // 

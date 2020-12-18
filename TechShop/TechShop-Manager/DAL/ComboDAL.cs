@@ -59,6 +59,16 @@ namespace TechShop_Manager.DAL
             _ctx.SaveChanges();
         }
 
+        public static void AddComboDetail(ComboDetail comboDetail)
+        {
+            _ctx.ComboDetails.Add(comboDetail);
+        }
+
+        public static void DeleteComboDetail(ComboDetail comboDetail)
+        {
+            _ctx.ComboDetails.Remove(comboDetail);
+        }
+
         public static void Reload()
         {
             _ctx = new ShopContext();
