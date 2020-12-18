@@ -36,5 +36,6 @@ namespace TechShop_Web.Models
         public virtual ProductType ProductType { get; set; }
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
         public virtual ICollection<ComboDetail> ComboDetails { get; set; }
+        public virtual ICollection<QuantityLog> QuantityLogs { get; set; }
     }
 }

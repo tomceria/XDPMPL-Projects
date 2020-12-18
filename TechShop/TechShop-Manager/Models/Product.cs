@@ -37,6 +37,7 @@ namespace TechShop_Manager.BUS
         public virtual ProductType ProductType { get; set; }
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
         public virtual ICollection<ComboDetail> ComboDetails { get; set; }
+        public virtual ICollection<QuantityLog> QuantityLogs { get; set; }
 
         public override string ToString()
         {
