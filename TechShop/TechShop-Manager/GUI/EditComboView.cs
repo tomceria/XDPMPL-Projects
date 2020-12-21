@@ -74,7 +74,6 @@ namespace TechShop_Manager.GUI
 
             gridView_Products.GridControl.DataSource = productsBL;
             gridView_Products.PopulateColumns();
-            gridView_Products.Columns["Id"].Visible = false;
             gridView_Products.Columns["Slug"].Visible = false;
             gridView_Products.Columns["Description"].Visible = false;
             gridView_Products.Columns["ProductTypeId"].Visible = false;
@@ -159,7 +158,7 @@ namespace TechShop_Manager.GUI
         {
 
             Product selectedProduct = _products.ElementAt(gridView_Products.FocusedRowHandle);
-            if(getItemState().ComboDetails.First(o => o.ProductId == selectedProduct.Id) != null)
+            if(getItemState().ComboDetails.FirstOrDefault(o => o.ProductId == selectedProduct.Id) != null)
             {
                 return;
             }
@@ -168,7 +167,6 @@ namespace TechShop_Manager.GUI
                 ProductId = selectedProduct.Id,
                 ComboId = _item.Id,
                 Quantity = 1
-
             };
             getItemState().AddComboDetail(selectedComboDetail);
             InitializeDataSources();
