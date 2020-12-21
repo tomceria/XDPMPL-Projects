@@ -12,6 +12,7 @@ namespace TechShop_Web.Persistence
         ICustomerRepository Customer { get; }
         IOrderRepository Order { get; }
         IProductRepository Product { get; }
+        IComboRepository Combo { get; }
 
         int Complete();
     }

@@ -15,11 +15,11 @@ namespace TechShop_Web.Services
         }
 
         public IEnumerable<Product> GetAllProducts() {
-            return _unitOfWork.Product.GetAllProducts();
+            return _unitOfWork.Product.GetAll();
         }
 
         public Product GetOneProduct(int id) {
-            return _unitOfWork.Product.GetOneProduct(id);
+            return _unitOfWork.Product.GetBy(id);
         }
         public IEnumerable<ProductType> GetProductTypes() {
             return _unitOfWork.Product.GetProductTypes();

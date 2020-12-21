@@ -17,6 +17,7 @@ namespace TechShop_Web.Persistence
             Customer = new CustomerRepository(context);
             Order = new OrderRepository(context);
             Product = new ProductRepository(context);
+            Combo = new ComboRepository(context);
 
             _context = context;
         }
@@ -25,6 +26,7 @@ namespace TechShop_Web.Persistence
         public ICustomerRepository Customer { get; }
         public IOrderRepository Order { get; }
         public IProductRepository Product { get; }
+        public IComboRepository Combo { get; }
 
         public int Complete()
         {

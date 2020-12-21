@@ -7,17 +7,12 @@ using TechShop_Web.Persistence.Interfaces;
 
 namespace TechShop_Web.Persistence.Repositories
 {
-    public class ProductRepository : Repository<Product>, IProductRepository
+    public class ComboRepository : Repository<Combo>, IComboRepository
     {
         protected ShopContext Context => DbContext as ShopContext;
-
-        public ProductRepository(ShopContext context) : base(context)
+        
+        public ComboRepository(DbContext context) : base(context)
         {
-        }
-
-        public IEnumerable<ProductType> GetProductTypes()
-        {
-            return Context.ProductTypes;
         }
     }
 }
