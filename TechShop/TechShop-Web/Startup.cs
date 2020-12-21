@@ -64,6 +64,7 @@ namespace TechShop_Web
             services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IComboRepository, ComboRepository>();
             /**/ // Injecting Unit of Work
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             /**/ // Injecting Business Services
@@ -71,6 +72,7 @@ namespace TechShop_Web
             services.AddScoped<ICustomerService, CustomerService>();
             services.AddScoped<IOrderService, OrderService>();
             services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<IComboService, ComboService>();
         }
 
         /**/ // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

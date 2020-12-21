@@ -1,5 +1,7 @@
 using TechShop_Web.Services.IService;
 using System.Collections.Generic;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using TechShop_Web.Models;
 using TechShop_Web.Persistence;
 
@@ -15,7 +17,8 @@ namespace TechShop_Web.Services
         }
 
         public IEnumerable<Product> GetAllProducts() {
-            return _unitOfWork.Product.GetAll();
+            return _unitOfWork.Product.GetAll()
+                .Where(o => o.IsHidden == false);
         }
 
         public Product GetOneProduct(int id) {

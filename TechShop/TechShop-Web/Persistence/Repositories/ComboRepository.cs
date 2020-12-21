@@ -11,8 +11,19 @@ namespace TechShop_Web.Persistence.Repositories
     {
         protected ShopContext Context => DbContext as ShopContext;
         
-        public ComboRepository(DbContext context) : base(context)
+        public ComboRepository(ShopContext context) : base(context)
         {
+        }
+        
+        // Overrides
+
+        public override Combo GetBy(int id)
+        {
+            return Context.Combos
+                .Where(o => o.Id == id)
+                .Include(o => o.ComboDetails)
+                .ThenInclude(o => o.Product)
+                .First();
         }
     }
 }

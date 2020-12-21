@@ -1,0 +1,40 @@
+@model ComboIndexVm
+
+@{
+    ViewBag.Title = "Sản phẩm";
+}
+
+<div class="row">
+    <div class="mx-auto">
+        <h5 class="card-title text-center">TechShop Inc.</h5>
+        <hr>
+        <table class="table">
+            <thead>
+            <tr>
+                @{
+                    var empty = new Combo();
+                }
+                <th scope="col">@Html.DisplayNameFor(m => empty.Name)</th>
+                <th scope="col">@Html.DisplayNameFor(m => empty.Slug)</th>
+                <th scope="col">@Html.DisplayNameFor(m => empty.Price)</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var item in Model.Combos)
+            {
+                <tr>
+                    <td>
+                        <a asp-action="Show" asp-route-id="@item.Id">@item.Name</a>
+                    </td>
+                    <td>@item.Slug</td>
+                    <td>@item.Price</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

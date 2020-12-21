@@ -1,0 +1,47 @@
+@model Combo
+
+@{
+    ViewBag.Title = "Combo";
+}
+
+<div class="row">
+    <table>
+        <tr>
+            <td>@Html.LabelFor(m => m.Name)</td>
+            <td>@Model.Name</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(m => m.Slug)</td>
+            <td>@Model.Slug</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(m => m.Price)</td>
+            <td>@Model.Price</td>
+        </tr>
+    </table>
+    
+        <table class="table">
+            <thead>
+            <tr>
+                @{
+                    var emptyComboDetail = new ComboDetail();
+                }
+                <th scope="col">@Html.DisplayNameFor(m => emptyComboDetail.Product.Name)</th>
+                <th scope="col">@Html.DisplayNameFor(m => emptyComboDetail.Product.Price)</th>
+                <th scope="col">@Html.DisplayNameFor(m => emptyComboDetail.Quantity)</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var item in Model.ComboDetails)
+            {
+                <tr>
+                    <td>
+                        <a asp-action="Show" asp-route-id="@item.ProductId">@item.Product.Name</a>
+                    </td>
+                    <td>@item.Product.Price</td>
+                    <td>@item.Quantity</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+</div>

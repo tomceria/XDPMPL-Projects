@@ -19,5 +19,20 @@ namespace TechShop_Web.Persistence.Repositories
         {
             return Context.ProductTypes;
         }
+        
+        // Overrides
+        public override Product GetBy(int id)
+        {
+            return Context.Products
+                .Where(o => o.Id == id)
+                .Include(o => o.ProductType)
+                .First();
+        }
+
+        public override IQueryable<Product> GetAll()
+        {
+            return base.GetAll()
+                .Include(o => o.ProductType);
+        }
     }
 }

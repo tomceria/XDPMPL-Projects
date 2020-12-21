@@ -7,22 +7,22 @@ using TechShop_Web.ViewModels;
 
 namespace TechShop_Web.Controllers
 {
-    public class ProductController : Controller
+    public class ComboController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly IProductService _productService;
+        private readonly IComboService _comboService;
 
-        public ProductController(ILogger<HomeController> logger, IProductService productService)
+        public ComboController(ILogger<HomeController> logger, IComboService comboService)
         {
             _logger = logger;
-            _productService = productService;
+            _comboService = comboService;
         }
 
         public IActionResult Index()
         {
-            var viewModel = new ProductIndexVm
+            var viewModel = new ComboIndexVm
             {
-                Products = _productService.GetAllProducts()
+                Combos = _comboService.GetAllCombos()
             };
             return View(viewModel);
         }
@@ -34,13 +34,13 @@ namespace TechShop_Web.Controllers
                 return NotFound();
             }
 
-            var product = _productService.GetOneProduct((int)id);
-            if (product == null)
+            var combo = _comboService.GetOneCombo((int)id);
+            if (combo == null)
             {
                 return NotFound();
             }
 
-            return View(product);
+            return View(combo);
         }
     }
 }

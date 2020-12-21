@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using TechShop_Web.Models;
 using TechShop_Web.Persistence;
 using TechShop_Web.Services.IService;
@@ -16,7 +17,7 @@ namespace TechShop_Web.Services
         
         public IEnumerable<Combo> GetAllCombos()
         {
-            return _unitOfWork.Combo.GetAll();
+            return _unitOfWork.Combo.GetAll().Where(o => o.IsHidden == false);
         }
 
         public Combo GetOneCombo(int id)

@@ -3,8 +3,8 @@ using System.Collections.Generic;
 
 namespace TechShop_Web.ViewModels
 {
-    public class ProductIndexVM
+    public class ComboIndexVm
     {
-        public IEnumerable<Product> Products { get; set; }
+        public IEnumerable<Combo> Combos { get; set; }
     }
 }
