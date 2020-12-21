@@ -1,0 +1,39 @@
+@model Product
+
+@{
+    ViewBag.Title = "Product";
+    Layout = "_Layout";
+}
+
+<div class="row">
+    <table>
+        <tr>
+            <td>@Html.LabelFor(m => m.Name)</td>
+            <td>@Model.Name</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(m => m.Slug)</td>
+            <td>@Model.Slug</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(m => m.Sku)</td>
+            <td>@Model.Sku</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(m => m.Price)</td>
+            <td>@Model.Price</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(m => m.Manufacturer)</td>
+            <td>@Model.Manufacturer</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(m => m.Description)</td>
+            <td>@Model.Description</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(m => m.ProductType.Name)</td>
+            <td>@Model.ProductType.Name</td>
+        </tr>
+    </table>
+</div>

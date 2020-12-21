@@ -1,0 +1,33 @@
+using System.Collections.Generic;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
+using TechShop_Web.Data;
+using TechShop_Web.Models;
+using TechShop_Web.Persistence.Interfaces;
+
+namespace TechShop_Web.Persistence.Repositories
+{
+    public class ProductRepository : Repository<Product>, IProductRepository
+    {
+        protected ShopContext Context => DbContext as ShopContext;
+
+        public ProductRepository(ShopContext context) : base(context)
+        {
+        }
+
+        public IEnumerable<Product> GetAllProducts()
+        {
+            return Context.Products.Include(p => p.ProductType).OrderBy(p => p.Id);
+        }
+
+        public Product GetOneProduct(int id)
+        {
+            return Context.Products.Include(p => p.ProductType).FirstOrDefault(p => p.Id == id);
+        }
+
+        public IEnumerable<ProductType> GetProductTypes()
+        {
+            return Context.ProductTypes;
+        }
+    }
+}

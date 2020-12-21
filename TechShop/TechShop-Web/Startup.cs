@@ -33,7 +33,7 @@ namespace TechShop_Web
             /**/ // Registering Database Connection
             services.AddDbContext<ShopContext>(options =>
                 options.UseSqlServer(
-                    Configuration.GetConnectionString("HoangShopContext")
+                    Configuration.GetConnectionString("HuyShopContext")
                 )
             );
             
@@ -63,12 +63,14 @@ namespace TechShop_Web
             services.AddScoped<IAccountRepository, AccountRepository>();
             services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddScoped<IOrderRepository, OrderRepository>();
+            services.AddScoped<IProductRepository, ProductRepository>();
             /**/ // Injecting Unit of Work
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             /**/ // Injecting Business Services
             services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<ICustomerService, CustomerService>();
             services.AddScoped<IOrderService, OrderService>();
+            services.AddScoped<IProductService, ProductService>();
         }
 
         /**/ // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

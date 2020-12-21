@@ -1,0 +1,44 @@
+@model ProductIndexVM
+
+@{
+    ViewBag.Title = "Sản phẩm";
+    Layout = "_Layout";
+}
+
+<div class="row">
+    <div class="mx-auto">
+        <h5 class="card-title text-center">TechShop Inc.</h5>
+        <hr>
+        <table class="table">
+            <thead>
+                <tr>
+                <th scope="col">Tên sản phẩm</th>
+                <th scope="col">Mã hiển thị</th>
+                <th scope="col">SKU</th>
+                <th scope="col">Giá</th>
+                <th scope="col">NSX</th>
+                <th scope="col">Mô tả</th>
+                <th scope="col">Loại sản phẩm</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Products)
+                {
+                    <tr>
+                        <td><a asp-action="Show" asp-route-id="@item.Id">@item.Name</a></td>
+                        <td>@item.Slug</td>
+                        <td>@item.Sku</td>
+                        <td>@item.Price</td>
+                        <td>@item.Manufacturer</td>
+                        <td>@item.Description</td>
+                        <td>@item.ProductType.Name</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

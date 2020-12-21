@@ -16,13 +16,15 @@ namespace TechShop_Web.Persistence
             Account = new AccountRepository(userManager, signInManager, roleManager);
             Customer = new CustomerRepository(context);
             Order = new OrderRepository(context);
-            
+            Product = new ProductRepository(context);
+
             _context = context;
         }
 
         public IAccountRepository Account { get; }
         public ICustomerRepository Customer { get; }
         public IOrderRepository Order { get; }
+        public IProductRepository Product { get; }
 
         public int Complete()
         {
