@@ -1,8 +1,10 @@
 using System;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TechShop_Manager.BUS
 {
+    [Table("QuantityLog")]
     public partial class QuantityLog
     {
         public int Id { get; set; }

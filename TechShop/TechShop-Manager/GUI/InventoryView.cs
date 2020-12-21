@@ -80,7 +80,6 @@ namespace TechShop_Manager.GUI
             // UI changes
             gridControl_Imports.DataSource = list;
             gridControl_Imports.RefreshDataSource();
-            gridView_Imports.Columns["Id"].Visible = false;
             gridView_Imports.Columns["ImportDetails"].Visible = false;
             gridView_Imports.Columns["Date"].DisplayFormat.FormatString = "dd/MM/yyyy hh:mm:ss";
             
@@ -97,7 +96,6 @@ namespace TechShop_Manager.GUI
             // UI changes
             gridControl_Orders.DataSource = list;
             gridControl_Orders.RefreshDataSource();
-            gridView_Orders.Columns["Id"].Visible = false;
             gridView_Orders.Columns["CustomerId"].Visible = false;
             gridView_Orders.Columns["OrderDetails"].Visible = false;
             gridView_Orders.Columns["Date"].DisplayFormat.FormatString = "dd/MM/yyyy hh:mm:ss";
@@ -115,12 +113,12 @@ namespace TechShop_Manager.GUI
             );
             
             gridView_ImportDetails.GridControl.DataSource = importDetailsBL;
-            gridView_ImportDetails.Columns["ProductId"].Visible = false;
             gridView_ImportDetails.Columns["ImportId"].Visible = false;
             gridView_ImportDetails.Columns["Import"].Visible = false;
-            gridView_ImportDetails.Columns["Product"].VisibleIndex = 0;
-            gridView_ImportDetails.Columns["Price"].VisibleIndex = 1;
-            gridView_ImportDetails.Columns["Quantity"].VisibleIndex = 2;
+            gridView_ImportDetails.Columns["ProductId"].VisibleIndex = 0;
+            gridView_ImportDetails.Columns["Product"].VisibleIndex = 1;
+            gridView_ImportDetails.Columns["Price"].VisibleIndex = 2;
+            gridView_ImportDetails.Columns["Quantity"].VisibleIndex = 3;
         }
 
         private void InitializeDataSources_OrderDetails()
@@ -130,14 +128,14 @@ namespace TechShop_Manager.GUI
             );
             
             gridView_OrderDetails.GridControl.DataSource = orderDetailsBL;
-            gridView_OrderDetails.Columns["ProductId"].Visible = false;
             gridView_OrderDetails.Columns["OrderId"].Visible = false;
             gridView_OrderDetails.Columns["Order"].Visible = false;
             gridView_OrderDetails.Columns["Price"].DisplayFormat.FormatType = FormatType.Numeric;
             gridView_OrderDetails.Columns["Price"].DisplayFormat.FormatString = "N0";
-            gridView_OrderDetails.Columns["Product"].VisibleIndex = 0;
-            gridView_OrderDetails.Columns["Price"].VisibleIndex = 1;
-            gridView_OrderDetails.Columns["Quantity"].VisibleIndex = 2;
+            gridView_OrderDetails.Columns["ProductId"].VisibleIndex = 0;
+            gridView_OrderDetails.Columns["Product"].VisibleIndex = 1;
+            gridView_OrderDetails.Columns["Price"].VisibleIndex = 2;
+            gridView_OrderDetails.Columns["Quantity"].VisibleIndex = 3;
         }
         
         // Event Handlers

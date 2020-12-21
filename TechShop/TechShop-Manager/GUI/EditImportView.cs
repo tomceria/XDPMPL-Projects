@@ -66,15 +66,15 @@ namespace TechShop_Manager.GUI
 
             gridView_ImportDetails.GridControl.DataSource = importDetailsBL;
             gridView_ImportDetails.PopulateColumns();
-            gridView_ImportDetails.Columns["ProductId"].Visible = false;
             gridView_ImportDetails.Columns["ImportId"].Visible = false;
-            gridView_ImportDetails.Columns["Product"].Visible = false;
             gridView_ImportDetails.Columns["Import"].Visible = false;
+            gridView_ImportDetails.Columns["ProductId"].VisibleIndex = 0;
+            gridView_ImportDetails.Columns["Product"].VisibleIndex = 1;
+            gridView_ImportDetails.Columns["Quantity"].VisibleIndex = 2;
             
             gridView_Products.GridControl.DataSource = productsBL;
             gridView_Products.OptionsView.ColumnAutoWidth = false;
             gridView_Products.PopulateColumns();
-            gridView_Products.Columns["Id"].Visible = false;
             gridView_Products.Columns["Sku"].Visible = false;
             gridView_Products.Columns["Slug"].Visible = false;
             gridView_Products.Columns["Description"].Visible = false;

@@ -7,6 +7,7 @@ namespace TechShop_Manager.BUS
 {
     public partial class Order
     {
+        [DisplayName("Mã HĐ")]
         public int Id { get; set; }
         
         [DisplayName("Ngày giờ đặt hàng")]

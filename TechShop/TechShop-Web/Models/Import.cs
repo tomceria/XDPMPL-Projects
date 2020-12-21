@@ -6,6 +6,7 @@ namespace TechShop_Web.Models
 {
     public class Import
     {
+        [DisplayName("Mã PN")]
         public int Id { get; set; }
         
         [DisplayName("Ngày giờ")]

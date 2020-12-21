@@ -6,7 +6,7 @@ namespace TechShop_Manager.BUS
 {
     public partial class OrderDetail
     {
-        [DisplayName("Sản phẩm")]
+        [DisplayName("Mã SP")]
         [ForeignKey("Product")]
         public int ProductId { get; set; }
         

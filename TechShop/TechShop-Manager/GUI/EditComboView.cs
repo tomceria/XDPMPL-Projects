@@ -67,10 +67,10 @@ namespace TechShop_Manager.GUI
             gridView_ComboDetails.GridControl.DataSource = comboDetailsBL;
             gridView_ComboDetails.PopulateColumns();
             gridView_ComboDetails.Columns["Combo"].Visible = false;
-            gridView_ComboDetails.Columns["ProductId"].Visible = false;
             gridView_ComboDetails.Columns["ComboId"].Visible = false;
-            gridView_ComboDetails.Columns["Product"].VisibleIndex = 0;
-            gridView_ComboDetails.Columns["Quantity"].VisibleIndex = 1;
+            gridView_ComboDetails.Columns["ProductId"].VisibleIndex = 0;
+            gridView_ComboDetails.Columns["Product"].VisibleIndex = 1;
+            gridView_ComboDetails.Columns["Quantity"].VisibleIndex = 2;
 
             gridView_Products.GridControl.DataSource = productsBL;
             gridView_Products.PopulateColumns();

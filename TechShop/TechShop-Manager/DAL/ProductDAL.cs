@@ -64,13 +64,23 @@ namespace TechShop_Manager.DAL
         {
             _ctx = new ShopContext();
         }
-        
+
         // ProductTypes
 
         public static List<ProductType> GetProductTypes()
         {
             return _ctx.ProductTypes.ToList();
         }
-    }
 
+        // QuantityLogs
+
+        public static List<QuantityLog> AddQuantityLogs(List<QuantityLog> quantityLogs)
+        {
+            _ctx.QuantityLogs.AddRange(quantityLogs);
+            
+            _ctx.SaveChanges();
+
+            return quantityLogs;
+        }
+    }
 }

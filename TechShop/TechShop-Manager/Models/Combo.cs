@@ -8,6 +8,7 @@ namespace TechShop_Manager.BUS
     [Table("Combos")]
     public partial class Combo
     {
+        [DisplayName("Mã Combo")]
         public int Id { get; set; }
 
         [DisplayName("Tên Combo")] public string Name { get; set; }

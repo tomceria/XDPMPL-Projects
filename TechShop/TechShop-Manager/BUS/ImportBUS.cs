@@ -22,7 +22,22 @@ namespace TechShop_Manager.BUS
 
         public Import Add()
         {
-            return ImportDAL.AddOne(this);
+            ImportDAL.AddOne(this);
+
+            List<QuantityLog> quantityLogs = new List<QuantityLog>();
+            foreach (var importDetail in this.ImportDetails)
+            {
+                var quantityLog = new QuantityLog()
+                {
+                    ProductId = importDetail.ProductId,
+                    Date = this.Date,
+                    Quantity = importDetail.Quantity
+                };
+                quantityLogs.Add(quantityLog);
+            }
+            ProductDAL.AddQuantityLogs(quantityLogs);
+
+            return this;
         }
 
         public void Update()

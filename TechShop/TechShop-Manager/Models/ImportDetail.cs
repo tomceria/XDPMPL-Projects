@@ -5,7 +5,7 @@ namespace TechShop_Manager.BUS
 {
     public partial class ImportDetail
     {
-        [DisplayName("Sản phẩm")]
+        [DisplayName("Mã SP")]
         [ForeignKey("Product")]
         public int ProductId { get; set; }
         

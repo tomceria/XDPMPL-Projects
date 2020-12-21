@@ -6,6 +6,7 @@ namespace TechShop_Web.Models
 {
     public class Combo
     {
+        [DisplayName("Mã Combo")]
         public int Id { get; set; }
         
         [DisplayName("Tên Combo")]

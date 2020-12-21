@@ -36,5 +36,6 @@ namespace TechShop_Web.Data
         public DbSet<OrderDetail> OrderDetails { get; set; }
         public DbSet<Import> Imports { get; set; }
         public DbSet<ImportDetail> ImportDetails { get; set; }
+        public DbSet<QuantityLog> QuantityLogs { get; set; }
     }
 }

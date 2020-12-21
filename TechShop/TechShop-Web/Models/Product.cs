@@ -6,6 +6,7 @@ namespace TechShop_Web.Models
 {
     public class Product
     {
+        [DisplayName("Mã SP")]
         public int Id { get; set; }
         
         [DisplayName("Tên Sản phẩm")]

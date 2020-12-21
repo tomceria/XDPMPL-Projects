@@ -6,6 +6,7 @@ namespace TechShop_Manager.BUS
     [Table("ComboDetails")]
     public partial class ComboDetail
     {
+        [DisplayName("Mã SP")]
         [ForeignKey("Product")]
         public int ProductId { get; set; }
         

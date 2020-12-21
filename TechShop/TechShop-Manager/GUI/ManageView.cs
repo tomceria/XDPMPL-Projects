@@ -89,13 +89,13 @@ namespace TechShop_Manager.GUI
             // UI changes
             gridControl_Products.DataSource = list;
             gridControl_Products.RefreshDataSource();
-            gridView_Products.Columns["Id"].Visible = false;
             gridView_Products.Columns["Slug"].Visible = false;
             gridView_Products.Columns["Description"].Visible = false;
             gridView_Products.Columns["ProductTypeId"].Visible = false;
             gridView_Products.Columns["IsHidden"].Visible = false;
             gridView_Products.Columns["OrderDetails"].Visible = false;
             gridView_Products.Columns["ComboDetails"].Visible = false;
+            gridView_Products.Columns["QuantityLogs"].Visible = false;
             
             bsiListCount.Caption = $"{list.Count} items";
         }
@@ -110,7 +110,6 @@ namespace TechShop_Manager.GUI
             // UI changes
             gridControl_Combos.DataSource = list;
             gridControl_Combos.RefreshDataSource();
-            gridView_Combos.Columns["Id"].Visible = false;
             gridView_Combos.Columns["Slug"].Visible = false;
             gridView_Combos.Columns["IsHidden"].Visible = false;
             gridView_Combos.Columns["ComboDetails"].Visible = false;
