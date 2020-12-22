@@ -35,5 +35,19 @@
             <td>@Html.LabelFor(m => m.ProductType.Name)</td>
             <td>@Model.ProductType.Name</td>
         </tr>
+        
     </table>
+    
+</div>
+<div class="row mt-3">
+    @if (User.IsInRole("Customer"))
+    {
+        <a>
+            <button class="btn btn-primary">Đặt mua</button>
+        </a>
+    }
+    else
+    {
+        <h5>Vui lòng đăng nhập để mua hàng</h5>
+    }
 </div>

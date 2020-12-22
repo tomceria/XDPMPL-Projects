@@ -19,29 +19,42 @@
             <td>@Model.Price</td>
         </tr>
     </table>
-    
-        <table class="table">
-            <thead>
-            <tr>
-                @{
-                    var emptyComboDetail = new ComboDetail();
-                }
-                <th scope="col">@Html.DisplayNameFor(m => emptyComboDetail.Product.Name)</th>
-                <th scope="col">@Html.DisplayNameFor(m => emptyComboDetail.Product.Price)</th>
-                <th scope="col">@Html.DisplayNameFor(m => emptyComboDetail.Quantity)</th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach (var item in Model.ComboDetails)
-            {
-                <tr>
-                    <td>
-                        <a asp-action="Show" asp-controller="Product" asp-route-id="@item.ProductId">@item.Product.Name</a>
-                    </td>
-                    <td>@item.Product.Price</td>
-                    <td>@item.Quantity</td>
-                </tr>
+
+    <table class="table">
+        <thead>
+        <tr>
+            @{
+                var emptyComboDetail = new ComboDetail();
             }
-            </tbody>
-        </table>
+            <th scope="col">@Html.DisplayNameFor(m => emptyComboDetail.Product.Name)</th>
+            <th scope="col">@Html.DisplayNameFor(m => emptyComboDetail.Product.Price)</th>
+            <th scope="col">@Html.DisplayNameFor(m => emptyComboDetail.Quantity)</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model.ComboDetails)
+        {
+            <tr>
+                <td>
+                    <a asp-action="Show" asp-controller="Product" asp-route-id="@item.ProductId">@item.Product.Name</a>
+                </td>
+                <td>@item.Product.Price</td>
+                <td>@item.Quantity</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
+
+<div class="row mt-3">
+    @if (User.IsInRole("Customer"))
+    {
+        <a>
+            <button class="btn btn-primary">Đặt mua</button>
+        </a>
+    }
+    else
+    {
+        <h5>Vui lòng đăng nhập để mua hàng</h5>
+    }
 </div>
