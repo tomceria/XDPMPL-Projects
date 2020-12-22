@@ -20,6 +20,11 @@ namespace TechShop_Manager.BUS
             ImportDAL.DeleteOne(id);
         }
 
+        public static void RevertChanges()
+        {
+            ImportDAL.Reload();
+        }
+
         public Import Add()
         {
             ImportDAL.AddOne(this);

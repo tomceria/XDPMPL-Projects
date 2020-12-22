@@ -82,6 +82,7 @@ namespace TechShop_Manager.GUI
             gridControl_Imports.RefreshDataSource();
             gridView_Imports.Columns["ImportDetails"].Visible = false;
             gridView_Imports.Columns["Date"].DisplayFormat.FormatString = "dd/MM/yyyy hh:mm:ss";
+            gridView_Imports.OptionsBehavior.Editable = false;
             
             bsiListCount.Caption = $"{list.Count} items";
         }
@@ -102,6 +103,7 @@ namespace TechShop_Manager.GUI
             gridView_Orders.Columns["PaidPrice"].DisplayFormat.FormatType = FormatType.Numeric;
             gridView_Orders.Columns["PaidPrice"].DisplayFormat.FormatString = "N0";
             gridView_Orders.OptionsView.ColumnAutoWidth = false;
+            gridView_Orders.OptionsBehavior.Editable = false;
             
             bsiListCount.Caption = $"{list.Count} items";
         }
@@ -119,6 +121,7 @@ namespace TechShop_Manager.GUI
             gridView_ImportDetails.Columns["Product"].VisibleIndex = 1;
             gridView_ImportDetails.Columns["Price"].VisibleIndex = 2;
             gridView_ImportDetails.Columns["Quantity"].VisibleIndex = 3;
+            gridView_ImportDetails.OptionsBehavior.Editable = false;
         }
 
         private void InitializeDataSources_OrderDetails()
@@ -136,6 +139,7 @@ namespace TechShop_Manager.GUI
             gridView_OrderDetails.Columns["Product"].VisibleIndex = 1;
             gridView_OrderDetails.Columns["Price"].VisibleIndex = 2;
             gridView_OrderDetails.Columns["Quantity"].VisibleIndex = 3;
+            gridView_OrderDetails.OptionsBehavior.Editable = false;
         }
         
         // Event Handlers

@@ -80,6 +80,7 @@ namespace TechShop_Manager.GUI
             gridView_Products.Columns["IsHidden"].Visible = false;
             gridView_Products.Columns["OrderDetails"].Visible = false;
             gridView_Products.Columns["ComboDetails"].Visible = false;
+            gridView_Products.Columns["QuantityLogs"].Visible = false;
             gridView_Products.OptionsView.ColumnAutoWidth = false;
         }
 

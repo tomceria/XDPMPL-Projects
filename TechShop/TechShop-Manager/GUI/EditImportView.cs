@@ -70,7 +70,12 @@ namespace TechShop_Manager.GUI
             gridView_ImportDetails.Columns["Import"].Visible = false;
             gridView_ImportDetails.Columns["ProductId"].VisibleIndex = 0;
             gridView_ImportDetails.Columns["Product"].VisibleIndex = 1;
-            gridView_ImportDetails.Columns["Quantity"].VisibleIndex = 2;
+            gridView_ImportDetails.Columns["Price"].VisibleIndex = 2;
+            gridView_ImportDetails.Columns["Quantity"].VisibleIndex = 3;
+            gridView_ImportDetails.Columns["ProductId"].OptionsColumn.AllowEdit = false;
+            gridView_ImportDetails.Columns["Product"].OptionsColumn.AllowEdit = false;
+            gridView_ImportDetails.Columns["Price"].OptionsColumn.AllowEdit = false;
+            gridView_ImportDetails.Columns["Quantity"].OptionsColumn.AllowEdit = true;
             
             gridView_Products.GridControl.DataSource = productsBL;
             gridView_Products.OptionsView.ColumnAutoWidth = false;
@@ -82,6 +87,8 @@ namespace TechShop_Manager.GUI
             gridView_Products.Columns["ProductTypeId"].Visible = false;
             gridView_Products.Columns["OrderDetails"].Visible = false;
             gridView_Products.Columns["ComboDetails"].Visible = false;
+            gridView_Products.Columns["QuantityLogs"].Visible = false;
+            gridView_Products.OptionsBehavior.Editable = false;
         }
 
         private Import getItemState()
@@ -124,16 +131,16 @@ namespace TechShop_Manager.GUI
 
             if (isUpdate)
             {
-                // _item.Update();
+                _item.Update();
             }
             else
             {
-                // var temp = _item.Create();
+                var temp = _item.Add();
 
-                // if (temp.Id != 0)   // tourGroup added to Database => ID changed from 0
-                // {
-                //     isUpdate = true;
-                // }
+                if (temp.Id != 0)   // tourGroup added to Database => ID changed from 0
+                {
+                    isUpdate = true;
+                }
             }
 
             MessageBox.Show("Lưu thành công.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -144,7 +151,7 @@ namespace TechShop_Manager.GUI
 
         private void handleDeleteImport()
         {
-            // Import.DeleteOne(_item.Id);
+            Import.DeleteOne(_item.Id);
 
             // close window
             Dispose();
@@ -159,8 +166,8 @@ namespace TechShop_Manager.GUI
             {
                 ProductId = selectedProduct.Id,
                 ImportId = getItemState().Id,
-                Price = 0,
-                Quantity = 0
+                Price = selectedProduct.Price,
+                Quantity = 1
             };
 
             getItemState().ImportDetails.Add(selectedImportDetail);
@@ -180,7 +187,7 @@ namespace TechShop_Manager.GUI
         private void handleCloseEdit()
         {
             //Revert changes when click close button
-            // Import.RevertChanges();
+            Import.RevertChanges();
         }
 
         // Events
