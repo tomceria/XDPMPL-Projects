@@ -41,32 +41,34 @@ namespace TechShop_Manager.GUI
             switch (tabIndex)
             {
                 case 0:
-                    {
-                        curPage = Page.Imports; break;
-                    }
+                {
+                    curPage = Page.Imports;
+                    break;
+                }
                 case 1:
-                    {
-                        curPage = Page.Orders; break;
-                    }
+                {
+                    curPage = Page.Orders;
+                    break;
+                }
             }
 
             return curPage;
         }
 
         private void InitializeDataSources()
-        {   
+        {
             switch (getCurrentPage())
             {
                 case Page.Imports:
-                    {
-                        InitializeDataSources_Imports();
-                        break;
-                    }
+                {
+                    InitializeDataSources_Imports();
+                    break;
+                }
                 case Page.Orders:
-                    {
-                        InitializeDataSources_Orders();
-                        break;
-                    }
+                {
+                    InitializeDataSources_Orders();
+                    break;
+                }
             }
         }
 
@@ -83,7 +85,7 @@ namespace TechShop_Manager.GUI
             gridView_Imports.Columns["ImportDetails"].Visible = false;
             gridView_Imports.Columns["Date"].DisplayFormat.FormatString = "dd/MM/yyyy hh:mm:ss";
             gridView_Imports.OptionsBehavior.Editable = false;
-            
+
             bsiListCount.Caption = $"{list.Count} items";
         }
 
@@ -104,16 +106,18 @@ namespace TechShop_Manager.GUI
             gridView_Orders.Columns["PaidPrice"].DisplayFormat.FormatString = "N0";
             gridView_Orders.OptionsView.ColumnAutoWidth = false;
             gridView_Orders.OptionsBehavior.Editable = false;
-            
+
             bsiListCount.Caption = $"{list.Count} items";
         }
 
         private void InitializeDataSources_ImportDetails()
         {
             BindingList<ImportDetail> importDetailsBL = new BindingList<ImportDetail>(
-                (selectedImport.ImportDetails != null) ? selectedImport.ImportDetails.ToList() : new List<ImportDetail>()
+                (selectedImport != null && selectedImport.ImportDetails != null)
+                    ? selectedImport.ImportDetails.ToList()
+                    : new List<ImportDetail>()
             );
-            
+
             gridView_ImportDetails.GridControl.DataSource = importDetailsBL;
             gridView_ImportDetails.Columns["ImportId"].Visible = false;
             gridView_ImportDetails.Columns["Import"].Visible = false;
@@ -127,9 +131,9 @@ namespace TechShop_Manager.GUI
         private void InitializeDataSources_OrderDetails()
         {
             BindingList<OrderDetail> orderDetailsBL = new BindingList<OrderDetail>(
-                (selectedOrder.OrderDetails != null) ? selectedOrder.OrderDetails.ToList() : new List<OrderDetail>()
+                (selectedOrder != null && selectedOrder.OrderDetails != null) ? selectedOrder.OrderDetails.ToList() : new List<OrderDetail>()
             );
-            
+
             gridView_OrderDetails.GridControl.DataSource = orderDetailsBL;
             gridView_OrderDetails.Columns["OrderId"].Visible = false;
             gridView_OrderDetails.Columns["Order"].Visible = false;
@@ -141,7 +145,7 @@ namespace TechShop_Manager.GUI
             gridView_OrderDetails.Columns["Quantity"].VisibleIndex = 3;
             gridView_OrderDetails.OptionsBehavior.Editable = false;
         }
-        
+
         // Event Handlers
 
         private void handleNewImport()
@@ -152,7 +156,7 @@ namespace TechShop_Manager.GUI
 
         private void handleEditImport()
         {
-            Import selectedImport = (Import)gridView_Imports.GetFocusedRow();
+            Import selectedImport = (Import) gridView_Imports.GetFocusedRow();
 
             if (selectedImport == null)
             {
@@ -165,14 +169,14 @@ namespace TechShop_Manager.GUI
 
         private void handleDeleteImport()
         {
-            Import selectedImport = (Import)gridView_Imports.GetFocusedRow();
+            Import selectedImport = (Import) gridView_Imports.GetFocusedRow();
 
             if (selectedImport == null)
             {
                 return;
             }
 
-            // Import.DeleteOne(selectedImport.ID);
+            Import.DeleteOne(selectedImport.Id);
         }
 
         private void handleNewOrder()
@@ -183,7 +187,7 @@ namespace TechShop_Manager.GUI
 
         private void handleEditOrder()
         {
-            Order selectedOrder = (Order)gridView_Orders.GetFocusedRow();
+            Order selectedOrder = (Order) gridView_Orders.GetFocusedRow();
 
             if (selectedOrder == null)
             {
@@ -194,10 +198,12 @@ namespace TechShop_Manager.GUI
             // editOrderView.ShowDialog(this);
         }
 
-        private void handleDeleteOrder() { 
-            Order selectedOrder = (Order)gridView_Orders.GetFocusedRow();
+        private void handleDeleteOrder()
+        {
+            Order selectedOrder = (Order) gridView_Orders.GetFocusedRow();
 
-            if (selectedOrder == null) {
+            if (selectedOrder == null)
+            {
                 return;
             }
 
@@ -210,30 +216,30 @@ namespace TechShop_Manager.GUI
             switch (getCurrentPage())
             {
                 case Page.Imports:
-                    {
-                        selectedItem = gridView_Imports.GetFocusedRow();
-                        bbiNew.Enabled = true;
-                        bbiEdit.Enabled = selectedItem != null;
-                        bbiDelete.Enabled = selectedItem != null;
+                {
+                    selectedItem = gridView_Imports.GetFocusedRow();
+                    bbiNew.Enabled = true;
+                    bbiEdit.Enabled = selectedItem != null;
+                    bbiDelete.Enabled = selectedItem != null;
 
-                        selectedImport = (Import) selectedItem;
-                        InitializeDataSources_ImportDetails();
-                        break;
-                    }
+                    selectedImport = (Import) selectedItem;
+                    InitializeDataSources_ImportDetails();
+                    break;
+                }
                 case Page.Orders:
-                    {
-                        selectedItem = gridView_Orders.GetFocusedRow();
-                        bbiNew.Enabled = false;
-                        bbiEdit.Enabled = false;
-                        bbiDelete.Enabled = false;
-                        
-                        selectedOrder = (Order) selectedItem;
-                        InitializeDataSources_OrderDetails();
-                        break;
-                    }
+                {
+                    selectedItem = gridView_Orders.GetFocusedRow();
+                    bbiNew.Enabled = false;
+                    bbiEdit.Enabled = false;
+                    bbiDelete.Enabled = false;
+
+                    selectedOrder = (Order) selectedItem;
+                    InitializeDataSources_OrderDetails();
+                    break;
+                }
             }
         }
-        
+
         // Events
 
         private void bbiNew_ItemClick(object sender, ItemClickEventArgs e)
@@ -241,15 +247,15 @@ namespace TechShop_Manager.GUI
             switch (getCurrentPage())
             {
                 case Page.Imports:
-                    {
-                        handleNewImport();
-                        break;
-                    }
+                {
+                    handleNewImport();
+                    break;
+                }
                 case Page.Orders:
-                    {
-                        handleNewOrder();
-                        break;
-                    }
+                {
+                    handleNewOrder();
+                    break;
+                }
             }
 
             // Post-Disposal of Dialog
@@ -262,15 +268,15 @@ namespace TechShop_Manager.GUI
             switch (getCurrentPage())
             {
                 case Page.Imports:
-                    {
-                        handleEditImport();
-                        break;
-                    }
+                {
+                    handleEditImport();
+                    break;
+                }
                 case Page.Orders:
-                    {
-                        handleEditOrder();
-                        break;
-                    }
+                {
+                    handleEditOrder();
+                    break;
+                }
             }
 
             // Post-Disposal of Dialog
@@ -280,25 +286,34 @@ namespace TechShop_Manager.GUI
 
         private void bbiDelete_ItemClick(object sender, ItemClickEventArgs e)
         {
-            switch (getCurrentPage()) {
-                case Page.Imports: {
-                        DialogResult res = MessageBox.Show("Bạn chắc chắn muốn xóa tour du lịch này?", "Xác nhận", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
-                        if (res == DialogResult.OK)
-                        {
-                            handleDeleteImport();
-                            MessageBox.Show("Xóa thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        }
-                        break;
+            switch (getCurrentPage())
+            {
+                case Page.Imports:
+                {
+                    DialogResult res = MessageBox.Show("Bạn chắc chắn muốn xóa tour du lịch này?", "Xác nhận",
+                        MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                    if (res == DialogResult.OK)
+                    {
+                        handleDeleteImport();
+                        MessageBox.Show("Xóa thành công", "Thông báo", MessageBoxButtons.OK,
+                            MessageBoxIcon.Information);
                     }
-                case Page.Orders: {
-                        DialogResult res = MessageBox.Show("Bạn chắc chắn muốn xóa đoàn tour du lịch này?", "Xác nhận", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
-                        if (res == DialogResult.OK)
-                        {
-                            handleDeleteOrder();
-                            MessageBox.Show("Xóa thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        }
-                        break;
+
+                    break;
+                }
+                case Page.Orders:
+                {
+                    DialogResult res = MessageBox.Show("Bạn chắc chắn muốn xóa đoàn tour du lịch này?", "Xác nhận",
+                        MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                    if (res == DialogResult.OK)
+                    {
+                        handleDeleteOrder();
+                        MessageBox.Show("Xóa thành công", "Thông báo", MessageBoxButtons.OK,
+                            MessageBoxIcon.Information);
                     }
+
+                    break;
+                }
             }
 
             // Refresh
@@ -306,17 +321,20 @@ namespace TechShop_Manager.GUI
             handleUpdateSelected();
         }
 
-        private void gridView_Imports_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
+        private void gridView_Imports_FocusedRowChanged(object sender,
+            DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
             handleUpdateSelected();
         }
 
-        private void gridView_Orders_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
+        private void gridView_Orders_FocusedRowChanged(object sender,
+            DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
             handleUpdateSelected();
         }
 
-        private void xtraTabControl_Imports_SelectedPageChanged(object sender, DevExpress.XtraTab.TabPageChangedEventArgs e)
+        private void xtraTabControl_Imports_SelectedPageChanged(object sender,
+            DevExpress.XtraTab.TabPageChangedEventArgs e)
         {
             InitializeDataSources();
             handleUpdateSelected();

@@ -82,5 +82,12 @@ namespace TechShop_Manager.DAL
 
             return quantityLogs;
         }
+
+        public static void RemoveQuantityLogs(List<QuantityLog> quantityLogs)
+        {
+            _ctx.QuantityLogs.RemoveRange(quantityLogs);
+            
+            _ctx.SaveChanges();
+        }
     }
 }

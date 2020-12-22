@@ -14,10 +14,14 @@ namespace TechShop_Manager.GUI
         private Import _item;
         private bool isUpdate = false;
         private List<Product> _products = Product.GetAll();
+
         public EditImportView() // New Import
         {
             InitializeComponent();
-            _item = new Import();
+            _item = new Import()
+            {
+                ImportDetails = new List<ImportDetail>()
+            };
             ConfigureControls();
             InitializeDataSources();
         }
@@ -40,7 +44,7 @@ namespace TechShop_Manager.GUI
         {
             // Data fetch
             Import item = Import.GetOne(_item.Id);
-            
+
             if (item == null)
             {
                 item = _item; // this "_item" would be INITIALIZED before running this method, meaning it has no reference to ANY BindingList, unlike EditImportView(Import tour)
@@ -51,7 +55,7 @@ namespace TechShop_Manager.GUI
             }
 
             // Data binding
-            
+
             BindingList<Import> itemBL = new BindingList<Import>(new List<Import>() {item});
 
             BindingList<Product> productsBL = new BindingList<Product>(
@@ -76,7 +80,7 @@ namespace TechShop_Manager.GUI
             gridView_ImportDetails.Columns["Product"].OptionsColumn.AllowEdit = false;
             gridView_ImportDetails.Columns["Price"].OptionsColumn.AllowEdit = false;
             gridView_ImportDetails.Columns["Quantity"].OptionsColumn.AllowEdit = true;
-            
+
             gridView_Products.GridControl.DataSource = productsBL;
             gridView_Products.OptionsView.ColumnAutoWidth = false;
             gridView_Products.PopulateColumns();
@@ -137,7 +141,7 @@ namespace TechShop_Manager.GUI
             {
                 var temp = _item.Add();
 
-                if (temp.Id != 0)   // tourGroup added to Database => ID changed from 0
+                if (temp.Id != 0) // tourGroup added to Database => ID changed from 0
                 {
                     isUpdate = true;
                 }
@@ -156,12 +160,19 @@ namespace TechShop_Manager.GUI
             // close window
             Dispose();
         }
-        
+
         private void handleAddImportDetail()
         {
             Product selectedProduct = _products.ElementAt(gridView_Products.FocusedRowHandle);
 
-            if(getItemState().ImportDetails.FirstOrDefault(o => o.ProductId == selectedProduct.Id) != null) { return; }
+            if (
+                _item.ImportDetails != null && selectedProduct != null &&
+                _item.ImportDetails.FirstOrDefault(o => o.ProductId == selectedProduct.Id) != null
+            )
+            {
+                return;
+            }
+
             ImportDetail selectedImportDetail = new ImportDetail
             {
                 ProductId = selectedProduct.Id,
@@ -173,12 +184,12 @@ namespace TechShop_Manager.GUI
             getItemState().ImportDetails.Add(selectedImportDetail);
             InitializeDataSources();
             gridView_ImportDetails.RefreshData();
-
         }
 
         private void handleDeleteImportDetail()
         {
-            ImportDetail selectedImportDetail = getItemState().ImportDetails.ElementAt(gridView_ImportDetails.FocusedRowHandle);
+            ImportDetail selectedImportDetail =
+                getItemState().ImportDetails.ElementAt(gridView_ImportDetails.FocusedRowHandle);
             getItemState().ImportDetails.Remove(selectedImportDetail);
             InitializeDataSources();
             gridView_ImportDetails.RefreshData();
@@ -200,7 +211,7 @@ namespace TechShop_Manager.GUI
         private void bbiDelete_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             DialogResult res =
-                MessageBox.Show("Bạn chắc chắn muốn xóa tour du lịch này?\nMọi dữ liệu liên quan sẽ bị xoá.",
+                MessageBox.Show("Bạn chắc chắn muốn xóa Phiếu nhập này?",
                     "Xác nhận", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
             if (res == DialogResult.OK)
             {
@@ -226,7 +237,6 @@ namespace TechShop_Manager.GUI
         private void btnRemoveImportDetail_ItemClick(object sender, EventArgs e)
         {
             handleDeleteImportDetail();
-            
         }
     }
 }
