@@ -59,9 +59,14 @@
 <div class="row mt-3">
     @if (User.IsInRole("Customer"))
     {
-        <a>
-            <button class="btn btn-primary">Đặt mua</button>
-        </a>
+        <form asp-action="PurchaseCombo" asp-controller="Order">
+            @Html.HiddenFor(m => m.Id)
+            @Html.HiddenFor(m => m.Name)
+            @Html.HiddenFor(m => m.Price)
+            <a>
+                <button type="submit" class="btn btn-primary">Đặt mua</button>
+            </a>
+        </form>
     }
     else
     {
