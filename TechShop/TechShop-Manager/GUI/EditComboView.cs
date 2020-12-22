@@ -19,7 +19,10 @@ namespace TechShop_Manager.GUI
         public EditComboView() // New Combo
         {
             InitializeComponent();
-            _item = new Combo();
+            _item = new Combo()
+            {
+                ComboDetails = new List<ComboDetail>()
+            };
             ConfigureControls();
             InitializeDataSources();
         }
@@ -71,6 +74,9 @@ namespace TechShop_Manager.GUI
             gridView_ComboDetails.Columns["ProductId"].VisibleIndex = 0;
             gridView_ComboDetails.Columns["Product"].VisibleIndex = 1;
             gridView_ComboDetails.Columns["Quantity"].VisibleIndex = 2;
+            gridView_ComboDetails.Columns["ProductId"].OptionsColumn.AllowEdit = false;
+            gridView_ComboDetails.Columns["Product"].OptionsColumn.AllowEdit = false;
+            gridView_ComboDetails.Columns["Quantity"].OptionsColumn.AllowEdit = true;
 
             gridView_Products.GridControl.DataSource = productsBL;
             gridView_Products.PopulateColumns();
@@ -82,6 +88,7 @@ namespace TechShop_Manager.GUI
             gridView_Products.Columns["ComboDetails"].Visible = false;
             gridView_Products.Columns["QuantityLogs"].Visible = false;
             gridView_Products.OptionsView.ColumnAutoWidth = false;
+            gridView_Products.OptionsBehavior.Editable = false;
         }
 
         private Combo getItemState()
@@ -159,7 +166,10 @@ namespace TechShop_Manager.GUI
         {
 
             Product selectedProduct = _products.ElementAt(gridView_Products.FocusedRowHandle);
-            if(getItemState().ComboDetails.FirstOrDefault(o => o.ProductId == selectedProduct.Id) != null)
+            if(
+                _item.ComboDetails != null && selectedProduct != null &&
+                _item.ComboDetails.FirstOrDefault(o => o.ProductId == selectedProduct.Id) != null
+                )
             {
                 return;
             }
@@ -169,15 +179,15 @@ namespace TechShop_Manager.GUI
                 ComboId = _item.Id,
                 Quantity = 1
             };
-            getItemState().AddComboDetail(selectedComboDetail);
+            getItemState().ComboDetails.Add(selectedComboDetail);
             InitializeDataSources();
             gridView_ComboDetails.RefreshData();
         }        
         
         private void handleDeleteComboDetail()
         {
-            ComboDetail selectedComboDetail = getItemState().ComboDetails.ElementAt(gridView_ComboDetails.FocusedRowHandle);
-            getItemState().DeleteComboDetail(selectedComboDetail);
+            ComboDetail selectedComboDetail = _item.ComboDetails.ElementAt(gridView_ComboDetails.FocusedRowHandle);
+            _item.DeleteComboDetail(selectedComboDetail);
             InitializeDataSources();
             gridView_ComboDetails.RefreshData();
         }
