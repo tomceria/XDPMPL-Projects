@@ -19,7 +19,20 @@ namespace TechShop_Web.Persistence.Repositories
         {
             return Context.ProductTypes;
         }
-        
+
+        public void AddQuantityLogs(List<QuantityLog> quantityLogs)
+        {
+            Context.QuantityLogs.AddRange(quantityLogs);
+        }
+
+        public QuantityLog GetLatestQuantityLogBy(int productId)
+        {
+            return Context.QuantityLogs
+                .Where(o => o.ProductId == productId)
+                .OrderByDescending(o => o.Date)
+                .FirstOrDefault();
+        }
+
         // Overrides
         public override Product GetBy(int id)
         {
