@@ -39,6 +39,10 @@ namespace TechShop_Manager.BUS
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
         public virtual ICollection<ComboDetail> ComboDetails { get; set; }
         public virtual ICollection<QuantityLog> QuantityLogs { get; set; }
+        
+        [NotMapped]
+        [DisplayName("Số lượng tồn")]
+        public int Quantity { get; set; }
 
         public override string ToString()
         {

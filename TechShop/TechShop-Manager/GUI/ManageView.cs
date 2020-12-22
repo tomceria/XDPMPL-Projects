@@ -63,11 +63,13 @@ namespace TechShop_Manager.GUI
             {
                 case Page.Products:
                     {
+                        Product.RevertChanges();
                         InitializeDataSources_Products();
                         break;
                     }
                 case Page.Combos:
                     {
+                        Combo.RevertChanges();
                         InitializeDataSources_Combos();
                         break;
                     }

@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.CompilerServices;
 using TechShop_Manager.Common.Utilities;
 using TechShop_Manager.DAL;
 
@@ -9,7 +11,12 @@ namespace TechShop_Manager.BUS
     {
         public static List<Product> GetAll()
         {
-            return ProductDAL.GetAll();
+            var result = ProductDAL.GetAll();
+            foreach (var product in result)
+            {
+                product.Quantity = ProductDAL.GetLatestQuantityLogBy(product.Id)?.Quantity ?? 0;
+            }
+            return result;
         }
 
         public static Product GetOne(int id)

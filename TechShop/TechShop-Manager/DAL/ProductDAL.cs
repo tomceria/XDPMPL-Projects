@@ -74,6 +74,14 @@ namespace TechShop_Manager.DAL
 
         // QuantityLogs
 
+        public static QuantityLog GetLatestQuantityLogBy(int productId)
+        {
+            return _ctx.QuantityLogs
+                .Where(o => o.ProductId == productId)
+                .OrderByDescending(o => o.Date)
+                .FirstOrDefault();
+        }
+        
         public static List<QuantityLog> AddQuantityLogs(List<QuantityLog> quantityLogs)
         {
             _ctx.QuantityLogs.AddRange(quantityLogs);

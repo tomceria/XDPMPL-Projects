@@ -32,14 +32,17 @@ namespace TechShop_Manager.BUS
             List<QuantityLog> quantityLogs = new List<QuantityLog>();
             foreach (var importDetail in this.ImportDetails)
             {
+                var oldQuantity = ProductDAL.GetLatestQuantityLogBy(importDetail.ProductId)?.Quantity ?? 0;
                 var quantityLog = new QuantityLog()
                 {
                     ProductId = importDetail.ProductId,
                     Date = this.Date,
-                    Quantity = importDetail.Quantity
+                    Quantity = importDetail.Quantity + oldQuantity
                 };
+                
                 quantityLogs.Add(quantityLog);
             }
+
             ProductDAL.AddQuantityLogs(quantityLogs);
 
             return this;
