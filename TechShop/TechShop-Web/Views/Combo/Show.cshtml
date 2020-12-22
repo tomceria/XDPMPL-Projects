@@ -16,7 +16,17 @@
         </tr>
         <tr>
             <td>@Html.LabelFor(m => m.Price)</td>
-            <td>@Model.Price</td>
+            <td>
+                <strong>@Model.Price</strong>
+            </td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(m => m.PriceOriginal)</td>
+            <td>
+                <span style="text-decoration: line-through">
+                    @Model.PriceOriginal
+                </span>
+            </td>
         </tr>
     </table>
 

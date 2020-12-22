@@ -16,6 +16,12 @@ namespace TechShop_Web.Persistence.Repositories
         }
         
         // Overrides
+        public override IQueryable<Combo> GetAll()
+        {
+            return base.GetAll()
+                .Include(o => o.ComboDetails)
+                .ThenInclude(o => o.Product);
+        }
 
         public override Combo GetBy(int id)
         {

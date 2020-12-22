@@ -16,6 +16,7 @@
                 }
                 <th scope="col">@Html.DisplayNameFor(m => emptyCombo.Name)</th>
                 <th scope="col">@Html.DisplayNameFor(m => emptyCombo.Price)</th>
+                <th scope="col">@Html.DisplayNameFor(m => emptyCombo.PriceOriginal)</th>
             </tr>
             </thead>
             <tbody>
@@ -25,7 +26,14 @@
                     <td>
                         <a asp-action="Show" asp-controller="Combo" asp-route-id="@item.Id">@item.Name</a>
                     </td>
-                    <td>@item.Price</td>
+                    <td>
+                        <strong>@item.Price</strong>
+                    </td>
+                    <td>
+                        <span style="text-decoration: line-through">
+                            @item.PriceOriginal
+                        </span>
+                    </td>
                 </tr>
             }
             </tbody>
@@ -65,7 +73,9 @@
                         <a asp-action="Show" asp-controller="Product" asp-route-id="@item.Id">@item.Name</a>
                     </td>
                     <td>@item.Sku</td>
-                    <td>@item.Price</td>
+                    <td>
+                        <strong>@item.Price</strong>
+                    </td>
                     <td>@item.Manufacturer</td>
                     <td>@item.ProductType.Name</td>
                 </tr>
