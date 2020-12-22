@@ -11,7 +11,7 @@ namespace TechShop_Manager.DAL {
         // 
         // If you wish to target a different database and/or database provider, modify the 'ShopContext' 
         // connection string in the application configuration file.
-        public ShopContext() : base("HoangPCShopContext")
+        public ShopContext() : base("HoangShopContext")
         {
             // Database.SetInitializer(new ShopInitializer());
             Database.SetInitializer<ShopContext>(null);

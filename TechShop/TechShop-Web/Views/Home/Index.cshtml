@@ -1,15 +1,76 @@
-﻿@{
+﻿@model HomeIndexVm
+@{
     ViewData["Title"] = "Catalog";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Catalog</h1>
-    <div class="col">
-        <div class="row">
-            <a asp-action="Index" asp-controller="Product">Sản phẩm bán lẻ</a>
-        </div>
-        <div class="row">
-            <a asp-action="Index" asp-controller="Combo">Combo Sản phẩm</a>
-        </div>
+    <h5 class="card-title text-center">TechShop Inc.</h5>
+</div>
+<div class="row">
+    <div class="mx-auto">
+        <table class="table">
+            <thead>
+            <tr>
+                @{
+                    var emptyCombo = new Combo();
+                }
+                <th scope="col">@Html.DisplayNameFor(m => emptyCombo.Name)</th>
+                <th scope="col">@Html.DisplayNameFor(m => emptyCombo.Price)</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var item in Model.Combos)
+            {
+                <tr>
+                    <td>
+                        <a asp-action="Show" asp-controller="Combo" asp-route-id="@item.Id">@item.Name</a>
+                    </td>
+                    <td>@item.Price</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="row">
+    <div class="mx-auto">
+        <table class="table">
+            <thead>
+            <tr>
+                @{
+                    var emptyProduct = new Product();
+                }
+                <th scope="col">
+                    @Html.DisplayNameFor(m => emptyProduct.Name)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(m => emptyProduct.Sku)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(m => emptyProduct.Price)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(m => emptyProduct.Manufacturer)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(m => emptyProduct.ProductTypeId)
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var item in Model.Products)
+            {
+                <tr>
+                    <td>
+                        <a asp-action="Show" asp-controller="Product" asp-route-id="@item.Id">@item.Name</a>
+                    </td>
+                    <td>@item.Sku</td>
+                    <td>@item.Price</td>
+                    <td>@item.Manufacturer</td>
+                    <td>@item.ProductType.Name</td>
+                </tr>
+            }
+            </tbody>
+        </table>
     </div>
 </div>

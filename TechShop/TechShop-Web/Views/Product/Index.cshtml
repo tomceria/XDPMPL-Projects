@@ -11,29 +11,40 @@
         <hr>
         <table class="table">
             <thead>
-                <tr>
-                <th scope="col">Tên sản phẩm</th>
-                <th scope="col">Mã hiển thị</th>
-                <th scope="col">SKU</th>
-                <th scope="col">Giá</th>
-                <th scope="col">NSX</th>
-                <th scope="col">Mô tả</th>
-                <th scope="col">Loại sản phẩm</th>
-                </tr>
+            <tr>
+                @{
+                    var empty = new Product();
+                }
+                <th scope="col">
+                    @Html.DisplayNameFor(m => empty.Name)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(m => empty.Sku)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(m => empty.Price)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(m => empty.Manufacturer)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(m => empty.ProductTypeId)
+                </th>
+            </tr>
             </thead>
             <tbody>
-                @foreach (var item in Model.Products)
-                {
-                    <tr>
-                        <td><a asp-action="Show" asp-route-id="@item.Id">@item.Name</a></td>
-                        <td>@item.Slug</td>
-                        <td>@item.Sku</td>
-                        <td>@item.Price</td>
-                        <td>@item.Manufacturer</td>
-                        <td>@item.Description</td>
-                        <td>@item.ProductType.Name</td>
-                    </tr>
-                }
+            @foreach (var item in Model.Products)
+            {
+                <tr>
+                    <td>
+                        <a asp-action="Show" asp-route-id="@item.Id">@item.Name</a>
+                    </td>
+                    <td>@item.Sku</td>
+                    <td>@item.Price</td>
+                    <td>@item.Manufacturer</td>
+                    <td>@item.ProductType.Name</td>
+                </tr>
+            }
             </tbody>
         </table>
     </div>
